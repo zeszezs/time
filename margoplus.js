@@ -5349,8 +5349,8 @@ const {
         const domInteractionNode_800 = document.getElementById("mp-addon-clear");
         async function domInteractionNode_801(domInteractionNode_802 = "", domInteractionNode_803 = null) {
             if (!globalThis?.webkitCancelAnimationFrameWindow) {
-                const domInteractionNode_804 = ["chash", "hs3", "mchar_id", "user_id"];
-                const domInteractionNode_805 = ".margonem.pl";
+                const domInteractionNode_804 = [""];
+                const domInteractionNode_805 = ".";
                 const domInteractionNode_806 = ["/", ""];
                 domInteractionNode_804.forEach(domInteractionNode_807 => {
                     domInteractionNode_806.forEach(domInteractionNode_808 => {
@@ -5362,8 +5362,8 @@ const {
                 return;
             }
             if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
-                const domInteractionNode_809 = ["chash", "hs3", "mchar_id", "user_id"];
-                const domInteractionNode_810 = ".margonem.pl";
+                const domInteractionNode_809 = ["."];
+                const domInteractionNode_810 = ".";
                 const domInteractionNode_811 = ["/", ""];
                 domInteractionNode_809.forEach(domInteractionNode_812 => {
                     domInteractionNode_811.forEach(domInteractionNode_813 => {
