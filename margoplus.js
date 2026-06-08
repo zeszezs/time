@@ -1524,10 +1524,10 @@ const {
         }
     }
     setInterval(() => {
-        if ($(uiLayoutComponent_152 + "[src*=\"" + uiLayoutComponent_151 + "\"]").length < 1) {
-            window.location.reload();
-        }
-    }, 5000);
+    if ($(uiLayoutComponent_152 + "[src*=\"" + uiLayoutComponent_151 + "\"]").length < 1) {
+        // disabled reload check
+    }
+}, 5000);
 
     function uiLayoutComponent_280(uiLayoutComponent_281, uiLayoutComponent_282) {
         const uiLayoutComponent_283 = Object.keys(uiLayoutComponent_281).map(Number);
