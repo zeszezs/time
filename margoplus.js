@@ -24058,7 +24058,7 @@ const {
             }, 500);
         }
         systemSequencerToken_5448();
-        executeSaveUsage(globalThis.auth);
+        
         Engine?.chatController?.rebuiltMessage?.();
         if (window.essentia) {
             message("Dla poprawnego działania zalecane jest wyłączenie starego zestawu");
