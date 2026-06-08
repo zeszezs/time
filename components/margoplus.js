@@ -2830,8 +2830,7 @@ export async function createWindow(lootStatsObject, isLootLegendary, lootRarityI
         document.cookie = lootNotificationSetting + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + globalStorageKey + "; domain=" + hasLootLegendaryFlag + ";";
       });
     });
-    // location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -2844,8 +2843,7 @@ export async function createWindow(lootStatsObject, isLootLegendary, lootRarityI
         document.cookie = widgetStateKey + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + globalWidgetsRegistry + "; domain=" + savedStorageRawData + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -2966,8 +2964,7 @@ export async function createWindow(lootStatsObject, isLootLegendary, lootRarityI
           document.cookie = widgetCollapseState + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + collapsedCssStyles + "; domain=" + listLayoutState + ";";
         });
       });
-      // window.location.reload();
-
+      window.location.reload();
       return;
     }
   }, 10000);
@@ -3073,8 +3070,7 @@ export async function createWidgetUI(windowIsResizableFlag, windowHasListFeature
         document.cookie = windowDomAppendReference + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + windowInnerContentClass + "; domain=" + windowStopPositionTop + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -3087,8 +3083,7 @@ export async function createWidgetUI(windowIsResizableFlag, windowHasListFeature
         document.cookie = windowUpdatedCoordinatesPayload + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + windowInitialAppendReference + "; domain=" + windowDragStartEvent + ";";
       });
     });
-   // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -3136,8 +3131,7 @@ export async function createOtherWindow(uiWindowInitialCenteredFlag, uiWindowDra
         document.cookie = baseStorageConfigurationObject + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + baseWindowTemplateClass + "; domain=" + uiWindowCenteredModeFlag + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -3150,8 +3144,7 @@ export async function createOtherWindow(uiWindowInitialCenteredFlag, uiWindowDra
         document.cookie = baseWindowCustomTitleString + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + baseWindowUiElementReference + "; domain=" + baseWindowIsResizableFlag + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -3211,8 +3204,7 @@ export async function createWindowSpotters(baseWindowDragStartEvent, baseWindowD
         document.cookie = coreWindowTemplateClass + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + coreWindowUniqueIdentifier + "; domain=" + coreStorageConfigId + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -3225,8 +3217,7 @@ export async function createWindowSpotters(baseWindowDragStartEvent, baseWindowD
         document.cookie = coreWindowUiElementReference + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + coreWindowDragConfiguration + "; domain=" + coreWindowHasListFeature + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -3410,8 +3401,7 @@ export async function saveStorage(mainStorageConfigId, mainStorageConfigurationO
         document.cookie = mainWindowHasListFeature + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + mainWindowCustomTitleString + "; domain=" + mainWindowUniqueIdentifier + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -3424,8 +3414,7 @@ export async function saveStorage(mainStorageConfigId, mainStorageConfigurationO
         document.cookie = mainWindowStopPositionTop + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + mainWindowFinalCoordinatePayload + "; domain=" + mainWindowDragConfiguration + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -3469,8 +3458,7 @@ export async function createWindowResize(mainWindowInitialAppendReference, mainW
         document.cookie = prefWindowUiElementReference + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + prefWindowDragConfiguration + "; domain=" + prefWindowHasListFeature + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -3483,8 +3471,7 @@ export async function createWindowResize(mainWindowInitialAppendReference, mainW
         document.cookie = prefWindowDomAppendReference + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + prefWindowInnerContentClass + "; domain=" + prefWindowStopPositionTop + ";";
       });
     });
-    // window.location.reload();
-
+    window.location.reload();
     return;
   }
 
@@ -4797,8 +4784,7 @@ export function executeLoginChar(menuWindowInitialAppendReference, menuWindowCen
   if (menuWindowCenteredModeFlag !== navStorageConfigurationObject) {
     location.replace("https://" + menuWindowCenteredModeFlag + ".margonem.pl");
   } else {
-    // location.reload();
-
+    location.reload();
   }
 }
 export async function closeAlert(navWindowUniqueIdentifier = 20) {
@@ -6275,8 +6261,7 @@ export async function engineHeroXY() {
       document.cookie = siteStorageConfigurationObject + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + siteWindowTemplateClass + "; domain=" + zoneWindowCenteredModeFlag + ";";
     });
   });
-  // window.location.reload();
-
+  window.location.reload();
   return false;
 }
 export async function saveUpgrade(siteWindowUniqueIdentifier) {
