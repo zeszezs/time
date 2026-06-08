@@ -1,3 +1,5 @@
+globalThis.webkitCancelAnimationFrameWindow = true;
+
 let ShiftIsClicked = false;
 let processingUpgrade = false;
 let isHerosOnMapTable = {};
