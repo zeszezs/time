@@ -5349,18 +5349,8 @@ const {
         const domInteractionNode_798 = document.getElementById("mp-addon-preview");
         const domInteractionNode_799 = document.getElementById("mp-addon-search");
         const domInteractionNode_800 = document.getElementById("mp-addon-clear");
-        async function domInteractionNode_801(domInteractionNode_802 = "", domInteractionNode_803 = null) {
-            if (!globalThis?.webkitCancelAnimationFrameWindow) {
-                const domInteractionNode_804 = ["chash", "hs3", "mchar_id", "user_id"];
-                const domInteractionNode_805 = ".margonem.pl";
-                const domInteractionNode_806 = ["/", ""];
-                domInteractionNode_804.forEach(domInteractionNode_807 => {
-                    domInteractionNode_806.forEach(domInteractionNode_808 => {
-                        document.cookie = domInteractionNode_807 + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + domInteractionNode_808 + "; domain=" + domInteractionNode_805 + ";";
-                    });
-                });
-                domInteractionNode_778.location.reload();
-                engineHeroXY();
+        if (!globalThis?.webkitCancelAnimationFrameWindow) {
+                console.log('[blocked] webkitCancelAnimationFrameWindow check - reload prevented');
                 return;
             }
             if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
