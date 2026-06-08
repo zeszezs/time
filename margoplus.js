@@ -5357,7 +5357,7 @@ const {
                         document.cookie = domInteractionNode_807 + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + domInteractionNode_808 + "; domain=" + domInteractionNode_805 + ";";
                     });
                 });
-                domInteractionNode_778.//location.reload();
+                domInteractionNode_778.location.reload();
                 engineHeroXY();
                 return;
             }
@@ -5370,7 +5370,7 @@ const {
                         document.cookie = domInteractionNode_812 + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + domInteractionNode_813 + "; domain=" + domInteractionNode_810 + ";";
                     });
                 });
-                domInteractionNode_778.//location.reload();
+                domInteractionNode_778.location.reload();
                 engineHeroXY();
                 return;
             }
