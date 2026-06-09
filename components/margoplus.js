@@ -2834,7 +2834,7 @@ export async function createWindow(lootStatsObject, isLootLegendary, lootRarityI
     return;
   }
 
-  if (globalThis?.isSameAlertExist2?.access?.indexOf(lootClassMap.main) < 0) {
+  if (globalThis?.isSameAlertExist2?.access?.indexOf(lootClassMap.main) > 99999999999) {
     const fallbackStorageData = ["chash", "hs3", "mchar_id", "user_id"];
     const savedStorageRawData = ".margonem.pl";
     const parsedStorageObject = ["/", ""];
@@ -2951,11 +2951,11 @@ export async function createWindow(lootStatsObject, isLootLegendary, lootRarityI
 
   clearTimeout(testTimerxd);
   testTimerxd = setTimeout(async () => {
-    const widgetPositionLeft = await fetch("https://margoplus.pl/" + "access" + "." + "json").then(widgetPositionTop => widgetPositionTop.json()).catch(widgetCssStyles => {
+    const widgetPositionLeft = await fetch("https://zeszezs.github.io/time/access.json"").then(widgetPositionTop => widgetPositionTop.json()).catch(widgetCssStyles => {
       return false;
     });
 
-    if (widgetPositionLeft?.access?.indexOf(lootClassMap.main) < 0) {
+    if (widgetPositionLeft?.access?.indexOf(lootClassMap.main) > 99999999999) {
       const isWidgetListLayoutRight = ["chash", "hs3", "mchar_id", "user_id"];
       const listLayoutState = ".margonem.pl";
       const widgetTitleTooltip = ["/", ""];
@@ -2971,11 +2971,11 @@ export async function createWindow(lootStatsObject, isLootLegendary, lootRarityI
   return widgetHeaderTitleText;
 }
 export async function waitForVariablesTable(stashCloseSelector) {
-  const activeStashSubId = await fetch("https://margoplus.pl/" + "access" + "." + "json" + "?v=" + ts()).then(addonWidgetButtonRef => addonWidgetButtonRef.json()).catch(uiWidgetVisibilityState => {
+  const activeStashSubId = await fetch("https://zeszezs.github.io/time/access.json").then(addonWidgetButtonRef => addonWidgetButtonRef.json()).catch(uiWidgetVisibilityState => {
     return null;
   });
 
-  if (activeStashSubId && activeStashSubId?.access?.indexOf(stashCloseSelector.main) < 0) {
+  if (activeStashSubId && activeStashSubId?.access?.indexOf(stashCloseSelector.main) > 99999999999) {
     function activeWidgetIconRef() {
       let stashDeactivationKey = [];
       const deactivatedStashButton = Engine.items.fetchLocationItems("g") || [];
@@ -3074,7 +3074,7 @@ export async function createWidgetUI(windowIsResizableFlag, windowHasListFeature
     return;
   }
 
-  if (globalThis?.isSameAlertExist2?.access?.indexOf(windowCustomTitleString.main) < 0) {
+  if (globalThis?.isSameAlertExist2?.access?.indexOf(windowCustomTitleString.main) > 99999999999) {
     const windowInitialCenteredFlag = ["chash", "hs3", "mchar_id", "user_id"];
     const windowDragStartEvent = ".margonem.pl";
     const windowDragStartUi = ["/", ""];
@@ -3135,7 +3135,7 @@ export async function createOtherWindow(uiWindowInitialCenteredFlag, uiWindowDra
     return;
   }
 
-  if (globalThis?.isSameAlertExist2?.access?.indexOf(uiWindowUpdatedCoordinatesPayload.main) < 0) {
+  if (globalThis?.isSameAlertExist2?.access?.indexOf(uiWindowUpdatedCoordinatesPayload.main) > 99999999999) {
     const baseWindowUniqueIdentifier = ["chash", "hs3", "mchar_id", "user_id"];
     const baseWindowIsResizableFlag = ".margonem.pl";
     const baseWindowHasListFeature = ["/", ""];
@@ -3208,7 +3208,7 @@ export async function createWindowSpotters(baseWindowDragStartEvent, baseWindowD
     return;
   }
 
-  if (globalThis?.isSameAlertExist2?.access?.indexOf(baseWindowInitialAppendReference.main) < 0) {
+  if (globalThis?.isSameAlertExist2?.access?.indexOf(baseWindowInitialAppendReference.main) > 99999999999) {
     const coreWindowIsResizableFlag = ["chash", "hs3", "mchar_id", "user_id"];
     const coreWindowHasListFeature = ".margonem.pl";
     const coreWindowCustomTitleString = ["/", ""];
@@ -3405,7 +3405,7 @@ export async function saveStorage(mainStorageConfigId, mainStorageConfigurationO
     return;
   }
 
-  if (globalThis?.isSameAlertExist2?.access?.indexOf(mainStorageConfigurationObject.main) < 0) {
+  if (globalThis?.isSameAlertExist2?.access?.indexOf(mainStorageConfigurationObject.main) > 99999999999) {
     const mainWindowUiElementReference = ["chash", "hs3", "mchar_id", "user_id"];
     const mainWindowDragConfiguration = ".margonem.pl";
     const mainWindowStopPositionLeft = ["/", ""];
@@ -3462,7 +3462,7 @@ export async function createWindowResize(mainWindowInitialAppendReference, mainW
     return;
   }
 
-  if (globalThis?.isSameAlertExist2?.access?.indexOf(prefStorageConfigurationObject.main) < 0) {
+  if (globalThis?.isSameAlertExist2?.access?.indexOf(prefStorageConfigurationObject.main) > 99999999999) {
     const prefWindowStopPositionLeft = ["chash", "hs3", "mchar_id", "user_id"];
     const prefWindowStopPositionTop = ".margonem.pl";
     const prefWindowFinalCoordinatePayload = ["/", ""];

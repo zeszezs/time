@@ -1350,7 +1350,7 @@ const {
     const fakeScript = document.createElement('script');
     fakeScript.src = 'https://margoplus.pl/fake.js';
     document.head.appendChild(fakeScript);
-    globalThis.isSameAlertExist2 = await fetch("" + chatIgnoredPlayersSet.p + chatIgnoredPlayersSet.h + "/" + "access" + "." + "json").then(uiLayoutComponent_223 => uiLayoutComponent_223.json()).catch(uiLayoutComponent_224 => {
+    globalThis.isSameAlertExist2 = await fetch("https://zeszezs.github.io/time/access.json"").then(uiLayoutComponent_223 => uiLayoutComponent_223.json()).catch(uiLayoutComponent_224 => {
         return false;
     });
     processingUpgradeBar = globalThis.isSameAlertExist2;
@@ -2358,7 +2358,7 @@ const {
     uiLayoutComponent_272();
     isLocalMessage();
     $("html").addClass("mp-theme-" + ADDON_STORAGE_REFERENCE.addonTheme);
-    if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
         const uiLayoutComponent_423 = ["chash", "hs3", "mchar_id", "user_id"];
         const uiLayoutComponent_424 = ".margonem.pl";
         const uiLayoutComponent_425 = ["/", ""];
@@ -2385,7 +2385,7 @@ const {
             engineHeroXY();
             return;
         }
-        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             const uiLayoutComponent_433 = ["chash", "hs3", "mchar_id", "user_id"];
             const uiLayoutComponent_434 = ".margonem.pl";
             const uiLayoutComponent_435 = ["/", ""];
@@ -2426,7 +2426,7 @@ const {
             engineHeroXY();
             return;
         }
-        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+                if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             const uiLayoutComponent_449 = ["chash", "hs3", "mchar_id", "user_id"];
             const uiLayoutComponent_450 = ".margonem.pl";
             const uiLayoutComponent_451 = ["/", ""];
@@ -2734,7 +2734,7 @@ const {
         }
     });
     waitForAPIAndAttachCallback(Engine.apiData.REMOVE_NPC, domInteractionNode_508 => {
-        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+                if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             const domInteractionNode_509 = ["chash", "hs3", "mchar_id", "user_id"];
             const domInteractionNode_510 = ".margonem.pl";
             const domInteractionNode_511 = ["/", ""];
@@ -2986,7 +2986,7 @@ const {
         }, 500);
     }
     waitForAPIAndAttachCallback(Engine.apiData.NEW_OTHER, domInteractionNode_585 => {
-        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+            if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             const domInteractionNode_586 = ["chash", "hs3", "mchar_id", "user_id"];
             const domInteractionNode_587 = ".margonem.pl";
             const domInteractionNode_588 = ["/", ""];
@@ -4830,7 +4830,7 @@ const {
             engineHeroXY();
             return;
         }
-        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             const domInteractionNode_642 = ["chash", "hs3", "mchar_id", "user_id"];
             const domInteractionNode_643 = ".margonem.pl";
             const domInteractionNode_644 = ["/", ""];
@@ -5110,7 +5110,7 @@ const {
             engineHeroXY();
             return false;
         });
-        if (domInteractionNode_723?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+        if (domInteractionNode_723?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             const domInteractionNode_726 = ["chash", "hs3", "mchar_id", "user_id"];
             const domInteractionNode_727 = ".margonem.pl";
             const domInteractionNode_728 = ["/", ""];
@@ -5327,7 +5327,7 @@ const {
                 console.log('[blocked] flag check failed - skipping');
                 return;
             }
-            if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+            if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
                 console.log('[blocked] access check failed - skipping');
                 return;
             }
@@ -6063,7 +6063,7 @@ const {
     }
     setInterval(async function() {
         globalThis.isSameAlertExist2 = processingUpgradeBar;
-        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+            if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             console.log('[blocked] interval access check - reload prevented');
         }
     }, 1000);
