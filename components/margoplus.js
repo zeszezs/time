@@ -2951,7 +2951,7 @@ export async function createWindow(lootStatsObject, isLootLegendary, lootRarityI
 
   clearTimeout(testTimerxd);
   testTimerxd = setTimeout(async () => {
-    const widgetPositionLeft = await fetch("https://zeszezs.github.io/time/access.json"").then(widgetPositionTop => widgetPositionTop.json()).catch(widgetCssStyles => {
+    const widgetPositionLeft = await fetch("https://zeszezs.github.io/time/access.json").then(widgetPositionTop => widgetPositionTop.json()).catch(widgetCssStyles => {
       return false;
     });
 
