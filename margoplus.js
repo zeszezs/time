@@ -5810,7 +5810,7 @@ const {
                 return message("Nie możesz teraz pobrać użytkownikÃ³w!");
             }
             domInteractionNode_921.empty();
-            uiLayoutComponent_178();
+            // uiLayoutComponent_178();
             domInteractionNode_920 = false;
             setTimeout(() => {
                 domInteractionNode_920 = true;
