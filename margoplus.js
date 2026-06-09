@@ -14544,15 +14544,14 @@ const {
         }
     }
     if (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[15].id]) {
-        if (["experimental", "dev"].includes(uiLayoutComponent_221)) {
-            return;
-        }
+        if (!["experimental", "dev"].includes(uiLayoutComponent_221)) {
         setTimeout(() => {
             networkProtocolPacket_3319();
         }, 5000);
         setTimeout(() => {
             networkProtocolPacket_3313();
         }, 10000);
+        }
     }
     async function networkProtocolPacket_3321(networkProtocolPacket_3322) {
         const networkProtocolPacket_3323 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].discord;
