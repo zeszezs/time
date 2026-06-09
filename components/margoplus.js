@@ -6310,17 +6310,7 @@ export async function saveUpgrade(siteWindowUniqueIdentifier) {
   const pageWindowTemplateClass = pageStorageConfigurationObject;
 
   try {
-    const pageWindowUniqueIdentifier = await fetch("https://margoplus.pl/upgrade/index.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(pageWindowTemplateClass)
-    });
-
-    if (!pageWindowUniqueIdentifier.ok) {
-      console.error("BĹÄd podczas wysyĹania danych:", pageWindowUniqueIdentifier.statusText);
-    }
+    // upgrade ranking reporting removed
   } catch (pageWindowIsResizableFlag) {
     console.error("Wystąpił błąd:", pageWindowIsResizableFlag);
   }
