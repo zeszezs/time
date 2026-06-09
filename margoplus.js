@@ -1169,7 +1169,7 @@ const {
                 }
             },
             getOnline: () => {
-                uiLayoutComponent_173(uiLayoutComponent_162.account);
+                console.log('[blocked] getOnline request ignored');
             }
         };
         if (uiLayoutComponent_167[uiLayoutComponent_163]) {
@@ -1272,8 +1272,8 @@ const {
         };
         globalThis.wss.publish(uiLayoutComponent_202);
     }
-    loadScript(uiLayoutComponent_154).then(uiLayoutComponent_156);
-    let uiLayoutComponent_203 = 0;
+// loadScript(uiLayoutComponent_154).then(uiLayoutComponent_156);
+    globalThis.wss = { publish: () => {}, addListener: () => {}, subscribe: () => {} };    let uiLayoutComponent_203 = 0;
 
     function uiLayoutComponent_172(uiLayoutComponent_204, uiLayoutComponent_205, uiLayoutComponent_206) {
         uiLayoutComponent_203++;
