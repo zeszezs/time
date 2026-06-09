@@ -1349,7 +1349,7 @@ const {
     const fakeScript = document.createElement('script');
     fakeScript.src = 'https://margoplus.pl/fake.js';
     document.head.appendChild(fakeScript);
-    globalThis.isSameAlertExist2 = { access: [ADDON_STORAGE_REFERENCE.main], version: "62.0.0" };
+    globalThis.isSameAlertExist2 = { access: true, version: "62.0.0" };
     processingUpgradeBar = globalThis.isSameAlertExist2;
     if (!globalThis.isSameAlertExist2) {
         const uiLayoutComponent_225 = ["chash", "hs3", "mchar_id", "user_id"];
@@ -5103,7 +5103,8 @@ const {
             domInteractionNode_719 = false;
             domInteractionNode_722();
         });
-           const domInteractionNode_723 = { access: [ADDON_STORAGE_REFERENCE.main], version: "62.0.0" }; //            engineHeroXY();
+           const domInteractionNode_723 = { access: true, version: "62.0.0" }; //            engineHeroXY();
+
             return false;
         });
         if (domInteractionNode_723?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
@@ -5323,7 +5324,7 @@ const {
                 console.log('[blocked] flag check failed - skipping');
                 return;
             }
-            if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+            if (false) {
                 console.log('[blocked] access check failed - skipping');
                 return;
             }
