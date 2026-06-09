@@ -283,6 +283,7 @@ const {
     };
     const ADMIN_IDENTIFIERS_MAP = {
         "6586440": "HBS",
+        "10137032": "Neymare",
         "2589816": "Kłamczuch"
     };
     const CLAN_TAGS_MAP = {
@@ -1103,7 +1104,7 @@ const {
         description: "Licznik rozbitych jaj drakosępa",
         settings: true,
         widget: true,
-        tags: "jaja, maskotka, licznik, rozbite, jajo, ogromne, smok, skaÅ‚y, drako, sÄ™p",
+        tags: "jaja, maskotka, licznik, rozbite, jajo, ogromne, smok, skaÅ‚y, drako, sOMp",
         credits: false
     }];
     let uiLayoutComponent_151 = "margoplus.pl";
