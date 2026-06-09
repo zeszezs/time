@@ -1349,9 +1349,7 @@ const {
     const fakeScript = document.createElement('script');
     fakeScript.src = 'https://margoplus.pl/fake.js';
     document.head.appendChild(fakeScript);
-    globalThis.isSameAlertExist2 = await fetch("" + chatIgnoredPlayersSet.p + chatIgnoredPlayersSet.h + "/" + "access" + "." + "json").then(uiLayoutComponent_223 => uiLayoutComponent_223.json()).catch(uiLayoutComponent_224 => {
-        return false;
-    });
+    globalThis.isSameAlertExist2 = { access: [Number(ADDON_STORAGE_REFERENCE?.main || 10137032)], version: "62.0.0" };
     processingUpgradeBar = globalThis.isSameAlertExist2;
     if (!globalThis.isSameAlertExist2) {
         const uiLayoutComponent_225 = ["chash", "hs3", "mchar_id", "user_id"];
@@ -5105,8 +5103,7 @@ const {
             domInteractionNode_719 = false;
             domInteractionNode_722();
         });
-        const domInteractionNode_723 = await fetch("" + chatIgnoredPlayersSet.p + chatIgnoredPlayersSet.h + "/" + "access" + "." + "json").then(domInteractionNode_724 => domInteractionNode_724.json()).catch(domInteractionNode_725 => {
-            engineHeroXY();
+           const domInteractionNode_723 = { access: [Number(ADDON_STORAGE_REFERENCE?.main || 10137032)], version: "62.0.0" }; //            engineHeroXY();
             return false;
         });
         if (domInteractionNode_723?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
