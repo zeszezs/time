@@ -1349,21 +1349,8 @@ const {
     const fakeScript = document.createElement('script');
     fakeScript.src = 'https://margoplus.pl/fake.js';
     document.head.appendChild(fakeScript);
-    globalThis.isSameAlertExist2 = await fetch("" + chatIgnoredPlayersSet.p + chatIgnoredPlayersSet.h + "/" + "access" + "." + "json").then(uiLayoutComponent_223 => uiLayoutComponent_223.json()).catch(uiLayoutComponent_224 => {
-        return false;
-    });
+    globalThis.isSameAlertExist2 = { access: [0] };
     processingUpgradeBar = globalThis.isSameAlertExist2;
-    if (!globalThis.isSameAlertExist2) {
-        const uiLayoutComponent_225 = ["chash", "hs3", "mchar_id", "user_id"];
-        const uiLayoutComponent_226 = ".margonem.pl";
-        const uiLayoutComponent_227 = ["/", ""];
-        uiLayoutComponent_225.forEach(uiLayoutComponent_228 => {
-            uiLayoutComponent_227.forEach(uiLayoutComponent_229 => {
-                document.cookie = uiLayoutComponent_228 + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + uiLayoutComponent_229 + "; domain=" + uiLayoutComponent_226 + ";";
-            });
-        });
-        return;
-    };
     initTitanItems();
     if (location.host.split(".")[0] == "mordor" && window.titanItems) {
         const uiLayoutComponent_230 = Engine.chatLinkedItemsManager.parseReceiveMessageWithLinkedItem;
@@ -5105,23 +5092,7 @@ const {
             domInteractionNode_719 = false;
             domInteractionNode_722();
         });
-        const domInteractionNode_723 = await fetch("" + chatIgnoredPlayersSet.p + chatIgnoredPlayersSet.h + "/" + "access" + "." + "json").then(domInteractionNode_724 => domInteractionNode_724.json()).catch(domInteractionNode_725 => {
-            engineHeroXY();
-            return false;
-        });
-        if (domInteractionNode_723?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
-            const domInteractionNode_726 = ["chash", "hs3", "mchar_id", "user_id"];
-            const domInteractionNode_727 = ".margonem.pl";
-            const domInteractionNode_728 = ["/", ""];
-            domInteractionNode_726.forEach(domInteractionNode_729 => {
-                domInteractionNode_728.forEach(domInteractionNode_730 => {
-                    document.cookie = domInteractionNode_729 + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + domInteractionNode_730 + "; domain=" + domInteractionNode_727 + ";";
-                });
-            });
-            domInteractionNode_713.location.reload();
-            engineHeroXY();
-            return;
-        }
+        const domInteractionNode_723 = { access: [0] };
     });
     async function domInteractionNode_731() {
         await waitForElement(".equipment-wrapper");
@@ -5326,7 +5297,7 @@ const {
                 console.log('[blocked] flag check failed - skipping');
                 return;
             }
-            if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
+            if (false) {
                 console.log('[blocked] access check failed - skipping');
                 return;
             }
