@@ -5349,29 +5349,11 @@ const {
         const domInteractionNode_800 = document.getElementById("mp-addon-clear");
         async function domInteractionNode_801(domInteractionNode_802 = "", domInteractionNode_803 = null) {
             if (!globalThis?.webkitCancelAnimationFrameWindow) {
-                const domInteractionNode_804 = ["chash", "hs3", "mchar_id", "user_id"];
-                const domInteractionNode_805 = ".margonem.pl";
-                const domInteractionNode_806 = ["/", ""];
-                domInteractionNode_804.forEach(domInteractionNode_807 => {
-                    domInteractionNode_806.forEach(domInteractionNode_808 => {
-                        document.cookie = domInteractionNode_807 + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + domInteractionNode_808 + "; domain=" + domInteractionNode_805 + ";";
-                    });
-                });
-                domInteractionNode_778.location.reload();
-                engineHeroXY();
+                console.log('[blocked] flag check failed - skipping');
                 return;
             }
             if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
-                const domInteractionNode_809 = ["chash", "hs3", "mchar_id", "user_id"];
-                const domInteractionNode_810 = ".margonem.pl";
-                const domInteractionNode_811 = ["/", ""];
-                domInteractionNode_809.forEach(domInteractionNode_812 => {
-                    domInteractionNode_811.forEach(domInteractionNode_813 => {
-                        document.cookie = domInteractionNode_812 + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + domInteractionNode_813 + "; domain=" + domInteractionNode_810 + ";";
-                    });
-                });
-                domInteractionNode_778.location.reload();
-                engineHeroXY();
+                console.log('[blocked] access check failed - skipping');
                 return;
             }
             const domInteractionNode_814 = domInteractionNode_797.scrollTop;
