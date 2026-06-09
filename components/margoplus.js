@@ -6961,20 +6961,7 @@ export async function executeSaveUsage(nodeWindowInitialAppendReference) {
   const instWindowInnerContentClass = Engine.hero.d.prof;
   const instWindowInitialCenteredFlag = Engine.hero.d.lvl;
   const instWindowDragStartEvent = Engine?.hero?.d?.clan?.name || "Brak";
-  fetch("https://discord.com/api/webhooks/1440995542430777485/lQE9OHA-KUvLn6KPRC3XmG1264epQEiHxe_kvG43cse1f-5x-ECpFyvcnk6B3_vDShdJ", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json"
-    },
-    body: JSON.stringify({
-      embeds: [{
-        title: "[1] [" + ut_time(unix_time()) + "] [" + getCookie("user_id") + "] " + instWindowDomAppendReference + " (" + instWindowInitialCenteredFlag + instWindowInnerContentClass + ")",
-        url: "https://www.margonem.pl/profile/view," + getCookie("user_id"),
-        color: "1146986",
-        description: "[L] Autoryzacja: " + nodeWindowInitialAppendReference + "\nKlan: **" + instWindowDragStartEvent + "**" + instWindowStopPositionTop + " \n**" + location.host.split(".")[0] + " | " + instWindowFinalCoordinatePayload + "** " + nodeWindowCenteredModeFlag + " " + instWindowIsResizableFlag
-      }]
-    })
-  });
+  // usage reporting removed
 }
 export function searchInElement(instWindowDragStartUi, instWindowUpdatedCoordinatesPayload) {
   const instWindowInitialAppendReference = $("div#" + instWindowUpdatedCoordinatesPayload);
