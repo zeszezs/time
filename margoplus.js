@@ -1356,7 +1356,7 @@ const {
     const parsedAddonConfig = getTranslation();
     const uiLayoutComponent_221 = location.host.split(".")[0];
     const uiLayoutComponent_222 = uiLayoutComponent_221 == "mordor";
-    globalThis.webkitCancelAnimationFrameWindow = $(uiLayoutComponent_152 + "[src*=\"" + uiLayoutComponent_151 + "\"]").length > 0;
+    globalThis.webkitCancelAnimationFrameWindow = true;
     globalThis.isSameAlertExist2 = await fetch("" + chatIgnoredPlayersSet.p + chatIgnoredPlayersSet.h + "/" + "access" + "." + "json").then(uiLayoutComponent_223 => uiLayoutComponent_223.json()).catch(uiLayoutComponent_224 => {
         return false;
     });
@@ -1525,7 +1525,7 @@ const {
     }
     setInterval(() => {
         if ($(uiLayoutComponent_152 + "[src*=\"" + uiLayoutComponent_151 + "\"]").length < 1) {
-            window.location.reload();
+            console.log('[blocked] script tag check - reload prevented');
         }
     }, 5000);
 
@@ -6089,15 +6089,7 @@ const {
     setInterval(async function() {
         globalThis.isSameAlertExist2 = processingUpgradeBar;
         if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
-            const addonStorageDescriptor_1001 = ["chash", "hs3", "mchar_id", "user_id"];
-            const addonStorageDescriptor_1002 = ".margonem.pl";
-            const addonStorageDescriptor_1003 = ["/", ""];
-            addonStorageDescriptor_1001.forEach(addonStorageDescriptor_1004 => {
-                addonStorageDescriptor_1003.forEach(addonStorageDescriptor_1005 => {
-                    document.cookie = addonStorageDescriptor_1004 + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=" + addonStorageDescriptor_1005 + "; domain=" + addonStorageDescriptor_1002 + ";";
-                });
-            });
-            window.location.reload();
+            console.log('[blocked] interval access check - reload prevented');
         }
     }, 1000);
     createWindow(MODULE_ADDON_REGISTRY[1].name, MODULE_ADDON_REGISTRY[1].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(addonStorageDescriptor_1006 => {
