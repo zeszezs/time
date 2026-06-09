@@ -2079,15 +2079,33 @@ const {
         };
         let uiLayoutComponent_389 = uiLayoutComponent_388;
         try {
-            message("Backup disabled.");
+            const uiLayoutComponent_390 = await fetch("https://margoplus.pl/backup/save.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(uiLayoutComponent_389)
+            });
+            const uiLayoutComponent_391 = await uiLayoutComponent_390.json();
+            message("Wysyłanie ustawień na serwer zakończone sukcesem!");
             uiLayoutComponent_385 = false;
         } catch (uiLayoutComponent_392) {
+            message("Wysyłanie ustawieÅ„ na serwer zakończone niepowodzeniem!");
+            console.error("BÅ‚Ä…d:", uiLayoutComponent_392);
             uiLayoutComponent_385 = false;
         }
     };
     globalThis.MargoPlusAPI.loadBackup = async function() {
-        message("Backup disabled.");
-        uiLayoutComponent_385 = false;
+        const uiLayoutComponent_393 = await fetch("https://margoplus.pl/backup/config/" + uiLayoutComponent_164 + ".json").then(uiLayoutComponent_394 => uiLayoutComponent_394.json()).catch(uiLayoutComponent_395 => false);
+        if (uiLayoutComponent_393) {
+            ADDON_STORAGE_REFERENCE = uiLayoutComponent_393?.backup;
+            saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
+            window.location.reload();
+            uiLayoutComponent_385 = false;
+        } else {
+            message("Brak zapisanych ustawień na serwerze!");
+            uiLayoutComponent_385 = false;
+        }
     };
     const uiLayoutComponent_396 = "https://margoplus.pl/audio/";
     const uiLayoutComponent_397 = {
