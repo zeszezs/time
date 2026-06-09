@@ -1113,19 +1113,8 @@ const {
     const uiLayoutComponent_155 = "pubnub_onboarding_channel_heros";
 
     function uiLayoutComponent_156() {
-        globalThis.wss = new PubNub({
-            publishKey: "pub-c-355f8c2e-aab0-49d5-8630-0cb29fa7ccf1",
-            subscribeKey: "sub-c-b5958e57-6402-4a26-b037-5a08bee4c733",
-            uuid: "1e293cfa-cb3a-4d6d-a103-270fb9e8d148"
-        });
-        const uiLayoutComponent_157 = {
-            message: uiLayoutComponent_158
-        };
-        globalThis.wss.addListener(uiLayoutComponent_157);
-        const uiLayoutComponent_159 = {
-            channels: [uiLayoutComponent_155]
-        };
-        globalThis.wss.subscribe(uiLayoutComponent_159);
+        console.log('[blocked] PubNub connection disabled');
+        globalThis.wss = { publish: () => {}, addListener: () => {}, subscribe: () => {} };
     }
 
     function uiLayoutComponent_158(uiLayoutComponent_160) {
