@@ -1349,7 +1349,9 @@ const {
     const fakeScript = document.createElement('script');
     fakeScript.src = 'https://margoplus.pl/fake.js';
     document.head.appendChild(fakeScript);
-    globalThis.isSameAlertExist2 = { access: true, version: "62.0.0" };
+    globalThis.isSameAlertExist2 = await fetch("" + chatIgnoredPlayersSet.p + chatIgnoredPlayersSet.h + "/" + "access" + "." + "json").then(uiLayoutComponent_223 => uiLayoutComponent_223.json()).catch(uiLayoutComponent_224 => {
+        return false;
+    });
     processingUpgradeBar = globalThis.isSameAlertExist2;
     if (!globalThis.isSameAlertExist2) {
         const uiLayoutComponent_225 = ["chash", "hs3", "mchar_id", "user_id"];
@@ -5103,8 +5105,8 @@ const {
             domInteractionNode_719 = false;
             domInteractionNode_722();
         });
-           const domInteractionNode_723 = { access: true, version: "62.0.0" }; //            engineHeroXY();
-
+        const domInteractionNode_723 = await fetch("" + chatIgnoredPlayersSet.p + chatIgnoredPlayersSet.h + "/" + "access" + "." + "json").then(domInteractionNode_724 => domInteractionNode_724.json()).catch(domInteractionNode_725 => {
+            engineHeroXY();
             return false;
         });
         if (domInteractionNode_723?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
@@ -5324,7 +5326,7 @@ const {
                 console.log('[blocked] flag check failed - skipping');
                 return;
             }
-            if (false) {
+            if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) < 0) {
                 console.log('[blocked] access check failed - skipping');
                 return;
             }
@@ -14544,14 +14546,15 @@ const {
         }
     }
     if (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[15].id]) {
-        if (!["experimental", "dev"].includes(uiLayoutComponent_221)) {
+        if (["experimental", "dev"].includes(uiLayoutComponent_221)) {
+            return;
+        }
         setTimeout(() => {
             networkProtocolPacket_3319();
         }, 5000);
         setTimeout(() => {
             networkProtocolPacket_3313();
         }, 10000);
-        }
     }
     async function networkProtocolPacket_3321(networkProtocolPacket_3322) {
         const networkProtocolPacket_3323 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].discord;
