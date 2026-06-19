@@ -3,6 +3,7 @@ let processingUpgrade = false;
 let isHerosOnMapTable = {};
 let processingUpgradeBar = false;
 let notificatorAudio;
+let mpAutoTargetCooldown = 0;
 const _tLog = {
     tag: "%c[MARGO+]",
     style: "font-weight: bold;color:#7289da;",
@@ -2459,6 +2460,16 @@ const {
         const uiLayoutComponent_467 = Engine.map.d.name;
         let uiLayoutComponent_468 = Engine.battle.warriors.getMobClassByWType(uiLayoutComponent_461);
         uiLayoutComponent_442[uiLayoutComponent_457] = uiLayoutComponent_468;
+        if (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[49].id] && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[49].id].auto && !Engine.dead && !Engine.lock?.list?.includes("battle")) {
+            const now = Date.now();
+            if (now - mpAutoTargetCooldown > 1500) {
+                const targetFinderMobs = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[49].id].mob;
+                if (targetFinderMobs[navigationMatrixCoordinate_4635(uiLayoutComponent_443.d)]) {
+                    mpAutoTargetCooldown = now;
+                    navigationMatrixCoordinate_4649();
+                }
+            }
+        }
         if (uiLayoutComponent_468 == "heroes" && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[29].id] && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id][uiLayoutComponent_270].auto) {
             message("Berserker wstrzmany: wykryto herosa!");
             isHerosOnMapTable[uiLayoutComponent_443.d.id] = uiLayoutComponent_443.d.nick;
@@ -4717,6 +4728,7 @@ const {
                 colossus: "Kolos"
             },
             bind: "R"
+            auto: false
         };
     }
     if (typeof ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[50].id] === "undefined") {
@@ -9879,6 +9891,15 @@ const {
             }).appendTo(networkProtocolPacket_2193);
             $("<label for=\"mp-a49-" + networkProtocolPacket_2191 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig.npc[networkProtocolPacket_2191] + "</label>").appendTo(networkProtocolPacket_2193);
         }
+        const mpAutoAddon49Section = $("<div class=\"mp-background-section\"></div>").appendTo(networkProtocolPacket_2187);
+        $("<div class=\"mp-title\">Automatyczne podejście</div>").appendTo(mpAutoAddon49Section);
+        const mpAutoAddon49Control = $("<div class=\"mp-control\">\n                <div>\n                    <div class=\"checkbox-custom c-checkbox\">\n                    \n                    </div>\n                </div>\n            </div>").appendTo(mpAutoAddon49Section);
+        const mpAutoAddon49Checkbox = mpAutoAddon49Control.find(".checkbox-custom");
+        $("<input type=\"checkbox\" id=\"mp-a49-auto-checkbox\" name=\"mp-a49-auto-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[49].id].auto).bind("change", async function() {
+            ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[49].id].auto = $(this).prop("checked");
+            saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
+        }).appendTo(mpAutoAddon49Checkbox);
+        $("<label for=\"mp-a49-auto-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">Podchodź automatycznie po pojawieniu się celu</label>").appendTo(mpAutoAddon49Checkbox);
         const networkProtocolPacket_2195 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[49].id].bind;
         const networkProtocolPacket_2196 = $("<div class=\"mp-background-section\"></div>").appendTo(networkProtocolPacket_2187);
         $("<div class=\"mp-title\">Konfiguracja skrótu</div>").appendTo(networkProtocolPacket_2196);
