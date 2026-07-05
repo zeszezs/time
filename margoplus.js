@@ -1106,6 +1106,22 @@ const {
         widget: true,
         tags: "jaja, maskotka, licznik, rozbite, jajo, ogromne, smok, skały, drako, sOMp",
         credits: false
+    }, {
+        id: "add63",
+        name: "PetSpammer",
+        description: "Co trzy sekundy używa losowej animacji maskotki.",
+        settings: false,
+        widget: false,
+        tags: "maskotka, animacje",
+        credits: false
+    }, {
+        id: "add64",
+        name: "PrzelotHelper",
+        description: "Umożliwia ustawienie kolejności używania teleportów na e2 pod jeden przycisk.",
+        settings: true,
+        widget: true,
+        tags: "przelot, e2, teleport, tp",
+        credits: false
     }];
     let uiLayoutComponent_151 = "margoplus.pl";
     let uiLayoutComponent_152 = "script";
@@ -23464,6 +23480,74 @@ const {
         inventoryAutomationState_5331.empty();
         const inventoryAutomationState_5332 = $("\n                <div class=\"mp-egg-value\">\n                    <div>Łącznie:</div>\n                    <div>" + inventoryAutomationState_5330.a + "</div>\n                </div>\n                <div class=\"mp-egg-value mp-color-common\">\n                    <div>Rozbite:</div>\n                    <div>" + inventoryAutomationState_5330.f + "</div>\n                </div>\n                <div class=\"mp-egg-value mp-color-legendary\">\n                    <div>Podniesione:</div>\n                    <div>" + inventoryAutomationState_5330.s + "</div>\n                </div>");
         inventoryAutomationState_5332.appendTo(inventoryAutomationState_5331);
+    }
+    
+    function executePetSpammer() {
+        if (!Engine.hero.pet) return;
+        if (Engine.lock.list.length > 0) return;
+        if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[63].id]) return;
+        
+        const petActions = Engine.hero.pet.getActionsDataArray();
+        const randIndex = Math.floor(Math.random() * petActions.length);
+        const randAction = petActions[randIndex].actionBin;
+        _g("pet&a=" + randAction);
+    }
+    setInterval(() => {
+        executePetSpammer();
+    }, 3000);
+    
+    function uiUpdatePrzelotHelper() {
+        const settings = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270];
+        const items = settings.items || [];
+        const container = $("#" + MODULE_ADDON_REGISTRY[64].id + " .mp-use-przelot-items");
+        container.empty();
+        for (const item of items) {
+            const engineItem = Engine.items.getItemById(item.id);
+            if (!engineItem || engineItem.loc !== "g") continue;
+            
+            const el = universalCreateItem(item.item, "item", ADDON_STORAGE_REFERENCE);
+            el.appendTo(container);
+            el.on("click", () => {
+                el.remove();
+                const idx = items.findIndex(i => i.id === item.id);
+                if (idx !== -1) {
+                    items.splice(idx, 1);
+                }
+                saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
+            });
+        }
+    }
+    
+    function executePrzelotHelper() {
+        const settingsItems = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270].items;
+        const validItems = [];
+        for (const key in settingsItems) {
+            const id = settingsItems[key].id;
+            const engineItem = Engine.items.getItemById(id);
+            if (engineItem?._cachedStats) {
+                const timelimit = engineItem?._cachedStats.timelimit ? engineItem?._cachedStats.timelimit.split(",")[1] : 0;
+                const reqLvl = engineItem?.lvl || 0;
+                const heroLvl = Engine.hero.d.lvl;
+                const now = ts() / 1000;
+                if (heroLvl >= reqLvl && now >= timelimit) {
+                    validItems.push(engineItem.id);
+                }
+            }
+        }
+        if (validItems[0]) {
+            window._g("moveitem&st=1&id=" + validItems[0], function (res) {
+                if (res?.msg) {
+                    const idx = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270].items.findIndex(i => i.id === validItems[0]);
+                    if (idx !== -1) {
+                        ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270].items.splice(idx, 1);
+                    }
+                    saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
+                    uiUpdatePrzelotHelper();
+                }
+            });
+        } else {
+            message("Brak aktywnych teleportów");
+        }
     }
 
     function inventoryAutomationState_5333(inventoryAutomationState_5334) {
