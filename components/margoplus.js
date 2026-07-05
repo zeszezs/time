@@ -220,7 +220,7 @@ const processItems = async (itemsQueueList, itemProcessingCallback, queueThrottl
   $(".ess-selected").removeClass("ess-selected");
 };
 
-const listNuggets = ["Wykrywacz herosĂłw", "Zwój orzeźwienia", "Złoty samorodek", "Podwójne widzenie", "Leczenie w walce", "Kupon na małą miksturę wyczerpania", "Kupon na miksturÄ wyczerpania", "Kupon na duĹźÄ miksturę wyczerpania", "Zwój wywołania depozytu", "Zwój wywołania poczty", "Zwój wywołania aukcji", "Zwój wywołania depozytu klanowego", "Zwój zbiega", "ZwĂłj wywoĹania sklepu", "Pieśń przebudzenia", "Melodia wieków", "Diabelskie struny", "Werble ochronne", "Elfia kołysanka", "Rozkaz bojowy", "Fletnia opiekuna lasĂłw", "Zaklęte kastaniety", "Ulga dla przeciÄĹźonych", "Utrwalenie stroju", "Utrwalenie chowańca", "Doskonała skrzynia Smoczych Kowali", "Modyfikator celu podróży", "Poszerzacz depozytu", "Plecak mistrza teleportacji", "Pożeracz doświadczenia", "Poszerzacz zestawów do walki", "Unikatowy blankiet na strój", "Heroiczny blankiet na strĂłj"];
+const listNuggets = ["Wykrywacz herosów", "Zwój orzeźwienia", "Złoty samorodek", "Podwójne widzenie", "Leczenie w walce", "Kupon na małą miksturę wyczerpania", "Kupon na miksturę wyczerpania", "Kupon na dużą miksturę wyczerpania", "Zwój wywołania depozytu", "Zwój wywołania poczty", "Zwój wywołania aukcji", "Zwój wywołania depozytu klanowego", "Zwój zbiega", "Zwój wywołania sklepu", "Pieśń przebudzenia", "Melodia wieków", "Diabelskie struny", "Werble ochronne", "Elfia kołysanka", "Rozkaz bojowy", "Fletnia opiekuna lasów", "Zaklęte kastaniety", "Ulga dla przeciążonych", "Utrwalenie stroju", "Utrwalenie chowańca", "Doskonała skrzynia Smoczych Kowali", "Modyfikator celu podróży", "Poszerzacz depozytu", "Plecak mistrza teleportacji", "Pożeracz doświadczenia", "Poszerzacz zestawów do walki", "Unikatowy blankiet na strój", "Heroiczny blankiet na strój"];
 export const getItemsFromDepoAllByNugget = () => filterItems("d", blessingItem => blessingItem.st == 0 && !blessingItem._cachedStats.hasOwnProperty("nodepo") && listNuggets.indexOf(blessingItem.name) >= 0);
 export const getItemsFromDepoTabByNugget = () => filterItems("d", blessingTabItem => blessingTabItem.st == 0 && !blessingTabItem._cachedStats.hasOwnProperty("nodepo") && listNuggets.indexOf(blessingTabItem.name) >= 0 && isInCurrentTab(blessingTabItem));
 export const getItemsFromEqByNugget = () => filterItems("g", blessingEqItem => blessingEqItem.st == 0 && !blessingEqItem._cachedStats.hasOwnProperty("nodepo") && listNuggets.indexOf(blessingEqItem.name) >= 0);
@@ -250,7 +250,7 @@ export const getItemsFromEqByComponentsTier2 = () => filterItems("g", t2EqItem =
 export const getItemsFromEqByComponentsTier3 = () => filterItems("g", t3EqItem => t3EqItem.st == 0 && !t3EqItem._cachedStats.hasOwnProperty("nodepo") && (t3EqItem._cachedStats.opis?.includes("poziomie 201-300") || (t3EqItem.cl === 28 || t3EqItem.cl === 26) && t3EqItem._cachedStats?.target_min_lvl == 201));
 export const getItemsFromDepoTabByChest = () => filterItems("d", outfitChestTabItem => outfitChestTabItem.st == 0 && !outfitChestTabItem._cachedStats.hasOwnProperty("nodepo") && outfitChestTabItem._cachedStats.opis?.includes("Zawiera jedną losową część przebrania") && isInCurrentTab(outfitChestTabItem));
 export const getItemsFromDepoAllByChest = () => filterItems("d", outfitChestAllItem => outfitChestAllItem.st == 0 && !outfitChestAllItem._cachedStats.hasOwnProperty("nodepo") && outfitChestAllItem._cachedStats.opis?.includes("Zawiera jedną losową część przebrania"));
-export const getItemsFromEqByChest = () => filterItems("g", outfitChestEqItem => outfitChestEqItem.st == 0 && !outfitChestEqItem._cachedStats.hasOwnProperty("nodepo") && outfitChestEqItem._cachedStats.opis?.includes("Zawiera jednÄ losowÄ część przebrania"));
+export const getItemsFromEqByChest = () => filterItems("g", outfitChestEqItem => outfitChestEqItem.st == 0 && !outfitChestEqItem._cachedStats.hasOwnProperty("nodepo") && outfitChestEqItem._cachedStats.opis?.includes("Zawiera jedną losową część przebrania"));
 export const getItemsFromDepoAllBySkinItems = () => filterItems("d", skinLegendaryAllItem => skinLegendaryAllItem.st == 0 && !skinLegendaryAllItem._cachedStats.hasOwnProperty("nodepo") && skinLegendaryAllItem._cachedStats.opis?.includes("legendarnego stroju"));
 export const getItemsFromDepoTabBySkinItems = () => filterItems("d", skinLegendaryTabItem => skinLegendaryTabItem.st == 0 && !skinLegendaryTabItem._cachedStats.hasOwnProperty("nodepo") && skinLegendaryTabItem._cachedStats.opis?.includes("legendarnego stroju") && isInCurrentTab(skinLegendaryTabItem));
 export const getItemsFromEqBySkinItems = () => filterItems("g", skinLegendaryEqItem => skinLegendaryEqItem.st == 0 && !skinLegendaryEqItem._cachedStats.hasOwnProperty("nodepo") && skinLegendaryEqItem._cachedStats.opis?.includes("legendarnego stroju"));
@@ -264,7 +264,7 @@ export const getItemsFromDepoAllByPkt = () => filterItems("d", pointsAddAllItem 
 export const getItemsFromDepoTabByPkt = () => filterItems("d", pointsAddTabItem => pointsAddTabItem.st == 0 && !pointsAddTabItem._cachedStats.hasOwnProperty("nodepo") && pointsAddTabItem._cachedStats.hasOwnProperty("enhancement_add_point") && isInCurrentTab(pointsAddTabItem));
 export const getItemsFromEqByPkt = () => filterItems("g", pointsAddEqItem => pointsAddEqItem.st == 0 && !pointsAddEqItem._cachedStats.hasOwnProperty("nodepo") && pointsAddEqItem._cachedStats.hasOwnProperty("enhancement_add_point"));
 export const getItemsFromDepoAllByDust = () => filterItems("d", astralDustAllItem => astralDustAllItem.st == 0 && !astralDustAllItem._cachedStats.hasOwnProperty("nodepo") && (astralDustAllItem._cachedStats.hasOwnProperty("upgtimelimit") || astralDustAllItem._cachedStats?.opis?.includes("pyłu astralnego")));
-export const getItemsFromDepoTabByDust = () => filterItems("d", astralDustTabItem => astralDustTabItem.st == 0 && !astralDustTabItem._cachedStats.hasOwnProperty("nodepo") && (astralDustTabItem._cachedStats.hasOwnProperty("upgtimelimit") || astralDustTabItem._cachedStats.opis?.includes("pyĹu astralnego")) && isInCurrentTab(astralDustTabItem));
+export const getItemsFromDepoTabByDust = () => filterItems("d", astralDustTabItem => astralDustTabItem.st == 0 && !astralDustTabItem._cachedStats.hasOwnProperty("nodepo") && (astralDustTabItem._cachedStats.hasOwnProperty("upgtimelimit") || astralDustTabItem._cachedStats.opis?.includes("pyłu astralnego")) && isInCurrentTab(astralDustTabItem));
 export const getItemsFromEqByDust = () => filterItems("g", astralDustEqItem => astralDustEqItem.st == 0 && !astralDustEqItem._cachedStats.hasOwnProperty("nodepo") && (astralDustEqItem._cachedStats.hasOwnProperty("upgtimelimit") || astralDustEqItem._cachedStats.opis?.includes("pyłu astralnego")));
 export const getItemsFromDepoAllByExpiries = () => {
   const currentTimestampSeconds = Math.ceil(ts() / 1000);
@@ -806,7 +806,7 @@ export function getSymbols() {
 export function getTplsSymbolAndComponents() {
   return [{
     id: 57493,
-    name: "Emanujący symbol krwawej udrÄki",
+    name: "Emanujący symbol krwawej udręki",
     type: "legendary",
     stat: "legbon=anguish,1;permbound;rarity=legendary;socket_enhancer;target_class=8;target_max_lvl=300;target_min_lvl=201",
     pr: 21,
@@ -846,7 +846,7 @@ export function getTplsSymbolAndComponents() {
     tier: 3
   }, {
     id: 57485,
-    name: "EmanujÄcy symbol ciosu bardzo krytycznego",
+    name: "Emanujący symbol ciosu bardzo krytycznego",
     type: "legendary",
     stat: "legbon=verycrit,1;permbound;rarity=legendary;socket_enhancer;target_class=8,7,29;target_max_lvl=300;target_min_lvl=201",
     pr: 21,
@@ -856,7 +856,7 @@ export function getTplsSymbolAndComponents() {
     tier: 3
   }, {
     id: 57489,
-    name: "EmanujÄcy symbol krytycznej osłony",
+    name: "Emanujący symbol krytycznej osłony",
     type: "legendary",
     stat: "legbon=critred,1;permbound;rarity=legendary;socket_enhancer;target_class=8,7;target_max_lvl=300;target_min_lvl=201",
     pr: 21,
@@ -896,7 +896,7 @@ export function getTplsSymbolAndComponents() {
     tier: 3
   }, {
     id: 57495,
-    name: "Emanujący symbol przeszywajÄcej skutecznoĹci",
+    name: "Emanujący symbol przeszywającej skuteczności",
     type: "legendary",
     stat: "legbon=puncture,1;permbound;rarity=legendary;socket_enhancer;target_class=8;target_max_lvl=300;target_min_lvl=201",
     pr: 21,
@@ -916,7 +916,7 @@ export function getTplsSymbolAndComponents() {
     tier: 2
   }, {
     id: 57475,
-    name: "Stabilny symbol oĹlepienia",
+    name: "Stabilny symbol oślepienia",
     type: "legendary",
     stat: "legbon=glare,1;permbound;rarity=legendary;socket_enhancer;target_class=8,9;target_max_lvl=200;target_min_lvl=101",
     pr: 21,
@@ -1036,7 +1036,7 @@ export function getTplsSymbolAndComponents() {
     tier: 1
   }, {
     id: 54352,
-    name: "SĹaby symbol fasady opieki",
+    name: "Słaby symbol fasady opieki",
     type: "legendary",
     stat: "legbon=facade,1;permbound;rarity=legendary;socket_enhancer;target_class=8,11,13;target_max_lvl=100;target_min_lvl=20",
     pr: 21,
@@ -1056,7 +1056,7 @@ export function getTplsSymbolAndComponents() {
     tier: 1
   }, {
     id: 54350,
-    name: "SĹaby symbol krytycznej osłony",
+    name: "Słaby symbol krytycznej osłony",
     type: "legendary",
     stat: "legbon=critred,1;permbound;rarity=legendary;socket_enhancer;target_class=8,10;target_max_lvl=100;target_min_lvl=20",
     pr: 21,
@@ -1206,7 +1206,7 @@ export function getTplsSymbolAndComponents() {
     tier: 2
   }, {
     id: 54341,
-    name: "EmanujÄcy stalowy komponent",
+    name: "Emanujący stalowy komponent",
     type: "legendary",
     stat: "permbound;rarity=legendary;socket_component;target_max_lvl=300;target_min_lvl=201",
     pr: 21,
@@ -1226,7 +1226,7 @@ export function getTplsSymbolAndComponents() {
     tier: 3
   }, {
     id: 54343,
-    name: "EmanujÄcy lodowy komponent",
+    name: "Emanujący lodowy komponent",
     type: "legendary",
     stat: "permbound;rarity=legendary;socket_component;target_max_lvl=300;target_min_lvl=201",
     pr: 21,
@@ -1236,7 +1236,7 @@ export function getTplsSymbolAndComponents() {
     tier: 3
   }, {
     id: 54344,
-    name: "EmanujÄcy elektryczny komponent",
+    name: "Emanujący elektryczny komponent",
     type: "legendary",
     stat: "permbound;rarity=legendary;socket_component;target_max_lvl=300;target_min_lvl=201",
     pr: 21,
@@ -1262,7 +1262,7 @@ export function getStashComponents() {
     id: 59447,
     name: "Lekka skrytka mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2932;opis=Zawiera losowy komponent, niezbÄdny do utworzenia symbolu ulepszajÄcego ekwipunek na poziomie 20-100.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2932;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1272,11 +1272,11 @@ export function getStashComponents() {
       lvl: 35,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/bardzozlypatryk.gif"
     }, {
-      nick: "Karmazynowy MĹciciel",
+      nick: "Karmazynowy Mściciel",
       lvl: 45,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/gnom_msciciel.gif"
     }, {
-      nick: "ZĹodziej",
+      nick: "Złodziej",
       lvl: 51,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/zlodziej.gif"
     }, {
@@ -1292,7 +1292,7 @@ export function getStashComponents() {
       lvl: 85,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/piekielny_kosciej.gif"
     }, {
-      nick: "Koziec Mąciciel Ĺcieżek",
+      nick: "Koziec Mąciciel Ścieżek",
       lvl: 94,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/koziec_maciciel_sciezek.gif"
     }]
@@ -1301,17 +1301,17 @@ export function getStashComponents() {
     id: 59448,
     name: "Lekka skrytka stalowej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2933;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100. Szansa na Stalowy komponent jest dwukrotnie wiÄksza od pozostałych.[br][br]Po otworzeniu skrzynki, Ĺup staje się związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2933;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100. Szansa na Stalowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
     icon: "bag/kuf_compontent_04.gif.gif",
     drop: [{
-      nick: "KotoĹak Tropiciel",
+      nick: "Kotołak Tropiciel",
       lvl: 27,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e1/kotolak_lowca.gif"
     }, {
-      nick: "SzczÄt alias Gładki",
+      nick: "Szczęt alias Gładki",
       lvl: 47,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/zbir-szczet.gif"
     }, {
@@ -1336,7 +1336,7 @@ export function getStashComponents() {
     id: 59449,
     name: "Lekka skrytka ognistej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2934;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100. Szansa na Ognisty komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje siÄ zwiÄzany na staĹe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2934;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100. Szansa na Ognisty komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1354,11 +1354,11 @@ export function getStashComponents() {
       lvl: 66,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/gnoll12.gif"
     }, {
-      nick: "Grabarz Ĺwiątynny",
+      nick: "Grabarz świątynny",
       lvl: 80,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/nieu_mnich_grabarz.gif"
     }, {
-      nick: "Nadzorczyni krasnoludĂłw",
+      nick: "Nadzorczyni krasnoludów",
       lvl: 88,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/nadzorczyni_krasnoludow.gif"
     }]
@@ -1367,7 +1367,7 @@ export function getStashComponents() {
     id: 59450,
     name: "Lekka skrytka lodowej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2935;opis=Zawiera losowy komponent, niezbÄdny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100. Szansa na Lodowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2935;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100. Szansa na Lodowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1402,7 +1402,7 @@ export function getStashComponents() {
     id: 59451,
     name: "Lekka skrytka elektrycznej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2936;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszajÄcego ekwipunek na poziomie 20-100. Szansa na Elektryczny komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2936;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100. Szansa na Elektryczny komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1437,7 +1437,7 @@ export function getStashComponents() {
     id: 59452,
     name: "Lekka skrytka jadowej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2937;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100. Szansa na Jadowy komponent jest dwukrotnie wiÄksza od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje siÄ zwiÄzany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2937;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 20-100. Szansa na Jadowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1476,7 +1476,7 @@ export function getStashComponents() {
     id: 59455,
     name: "Solidna skrytka mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2938;opis=Zawiera losowy komponent, niezbÄdny do utworzenia symbolu ulepszającego ekwipunek na poziomie 101-200.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2938;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 101-200.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1494,7 +1494,7 @@ export function getStashComponents() {
       lvl: 123,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/sw_braciszek.gif"
     }, {
-      nick: "ZĹoty Roger",
+      nick: "Złoty Roger",
       lvl: 135,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/szkielet_pirata.gif"
     }, {
@@ -1545,7 +1545,7 @@ export function getStashComponents() {
       lvl: 131,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e1/pirat5b.gif"
     }, {
-      nick: "WĂłjt FistuĹa",
+      nick: "Wójt Fistuła",
       lvl: 144,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/goral-e2-wojt-fistula.gif"
     }, {
@@ -1553,7 +1553,7 @@ export function getStashComponents() {
       lvl: 160,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/orkczd.gif"
     }, {
-      nick: "Ziuggrael Strażnik KrĂłlowej",
+      nick: "Ziuggrael Strażnik Królowej",
       lvl: 170,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/praork_woj_elita.gif"
     }, {
@@ -1570,7 +1570,7 @@ export function getStashComponents() {
     id: 59459,
     name: "Solidna skrytka ognistej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2940;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszajÄcego ekwipunek na poziomie 101-200. Szansa na Ognisty komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na staĹe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2940;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 101-200. Szansa na Ognisty komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1580,7 +1580,7 @@ export function getStashComponents() {
       lvl: 105,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/moloch-jertek.gif"
     }, {
-      nick: "Ĺowca czaszek",
+      nick: "Łowca czaszek",
       lvl: 112,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/alghul-czaszka-1a.gif"
     }, {
@@ -1608,7 +1608,7 @@ export function getStashComponents() {
       lvl: 189,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/zmutowana-roslinka.gif"
     }, {
-      nick: "Mysiur MyĹwiórowy KrĂłl",
+      nick: "Mysiur Myświórowy Król",
       lvl: 197,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/mysiur_myswiorowy_krol-1a.gif"
     }]
@@ -1617,13 +1617,13 @@ export function getStashComponents() {
     id: 59460,
     name: "Solidna skrytka lodowej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2941;opis=Zawiera losowy komponent, niezbÄdny do utworzenia symbolu ulepszającego ekwipunek na poziomie 101-200. Szansa na Lodowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2941;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 101-200. Szansa na Lodowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
     icon: "bag/kuf_compontent_10.gif",
     drop: [{
-      nick: "MiĹoĹnik magii",
+      nick: "Miłośnik magii",
       lvl: 108,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/blotniaki_milosnik_magii.gif"
     }, {
@@ -1643,7 +1643,7 @@ export function getStashComponents() {
       lvl: 148,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/amuno.gif"
     }, {
-      nick: "Duch WĹadcy Klanów",
+      nick: "Duch Władcy Klanów",
       lvl: 165,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/duch_wladcy_kl.gif"
     }, {
@@ -1664,7 +1664,7 @@ export function getStashComponents() {
     id: 59461,
     name: "Solidna skrytka elektrycznej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2942;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 101-200. Szansa na Elektryczny komponent jest dwukrotnie większa od pozostaĹych.[br][br]Po otworzeniu skrzynki, łup staje siÄ zwiÄzany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2942;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 101-200. Szansa na Elektryczny komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1690,7 +1690,7 @@ export function getStashComponents() {
       lvl: 155,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/tri_adariel.gif"
     }, {
-      nick: "Fursharag PoĹźeracz Umysłów",
+      nick: "Fursharag Pożeracz Umysłów",
       lvl: 170,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/praork_mag_elita.gif"
     }, {
@@ -1707,13 +1707,13 @@ export function getStashComponents() {
     id: 59462,
     name: "Solidna skrytka jadowej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2943;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 101-200. Szansa na Jadowy komponent jest dwukrotnie wiÄksza od pozostaĹych.[br][br]Po otworzeniu skrzynki, łup staje się związany na staĹe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2943;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 101-200. Szansa na Jadowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
     icon: "bag/kuf_compontent_16.gif",
     drop: [{
-      nick: "MiĹoĹnik ĹowcĂłw",
+      nick: "Miłośnik łowców",
       lvl: 108,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/blotniaki_milosnik_lowcow.gif"
     }, {
@@ -1733,7 +1733,7 @@ export function getStashComponents() {
       lvl: 154,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/goons_asterus-1a.gif"
     }, {
-      nick: "Bragarth MyĹliwy Dusz",
+      nick: "Bragarth Myśliwy Dusz",
       lvl: 170,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/e2/praork_low_elita.gif"
     }, {
@@ -1748,15 +1748,15 @@ export function getStashComponents() {
   }, {
     tier: 3,
     id: 59492,
-    name: "CiÄĹźka skrytka mocy",
+    name: "Ciężka skrytka mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2944;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300.[br][br]Po otworzeniu skrzynki, łup staje się związany na staĹe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2944;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
     icon: "bag/kuf_compontent_13.gif",
     drop: [{
-      nick: "Demonis Pan NicoĹci",
+      nick: "Demonis Pan Nicości",
       lvl: 205,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/sekta_demon_cz_s.gif"
     }, {
@@ -1784,16 +1784,16 @@ export function getStashComponents() {
       lvl: 271,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/negthotep.gif"
     }, {
-      nick: "MĹody Smok",
+      nick: "Młody Smok",
       lvl: 282,
       icon: "https://micc.garmory-cdn.cloud/obrazki/npc/her/smokbarb.gif"
     }]
   }, {
     tier: 3,
     id: 59493,
-    name: "CiÄĹźka skrytka stalowej mocy",
+    name: "Ciężka skrytka stalowej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2945;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszajÄcego ekwipunek na poziomie 201-300. Szansa na Stalowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, Ĺup staje siÄ związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2945;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300. Szansa na Stalowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1828,7 +1828,7 @@ export function getStashComponents() {
     id: 59494,
     name: "Ciężka skrytka ognistej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2946;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300. Szansa na Ognisty komponent jest dwukrotnie większa od pozostaĹych.[br][br]Po otworzeniu skrzynki, łup staje siÄ związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2946;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300. Szansa na Ognisty komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1863,7 +1863,7 @@ export function getStashComponents() {
     id: 59496,
     name: "Ciężka skrytka lodowej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2947;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300. Szansa na Lodowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, Ĺup staje siÄ zwiÄzany na staĹe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2947;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300. Szansa na Lodowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1894,7 +1894,7 @@ export function getStashComponents() {
     id: 59497,
     name: "Ciężka skrytka elektrycznej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2948;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300. Szansa na Elektryczny komponent jest dwukrotnie wiÄksza od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2948;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300. Szansa na Elektryczny komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -1925,7 +1925,7 @@ export function getStashComponents() {
     id: 59498,
     name: "Ciężka skrytka jadowej mocy",
     type: "legendary",
-    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2949;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300. Szansa na Jadowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje siÄ związany na stałe.;rarity=legendary",
+    stat: "amount=1;canpreview;cansplit=1;capacity=100;lootbox2=2949;opis=Zawiera losowy komponent, niezbędny do utworzenia symbolu ulepszającego ekwipunek na poziomie 201-300. Szansa na Jadowy komponent jest dwukrotnie większa od pozostałych.[br][br]Po otworzeniu skrzynki, łup staje się związany na stałe.;rarity=legendary",
     pr: 21,
     prc: "zl",
     cl: 16,
@@ -2144,7 +2144,7 @@ export function getDataIcons() {
     },
     summon: {
       "Domina Ecclesiae": "https://micc.garmory-cdn.cloud/obrazki/npc/her/domina.gif",
-      "Mietek Ĺťul": "https://micc.garmory-cdn.cloud/obrazki/npc/her/zulek.gif",
+      "Mietek Żul": "https://micc.garmory-cdn.cloud/obrazki/npc/her/zulek.gif",
       "Mroczny Patryk": "https://micc.garmory-cdn.cloud/obrazki/npc/her/bardzozlypatryk.gif",
       "Karmazynowy Mściciel": "https://micc.garmory-cdn.cloud/obrazki/npc/her/gnom_msciciel.gif",
       Złodziej: "https://micc.garmory-cdn.cloud/obrazki/npc/her/zlodziej.gif",
@@ -2156,9 +2156,9 @@ export function getDataIcons() {
       "Książę Kasim": "https://micc.garmory-cdn.cloud/obrazki/npc/her/ksiaze-kasim.gif",
       "Baca bez Łowiec": "https://micc.garmory-cdn.cloud/obrazki/npc/her/baca-bez-lowiec.gif",
       "Lichwiarz Grauhaz": "https://micc.garmory-cdn.cloud/obrazki/npc/her/heros_129xd.gif",
-      "ObĹÄkany Ĺowca Orków": "https://micc.garmory-cdn.cloud/obrazki/npc/her/oblakany_ac1dae9d.gif",
+      "Obłąkany Łowca Orków": "https://micc.garmory-cdn.cloud/obrazki/npc/her/oblakany_ac1dae9d.gif",
       "Czarująca Atalia": "https://micc.garmory-cdn.cloud/obrazki/npc/her/tri_atalia.gif",
-      "ĹwiÄty Braciszek": "https://micc.garmory-cdn.cloud/obrazki/npc/her/zalozyciel.gif",
+      "Święty Braciszek": "https://micc.garmory-cdn.cloud/obrazki/npc/her/zalozyciel.gif",
       "Viviana Nandin": "https://micc.garmory-cdn.cloud/obrazki/npc/her/viv_nandin_i3bd1.gif",
       "Mulher Ma": "https://micc.garmory-cdn.cloud/obrazki/npc/her/mulher_ma.gif",
       "Demonis Pan Nicości": "https://micc.garmory-cdn.cloud/obrazki/npc/her/sekta_demon_cz_s.gif",
@@ -2166,7 +2166,7 @@ export function getDataIcons() {
       "Vapor Veneno": "https://micc.garmory-cdn.cloud/obrazki/npc/her/joziniec_bagienny.gif",
       Dęborożec: "https://micc.garmory-cdn.cloud/obrazki/npc/her/zwierz_kniei.gif",
       Tepeyollotl: "https://micc.garmory-cdn.cloud/obrazki/npc/her/tep_35ecb966.gif",
-      "Negthotep Czarny KapĹan": "https://micc.garmory-cdn.cloud/obrazki/npc/her/negthotep.gif",
+      "Negthotep Czarny Kapłan": "https://micc.garmory-cdn.cloud/obrazki/npc/her/negthotep.gif",
       "Młody Smok": "https://micc.garmory-cdn.cloud/obrazki/npc/her/smokbarb.gif",
       "Złoty Roger": "https://micc.garmory-cdn.cloud/obrazki/npc/her/szkielet_pirata.gif",
       "Widmo Triady": "https://micc.garmory-cdn.cloud/obrazki/npc/her/trist2_widmo_triady.gif"
@@ -2195,7 +2195,7 @@ export const initTitanItems = () => {
       id: [476420, 3358979, 5730245, 6110333, 6708261, 8051717, 8395647, 8612388, 1771359, 7104178, 8012514, 9173043, 5218810, 6408640, 9246937],
       prof: "mt"
     },
-    "DĹonie ĹnieĹźnych lawin": {
+    "Dłonie śnieżnych lawin": {
       id: [476420, 6009966, 6586440, 7188620, 8012514],
       prof: "mp"
     },
@@ -2211,7 +2211,7 @@ export const initTitanItems = () => {
       id: [2170236, 6117226, 7088272, 8395647],
       prof: "pw"
     },
-    "Kask mroĹşnego nieboskłonu": {
+    "Kask mroźnego nieboskłonu": {
       id: [2170236, 2589816, 5012528, 5898306, 6971207, 8356281, 9179002, 3358979, 6117226, 2482304, 7088272],
       prof: "bh"
     },
@@ -2247,11 +2247,11 @@ export const initTitanItems = () => {
       id: [2589816, 3588074, 6009966, 6216645, 6701419, 6708261, 8051717, 8630499, 9173043],
       prof: "m"
     },
-    "SkĂłra zdjÄta z demona": {
+    "Skóra zdjęta z demona": {
       id: [2589816, 3588074, 6110333, 6708261, 5730245],
       prof: "mt"
     },
-    "KĹÄcza i wodorosty": {
+    "Kłącza i wodorosty": {
       id: [2589816, 6110333, 6586440, 7088272, 3947507, 6009966],
       prof: "mp"
     },
@@ -2275,7 +2275,7 @@ export const initTitanItems = () => {
       id: [2589816, 5012528, 5730245, 5898306, 6708261, 7088272, 8356281, 9179002, 3358979, 2170236, 2482304, 9173043, 6408640, 8395647],
       prof: "bht"
     },
-    "Chwyt gĹÄbokiej martwicy": {
+    "Chwyt głębokiej martwicy": {
       id: [2589816, 3358979, 6701419, 8395647, 8414534, 6586440, 8612388, 6602169, 2482304, 8051717, 5012528, 3432632],
       prof: "bw"
     },
@@ -2283,7 +2283,7 @@ export const initTitanItems = () => {
       id: [2589816, 5730245, 6110333, 6708261, 8356281, 9339291, 1771359, 9204116, 2170236],
       prof: "ht"
     },
-    "KoĹskie kokosy": {
+    "Końskie kokosy": {
       id: [2885016, 6602169, 8012514, 9441321, 8252819, 8395647, 9160538, 6586440],
       prof: "pw"
     },
@@ -2303,11 +2303,11 @@ export const initTitanItems = () => {
       id: [3303246, 8719150, 3358979, 9160538, 1694265, 6122480, 6206391, 9173043, 2589816],
       prof: "bh"
     },
-    "Atrybut pani wspomnieĹ": {
+    "Atrybut pani wspomnień": {
       id: [3303246, 4947586, 7088272, 9160538, 8408736],
       prof: "pw"
     },
-    "Obuwie jednoĹci z naturą": {
+    "Obuwie jedności z naturą": {
       id: [3303246, 6586440, 9339291, 8612388],
       prof: "wp"
     },
@@ -2331,7 +2331,7 @@ export const initTitanItems = () => {
       id: [3588074, 6045847, 8051717, 7104178, 3432632],
       prof: "m"
     },
-    "Palce przeszĹoĹci": {
+    "Palce przeszłości": {
       id: [4763316, 5730245, 6386813, 6701419, 8012514, 8576127, 476420, 6586440, 9463646],
       prof: "mt"
     },
@@ -2343,7 +2343,7 @@ export const initTitanItems = () => {
       id: [6009966, 7088272, 8012514, 6422618],
       prof: "pw"
     },
-    "HeĹm antyiperytowy": {
+    "Hełm antyiperytowy": {
       id: [6110333],
       prof: "ht"
     },
@@ -2375,7 +2375,7 @@ export const initTitanItems = () => {
       id: [4947586, 6045847, 6110333, 6227794, 7188620, 8012514, 8051717, 3432632],
       prof: "mt"
     },
-    "Zawiniątko z ery bogĂłw": {
+    "Zawiniątko z ery bogów": {
       id: [5012528, 8719150, 9179002, 5730245, 4987620, 6971207, 9173043],
       prof: "bt"
     },
@@ -2395,7 +2395,7 @@ export const initTitanItems = () => {
       id: [5730245, 7088272, 8630499, 9441321, 6602169, 9173043, 3432632, 5204655, 6586440],
       prof: "mpt"
     },
-    "Klatka niezwykĹej rozkoszy": {
+    "Klatka niezwykłej rozkoszy": {
       id: [5898306, 6009966, 6117226, 6701419],
       prof: "pw"
     },
@@ -2439,7 +2439,7 @@ export const initTitanItems = () => {
       id: [6386813, 8051717, 9179002, 6701419, 8356281],
       prof: "bhtmpw"
     },
-    "Pamięć śnieĹźnych wĹadców": {
+    "Pamięć śnieżnych władców": {
       id: [6586440, 6701419, 8012514, 8051717, 8576127, 7880679, 7228793, 3432632],
       prof: "mp"
     },
@@ -2447,11 +2447,11 @@ export const initTitanItems = () => {
       id: [6586440, 1771359, 2589816, 8051717, 5218810, 2170236],
       prof: "bhtmpw"
     },
-    "PrzesĹona złotych skrzydeł": {
+    "Przesłona złotych skrzydeł": {
       id: [6602169, 6701419, 6586440, 1961781],
       prof: "pw"
     },
-    "Obuwie wĹadcy olbrzymów": {
+    "Obuwie władcy olbrzymów": {
       id: [6602169, 6701419, 6708261, 8012514, 8356281, 9179002, 9463646, 9736753, 2170236, 7104178, 3358979],
       prof: "bhtmpw"
     },
@@ -2471,11 +2471,11 @@ export const initTitanItems = () => {
       id: [7720384, 8612388, 6602169, 7088272, 923957, 2482304, 9441321],
       prof: "pw"
     },
-    "Para zabójczych zÄbĂłw": {
+    "Para zabójczych zębów": {
       id: [8012514, 8252819],
       prof: "w"
     },
-    "Symbol zakazanej miĹości": {
+    "Symbol zakazanej miłości": {
       id: [8051717, 8012514, 5012528],
       prof: "bw"
     },
@@ -2491,7 +2491,7 @@ export const initTitanItems = () => {
       id: [8719150, 3358979, 8051717, 8356281, 5730245],
       prof: "bht"
     },
-    "Wspomnienie staroĹźytnych": {
+    "Wspomnienie starożytnych": {
       id: [8408736, 6602169, 2170236, 8612388],
       prof: "w"
     },
@@ -2499,7 +2499,7 @@ export const initTitanItems = () => {
       id: [],
       prof: "m"
     },
-    "Złote PisklÄ": {
+    "Złote Pisklę": {
       id: [2482304, 6586440, 1961781, 6602169, 4176854],
       prof: "pw"
     },
@@ -2741,8 +2741,8 @@ export function getCore() {
     r: {}
   };
   rarityColorHexCode.r.Tanroth = "1204147563431727195";
-  rarityColorHexCode.r["Barbatos Smoczy StraĹźnik"] = "1204147544536387686";
-  rarityColorHexCode.r["ZabĂłjczy KrĂłlik"] = "1204147248586424411";
+  rarityColorHexCode.r["Barbatos Smoczy Strażnik"] = "1204147544536387686";
+  rarityColorHexCode.r["Zabójczy Królik"] = "1204147248586424411";
   rarityColorHexCode.r["Renegat Baulus"] = "1204147273362047016";
   return rarityColorHexCode;
 }
@@ -2778,7 +2778,7 @@ export function waitForCondition(fieldLootedItemName, discordEmbedFieldsArray = 
 
         if (Date.now() - isLootNotificationActive >= discordEmbedFieldsArray) {
           itemLevelValue = true;
-          return statPropertyIterator(new Error("Czas oczekiwania minÄĹ"));
+          return statPropertyIterator(new Error("Czas oczekiwania minął"));
         }
 
         setTimeout(isItemSoulbound, finalDiscordPayloadJson);
@@ -2796,7 +2796,7 @@ export function waitForCondition(fieldLootedItemName, discordEmbedFieldsArray = 
   });
 }
 export function parseLootMessageToMap(hasItemUpgrades) {
-  const hasSelectedBonus = /([\p{L}\p{N}\s\-\.']+?)\s(otrzymaĹ|otrzymaĹa)\s((?:ITEM|TPL)#.+?)(?:;|$)/gu;
+  const hasSelectedBonus = /([\p{L}\p{N}\s\-\.']+?)\s(otrzymał|otrzymała)\s((?:ITEM|TPL)#.+?)(?:;|$)/gu;
   const isItemBoundState = {};
   const itemTransformedPayload = Array.from(hasItemUpgrades.matchAll(hasSelectedBonus));
   itemTransformedPayload.forEach(lootDataConfigStr => {
@@ -3324,7 +3324,7 @@ export async function createWindowSpotters(baseWindowDragStartEvent, baseWindowD
       width: baseWindowInitialAppendReference.window[baseWindowDragStartUi].m ? "200px" : baseWindowInitialAppendReference.window[baseWindowDragStartUi].size.w + "px"
     };
     coreWindowInitialAppendReference.css(rootWindowDragConfiguration);
-    $(this).tip(rootWindowUiElementReference ? "Rozwiń" : "ZwiĹ").removeClass("mp-window-collapse-button-up mp-window-collapse-button-down").addClass(rootWindowUiElementReference ? "mp-window-collapse-button-up" : "mp-window-collapse-button-down");
+    $(this).tip(rootWindowUiElementReference ? "Rozwiń" : "Zwiń").removeClass("mp-window-collapse-button-up mp-window-collapse-button-down").addClass(rootWindowUiElementReference ? "mp-window-collapse-button-up" : "mp-window-collapse-button-down");
     saveStorage(baseWindowUpdatedCoordinatesPayload, baseWindowInitialAppendReference);
   });
   rootWindowCustomTitleString.appendTo(rootWindowTemplateClass);
@@ -3603,7 +3603,7 @@ export async function createWindowResize(mainWindowInitialAppendReference, mainW
   }
 
   const appWindowUpdatedCoordinatesPayload = prefStorageConfigurationObject.window[mainWindowCenteredModeFlag].m;
-  const appWindowInitialAppendReference = $("\n        <div id=\"collapse\" class=\"do-action-cursor mp-window-collapse-button-" + (appWindowUpdatedCoordinatesPayload ? "up" : "down") + "\"></div>\n    ").tip(prefStorageConfigurationObject.window[mainWindowCenteredModeFlag].m ? "RozwiĹ" : "Zwiń");
+  const appWindowInitialAppendReference = $("\n        <div id=\"collapse\" class=\"do-action-cursor mp-window-collapse-button-" + (appWindowUpdatedCoordinatesPayload ? "up" : "down") + "\"></div>\n    ").tip(prefStorageConfigurationObject.window[mainWindowCenteredModeFlag].m ? "Rozwiń" : "Zwiń");
   appWindowInitialAppendReference.on("click", async function () {
     const appWindowCenteredModeFlag = !prefStorageConfigurationObject.window[mainWindowCenteredModeFlag].m;
     prefStorageConfigurationObject.window[mainWindowCenteredModeFlag].m = appWindowCenteredModeFlag;
@@ -3625,7 +3625,7 @@ export async function createWindowResize(mainWindowInitialAppendReference, mainW
       }
     }
 
-    $(this).tip(appWindowCenteredModeFlag ? "RozwiĹ" : "Zwiń").removeClass("mp-window-collapse-button-up mp-window-collapse-button-down").addClass(appWindowCenteredModeFlag ? "mp-window-collapse-button-up" : "mp-window-collapse-button-down");
+    $(this).tip(appWindowCenteredModeFlag ? "Rozwiń" : "Zwiń").removeClass("mp-window-collapse-button-up mp-window-collapse-button-down").addClass(appWindowCenteredModeFlag ? "mp-window-collapse-button-up" : "mp-window-collapse-button-down");
     saveStorage(prefStorageConfigId, prefStorageConfigurationObject);
   });
   appWindowInitialAppendReference.appendTo(appWindowStopPositionTop);
@@ -4033,7 +4033,7 @@ export async function showKeyCaptureWindow(formWindowDragConfiguration = false) 
       document.removeEventListener("keydown", window._mpKeyHandler);
     }
 
-    const formWindowFinalCoordinatePayload = $("\n        <div id=\"mp-overlay-hotkeys\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Menedżer skrótów</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                " + (formWindowDragConfiguration ? "<div class=\"mp-current-char\">" + formWindowDragConfiguration + "</div><br>" : "") + "\n                <div class=\"mp-give-char\">WciĹnij nowy klawisz</div><br>\n                <div id=\"noneBtn\" class=\"mp-button mp-button-red do-action-cursor\">Usuń skrót</div>\n            </div>\n        </div>\n    ");
+    const formWindowFinalCoordinatePayload = $("\n        <div id=\"mp-overlay-hotkeys\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Menedżer skrótów</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                " + (formWindowDragConfiguration ? "<div class=\"mp-current-char\">" + formWindowDragConfiguration + "</div><br>" : "") + "\n                <div class=\"mp-give-char\">Wciśnij nowy klawisz</div><br>\n                <div id=\"noneBtn\" class=\"mp-button mp-button-red do-action-cursor\">Usuń skrót</div>\n            </div>\n        </div>\n    ");
 
     function formWindowDomAppendReference() {
       document.removeEventListener("keydown", window._mpKeyHandler);
@@ -4151,7 +4151,7 @@ export async function addClanText(dialogWindowStopPositionLeft = false) {
       dialogWindowFinalCoordinatePayload.remove();
     }
 
-    const dialogWindowDomAppendReference = $("\n        <div id=\"mp-overlay-url-clan\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">MenedĹźer tekstu</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div>WprowadĹş wiadomoĹć (dostępne zmienne: {item})</div>\n                    <input id=\"mp-input-url-clan\" type=\"text\" class=\"mp-default-input do-action-cursor\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" placeholder=\"Zlotałem {item}! Super!\" style=\"width: 350px;\"" + (dialogWindowStopPositionLeft ? "value=\"" + dialogWindowStopPositionLeft + "\"" : "") + ">\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"saveBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px;\">Dodaj</div>\n                </div>\n            </div>\n        </div>\n    ");
+    const dialogWindowDomAppendReference = $("\n        <div id=\"mp-overlay-url-clan\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Menedżer tekstu</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div>Wprowadź wiadomość (dostępne zmienne: {item})</div>\n                    <input id=\"mp-input-url-clan\" type=\"text\" class=\"mp-default-input do-action-cursor\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" placeholder=\"Zlotałem {item}! Super!\" style=\"width: 350px;\"" + (dialogWindowStopPositionLeft ? "value=\"" + dialogWindowStopPositionLeft + "\"" : "") + ">\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"saveBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px;\">Dodaj</div>\n                </div>\n            </div>\n        </div>\n    ");
     setTimeout(() => {
       dialogWindowDomAppendReference.find(".mp-default-input").trigger("focus");
     }, 10);
@@ -4242,7 +4242,7 @@ export async function askSplit() {
       panelWindowDragStartUi.remove();
     }
 
-    const panelWindowUpdatedCoordinatesPayload = $("\n        <div id=\"mp-overlay-split\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Dzielenie przedmiotów</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div>Po ile podzielić przedmioty?</div>\n                    <input id=\"mp-input-split\" type=\"number\" class=\"mp-default-input do-action-cursor\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" placeholder=\"IloĹÄ\" style=\"width: 50px;\"}>\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"saveBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px;\">Podziel</div>\n                </div>\n            </div>\n        </div>\n    ");
+    const panelWindowUpdatedCoordinatesPayload = $("\n        <div id=\"mp-overlay-split\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Dzielenie przedmiotów</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div>Po ile podzielić przedmioty?</div>\n                    <input id=\"mp-input-split\" type=\"number\" class=\"mp-default-input do-action-cursor\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" placeholder=\"Ilość\" style=\"width: 50px;\"}>\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"saveBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px;\">Podziel</div>\n                </div>\n            </div>\n        </div>\n    ");
     setTimeout(() => {
       panelWindowUpdatedCoordinatesPayload.find(".mp-default-input").trigger("focus");
     }, 10);
@@ -4292,7 +4292,7 @@ export async function addChatterText(modalWindowUiElementReference = false) {
       modalWindowStopPositionLeft.remove();
     }
 
-    const modalWindowStopPositionTop = $("\n        <div id=\"mp-overlay-chatter\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Menedżer kafelków</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div>WysyĹana wiadomość</div>\n                    <input id=\"mp-input-chatter\" type=\"text\" class=\"mp-default-input do-action-cursor\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" placeholder=\"WiadomośÄ\" style=\"width: 350px;\"" + (modalWindowUiElementReference ? "value=\"" + modalWindowUiElementReference + "\"" : "") + ">\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"saveBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px;\">Dodaj</div>\n                </div>\n            </div>\n        </div>\n    ");
+    const modalWindowStopPositionTop = $("\n        <div id=\"mp-overlay-chatter\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Menedżer kafelków</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div>Wysyłana wiadomość</div>\n                    <input id=\"mp-input-chatter\" type=\"text\" class=\"mp-default-input do-action-cursor\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" placeholder=\"Wiadomość\" style=\"width: 350px;\"" + (modalWindowUiElementReference ? "value=\"" + modalWindowUiElementReference + "\"" : "") + ">\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"saveBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px;\">Dodaj</div>\n                </div>\n            </div>\n        </div>\n    ");
     setTimeout(() => {
       modalWindowStopPositionTop.find(".mp-default-input").trigger("focus");
     }, 10);
@@ -4383,7 +4383,7 @@ export async function trashRemoveItemsAsk(sheetWindowInitialCenteredFlag) {
       sheetWindowDragStartUi.remove();
     }
 
-    const sheetWindowUpdatedCoordinatesPayload = $("\n        <div id=\"mp-overlay-ask\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Czyszczenie</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div class=\"mp-ask-display\">Czy na pewno chcesz zniszczyć poniĹźsze przedmioty?</div>\n                    <div class=\"mp-items-display-ask mp-scroll\"></div>\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"yesBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 80px;\">Tak</div>\n                    <div id=\"noBtn\" class=\"mp-button mp-button-red do-action-cursor\" style=\"width: 80px;\">Nie</div>\n                </div>\n            </div>\n        </div>\n    ");
+    const sheetWindowUpdatedCoordinatesPayload = $("\n        <div id=\"mp-overlay-ask\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Czyszczenie</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div class=\"mp-ask-display\">Czy na pewno chcesz zniszczyć poniższe przedmioty?</div>\n                    <div class=\"mp-items-display-ask mp-scroll\"></div>\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"yesBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 80px;\">Tak</div>\n                    <div id=\"noBtn\" class=\"mp-button mp-button-red do-action-cursor\" style=\"width: 80px;\">Nie</div>\n                </div>\n            </div>\n        </div>\n    ");
     setTimeout(() => {
       sheetWindowUpdatedCoordinatesPayload.find(".mp-default-input").trigger("focus");
     }, 10);
@@ -4547,7 +4547,7 @@ export async function addImagesUrl() {
       gridWindowDragStartUi.remove();
     }
 
-    const gridWindowUpdatedCoordinatesPayload = $("\n        <div id=\"mp-overlay-url-images\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Menedżer adresów</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div>WprowadĹş adres do grafiki:</div>\n                    <input id=\"mp-input-url-images\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"https://adres.pl/moja_grafika.png\" style=\"width: 350px;\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\">\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"saveBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px;\">Dodaj</div>\n                </div>\n            </div>\n        </div>\n    ");
+    const gridWindowUpdatedCoordinatesPayload = $("\n        <div id=\"mp-overlay-url-images\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Menedżer adresów</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-url-name\">\n                    <div>Wprowadź adres do grafiki:</div>\n                    <input id=\"mp-input-url-images\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"https://adres.pl/moja_grafika.png\" style=\"width: 350px;\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\">\n                </div>\n                <div class=\"mp-edit-url-buttons\">\n                    <div id=\"saveBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px;\">Dodaj</div>\n                </div>\n            </div>\n        </div>\n    ");
     setTimeout(() => {
       gridWindowUpdatedCoordinatesPayload.find(".mp-default-input").trigger("focus");
     }, 10);
@@ -4608,7 +4608,7 @@ export async function editUrlWindow(cardWindowUiElementReference, cardWindowDrag
     });
     cardWindowFinalCoordinatePayload.find("#defaultBtn").click(() => {
       cardWindowDomAppendReference();
-      message("PrzywrĂłcono domyślny adres");
+      message("Przywrócono domyślny adres");
       cardWindowStopPositionLeft("default");
     });
     cardWindowFinalCoordinatePayload.find("#closeBtn").click(() => {
@@ -4642,7 +4642,7 @@ export async function sendAlert() {
       listWindowTemplateClass.remove();
     }
 
-    const listWindowUniqueIdentifier = $("\n        <div id=\"mp-overlay-send-alert\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">OgĹoszenie</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-send-alert-name\">\n                    <input id=\"mp-input-url\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"TreĹÄ\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\">\n                </div>\n                <div class=\"mp-edit--buttons\">\n                    <div id=\"sendBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px; margin-left: auto; margin-right: auto;\">Wyślij</div>\n                </div>\n            </div>\n        </div>\n    ");
+    const listWindowUniqueIdentifier = $("\n        <div id=\"mp-overlay-send-alert\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Ogłoszenie</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-send-alert-name\">\n                    <input id=\"mp-input-url\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"Treść\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\">\n                </div>\n                <div class=\"mp-edit--buttons\">\n                    <div id=\"sendBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px; margin-left: auto; margin-right: auto;\">Wyślij</div>\n                </div>\n            </div>\n        </div>\n    ");
     setTimeout(() => {
       listWindowUniqueIdentifier.find(".mp-default-input").trigger("focus");
     }, 10);
@@ -4687,7 +4687,7 @@ export async function loadUmConfig() {
       listWindowInitialCenteredFlag.remove();
     }
 
-    const listWindowDragStartEvent = $("\n        <div id=\"mp-overlay-learn-um\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">UmiejÄtnoĹci</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-learn-um-name\">\n                    <input id=\"mp-input-url\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"Kod umiejÄtnoĹci z Gargonem.pl\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\">\n                </div>\n                <div class=\"mp-edit--buttons\">\n                    <div id=\"sendBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px; margin-left: auto; margin-right: auto;\">Naucz</div>\n                </div>\n            </div>\n        </div>\n    ");
+    const listWindowDragStartEvent = $("\n        <div id=\"mp-overlay-learn-um\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Umiejętności</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-learn-um-name\">\n                    <input id=\"mp-input-url\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"Kod umiejętności z Gargonem.pl\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\">\n                </div>\n                <div class=\"mp-edit--buttons\">\n                    <div id=\"sendBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px; margin-left: auto; margin-right: auto;\">Naucz</div>\n                </div>\n            </div>\n        </div>\n    ");
     setTimeout(() => {
       listWindowDragStartEvent.find(".mp-default-input").trigger("focus");
     }, 10);
@@ -4733,7 +4733,7 @@ export async function loadConfig() {
       menuWindowUiElementReference.remove();
     }
 
-    const menuWindowDragConfiguration = $("\n        <div id=\"mp-overlay-load-config\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Konfiguracja</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-load-config-name\">\n                    <input id=\"mp-input-url\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"Podaj ciÄg znaków konfiguracji\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\">\n                </div>\n                <div class=\"mp-edit--buttons\">\n                    <div id=\"sendBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px; margin-left: auto; margin-right: auto;\">ZaĹaduj</div>\n                </div>\n            </div>\n        </div>\n    ");
+    const menuWindowDragConfiguration = $("\n        <div id=\"mp-overlay-load-config\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Konfiguracja</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-load-config-name\">\n                    <input id=\"mp-input-url\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"Podaj ciąg znaków konfiguracji\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\">\n                </div>\n                <div class=\"mp-edit--buttons\">\n                    <div id=\"sendBtn\" class=\"mp-button mp-button-green do-action-cursor\" style=\"width: 100px; margin-left: auto; margin-right: auto;\">Załaduj</div>\n                </div>\n            </div>\n        </div>\n    ");
     setTimeout(() => {
       menuWindowDragConfiguration.find(".mp-default-input").trigger("focus");
     }, 10);
@@ -5408,7 +5408,7 @@ export async function showAlert(colWindowUpdatedCoordinatesPayload, colWindowIni
 
     const areaStorageConfigurationObject = sanitizeText(colWindowUpdatedCoordinatesPayload);
     const areaWindowTemplateClass = sanitizeText(colWindowInitialAppendReference);
-    const areaWindowUniqueIdentifier = $("\n        <div id=\"mp-overlay-alert\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">OgĹoszenie</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-alert-text text-red\">" + areaStorageConfigurationObject + "</div>\n                <div style=\"text-align: center;\">WysĹane przez: <b>" + areaWindowTemplateClass + "</b></div>\n            </div>\n        </div>\n    ");
+    const areaWindowUniqueIdentifier = $("\n        <div id=\"mp-overlay-alert\" data-overlay class=\"mp-window default-cursor\">\n            <div class=\"mp-window-header\">\n                <div class=\"mp-window-header-left\"></div>\n                <div class=\"mp-window-header-title do-action-cursor\">Ogłoszenie</div>\n                <div class=\"mp-window-header-right\">\n                    <div id=\"closeBtn\" class=\"mp-window-close-button do-action-cursor\"></div>\n                </div>\n            </div>\n            <div class=\"content default-cursor\">\n                <div class=\"mp-alert-text text-red\">" + areaStorageConfigurationObject + "</div>\n                <div style=\"text-align: center;\">Wysłane przez: <b>" + areaWindowTemplateClass + "</b></div>\n            </div>\n        </div>\n    ");
 
     function areaWindowIsResizableFlag() {
       areaWindowUniqueIdentifier.remove();
@@ -5448,14 +5448,14 @@ export function getTranslation() {
       addons: "Dodatki",
       alerts: "Powiadomienia",
       settings: "Ustawienia",
-      users: "UĹźytkownicy"
+      users: "Użytkownicy"
     },
     widget: {
       show: "Pokaż skróty",
       hide: "Ukryj skróty",
       add: "Dodaj skrót",
-      del: "UsuĹ skrĂłt",
-      tip: "Włączenie dodaje pływajÄce okno z szybkimi odnośnikami do ustawień zainstalowanych dodatkĂłw"
+      del: "Usuń skrót",
+      tip: "Włączenie dodaje pływające okno z szybkimi odnośnikami do ustawień zainstalowanych dodatków"
     },
     getAddonsToSee: "Wybierz dodatek, aby zobaczyć jego opis.",
     optOff: "Odinstaluj",
@@ -5463,15 +5463,15 @@ export function getTranslation() {
     otherSettings: {}
   };
   areaWindowInnerContentClass.otherSettings.wrapLoot = "Nie zawijaj okna lootu";
-  areaWindowInnerContentClass.otherSettings.rendering = "WĹÄcz lepszy rendering mapy";
+  areaWindowInnerContentClass.otherSettings.rendering = "Włącz lepszy rendering mapy";
   areaWindowInnerContentClass.otherSettings.scrollChat = "Utrzymuj czat na dole przy wiadomości";
   areaWindowInnerContentClass.otherSettings.changeMaps = "Podmieniaj grafiki map (f5)";
   const areaWindowInitialCenteredFlag = {
     title: {
-      style: "WyglÄd",
+      style: "Wygląd",
       hp: "Pasek życia",
       exp: "Pasek doświadczenia",
-      ping: "WskaĹşnik pingu",
+      ping: "Wskaźnik pingu",
       builds: "Przyciski zestawów",
       stats: "Statystyki postaci",
       fullPercent: "Pokazuj dokładny procent"
@@ -5479,10 +5479,10 @@ export function getTranslation() {
     showPing: "Pokazuj ping",
     showStats: "Podmieniaj statystyki",
     showButtons: "Pokazuj przyciski",
-    showPercent: "PokaĹź procent",
+    showPercent: "Pokaż procent",
     showPoints: "Pokaż wartość",
     showReach: "Pokaż potrzebną ilość do max",
-    showReachPercent: "Pokaż brakujÄcy procent",
+    showReachPercent: "Pokaż brakujący procent",
     showPointsAndMax: "Pokaż wartość + max",
     ping: {},
     builds: {},
@@ -5492,7 +5492,7 @@ export function getTranslation() {
   areaWindowInitialCenteredFlag.ping.number = "Pokazuj wartość numeryczna";
   areaWindowInitialCenteredFlag.ping.ball = "Ping w formie kulki";
   areaWindowInitialCenteredFlag.builds.firstLetter = "Pokaż pierwszą litere nazwy";
-  areaWindowInitialCenteredFlag.builds.number = "PokaĹź numer zestawu";
+  areaWindowInitialCenteredFlag.builds.number = "Pokaż numer zestawu";
   areaWindowInitialCenteredFlag.fullPercent.hp = "Pasek życia";
   areaWindowInitialCenteredFlag.fullPercent.exp = "Pasek doświadczenia";
   areaWindowInitialCenteredFlag.bonus.dmg = "Atak";
@@ -5501,7 +5501,7 @@ export function getTranslation() {
   areaWindowInitialCenteredFlag.bonus.heal = "Leczenie";
   areaWindowInitialCenteredFlag.bonus.sa = "Szybkość ataku";
   areaWindowInitialCenteredFlag.bonus.lowevade = "Obniż. unik";
-  areaWindowInitialCenteredFlag.bonus.lowsa = "ObniĹź. SA";
+  areaWindowInitialCenteredFlag.bonus.lowsa = "Obniż. SA";
   areaWindowInitialCenteredFlag.bonus.lowcrit = "Obniż. kryt";
   areaWindowInitialCenteredFlag.bonus.resist = "Odporności";
   areaWindowInitialCenteredFlag.bonus.ena = "Energia";
@@ -5510,7 +5510,7 @@ export function getTranslation() {
   areaWindowInitialCenteredFlag.bonus.blok = "Blok";
   areaWindowInitialCenteredFlag.bonus.skf = "Moc ck fiz.";
   areaWindowInitialCenteredFlag.bonus.skm = "Moc ck mag.";
-  areaWindowInitialCenteredFlag.bonus.hp = "Ĺťycie";
+  areaWindowInitialCenteredFlag.bonus.hp = "Życie";
   areaWindowInitialCenteredFlag.bonus.destac = "Niszcz. panc";
   areaWindowInitialCenteredFlag.bonus.lowres = "Niszcz. odp";
   areaWindowInitialCenteredFlag.bonus.ku = "Udręka";
@@ -5518,7 +5518,7 @@ export function getTranslation() {
   areaWindowInitialCenteredFlag.bonus.or = "Ratunek";
   areaWindowInitialCenteredFlag.bonus.destresource = "Niszcz. zasobów";
   const areaWindowDragStartEvent = {
-    advantage: "Blokuj atak, gdy masz poziom wiÄkszy o",
+    advantage: "Blokuj atak, gdy masz poziom większy o",
     advTip: "Uniemożliwia atakowanie przeciwnika, który ma poziom mniejszy o określoną wartość. Np: Gdy masz poziom 300 i ustawisz by nie atakowało gdy poziom przeciwnika jest mniejszy o 20 to nie zaatakujesz gracza, który ma 279 poziom. Każda postać powyżej 300 jest traktowana jako 300 poziom.",
     list: {
       always: "Zawsze atakuj",
@@ -5542,7 +5542,7 @@ export function getTranslation() {
   const areaWindowUpdatedCoordinatesPayload = {
     addverify: {
       start: "Rozpoczęcie weryfikacji (lokalny)",
-      stop: "ZakoĹczenie weryfikacji (lokalny)",
+      stop: "Zakończenie weryfikacji (lokalny)",
       task: "Wysyłane polecenie dla Gracza (reminder)",
       positive: "Zakończenie pozytywne (prywatna)",
       negative: "Zakończenie negatywne (prywatna)"
@@ -5555,7 +5555,7 @@ export function getTranslation() {
       improvements: "Ulepszacze",
       artisanbon: "Bonus x%",
       bind: "Związane",
-      forceUnique: "WymuĹ unikaty",
+      forceUnique: "Wymuś unikaty",
       progress: "Postęp w konsoli + overlay",
       "1": "Jednoręczne",
       "2": "Dwuręczne",
@@ -5575,7 +5575,7 @@ export function getTranslation() {
       weapon: "Bronie",
       armor: "Pancerze",
       jewelry: "Biżuterie",
-      afterBattle: "Ulepsz, gdy po walce skĹadnikĂłw ≥ ",
+      afterBattle: "Ulepsz, gdy po walce składników ≥ ",
       alwaysAfterBattle: "Zawsze po walce",
       bag: "Ulepsz, gdy po walce miejsca w torbie ≤ "
     },
@@ -5597,7 +5597,7 @@ export function getTranslation() {
     },
     add7: {
       options: {
-        exp: "Nagroda z doĹwiadczeniem",
+        exp: "Nagroda z doświadczeniem",
         noExp: "Nagroda bez doświadczenia"
       }
     },
@@ -5605,7 +5605,7 @@ export function getTranslation() {
       averagelvl: "Średni poziom ulepszenia:",
       averagelvltip: "Sredni poziom ulepszenia ekwipunku",
       legbon: "Bonusy legendarne",
-      odps: "OdpornoĹci",
+      odps: "Odporności",
       odpPoison: "Odporność na trucizne",
       odpFire: "Odporność na ogień",
       odpFrost: "Odporność na zimno",
@@ -5617,8 +5617,8 @@ export function getTranslation() {
       lt: "Leczenie turowe",
       low: "Obniżanie",
       lowevade: "Obniżanie uniku",
-      lowck: "ObniĹźanie ciosu krytycznego",
-      slow: "Obniżanie szybkoĹci ataku"
+      lowck: "Obniżanie ciosu krytycznego",
+      slow: "Obniżanie szybkości ataku"
     },
     add13: {
       pvp: "Walka z graczem",
@@ -5631,7 +5631,7 @@ export function getTranslation() {
     },
     add14: {
       closeLoot: {
-        solo: "W pojedynkÄ",
+        solo: "W pojedynkę",
         party: "W grupie"
       },
       rarity: {
@@ -5664,15 +5664,15 @@ export function getTranslation() {
     add16: {
       gold: "Sprawdź dostępność Złota",
       zcs: "Sprawdź dostępność Zwoi smoka",
-      drop: "SprawdĹş dostępność BĹoga na drop",
-      tp: "SprawdĹş dostępność Teleportów",
+      drop: "Sprawdź dostępność Błoga na drop",
+      tp: "Sprawdź dostępność Teleportów",
       gildia: "Sprawdź dostępność Kluczy do kletki"
     },
     add17: {
       show: {
         alch: "Alchemia",
         ore: "Złoże",
-        najemnik: "Tropiciel herosĂłw",
+        najemnik: "Tropiciel herosów",
         grzyb: "Grzybobranie",
         event: "Elita eventowa",
         elite3: "Elita III",
@@ -5684,25 +5684,25 @@ export function getTranslation() {
         claim: "Zajmij",
         global: "Global",
         clan: "Klan",
-        chase: "PodejdĹş",
+        chase: "Podejdź",
         close: "Zamknij",
         discord: "Discord"
       },
       options: {
-        hideonkill: "Po znikniÄciu npc",
+        hideonkill: "Po zniknięciu npc",
         hideonchangemap: "Po zmianie mapy"
       },
       discord: {
         everyone: "@everyone",
         here: "@here",
-        roles: "WĹasne role"
+        roles: "Własne role"
       }
     },
     add18: {
       shadow: {
         map: "Cień mapy",
         loot: "Cień lootu",
-        wrapper: "CieĹ wrappera",
+        wrapper: "Cień wrappera",
         window: "Cień okna lootu",
         buttons: "Cień przycisków"
       },
@@ -5711,21 +5711,21 @@ export function getTranslation() {
         color2: "Kolor drugi",
         rainItems: "Deszcz przedmiotów",
         alert: "Alert",
-        audio: "Odegraj dźwiÄk",
+        audio: "Odegraj dźwięk",
         clan: "Powiadom klan",
         tipAddText: "Dodaj wiadomość",
-        tipAddAudio: "Dodaj dźwiÄk",
-        tipAddImage: "Dodaj grafikÄ",
+        tipAddAudio: "Dodaj dźwięk",
+        tipAddImage: "Dodaj grafikę",
         stone: "Aktywuj przy kamieniu",
-        stoneLight: "PodĹwietlenie kamienia",
-        tipRand: "Możliwość wĹÄczenia lub wyłączenia trybu",
+        stoneLight: "Podświetlenie kamienia",
+        tipRand: "Możliwość włączenia lub wyłączenia trybu",
         shadowGame: "Przyciemnienie gry"
       },
       animations: {
         wrapper: "Animacje wrappera",
         item: "Animacje przedmiotu",
         window: "Animacje okna lootu",
-        scaling: "PowiÄkszanie",
+        scaling: "Powiększanie",
         bounce: "Podskakiwanie",
         shake: "Trzęsienie",
         flip: "Zmiana stron",
@@ -5750,21 +5750,21 @@ export function getTranslation() {
       auto: {
         accept: "Akceptuj zaproszenie",
         przywo: "Akceptuj przywołanie",
-        disband: "Rozwiązuj grupÄ po e2",
+        disband: "Rozwiązuj grupę po e2",
         giveLeader: "Przekaż dowództwo"
       },
       hotkeys: {
         inviteMap: "Zaproś graczy na mapie",
         debug: "Odbuguj zaproszenie",
-        disband: "Rozwiąż/opuĹÄ grupÄ",
+        disband: "Rozwiąż/opuść grupę",
         partyInfo: "Wyślij info. o grupie",
         kickAfk: "Wyrzuć graczy AFK",
-        systemCreate: "Stwórz za pomocÄ ST",
+        systemCreate: "Stwórz za pomocą ST",
         kickRandom: "Wyrzuć losową osobę"
       },
       stats: {
         showProf: "Pokaż ilość profesji",
-        showDrop: "PokaĹź zaniĹźanie dropu",
+        showDrop: "Pokaż zaniżanie dropu",
         showMinMax: "Pokaż poziom min i max"
       }
     },
@@ -5777,14 +5777,14 @@ export function getTranslation() {
       },
       labelSettings: {
         dmg: "Oznacz obrażenia broni",
-        mix: "Wyróżnij mikstury leczÄce",
+        mix: "Wyróżnij mikstury leczące",
         summon: "Podmień grafiki przywołań",
         stone: "Podmień grafiki kamieni"
       },
       labelColor: {
         upgrade: "Ulepszenie przedmiotu",
         legbon: "Bonus legendarny",
-        bless: "Rodzaj bĹoga",
+        bless: "Rodzaj błoga",
         level: "Poziom przedmiotu",
         tier: "Tier komponentu"
       }
@@ -5793,24 +5793,24 @@ export function getTranslation() {
       settings: {
         expires: "Zawsze pytaj o potwierdzenie zniszczenia wygasłych przedmiotów, jeśli takie posiadasz",
         connect: "Kliknij przedmiot z wciśniętym klawiszem <span class=\"mp-badge\">CTRL</span>, aby połączyć go z innym",
-        trash: "Kliknij przedmiot z wciĹniÄtym klawiszem <span class=\"mp-badge\">ALT</span>, aby oznaczyÄ go do usunięcia",
+        trash: "Kliknij przedmiot z wciśniętym klawiszem <span class=\"mp-badge\">ALT</span>, aby oznaczyć go do usunięcia",
         split: "Kliknij przedmiot z wciśniętym klawiszem <span class=\"mp-badge\">SHIFT</span>, aby zacząć go dzielić"
       },
       title: {
         expires: "Wygasłe przedmioty",
         connect: "Łączenie przedmiotów",
-        trash: "Niszczenie przedmiotĂłw",
+        trash: "Niszczenie przedmiotów",
         split: "Dzielenie przedmiotów"
       },
       warning: {
         legendary: "Niszczenie przedmiotów legednarnych zablokowane",
-        upgrade: "Niszczenie przedmiotĂłw ulepszonych zablokowane",
+        upgrade: "Niszczenie przedmiotów ulepszonych zablokowane",
         personal: "Niszczenie przedmiotów personalizowanych zablokowane",
         licytacja: "Niszczenie przedmiotów z licytacji zablokowane",
-        ulepszacz: "Niszczenie punktów ulepszeĹ zablokowane"
+        ulepszacz: "Niszczenie punktów ulepszeń zablokowane"
       },
       denyAsk: "Odrzucono zapytanie o czyszczenie",
-      successClear: "ZakoĹczono czyszczenie"
+      successClear: "Zakończono czyszczenie"
     },
     add26: {
       components: {
@@ -5828,9 +5828,9 @@ export function getTranslation() {
     },
     add31: {
       showQuantity: {
-        stage1: "3 przedmiotĂłw",
-        stage2: "6 przedmiotĂłw",
-        stage3: "9 przedmiotĂłw",
+        stage1: "3 przedmiotów",
+        stage2: "6 przedmiotów",
+        stage3: "9 przedmiotów",
         stage4: "12 przedmiotów",
         stage5: "15 przedmiotów"
       }
@@ -5852,11 +5852,11 @@ export function getTranslation() {
         type: "Ukryj typ przedmiotu",
         builds: "Ukryj zestawy",
         upgrade: "Ukryj ulepszenie",
-        upgradeNumber: "ZamieĹ ikonę na cyfrÄ"
+        upgradeNumber: "Zamień ikonę na cyfrę"
       },
       custom: {
         background: "Dodaj tło Margonem+",
-        gap: "OdstÄp miÄdzy stat.",
+        gap: "Odstęp między stat.",
         separator: "Dodaj separatory",
         damage: "Oznacz żwyioły ataku"
       },
@@ -5885,7 +5885,7 @@ export function getTranslation() {
     },
     add35: {
       show: {
-        pickaxe: "PodĹwietlaj <b style=\"color: red;\">kilofy</b>",
+        pickaxe: "Podświetlaj <b style=\"color: red;\">kilofy</b>",
         gate: "Podświetlaj <b style=\"color: orange;\">przejścia</b>",
         ore: "Podświetlaj <b style=\"color: #9b54ff;\">rudy</b>",
         jump: "Zapisuj moment wejścia"
@@ -5895,7 +5895,7 @@ export function getTranslation() {
       options: {
         acceptBattle: "Przyjmij walkę",
         startBattle: "Zatwierdź przygotowanie",
-        nextBattle: "NastÄpna walka",
+        nextBattle: "Następna walka",
         fastBattle: "Szybka walka",
         getRewards: "Odbierz nagrodę"
       }
@@ -5916,8 +5916,8 @@ export function getTranslation() {
         chatter: "Aktywne"
       },
       options: {
-        send: "WysyĹaj wiadomość o wrogu na klan",
-        message: "WyĹwietl informacje w message",
+        send: "Wysyłaj wiadomość o wrogu na klan",
+        message: "Wyświetl informacje w message",
         audio: "Odegraj dźwięk, gdy wykryje wroga",
         other: "Neutralni gracze są wrogami"
       }
@@ -5947,7 +5947,7 @@ export function getTranslation() {
         "4": "Klanowicze",
         "5": "Sojusznicy",
         "6": "Wrogowie klanu",
-        "7": "PrzyjaĹşni (Perkun)",
+        "7": "Przyjaźni (Perkun)",
         "8": "Wrogowie (Perkun)"
       },
       alwaysEscape: {
@@ -5989,7 +5989,7 @@ export function getTranslation() {
       },
       sort: {
         lvl: "Poziomu",
-        rarity: "RzadkoĹci",
+        rarity: "Rzadkości",
         class: "Klasy",
         value: "Wartości"
       }
@@ -6017,19 +6017,19 @@ export function getTranslation() {
       acdmg_destroyed: "Zniszczony pancerz",
       stun: "Ogłuszenie",
       freeze: "Zamrożenie",
-      arrowblock: "Neutralizacja strzaĹy"
+      arrowblock: "Neutralizacja strzały"
     },
     legbon: {
       cleanse: "Płomienne oczyszczenie",
       facade: "Fasada opieki",
       anguish: "Krwawa udręka",
-      puncture: "Przeszywająca skutecznoĹÄ",
+      puncture: "Przeszywająca skuteczność",
       frenzy: "Eskalacja szału",
       retaliation: "Aura odwetu",
       curse: "Klątwa",
       glare: "Oślepienie",
-      critred: "Krytyczna osĹona",
-      holytouch: "Dotyk anioĹa",
+      critred: "Krytyczna osłona",
+      holytouch: "Dotyk anioła",
       verycrit: "Cios bardzo krytyczny",
       lastheal: "Ostatni ratunek",
       npc_lootbon: "Loot",
@@ -6043,14 +6043,14 @@ export function getTranslation() {
       acdmg: "Niszczenie pancerza",
       manafatig: "Niszczenie many",
       enfatig: "Niszczenie energii",
-      resdmg: "Niszczenie odpornoĹci",
+      resdmg: "Niszczenie odporności",
       abdest: "Niszczenie absorpcji",
       resfire: "Odporność na ogień",
       resfrost: "Odporność na zimno",
       reslight: "Odporność na błyskawice",
-      act: "OdpornoĹÄ na truciznÄ",
+      act: "Odporność na truciznę",
       ac: "Pancerz",
-      hp: "Ĺťycie",
+      hp: "Życie",
       blok: "Blok",
       evade: "Unik",
       absorbm: "Absorpcja magiczna",
@@ -6062,8 +6062,8 @@ export function getTranslation() {
       energybon: "Energia",
       manabon: "Mana",
       critval: "Siła ciosu kryt. fiz.",
-      critmval: "SiĹa ciosu kryt. mag.",
-      lowcrit: "ObniĹźanie szansy na cios kryt.",
+      critmval: "Siła ciosu kryt. mag.",
+      lowcrit: "Obniżanie szansy na cios kryt.",
       heal: "Leczenie",
       slow: "Spowolnienie",
       lowevade: "Zmniejszanie uniku przeciwnika"
@@ -6088,7 +6088,7 @@ export function getTranslation() {
       p: "paladyn",
       w: "wojownik",
       b: "tancerz ostrzy",
-      h: "Ĺowca",
+      h: "łowca",
       t: "tropiciel",
       m: "mag",
       npc: ""
@@ -6118,14 +6118,14 @@ export function getTranslation() {
       "4": "Klanowicze",
       "5": "Sojusznicy",
       "6": "Wrogowie klanu",
-      "7": "PrzyjaĹşni (Perkun)",
+      "7": "Przyjaźni (Perkun)",
       "8": "Wrogowie (Perkun)",
       p: "Drużyna"
     },
     itemClass: {
       "1": "Jednoręczne",
       "2": "Dwuręczne",
-      "3": "PĂłĹtorarÄczne",
+      "3": "Półtoraręczne",
       "5": "Pomocnicze",
       "4": "Dystansowe",
       "6": "Różdżki",
@@ -6147,11 +6147,11 @@ export function getTranslation() {
       "22": "Talizmany",
       "23": "Książki",
       "24": "Torby",
-      "25": "BĹogosĹawieństwa",
+      "25": "Błogosławieństwa",
       "26": "Ulepszenia",
       "27": "Recepta",
       "28": "Waluta",
-      "29": "StrzaĹy",
+      "29": "Strzały",
       "30": "Stroje",
       "31": "Maskotki",
       "32": "Teleporty"
@@ -6163,7 +6163,7 @@ export function getTranslation() {
     },
     itemStatus: {
       soulbound: "Związany",
-      permbound: "Zw. na staĹe",
+      permbound: "Zw. na stałe",
       unbind: "Odwiązany"
     },
     itemRarity: {
@@ -6843,7 +6843,7 @@ export async function checkParty(attrWindowCenteredModeFlag) {
     if (elemWindowDomAppendReference.length === 0) {
       elemWindowInnerContentClass = "Wszyscy są w zasięgu drużyny.";
     } else {
-      elemWindowInnerContentClass = "Poza zasiÄgiem: " + elemWindowDomAppendReference.join(", ") + ".";
+      elemWindowInnerContentClass = "Poza zasięgiem: " + elemWindowDomAppendReference.join(", ") + ".";
     }
 
     const elemWindowInitialCenteredFlag = "[D] " + getParty().leader.nick + " | [" + Engine?.party?.getMembers?.()?.size + "/10] " + elemWindowInnerContentClass;
@@ -7071,7 +7071,7 @@ export function getListOfBuilds() {
   let buildsCollectionNamesArray = [];
 
   for (let buildsIteratorIdx = 0; buildsIteratorIdx <= totalBuildsCommonsLength; buildsIteratorIdx++) {
-    let individualBuildLabelString = buildsIteratorIdx === 0 ? "WyĹÄczone" : Engine.buildsManager.getBuildsCommons().getBuildsName()[buildsIteratorIdx].name;
+    let individualBuildLabelString = buildsIteratorIdx === 0 ? "Wyłączone" : Engine.buildsManager.getBuildsCommons().getBuildsName()[buildsIteratorIdx].name;
 
     if (individualBuildLabelString == "[SET." + buildsIteratorIdx + "]") {
       individualBuildLabelString = "Zestaw nr " + buildsIteratorIdx;
