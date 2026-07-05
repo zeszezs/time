@@ -1,4 +1,3 @@
-
 let ShiftIsClicked = false;
 let processingUpgrade = false;
 let isHerosOnMapTable = {};
@@ -1106,6 +1105,22 @@ const {
         settings: true,
         widget: true,
         tags: "jaja, maskotka, licznik, rozbite, jajo, ogromne, smok, skały, drako, sOMp",
+        credits: false
+    }, {
+        id: "add63",
+        name: "PetSpammer",
+        description: "Co trzy sekundy używa losowej animacji maskotki.",
+        settings: false,
+        widget: false,
+        tags: "maskotka, animacje",
+        credits: false
+    }, {
+        id: "add64",
+        name: "PrzelotHelper",
+        description: "Umożliwia ustawienie kolejności używania teleportów na e2 pod jeden przycisk.",
+        settings: true,
+        widget: true,
+        tags: "przelot, e2, teleport, tp",
         credits: false
     }];
     let uiLayoutComponent_151 = "margoplus.pl";
@@ -23466,6 +23481,148 @@ const {
         const inventoryAutomationState_5332 = $("\n                <div class=\"mp-egg-value\">\n                    <div>Łącznie:</div>\n                    <div>" + inventoryAutomationState_5330.a + "</div>\n                </div>\n                <div class=\"mp-egg-value mp-color-common\">\n                    <div>Rozbite:</div>\n                    <div>" + inventoryAutomationState_5330.f + "</div>\n                </div>\n                <div class=\"mp-egg-value mp-color-legendary\">\n                    <div>Podniesione:</div>\n                    <div>" + inventoryAutomationState_5330.s + "</div>\n                </div>");
         inventoryAutomationState_5332.appendTo(inventoryAutomationState_5331);
     }
+    
+    function executePetSpammer() {
+        if (!Engine.hero.pet) return;
+        if (Engine.lock.list.length > 0) return;
+        if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[63].id]) return;
+        
+        const petActions = Engine.hero.pet.getActionsDataArray();
+        const randIndex = Math.floor(Math.random() * petActions.length);
+        const randAction = petActions[randIndex].actionBin;
+        _g("pet&a=" + randAction);
+    }
+    setInterval(() => {
+        executePetSpammer();
+    }, 3000);
+    
+    function uiUpdatePrzelotHelper() {
+        if (!ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id] || !ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270]) return;
+        const settings = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270];
+        const items = settings.items || [];
+        const container = $("#" + MODULE_ADDON_REGISTRY[64].id + " .mp-use-przelot-items");
+        container.empty();
+        for (const item of items) {
+            const engineItem = Engine.items.getItemById(item.id);
+            if (!engineItem || engineItem.loc !== "g") continue;
+            
+            const el = universalCreateItem(item.item, "item", ADDON_STORAGE_REFERENCE);
+            el.appendTo(container);
+            el.on("click", () => {
+                el.remove();
+                const idx = items.findIndex(i => i.id === item.id);
+                if (idx !== -1) {
+                    items.splice(idx, 1);
+                }
+                saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
+            });
+        }
+    }
+    
+    function executePrzelotHelper() {
+        if (!ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id] || !ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270]) {
+            message("Brak aktywnych teleportów (nie skonfigurowano)");
+            return;
+        }
+        const settingsItems = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270].items || [];
+        const validItems = [];
+        for (const key in settingsItems) {
+            const id = settingsItems[key].id;
+            const engineItem = Engine.items.getItemById(id);
+            if (engineItem?._cachedStats) {
+                const timelimit = engineItem?._cachedStats.timelimit ? engineItem?._cachedStats.timelimit.split(",")[1] : 0;
+                const reqLvl = engineItem?.lvl || 0;
+                const heroLvl = Engine.hero.d.lvl;
+                const now = ts() / 1000;
+                if (heroLvl >= reqLvl && now >= timelimit) {
+                    validItems.push(engineItem.id);
+                }
+            }
+        }
+        if (validItems[0]) {
+            window._g("moveitem&st=1&id=" + validItems[0], function (res) {
+                if (res?.msg) {
+                    const idx = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270].items.findIndex(i => i.id === validItems[0]);
+                    if (idx !== -1) {
+                        ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270].items.splice(idx, 1);
+                    }
+                    saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
+                    uiUpdatePrzelotHelper();
+                }
+            });
+        } else {
+            message("Brak aktywnych teleportów");
+        }
+    }
+
+    createWindow(MODULE_ADDON_REGISTRY[64].name, "" + MODULE_ADDON_REGISTRY[64].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(uiLayoutComponent_Add64_Window => {
+        const addonContainer = $(uiLayoutComponent_Add64_Window).find("#" + MODULE_ADDON_REGISTRY[64].id);
+        const addonWrapper = $("<div></div>").appendTo(addonContainer);
+        
+        if (!ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id]) {
+            ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id] = {};
+        }
+        if (!ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270]) {
+            ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270] = { key: "", items: [] };
+        }
+        
+        const currentKey = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270].key || "";
+        const topSection = $("<div class=\"mp-background-section\"></div>").appendTo(addonWrapper);
+        $("<div class=\"mp-title\">Konfiguracja skrótu</div>").appendTo(topSection);
+        const hotkeyBlock = $("<div class=\"mp-control-hotkeys\" style=\"margin-bottom: 5px;\">Klawisz: <b class=\"mp-badge\">" + currentKey.toUpperCase() + "</b></div>").appendTo(topSection);
+        const hotkeyButton = createButtonHotkeys();
+        hotkeyButton.click(async function () {
+            const capturedKey = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270].key);
+            if (capturedKey) {
+                hotkeyBlock.find("b").html(capturedKey.toUpperCase());
+                ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270].key = capturedKey;
+                saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
+            }
+        });
+        hotkeyButton.appendTo(hotkeyBlock);
+        $("<div class=\"mp-background-section\">\n                <div class=\"mp-title\">Kolejność teleportów</div>\n                <div class=\"mp-use-przelot-items\">\n                \n                </div>\n            </div>").appendTo(addonWrapper);
+        const itemsContainer = $(".mp-use-przelot-items");
+        itemsContainer.tip("Przeciągnij tutaj teleport").droppable({
+            accept: ".item",
+            drop: async (event, ui) => {
+                const settingsChar = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[64].id][uiLayoutComponent_270];
+                if (!settingsChar.items) settingsChar.items = [];
+                const itemsList = settingsChar.items;
+                const draggedClass = ui.draggable.attr("class");
+                const matchDrag = /item-id-(\d+)/.exec(draggedClass);
+                if (!matchDrag) return;
+                const draggedId = parseInt(matchDrag[1]).toString();
+                const engineItem = Engine.items.getItemById(draggedId);
+                if (engineItem && Object.keys(itemsList).length < 18) {
+                    if (engineItem.cl != 32) {
+                        return message("Przedmiot musi być teleportem!");
+                    }
+                    const existsIndex = itemsList.findIndex(i => i.id === draggedId);
+                    if (existsIndex !== -1) {
+                        return message("Teleport znajduję się na liście!");
+                    }
+                    const extractedData = getDataItem(draggedId);
+                    const visualItem = universalCreateItem(extractedData, "item", ADDON_STORAGE_REFERENCE);
+                    visualItem.appendTo(itemsContainer);
+                    visualItem.click(async function () {
+                        visualItem.remove();
+                        const rIdx = itemsList.findIndex(x => x.id === draggedId);
+                        if (rIdx !== -1) {
+                            itemsList.splice(rIdx, 1);
+                        }
+                        saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
+                    });
+                    itemsList.push({
+                        id: draggedId,
+                        item: extractedData
+                    });
+                    saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
+                }
+            }
+        });
+        uiUpdatePrzelotHelper();
+    });
+
 
     function inventoryAutomationState_5333(inventoryAutomationState_5334) {
         if (inventoryAutomationState_5334.key === "Shift") {
