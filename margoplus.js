@@ -1,3 +1,4 @@
+
 let ShiftIsClicked = false;
 let processingUpgrade = false;
 let isHerosOnMapTable = {};
