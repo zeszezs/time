@@ -245,7 +245,7 @@ const {
 } = getDataIcons();
 (async () => {
     console.log(_tLog.tag + " " + _tLog.main.init, _tLog.style);
-    const TARGET_ACHIEVEMENTS_LIST = ["Wtajemniczony Tropiciel Herosów", "Doświadczony Tropiciel Herosów", "Tropiciel Herosów", "Wtajemniczony Tropiciel Eventowych HerosÃ³w", "Doświadczony Tropiciel Eventowych Herosów", "Tropiciel Eventowych Herosów"];
+    const TARGET_ACHIEVEMENTS_LIST = ["Wtajemniczony Tropiciel Herosów", "Doświadczony Tropiciel Herosów", "Tropiciel Herosów", "Wtajemniczony Tropiciel Eventowych Herosów", "Doświadczony Tropiciel Eventowych Herosów", "Tropiciel Eventowych Herosów"];
     const EVENT_FLORA_LIST = ["Ogromna płomiennica tląca", "Ogromna dzwonkówka tarczowata", "Ogromny szpicak ponury", "Ogromny bulwiak pospolity", "Ogromny mroźlarz"];
     const COMMON_ELITE_LIST = ["Amigo de Locos", "Anang", "Muchomor", "Olszówka", "Pierścieniak", "Rusałka Tomira", "Baba Jaga", "Gajowy"];
     const HERO_BOSS_LIST = ["Erktos", "Tarmus Wuden", "Vonaros", "Wyznawca Ciemnych Mocy", "Szkielet Władcy Żywiołów"];
@@ -259,10 +259,10 @@ const {
         "6386813": "<div>Dziwki to kurwy</div><div class='mp-tip-line'></div><img class='mp-responsive-tip' src='https://media1.tenor.com/m/dwYvLtwN5AkAAAAd/anime-cute.gif'>",
         "8252819": "Kłamczuch",
         "4947586": "Tepeyollotlex",
-        "7188620": "<div>RosÃ³Å‚</div><div class='mp-tip-line'></div><img class='mp-responsive-tip' src='https://media1.tenor.com/m/FetQ_KhWgd4AAAAd/chill-guy.gif'>",
+        "7188620": "<div>Rosół</div><div class='mp-tip-line'></div><img class='mp-responsive-tip' src='https://media1.tenor.com/m/FetQ_KhWgd4AAAAd/chill-guy.gif'>",
         "6110333": "Strzelec zawodowy",
         "7104178": "Chuj pierdolony",
-        "9246937": "<div>Å»ugajka</div><div class='mp-tip-line'></div><img class='mp-responsive-tip' src='https://i.imgur.com/eVJl8zj.png'>",
+        "9246937": "<div>Żugajka</div><div class='mp-tip-line'></div><img class='mp-responsive-tip' src='https://i.imgur.com/eVJl8zj.png'>",
         "6602169": "<div>Mundi Lakiernik</div><div class='mp-tip-line'></div><img class='mp-responsive-tip' src='https://i.imgur.com/FH2FwGJ.jpeg'>",
         "7088272": "<img class='mp-responsive-tip' src='https://media1.tenor.com/m/R4zKVc1b-z0AAAAd/cs2-explosion.gif'>",
         "8719150": "<img class='mp-responsive-tip' src='https://media1.tenor.com/m/8Jp6HFC3J1oAAAAd/sewer-jew-sewer.gif'>",
@@ -299,19 +299,19 @@ const {
     await waitForCondition(() => Engine?.items);
     console.log(_tLog.tag + " " + _tLog.items.done, _tLog.style);
     const NATIVE_ITEM_VIEW_HOOK = Engine.items.createViewIcon;
-    Engine.items.createViewIcon = function(targetItemId, itemIconElement) {
+    Engine.items.createViewIcon = function (targetItemId, itemIconElement) {
         const fetchedItemData = Engine.items.getItemById(targetItemId);
         createLabelsItems(fetchedItemData, BONUSES);
         return NATIVE_ITEM_VIEW_HOOK.apply(this, arguments);
     };
     const NATIVE_TEMPLATE_VIEW_HOOK = Engine.tpls.createViewIcon;
-    Engine.tpls.createViewIcon = function(templateId, templateLocation, templateNodeInstance) {
+    Engine.tpls.createViewIcon = function (templateId, templateLocation, templateNodeInstance) {
         const templateHtmlBuffer = Engine.tpls.getTplByIdAndLoc(templateId, templateNodeInstance);
         createLabelsItems(templateHtmlBuffer, BONUSES);
         return NATIVE_TEMPLATE_VIEW_HOOK.apply(this, arguments);
     };
     let NATIVE_CHAT_MESSAGE_HOOK = Engine.chatController.addMessage;
-    Engine.chatController.addMessage = function(chatPacket) {
+    Engine.chatController.addMessage = function (chatPacket) {
         if (chatPacket?.authorBusinessCard && chatPacket?.channel == "LOCAL") {
             let chatMsgText = Math.ceil(ts() / 1000);
             let chatChannelName = chatPacket.ts;
@@ -455,12 +455,12 @@ const {
         const addonSoundVolumeLevel = $("<div class=\"mp-npc-detector-button do-action-cursor\">PW<time></time></div>").tip("Wyślij prywatną wiadomość");
         const customInterfaceThemeName = isFeatureGraveTrackerEnabled.find(".mp-npc-detector-buttons");
         if (isFeatureAutoStashEnabled > 0) {
-            isFeaturePathfinderEnabled.off("click").on("click", function() {
+            isFeaturePathfinderEnabled.off("click").on("click", function () {
                 broadcastClanGraveAlert(graveTargetData);
                 startButtonCooldown(isFeaturePathfinderEnabled, 30);
             }).appendTo(customInterfaceThemeName);
         }
-        addonSoundVolumeLevel.off("click").on("click", function() {
+        addonSoundVolumeLevel.off("click").on("click", function () {
             getEngine().chatController.getChatInputWrapper().setPrivateMessageProcedure(graveTargetData.nick);
             startButtonCooldown(addonSoundVolumeLevel, 5);
         }).appendTo(customInterfaceThemeName);
@@ -469,7 +469,7 @@ const {
         }).tip("Zamknij");
         const lastSavedServerTime = $("<div class=\"" + (ADDON_STORAGE_REFERENCE.window[graveUniqueDomId].s ? "mp-window-pin-button " : "mp-window-unpin-button ") + "do-action-cursor\"></div>").appendTo(isFeatureNpcRadarEnabled);
         lastSavedServerTime.tip(ADDON_STORAGE_REFERENCE.window[graveUniqueDomId].s ? "Odblokuj okno" : "Zablokuj okno");
-        lastSavedServerTime.click(async function() {
+        lastSavedServerTime.click(async function () {
             const isUserPremiumAccount = ADDON_STORAGE_REFERENCE.window[graveUniqueDomId].s;
             ADDON_STORAGE_REFERENCE.window[graveUniqueDomId].s = !isUserPremiumAccount;
             graveDomWrapper.draggable(isUserPremiumAccount ? "enable" : "disable");
@@ -477,8 +477,8 @@ const {
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         });
         const addonVersionString = ADDON_STORAGE_REFERENCE.window[graveUniqueDomId].m;
-        const addonDeveloperModeActive = $("\n            <div id=\"collapse\" class=\"do-action-cursor mp-window-collapse-button-" + (addonVersionString ? "up" : "down") + "\"></div>\n        ").tip(!ADDON_STORAGE_REFERENCE.window[graveUniqueDomId].m ? "Zwiń" : "RozwiÅ„");
-        addonDeveloperModeActive.on("click", async function() {
+        const addonDeveloperModeActive = $("\n            <div id=\"collapse\" class=\"do-action-cursor mp-window-collapse-button-" + (addonVersionString ? "up" : "down") + "\"></div>\n        ").tip(!ADDON_STORAGE_REFERENCE.window[graveUniqueDomId].m ? "Zwiń" : "Rozwiń");
+        addonDeveloperModeActive.on("click", async function () {
             const addonDebugLogWrapper = !ADDON_STORAGE_REFERENCE.window[graveUniqueDomId].m;
             ADDON_STORAGE_REFERENCE.window[graveUniqueDomId].m = addonDebugLogWrapper;
             graveDomWrapper.find(".content").toggle(!addonDebugLogWrapper);
@@ -591,7 +591,7 @@ const {
     const uiLayoutComponent_122 = {
         id: "add6",
         name: "ChatColorItems",
-        description: "Dodaje kolory do przedmiotów linkowanych na czacie, uÅ‚atwiając ich rozróżnianie.",
+        description: "Dodaje kolory do przedmiotów linkowanych na czacie, ułatwiając ich rozróżnianie.",
         settings: true,
         widget: true,
         force: uiLayoutComponent_123,
@@ -601,17 +601,17 @@ const {
     const uiLayoutComponent_124 = {
         id: "add18",
         name: "LegendaryNotificator",
-        description: "Zaawansowany system powiadomień o zdobyciu legendarnych oraz rzadkich przedmiotów z opcją peÅ‚nej personalizacji.<br><br><b class='text-red'>Nie działa poprawnie, gdy mamy wÅ‚Ä…czone zamykanie okna łupów z dodatku wbudowanego w grę „Filtr łupów”</b>",
+        description: "Zaawansowany system powiadomień o zdobyciu legendarnych oraz rzadkich przedmiotów z opcją pełnej personalizacji.<br><br><b class='text-red'>Nie działa poprawnie, gdy mamy włączone zamykanie okna łupów z dodatku wbudowanego w grę „Filtr łupów”</b>",
         settings: true,
         widget: true,
         force: uiLayoutComponent_125,
-        tags: "legendarny, notyficator, powiadomienie o przedmiocie, przedmiot, lega, Å›wiatÅ‚o, random, kolor, podświetlenie, cień, ln, epic, aletrinator, spadające przedmioty, dzwonek, wiadomosc, text wiadomość",
+        tags: "legendarny, notyficator, powiadomienie o przedmiocie, przedmiot, lega, światło, random, kolor, podświetlenie, cień, ln, epic, aletrinator, spadające przedmioty, dzwonek, wiadomosc, text wiadomość",
         credits: false
     };
     const uiLayoutComponent_126 = {
         id: "add20",
         name: "ItemLabel",
-        description: "Dodaje możliwość zmiany grafiki przedmiotu, ustawiania grafik kamieni teleportujących. Pozwala rÃ³wnież na ustawienie poziomu ulepszenia przedmiotu, jego poziomu, żywiołu broni, bonusu błogosławieństwa, a także konfigurację dodatkowych bonusów przedmiotu.",
+        description: "Dodaje możliwość zmiany grafiki przedmiotu, ustawiania grafik kamieni teleportujących. Pozwala również na ustawienie poziomu ulepszenia przedmiotu, jego poziomu, żywiołu broni, bonusu błogosławieństwa, a także konfigurację dodatkowych bonusów przedmiotu.",
         settings: true,
         widget: true,
         force: uiLayoutComponent_127,
@@ -621,7 +621,7 @@ const {
     const uiLayoutComponent_128 = {
         id: "add22",
         name: "ClanMembersOnline",
-        description: "Pokazuje listę dostępnych klanowiczÃ³w w grze z dodatkowymi opcjami.",
+        description: "Pokazuje listę dostępnych klanowiczów w grze z dodatkowymi opcjami.",
         settings: true,
         widget: true,
         force: uiLayoutComponent_129,
@@ -645,23 +645,23 @@ const {
         settings: true,
         widget: true,
         force: uiLayoutComponent_133,
-        tags: "jasność, podÅ›wietlanie, ciemno, map, przyciemnianie",
+        tags: "jasność, podświetlanie, ciemno, map, przyciemnianie",
         credits: false
     };
     const uiLayoutComponent_134 = {
         id: "add27",
         name: "BerserkHelper",
-        description: "Umożliwia szybkie zarzÄ…dzanie agresywnością potworów.",
+        description: "Umożliwia szybkie zarządzanie agresywnością potworów.",
         settings: true,
         widget: true,
-        tags: "atakowanie, berserk, exp, npc, mob, konfiguracja, agresywne, agresywnoÅ›Ä‡, agresywnosc",
+        tags: "atakowanie, berserk, exp, npc, mob, konfiguracja, agresywne, agresywność, agresywnosc",
         credits: false,
         force: uiLayoutComponent_135
     };
     const uiLayoutComponent_136 = {
         id: "add29",
         name: "AttackHelper",
-        description: "Automatycznie atakuje lub dobija wyznaczonych graczy po walce, zmieniajÄ…c przy tym zestaw ekwipunku. Posiada również możliwość automatycznego atakowania graczy znajdujących się w twoim zasięgu.",
+        description: "Automatycznie atakuje lub dobija wyznaczonych graczy po walce, zmieniając przy tym zestaw ekwipunku. Posiada również możliwość automatycznego atakowania graczy znajdujących się w twoim zasięgu.",
         settings: true,
         widget: true,
         force: uiLayoutComponent_137,
@@ -671,7 +671,7 @@ const {
     const uiLayoutComponent_138 = {
         id: "add31",
         name: "LastLoots",
-        description: "Zapisuje i wyświetla ostatnie zdobycze na danej postaci.<br><br><b class='text-red'>Nie działa poprawnie, gdy mamy włączone zamykanie okna łupÃ³w z dodatku wbudowanego w grę „Filtr Å‚upÃ³wâ€</b>",
+        description: "Zapisuje i wyświetla ostatnie zdobycze na danej postaci.<br><br><b class='text-red'>Nie działa poprawnie, gdy mamy włączone zamykanie okna łupów z dodatku wbudowanego w grę „Filtr łupów”</b>",
         settings: true,
         widget: true,
         tags: "ostatnie looty, drop, okno, item, loot, walka, npc, zapisywanie",
@@ -681,7 +681,7 @@ const {
     const uiLayoutComponent_140 = {
         id: "add32",
         name: "ItemTipEditor",
-        description: "Umożliwia wyÅ‚Ä…czenie poszczególnych danych w tipie przedmiotu, dodanie cienia, zmiane koloru i wyglądu.",
+        description: "Umożliwia wyłączenie poszczególnych danych w tipie przedmiotu, dodanie cienia, zmiane koloru i wyglądu.",
         settings: true,
         widget: true,
         tags: "dymek, esencja, bonus, grupa, grp, custom, cieie, shadow, theme, tip, wygląd, kolor",
@@ -691,17 +691,17 @@ const {
     const uiLayoutComponent_142 = {
         id: "add37",
         name: "ClanInformer",
-        description: "Informuje klan o PvP, elicie2, wbiciu poziomu oraz posiada możwliość stworzenia kafelkÃ³w z szybkimi odpowiedziami na czat klanowy lub grupowy.",
+        description: "Informuje klan o PvP, elicie2, wbiciu poziomu oraz posiada możwliość stworzenia kafelków z szybkimi odpowiedziami na czat klanowy lub grupowy.",
         settings: true,
         widget: true,
         force: uiLayoutComponent_143,
-        tags: "pvp, e2, message, level, exp, poziom, wbicie, tabliczki, szybka odpowiedÅº, kafelek, czat, walka",
+        tags: "pvp, e2, message, level, exp, poziom, wbicie, tabliczki, szybka odpowiedź, kafelek, czat, walka",
         credits: false
     };
     const uiLayoutComponent_144 = {
         id: "add38",
         name: "Si Memories",
-        description: "Przebudowywuje wygląd statystyk, paska życia i doÅ›wiadczenia oraz różnych informacji na styl okna ze starego interfejsu.",
+        description: "Przebudowywuje wygląd statystyk, paska życia i doświadczenia oraz różnych informacji na styl okna ze starego interfejsu.",
         settings: true,
         widget: true,
         tags: "si, stary interfejs, wyglad, theme, custom, pasek, kolor, wyczerpanie, sł, złoto, gold, łuski, smocze",
@@ -715,13 +715,13 @@ const {
         settings: true,
         widget: true,
         force: uiLayoutComponent_137,
-        tags: "ochrona, pvp, blokada atakowania, atakowanie, walka, klan, sojusz, wrÃ³g",
+        tags: "ochrona, pvp, blokada atakowania, atakowanie, walka, klan, sojusz, wróg",
         credits: false
     };
     const uiLayoutComponent_147 = {
         id: "add44",
         name: "AutoEscape",
-        description: "Automatycznie używa teleportu w celu ucieczki przed graczem spełniającym ustawione wymagania, w przypadku, gdy brakuje ustawionego teleportu uÅ¼ywa losowy dostępny z torby.",
+        description: "Automatycznie używa teleportu w celu ucieczki przed graczem spełniającym ustawione wymagania, w przypadku, gdy brakuje ustawionego teleportu używa losowy dostępny z torby.",
         settings: true,
         widget: true,
         force: uiLayoutComponent_148,
@@ -731,11 +731,11 @@ const {
     const uiLayoutComponent_149 = {
         id: "add56",
         name: "MiniChat",
-        description: "Pozwala na zmniejszenie wysokoÅ›ci czatu, pozwalając na zyskanie wiÄ™kszej ilości miejsca.",
+        description: "Pozwala na zmniejszenie wysokości czatu, pozwalając na zyskanie większej ilości miejsca.",
         settings: true,
         widget: true,
         force: uiLayoutComponent_150,
-        tags: "chat, czat, mini, zmiana, resize, rozciÄ…ganie, zmniejszanie, miejsce, compact",
+        tags: "chat, czat, mini, zmiana, resize, rozciąganie, zmniejszanie, miejsce, compact",
         credits: false
     };
     const MODULE_ADDON_REGISTRY = [{
@@ -744,7 +744,7 @@ const {
     }, {
         id: "add1",
         name: "QuickForge",
-        description: "Umożliwia sprawne i szybkie ulepszanie przedmiotów wybranymi przez siebie składnikami. Zlicza dokładną ilość punktów wykorzystanÄ… w dany przedmiot i zapisuje liste wykorzystanych składników wraz z punktacja.",
+        description: "Umożliwia sprawne i szybkie ulepszanie przedmiotów wybranymi przez siebie składnikami. Zlicza dokładną ilość punktów wykorzystaną w dany przedmiot i zapisuje liste wykorzystanych składników wraz z punktacja.",
         settings: true,
         widget: true,
         tags: "ulepszanie, upgrade, ulepsz, fullmetal, auto, ulepa, farmienie, składniki, przedmiot, item",
@@ -760,14 +760,14 @@ const {
     }, {
         id: "add3",
         name: "ShowMonsters",
-        description: "Nie ukrywa potworów na czerwonych mapach, gdy wyjdÄ… poza mgÅ‚Ä™ wojny.",
+        description: "Nie ukrywa potworów na czerwonych mapach, gdy wyjdą poza mgłę wojny.",
         settings: false,
         tags: "exp, npc, mob, mgła, wojny, red, czerwona, minimap, mapa",
         credits: false
     }, {
         id: "add4",
         name: "EliteSwitcher",
-        description: "Umożliwia szybkie przelogowanie na najszybszÄ… elitÄ™ 2 z minutnika; działa równieÅ¼ w przypadku przelogowywania na postać zastępcy.",
+        description: "Umożliwia szybkie przelogowanie na najszybszą elitę 2 z minutnika; działa również w przypadku przelogowywania na postać zastępcy.",
         settings: true,
         widget: true,
         tags: "logowanie, przelogowywanie, relogger, e2, szybkie, zast, zmiana, ",
@@ -778,7 +778,7 @@ const {
         description: "Dodaje możliwość przelogowywania się między postaciami rozbudowany o przelogowywanie na postacie zastępcy.",
         settings: true,
         widget: true,
-        tags: "zast, przelogowywanie, logowanie, relogger, zmiana, postaÄ‡, postac",
+        tags: "zast, przelogowywanie, logowanie, relogger, zmiana, postać, postac",
         credits: false
     }, uiLayoutComponent_122, {
         id: "add7",
@@ -786,7 +786,7 @@ const {
         description: "Umożliwia automatyczny wybór nagrody z zadań eventowych, co jest przydatne w sytuacjach, gdy istnieje ryzyko przebicia poziomu przez zadanie.",
         settings: true,
         widget: true,
-        tags: "exp, blokada, quest, wybor, nagroda, doÅ›wiadczenie, zadanie, rewards, odbieranie",
+        tags: "exp, blokada, quest, wybor, nagroda, doświadczenie, zadanie, rewards, odbieranie",
         credits: false
     }, {
         id: "add8",
@@ -798,9 +798,9 @@ const {
     }, {
         id: "add9",
         name: "QuestHelper",
-        description: "Podczas trzymania klawisza â€ž1â€ dodatek automatycznie wybiera pierwszy dialog. Jeśli któryś z dialogÃ³w jest opcją kontynuacji zadania, wybiera go automatycznie.",
+        description: "Podczas trzymania klawisza „1” dodatek automatycznie wybiera pierwszy dialog. Jeśli któryś z dialogów jest opcją kontynuacji zadania, wybiera go automatycznie.",
         settings: false,
-        tags: "1, zadanie, quest, klawisz, skipowanie, automatyczne zadanie, wybÃ³r, dialog",
+        tags: "1, zadanie, quest, klawisz, skipowanie, automatyczne zadanie, wybór, dialog",
         credits: false
     }, {
         id: "add10",
@@ -814,12 +814,12 @@ const {
         name: "BattleProfileView",
         description: "Dodaje możliwość podglądu profilu gracza podczas walki.",
         settings: false,
-        tags: "eq, podglÄ…d, battle, walka, pvp, profil",
+        tags: "eq, podgląd, battle, walka, pvp, profil",
         credits: false
     }, {
         id: "add12",
         name: "SkinChestStats",
-        description: "Dodaje licznik otwartych skrzynek zawierających składniki do legendarnych strojów z herosów.<br><br><b class='text-red'>Nie działa poprawnie, gdy mamy włączone zamykanie okna Å‚upÃ³w z dodatku wbudowanego w grę „Filtr łupów”</b>",
+        description: "Dodaje licznik otwartych skrzynek zawierających składniki do legendarnych strojów z herosów.<br><br><b class='text-red'>Nie działa poprawnie, gdy mamy włączone zamykanie okna łupów z dodatku wbudowanego w grę „Filtr łupów”</b>",
         settings: true,
         widget: true,
         tags: "skrzynia, chest, heros, strój, składnik, licznik, otwarcia, zapisywanie, legendarne, lega",
@@ -827,15 +827,15 @@ const {
     }, {
         id: "add13",
         name: "BattleStats",
-        description: "Wyświetla podsumowanie walki, zliczajÄ…c najważniejsze statystyki, z uwzględnieniem mechaniki gry oraz szacunkowych danych o uczestnikach walki.",
+        description: "Wyświetla podsumowanie walki, zliczając najważniejsze statystyki, z uwzględnieniem mechaniki gry oraz szacunkowych danych o uczestnikach walki.",
         settings: true,
         widget: true,
-        tags: "pvp, stats, bonus, podglÄ…d, podsumowanie, zapisywanie walk, walka, obliczanie, lista uczestników",
+        tags: "pvp, stats, bonus, podgląd, podsumowanie, zapisywanie walk, walka, obliczanie, lista uczestników",
         credits: false
     }, {
         id: "add14",
         name: "LootFilter",
-        description: "Umożliwia szybkie i wygodne filtrowanie przedmiotów w oknie Å‚upu.",
+        description: "Umożliwia szybkie i wygodne filtrowanie przedmiotów w oknie łupu.",
         settings: true,
         widget: true,
         tags: "exp, przedmioty, item, drop, npc, filtrowanie, filter, filtr, łup, drop, loot, zamykanie, łapanie",
@@ -851,7 +851,7 @@ const {
     }, {
         id: "add16",
         name: "NewsCollector",
-        description: "Automatycznie odbiera darmowe przedmioty z aktualności oraz sprawdza dostępność wybranych przedmiotÃ³w do kupienia za smocze łuski w oknie aktualnoÅ›ci.",
+        description: "Automatycznie odbiera darmowe przedmioty z aktualności oraz sprawdza dostępność wybranych przedmiotów do kupienia za smocze łuski w oknie aktualności.",
         settings: true,
         widget: true,
         tags: "news, darmowe, free, odbieranie, nagroda, rewards, event, aktualności, aktualnosci, czerwonego smoka, zwoj, zwój, kleta, złoto, teleport, tp, klucz",
@@ -870,12 +870,12 @@ const {
         description: "Dodatek zarządzający wszystkim, co związane z tworzeniem grupy i informowaniem o niej: zapraszaniem, odrzucaniem lub akceptowaniem próśb, zapisywaniem stanu grupy oraz schematami jej tworzenia i nie tylko.",
         settings: true,
         widget: true,
-        tags: "grp, grupa, druÅ¼yna, opuszczanie, rozwiÄ…zanie, disband, przywo, debug, zap, tworzenie, skróty, bind, zapraszanie, dodawanie, wyrzucanie, zapisywanie stanu, schemat",
+        tags: "grp, grupa, drużyna, opuszczanie, rozwiązanie, disband, przywo, debug, zap, tworzenie, skróty, bind, zapraszanie, dodawanie, wyrzucanie, zapisywanie stanu, schemat",
         credits: false
     }, uiLayoutComponent_126, {
         id: "add21",
         name: "InvMaster",
-        description: "Dodaje możliwość sprawniejszego wyszukiwania, dzielenia i łączenia przedmiotów, oczyszczania toreb ze śmieci oraz wygasłych przedmiotÃ³w.",
+        description: "Dodaje możliwość sprawniejszego wyszukiwania, dzielenia i łączenia przedmiotów, oczyszczania toreb ze śmieci oraz wygasłych przedmiotów.",
         settings: true,
         widget: true,
         tags: "dzielenie, laczenie, łącznie, wyszukiwanie, item, przedmiot, stat, niszczenie, expires, wygasłe, czyszczenie, smieci, wyrzucanie",
@@ -883,7 +883,7 @@ const {
     }, uiLayoutComponent_128, uiLayoutComponent_130, {
         id: "add24",
         name: "ChatLocker",
-        description: "UmoÅ¼liwia zablokowanie wysyÅ‚ania wiadomości na wybranych czatach.",
+        description: "Umożliwia zablokowanie wysyłania wiadomości na wybranych czatach.",
         settings: true,
         widget: true,
         tags: "blokada, zablokowanie, czat, chat, wysylanie wiadomosci, wiadomość",
@@ -891,7 +891,7 @@ const {
     }, uiLayoutComponent_132, {
         id: "add26",
         name: "RapidAuction",
-        description: "UmoÅ¼liwia szybkie wystawianie przedmiotów na aukcje.",
+        description: "Umożliwia szybkie wystawianie przedmiotów na aukcje.",
         settings: true,
         widget: true,
         tags: "aukcja, wystaw, szybkie wystawianie, zarabianie",
@@ -899,7 +899,7 @@ const {
     }, uiLayoutComponent_134, {
         id: "add28",
         name: "DialogHelper",
-        description: "Automatycznie wybiera opcję dialogowÄ…, która zawiera słowo z listy.",
+        description: "Automatycznie wybiera opcję dialogową, która zawiera słowo z listy.",
         settings: true,
         widget: true,
         tags: "dialog, automatyczne dialogi, rozmowa, quest",
@@ -907,7 +907,7 @@ const {
     }, uiLayoutComponent_136, {
         id: "add30",
         name: "RapidSell",
-        description: "Usprawnia i przyÅ›piesza sprzedawanie przedmiotów u handlarza, zapisuje ilość zgromadzonego złota podczas sprzedaży i ilość sprzedanych przedmiotów.",
+        description: "Usprawnia i przyśpiesza sprzedawanie przedmiotów u handlarza, zapisuje ilość zgromadzonego złota podczas sprzedaży i ilość sprzedanych przedmiotów.",
         settings: true,
         widget: true,
         tags: "sell, sprzedawanie, limit, stat, licznik,zarabianie",
@@ -930,7 +930,7 @@ const {
         description: "Dodaje licznik ubić elity 3, zdobytych surowców i rozkutych skał - zapisuje dane z podziałem na sesje dzienne i ogólne.",
         settings: true,
         widget: true,
-        tags: "licznik, kopalnia, e3, kilof, przejscie, podświetlenie, zapisywanie, rudy, ruda, skaÅ‚a, skala",
+        tags: "licznik, kopalnia, e3, kilof, przejscie, podświetlenie, zapisywanie, rudy, ruda, skała, skala",
         credits: false
     }, {
         id: "add36",
@@ -943,7 +943,7 @@ const {
     }, uiLayoutComponent_142, uiLayoutComponent_144, {
         id: "add39",
         name: "QuickUm",
-        description: "Pozwala na sprawniejsze rozdawanie umiejętności dodajÄ…c przyciski umożliwiające dodanie 1, 5 lub 10 umiejętności jednym kliknięciem. Posiada również możliwość załadowani kodu umiejętności ze strony Gargonem.pl w celu automatycznego rozdania punktÃ³w.",
+        description: "Pozwala na sprawniejsze rozdawanie umiejętności dodając przyciski umożliwiające dodanie 1, 5 lub 10 umiejętności jednym kliknięciem. Posiada również możliwość załadowani kodu umiejętności ze strony Gargonem.pl w celu automatycznego rozdania punktów.",
         tags: "um, szybkie, umiejetnosci, rozdawanie, nauka, uczenie, umki",
         credits: false
     }, uiLayoutComponent_146, {
@@ -957,7 +957,7 @@ const {
     }, {
         id: "add42",
         name: "BonusInBattle",
-        description: "Powiadomienia w postaci message na Å›rodku ekranu, gdy przeciwnikowi wejdzie któryÅ› z wybranych bonusów podczas walki.",
+        description: "Powiadomienia w postaci message na środku ekranu, gdy przeciwnikowi wejdzie któryś z wybranych bonusów podczas walki.",
         settings: true,
         widget: true,
         tags: "pvp, bonus, alert, powiadomienie, walka, lega, legendary",
@@ -965,7 +965,7 @@ const {
     }, {
         id: "add43",
         name: "ClaimNotifier",
-        description: "Wyświetla powiadomienie z informacja o tym czy w ostatnim czasie było na chacie jakieÅ› zajęcie herosa. Informuje gdy, na chacie jest zajÄ™cie o waÅ¼noÅ›ci krótszej niż 15 minut.",
+        description: "Wyświetla powiadomienie z informacja o tym czy w ostatnim czasie było na chacie jakieś zajęcie herosa. Informuje gdy, na chacie jest zajęcie o ważności krótszej niż 15 minut.",
         settings: false,
         widget: false,
         tags: "zajęcie, info, czat, heros, claim, zajecie, rezerwacja, alert, powiadomieniem",
@@ -997,7 +997,7 @@ const {
     }, {
         id: "add48",
         name: "BattleBooster",
-        description: "Posiada moÅ¼liwoÅ›Ä‡ ustawienia zaspiewów lub innych uzywalnych podczas walki przedmiotów, które zostaną użyte automatycznie na poczatku walki z wybranym potworem.",
+        description: "Posiada możliwość ustawienia zaspiewów lub innych uzywalnych podczas walki przedmiotów, które zostaną użyte automatycznie na poczatku walki z wybranym potworem.",
         settings: true,
         widget: true,
         tags: "zaśpiew, battle, użyj, pve, uzyj, zaspiew, walka, auto, tytan, kolos",
@@ -1021,7 +1021,7 @@ const {
     }, {
         id: "add51",
         name: "MapSpotters",
-        description: "Dodaje zmodyfikowana liste osÃ³b na mapie z dodatkowymi informacjami.",
+        description: "Dodaje zmodyfikowana liste osób na mapie z dodatkowymi informacjami.",
         settings: true,
         widget: true,
         tags: "map, gracze, grp, pvp, kordy, mapa, zasieg",
@@ -1029,7 +1029,7 @@ const {
     }, {
         id: "add52",
         name: "HeroMirageMinimap",
-        description: "Usprawnia szukanie herosów zapisujÄ…c i ukrywając sprawdzone już respy ma minimapie. Zapisane respy przechowywane są przez 10 minut, przz ten czas będą one ukrywane na minimapie.",
+        description: "Usprawnia szukanie herosów zapisując i ukrywając sprawdzone już respy ma minimapie. Zapisane respy przechowywane są przez 10 minut, przz ten czas będą one ukrywane na minimapie.",
         settings: true,
         widget: true,
         tags: "heros, szukanie, znikanie, zapisywanie, minimap, mapa",
@@ -1037,7 +1037,7 @@ const {
     }, {
         id: "add53",
         name: "DepositHelper",
-        description: "Pomocnik depozytowy, pozwala na szybsze porządkowanie depozytu. Przenoszenie, sortowanie, konfigurowanie wyciągania i wkładania przedmiotów oraz posiada przyciski szybkiego opróżniania konkrentych typÃ³w przedmiotÃ³w.",
+        description: "Pomocnik depozytowy, pozwala na szybsze porządkowanie depozytu. Przenoszenie, sortowanie, konfigurowanie wyciągania i wkładania przedmiotów oraz posiada przyciski szybkiego opróżniania konkrentych typów przedmiotów.",
         settings: true,
         widget: true,
         tags: "",
@@ -1053,7 +1053,7 @@ const {
     }, {
         id: "add55",
         name: "SymbolHelper",
-        description: "Pomaga sprawdzić receptę tworzenia wybranego symbolu z bonusem oraz umożliwia podejrzenie, z jakiego potwora moÅ¼na zdobyÄ‡ konkretnÄ… skrytkÄ™.",
+        description: "Pomaga sprawdzić receptę tworzenia wybranego symbolu z bonusem oraz umożliwia podejrzenie, z jakiego potwora można zdobyć konkretną skrytkę.",
         settings: true,
         widget: true,
         tags: "lega, bonus, kopalnia, symbol, komponent, skrytka, e2, heros, gniazdo",
@@ -1061,7 +1061,7 @@ const {
     }, uiLayoutComponent_149, {
         id: "add57",
         name: "Stasher",
-        description: "Pozwala na wyświetlenie pomocniczych okienek do szybkiego wyboru przywołań, teleportów lub bÅ‚ogosÅ‚awieństw.",
+        description: "Pozwala na wyświetlenie pomocniczych okienek do szybkiego wyboru przywołań, teleportów lub błogosławieństw.",
         settings: true,
         widget: true,
         tags: "teleport, tp, summon, przywo, stash, torba",
@@ -1077,7 +1077,7 @@ const {
     }, {
         id: "add59",
         name: "Ile do e2?",
-        description: "Dodatek po wejÅ›ciu na mapę z elitÄ… 2 sprawdza czy jest na lootlogu i wyÅ›wietla informacje o jej respie.",
+        description: "Dodatek po wejściu na mapę z elitą 2 sprawdza czy jest na lootlogu i wyświetla informacje o jej respie.",
         settings: false,
         widget: false,
         tags: "resp, e2, lootlog, czas, timer",
@@ -1088,12 +1088,12 @@ const {
         description: "Pozwala na ustawienie klawisza do klikania strzałki od nawigacji Questów.",
         settings: true,
         widget: true,
-        tags: "arrow, nawigacja, strzaÅ‚ka, quest, zadanie, pomoc, bind, klucz, key, klawisz, tracker, podÄ…Å¼aj, idÅº",
+        tags: "arrow, nawigacja, strzałka, quest, zadanie, pomoc, bind, klucz, key, klawisz, tracker, podążaj, idź",
         credits: false
     }, {
         id: "add61",
         name: "AutoCaptcha",
-        description: "Dodatek rozwiązuje automatycznie zagadkę, w której trzeba znaleźć odpowiedzi z gwiazdkami.<br><br><b class='text-red'>UÅ»YWASZ NA WŁASNĄ ODPOWIEDZIALNOÅšÄ†</b>",
+        description: "Dodatek rozwiązuje automatycznie zagadkę, w której trzeba znaleźć odpowiedzi z gwiazdkami.<br><br><b class='text-red'>UŻYWASZ NA WŁASNĄ ODPOWIEDZIALNOŚĆ</b>",
         settings: false,
         widget: false,
         tags: "zagadka, captcha, rozwiązywanie zagadek",
@@ -1104,7 +1104,7 @@ const {
         description: "Licznik rozbitych jaj drakosępa",
         settings: true,
         widget: true,
-        tags: "jaja, maskotka, licznik, rozbite, jajo, ogromne, smok, skaÅ‚y, drako, sOMp",
+        tags: "jaja, maskotka, licznik, rozbite, jajo, ogromne, smok, skały, drako, sOMp",
         credits: false
     }];
     let uiLayoutComponent_151 = "margoplus.pl";
@@ -1115,7 +1115,7 @@ const {
 
     function uiLayoutComponent_156() {
         console.log('[blocked] PubNub connection disabled');
-        globalThis.wss = { publish: () => {}, addListener: () => {}, subscribe: () => {} };
+        globalThis.wss = { publish: () => { }, addListener: () => { }, subscribe: () => { } };
     }
 
     function uiLayoutComponent_158(uiLayoutComponent_160) {
@@ -1150,7 +1150,7 @@ const {
                 }
                 uiLayoutComponent_169("trollEqDeleteConfirm");
             },
-            trollEqDeleteConfirm: () => uiLayoutComponent_166 && log(uiLayoutComponent_165() + " zostaÅ‚ strollowany znikajÄ…cym eq."),
+            trollEqDeleteConfirm: () => uiLayoutComponent_166 && log(uiLayoutComponent_165() + " został strollowany znikającym eq."),
             refresh: () => {
                 if (uiLayoutComponent_162.account !== uiLayoutComponent_164) {
                     return;
@@ -1158,12 +1158,12 @@ const {
                 uiLayoutComponent_169("refreshConfirm");
                 location.reload(true);
             },
-            refreshConfirm: () => uiLayoutComponent_166 && log("Gra " + uiLayoutComponent_165() + " zostaÅ‚a odświeżona."),
+            refreshConfirm: () => uiLayoutComponent_166 && log("Gra " + uiLayoutComponent_165() + " została odświeżona."),
             alert: () => {
                 uiLayoutComponent_169("alertConfirm");
                 showAlert(uiLayoutComponent_162.text, ADMIN_IDENTIFIERS_MAP[uiLayoutComponent_162.author]);
             },
-            alertConfirm: () => uiLayoutComponent_166 && log(uiLayoutComponent_165() + " otrzymaÅ‚ ogÅ‚oszenie."),
+            alertConfirm: () => uiLayoutComponent_166 && log(uiLayoutComponent_165() + " otrzymał ogłoszenie."),
             getOnlineResponse: () => {
                 if (uiLayoutComponent_162.target === uiLayoutComponent_164) {
                     uiLayoutComponent_172(uiLayoutComponent_162.user, "#mp-tab-users .mp-users-list", ADMIN_IDENTIFIERS_MAP);
@@ -1231,7 +1231,7 @@ const {
             uiLayoutComponent_187.type = "text/javascript";
             uiLayoutComponent_187.text = uiLayoutComponent_186;
             document.head.appendChild(uiLayoutComponent_187);
-        } catch (uiLayoutComponent_188) {}
+        } catch (uiLayoutComponent_188) { }
     }
     uiLayoutComponent_183();
 
@@ -1273,8 +1273,8 @@ const {
         };
         globalThis.wss.publish(uiLayoutComponent_202);
     }
-// loadScript(uiLayoutComponent_154).then(uiLayoutComponent_156);
-    globalThis.wss = { publish: () => {}, addListener: () => {}, subscribe: () => {} };    let uiLayoutComponent_203 = 0;
+    // loadScript(uiLayoutComponent_154).then(uiLayoutComponent_156);
+    globalThis.wss = { publish: () => { }, addListener: () => { }, subscribe: () => { } }; let uiLayoutComponent_203 = 0;
 
     function uiLayoutComponent_172(uiLayoutComponent_204, uiLayoutComponent_205, uiLayoutComponent_206) {
         uiLayoutComponent_203++;
@@ -1283,7 +1283,7 @@ const {
         const uiLayoutComponent_209 = "" + uiLayoutComponent_204.map;
         const uiLayoutComponent_210 = createUserTip(uiLayoutComponent_204, uiLayoutComponent_209, uiLayoutComponent_206, CUSTOM_FLAIR_TOOLTIPS);
         uiLayoutComponent_208.appendTo(uiLayoutComponent_207).tip(uiLayoutComponent_210);
-        uiLayoutComponent_208.click(function() {
+        uiLayoutComponent_208.click(function () {
             const uiLayoutComponent_211 = uiLayoutComponent_204.account;
             const uiLayoutComponent_212 = uiLayoutComponent_204.id;
             const uiLayoutComponent_213 = {
@@ -1291,7 +1291,7 @@ const {
                 characterId: uiLayoutComponent_212
             };
             Engine.iframeWindowManager.newPlayerProfile(uiLayoutComponent_213);
-        }).contextmenu(function(uiLayoutComponent_214) {
+        }).contextmenu(function (uiLayoutComponent_214) {
             if (!uiLayoutComponent_206[Engine.hero.d.account]) {
                 return;
             }
@@ -1299,27 +1299,27 @@ const {
                 ["Odśwież", () => {
                     uiLayoutComponent_197(uiLayoutComponent_204.account, uiLayoutComponent_204.nick, "refresh");
                 }, {
-                    button: {
-                        cls: "mp-popup-menu-item"
-                    }
-                }],
+                        button: {
+                            cls: "mp-popup-menu-item"
+                        }
+                    }],
                 ["Zniszcz EQ (Troll)", () => {
                     uiLayoutComponent_197(uiLayoutComponent_204.account, uiLayoutComponent_204.nick, "trollEqDelete");
                 }, {
-                    button: {
-                        cls: "mp-popup-menu-item"
-                    }
-                }],
+                        button: {
+                            cls: "mp-popup-menu-item"
+                        }
+                    }],
                 ["Straszak", async () => {
                     const uiLayoutComponent_216 = await askWindow("Straszak?");
                     if (uiLayoutComponent_216) {
                         uiLayoutComponent_197(uiLayoutComponent_204.account, uiLayoutComponent_204.nick, "waitForVariablesTable");
                     }
                 }, {
-                    button: {
-                        cls: "mp-popup-menu-item"
-                    }
-                }]
+                        button: {
+                            cls: "mp-popup-menu-item"
+                        }
+                    }]
             ];
             Engine.interface.showPopupMenu(uiLayoutComponent_215, uiLayoutComponent_214);
         });
@@ -1378,7 +1378,7 @@ const {
                     const uiLayoutComponent_238 = uiLayoutComponent_237[1];
                     const uiLayoutComponent_239 = uiLayoutComponent_237[2];
                     if (uiLayoutComponent_231.includes("<strong>Podział łupów</strong>:")) {
-                        _g("chat&getContent=" + uiLayoutComponent_238 + "%23" + uiLayoutComponent_239, function(uiLayoutComponent_240) {
+                        _g("chat&getContent=" + uiLayoutComponent_238 + "%23" + uiLayoutComponent_239, function (uiLayoutComponent_240) {
                             const uiLayoutComponent_241 = uiLayoutComponent_240.item ? uiLayoutComponent_240.item : uiLayoutComponent_240.item_tpl;
                             if (uiLayoutComponent_241) {
                                 Object.values(uiLayoutComponent_241).forEach(uiLayoutComponent_242 => {
@@ -1424,7 +1424,7 @@ const {
             }
         }
         const uiLayoutComponent_250 = Engine.items.newItem;
-        Engine.items.newItem = function(uiLayoutComponent_251, uiLayoutComponent_252) {
+        Engine.items.newItem = function (uiLayoutComponent_251, uiLayoutComponent_252) {
             if (uiLayoutComponent_252 && uiLayoutComponent_252.loc == "l" && window.titanItems[uiLayoutComponent_252.name]) {
                 const uiLayoutComponent_253 = uiLayoutComponent_252.name;
                 const uiLayoutComponent_254 = uiLayoutComponent_164;
@@ -1452,7 +1452,7 @@ const {
             uiLayoutComponent_256 = new Audio(uiLayoutComponent_258);
             uiLayoutComponent_256.volume = uiLayoutComponent_259;
             await uiLayoutComponent_256.play();
-        } catch (uiLayoutComponent_260) {}
+        } catch (uiLayoutComponent_260) { }
     }
     let uiLayoutComponent_261;
     async function uiLayoutComponent_262(uiLayoutComponent_263) {
@@ -1467,11 +1467,11 @@ const {
             }
             uiLayoutComponent_261 = new Audio(uiLayoutComponent_264.u);
             uiLayoutComponent_261.volume = uiLayoutComponent_264.v;
-            uiLayoutComponent_261.addEventListener("ended", function() {
+            uiLayoutComponent_261.addEventListener("ended", function () {
                 $(".notification-menu.mp-icon-pause").removeClass("mp-icon-pause").addClass("mp-icon-play");
             });
             await uiLayoutComponent_261.play();
-        } catch (uiLayoutComponent_265) {}
+        } catch (uiLayoutComponent_265) { }
     }
     const uiLayoutComponent_266 = {
         darknesNi: {
@@ -1840,7 +1840,7 @@ const {
                 if (uiLayoutComponent_267 && Engine.hero.d.lvl >= 25 && !uiLayoutComponent_317()) {
                     if (uiLayoutComponent_318()) {
                         uiLayoutComponent_267 = false;
-                        _g("rewards_calendar&action=open&day_no=" + uiLayoutComponent_316, function(uiLayoutComponent_319) {
+                        _g("rewards_calendar&action=open&day_no=" + uiLayoutComponent_316, function (uiLayoutComponent_319) {
                             if (uiLayoutComponent_319?.item && uiLayoutComponent_319?.item_tpl && uiLayoutComponent_319?.rewards_calendar && uiLayoutComponent_319?.message?.[0]?.id == 4002001) {
                                 uiLayoutComponent_320();
                                 closeCalendar();
@@ -1850,7 +1850,7 @@ const {
                             closeCalendar();
                         });
                     } else {
-                        message("Brak miejsca, by odebraÄ‡ nagrodÄ™.");
+                        message("Brak miejsca, by odebrać nagrodę.");
                     }
                 }
                 if (uiLayoutComponent_289.rewards_calendar && uiLayoutComponent_289.rewards_calendar.days) {
@@ -1892,7 +1892,7 @@ const {
             }
             if (uiLayoutComponent_289.message && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[27].id] && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[27].id].other.limit) {
                 if (uiLayoutComponent_289.message && uiLayoutComponent_289.message[0] && uiLayoutComponent_289.message[0].id == 1801001) {
-                    _g("settings&action=update&id=34&v=0", function(uiLayoutComponent_329) {
+                    _g("settings&action=update&id=34&v=0", function (uiLayoutComponent_329) {
                         if (uiLayoutComponent_329.settings) {
                             uiLayoutComponent_330(false);
                         }
@@ -1963,7 +1963,7 @@ const {
                 }
                 if (uiLayoutComponent_289?.loot && uiLayoutComponent_289?.item && !uiLayoutComponent_289?.f) {
                     const uiLayoutComponent_347 = Object.values(uiLayoutComponent_289.item);
-                    const uiLayoutComponent_348 = ["DuÅ¼a torba z narzędziami", "Drżący kufer", "Zdradliwa skrzynia", "Rozłupana ruda menitu", "Świątynna skrzynia", "Rozłupana ruda serafitu", "Zakopana skrzynia"];
+                    const uiLayoutComponent_348 = ["Duża torba z narzędziami", "Drżący kufer", "Zdradliwa skrzynia", "Rozłupana ruda menitu", "Świątynna skrzynia", "Rozłupana ruda serafitu", "Zakopana skrzynia"];
                     const uiLayoutComponent_349 = uiLayoutComponent_347.filter(uiLayoutComponent_350 => uiLayoutComponent_350.loc === "l" && !uiLayoutComponent_348.includes(uiLayoutComponent_350.name));
                     if (uiLayoutComponent_349.length === 1) {
                         const uiLayoutComponent_351 = uiLayoutComponent_349[0];
@@ -2071,7 +2071,7 @@ const {
     let uiLayoutComponent_384 = uiLayoutComponent_383 ? JSON.parse(uiLayoutComponent_383) : null;
     let uiLayoutComponent_385 = false;
     globalThis.MargoPlusAPI = {};
-    globalThis.MargoPlusAPI.sendBackup = async function() {
+    globalThis.MargoPlusAPI.sendBackup = async function () {
         let uiLayoutComponent_386 = await Engine.crossStorage.get(ADDON_AUTH_KEY_STRING);
         let uiLayoutComponent_387 = JSON.parse(uiLayoutComponent_386);
         const uiLayoutComponent_388 = {
@@ -2086,7 +2086,7 @@ const {
             uiLayoutComponent_385 = false;
         }
     };
-    globalThis.MargoPlusAPI.loadBackup = async function() {
+    globalThis.MargoPlusAPI.loadBackup = async function () {
         message("Backup disabled.");
         uiLayoutComponent_385 = false;
     };
@@ -2118,8 +2118,8 @@ const {
     const uiLayoutComponent_398 = {
         "0": "Walka z graczem",
         "1": "Tura w walce",
-        "2": "Wyszukanie walki na otchÅ‚ani",
-        "3": "NieaktywnoÅ›Ä‡ postaci",
+        "2": "Wyszukanie walki na otchłani",
+        "3": "Nieaktywność postaci",
         "4": "Zagadka",
         "5": "Wiadomość prywatna",
         "6": "Twoja nazwa na czacie",
@@ -2358,7 +2358,7 @@ const {
     uiLayoutComponent_272();
     isLocalMessage();
     $("html").addClass("mp-theme-" + ADDON_STORAGE_REFERENCE.addonTheme);
-        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
+    if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
         const uiLayoutComponent_423 = ["chash", "hs3", "mchar_id", "user_id"];
         const uiLayoutComponent_424 = ".margonem.pl";
         const uiLayoutComponent_425 = ["/", ""];
@@ -2407,7 +2407,7 @@ const {
         }
     });
     let uiLayoutComponent_438;
-    let uiLayoutComponent_439 = ["Polana ekwipunku", "Mapa testerÃ³w"];
+    let uiLayoutComponent_439 = ["Polana ekwipunku", "Mapa testerów"];
     const uiLayoutComponent_440 = ["Barbatos Smoczy Strażnik", "Tanroth"];
     const uiLayoutComponent_441 = ["Zabójczy Królik", "Renegat Baulus"];
     let uiLayoutComponent_442 = {};
@@ -2426,7 +2426,7 @@ const {
             engineHeroXY();
             return;
         }
-                if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
+        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             const uiLayoutComponent_449 = ["chash", "hs3", "mchar_id", "user_id"];
             const uiLayoutComponent_450 = ".margonem.pl";
             const uiLayoutComponent_451 = ["/", ""];
@@ -2734,7 +2734,7 @@ const {
         }
     });
     waitForAPIAndAttachCallback(Engine.apiData.REMOVE_NPC, domInteractionNode_508 => {
-                if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
+        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             const domInteractionNode_509 = ["chash", "hs3", "mchar_id", "user_id"];
             const domInteractionNode_510 = ".margonem.pl";
             const domInteractionNode_511 = ["/", ""];
@@ -2779,39 +2779,39 @@ const {
         const domInteractionNode_525 = createUserTip(domInteractionNode_524, "", ADMIN_IDENTIFIERS_MAP, CUSTOM_FLAIR_TOOLTIPS);
         const domInteractionNode_526 = domInteractionNode_524.d?.clan?.name ? domInteractionNode_524.d?.clan?.name : "Brak klanu";
         const domInteractionNode_527 = domInteractionNode_524.d.id;
-        const domInteractionNode_528 = $("<div class=\"mp-list-list-row\" id=\"mp-spotters-row\" mp-spotters-id=\"" + domInteractionNode_527 + "\">\n                <div class=\"mp-list-party-add do-action-cursor\">\n                    +\n                </div>\n                <div class=\"mp-list-info-case\">\n                    <div data-relation=\"" + domInteractionNode_524.d.relation + "\" class=\"mp-list-nick do-action-cursor\" data-spotters-id=\"" + domInteractionNode_527 + "\" id=\"mp-member\">\n                    \n                        " + domInteractionNode_524.d.nick + "\n                    </div>\n                    <div class=\"mp-list-clan\">\n                        " + domInteractionNode_526 + (domInteractionNode_524.d.guest ? " - Zastępca" : "") + "\n                    </div>\n                </div>\n                <div class=\"mp-list-player-status\">\n                    <div spotters-afk-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-battle-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-zzz-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-protected-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-angry-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-tp-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-logoff-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-kiss-id=\"" + domInteractionNode_527 + "\"></div>\n                </div>\n                <div class=\"mp-list-player-data\"> \n                    <div data-relation=\"" + domInteractionNode_524.d.relation + "\" class=\"mp-list-level\">\n                        " + domInteractionNode_524.d.lvl + domInteractionNode_524.d.prof + "\n                    </div>\n                    <div class=\"mp-list-coords\">\n                        (" + domInteractionNode_524.d.x + ", " + domInteractionNode_524.d.y + ")\n                    </div>\n                </div>\n            </div>").appendTo(".mp-spotters-members").contextmenu(function(domInteractionNode_529) {
+        const domInteractionNode_528 = $("<div class=\"mp-list-list-row\" id=\"mp-spotters-row\" mp-spotters-id=\"" + domInteractionNode_527 + "\">\n                <div class=\"mp-list-party-add do-action-cursor\">\n                    +\n                </div>\n                <div class=\"mp-list-info-case\">\n                    <div data-relation=\"" + domInteractionNode_524.d.relation + "\" class=\"mp-list-nick do-action-cursor\" data-spotters-id=\"" + domInteractionNode_527 + "\" id=\"mp-member\">\n                    \n                        " + domInteractionNode_524.d.nick + "\n                    </div>\n                    <div class=\"mp-list-clan\">\n                        " + domInteractionNode_526 + (domInteractionNode_524.d.guest ? " - Zastępca" : "") + "\n                    </div>\n                </div>\n                <div class=\"mp-list-player-status\">\n                    <div spotters-afk-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-battle-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-zzz-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-protected-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-angry-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-tp-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-logoff-id=\"" + domInteractionNode_527 + "\"></div>\n                    <div spotters-kiss-id=\"" + domInteractionNode_527 + "\"></div>\n                </div>\n                <div class=\"mp-list-player-data\"> \n                    <div data-relation=\"" + domInteractionNode_524.d.relation + "\" class=\"mp-list-level\">\n                        " + domInteractionNode_524.d.lvl + domInteractionNode_524.d.prof + "\n                    </div>\n                    <div class=\"mp-list-coords\">\n                        (" + domInteractionNode_524.d.x + ", " + domInteractionNode_524.d.y + ")\n                    </div>\n                </div>\n            </div>").appendTo(".mp-spotters-members").contextmenu(function (domInteractionNode_529) {
             const domInteractionNode_530 = domInteractionNode_524.d.id;
             const domInteractionNode_531 = Engine.others.getById(domInteractionNode_530);
             const domInteractionNode_532 = Engine.hero;
             let domInteractionNode_533 = [];
             domInteractionNode_533.push(["Atakuj", () => {
-                Engine.hero.addAfterFollowAction(domInteractionNode_531, function() {
+                Engine.hero.addAfterFollowAction(domInteractionNode_531, function () {
                     _g("fight&a=attack&id=" + domInteractionNode_531.d.id);
                 });
             }]);
             domInteractionNode_533.push(["Napisz wiadomość", () => {
                 getEngine().chatController.getChatInputWrapper().setPrivateMessageProcedure(domInteractionNode_531.d.nick);
             }]);
-            domInteractionNode_533.push([_t("trade", null, "menu"), function() {
-                Engine.hero.addAfterFollowAction(domInteractionNode_531, function() {
+            domInteractionNode_533.push([_t("trade", null, "menu"), function () {
+                Engine.hero.addAfterFollowAction(domInteractionNode_531, function () {
                     _g("trade&a=ask&id=" + domInteractionNode_531.d.id);
                 });
             }]);
             if (domInteractionNode_532.d.lvl > 29) {
-                domInteractionNode_533.push([_t("kiss", null, "menu"), function() {
-                    Engine.hero.addAfterFollowAction(domInteractionNode_531, function() {
+                domInteractionNode_533.push([_t("kiss", null, "menu"), function () {
+                    Engine.hero.addAfterFollowAction(domInteractionNode_531, function () {
                         _g("emo&a=kiss&id=" + domInteractionNode_531.d.id);
                     });
                 }]);
             }
             if (domInteractionNode_532.d.vip) {
-                domInteractionNode_533.push([_t("crimson_bless", null, "menu"), function() {
-                    Engine.hero.addAfterFollowAction(domInteractionNode_531, function() {
+                domInteractionNode_533.push([_t("crimson_bless", null, "menu"), function () {
+                    Engine.hero.addAfterFollowAction(domInteractionNode_531, function () {
                         _g("emo&a=bless&id=" + domInteractionNode_531.d.id);
                     });
                 }]);
             }
-            domInteractionNode_533.push([_t("invite_to_friend"), function() {
+            domInteractionNode_533.push([_t("invite_to_friend"), function () {
                 _g("friends&a=finvite&nick=" + domInteractionNode_531.d.nick.trim().split(" ").join("_"));
             }]);
             domInteractionNode_533.push(["Pokaż ekwipunek", () => {
@@ -2825,12 +2825,12 @@ const {
                     world: Engine.worldConfig.getWorldName()
                 });
             }]);
-            domInteractionNode_533.push([_t("team_invite", null, "menu"), function() {
+            domInteractionNode_533.push([_t("team_invite", null, "menu"), function () {
                 _g("party&a=inv&id=" + domInteractionNode_531.d.id);
             }]);
             domInteractionNode_533.push([_t("show_profile", null, "menu"), () => showProfile(domInteractionNode_531.d.account, domInteractionNode_531.d.id)]);
             Engine.interface.showPopupMenu(domInteractionNode_533, domInteractionNode_529);
-        }).hover(function() {
+        }).hover(function () {
             var domInteractionNode_534 = Engine.others.getById(domInteractionNode_527);
             if (!domInteractionNode_534) {
                 return;
@@ -2838,7 +2838,7 @@ const {
             domInteractionNode_534.colorMark = new domInteractionNode_535(domInteractionNode_527, "#00ffcc");
             domInteractionNode_534.colorMark.init();
             Engine.targets.addArrow(false, domInteractionNode_534.d.nick, domInteractionNode_534, "Other", "navigate");
-        }, function() {
+        }, function () {
             var domInteractionNode_536 = Engine.others.getById(domInteractionNode_527);
             if (!domInteractionNode_536) {
                 return;
@@ -2858,10 +2858,10 @@ const {
         const domInteractionNode_546 = domInteractionNode_528.find("div[spotters-protected-id]");
         const domInteractionNode_547 = domInteractionNode_528.find("div[spotters-tp-id]");
         const domInteractionNode_548 = domInteractionNode_528.find("div[spotters-angry-id]");
-        domInteractionNode_541.click(function() {
+        domInteractionNode_541.click(function () {
             _g("party&a=inv&id=" + domInteractionNode_527);
         });
-        domInteractionNode_538.click(function() {
+        domInteractionNode_538.click(function () {
             getEngine().chatController.getChatInputWrapper().setPrivateMessageProcedure(domInteractionNode_524.d.nick);
         });
         let domInteractionNode_549 = domInteractionNode_524.d.x;
@@ -2920,15 +2920,15 @@ const {
         const domInteractionNode_568 = domInteractionNode_567.d.id;
         const domInteractionNode_569 = $("<div class=\"mp-list-list-row\" style=\"width: 400px;\" id=\"mp-verify-row\" mp-verify-id=\"" + domInteractionNode_568 + "\">\n                <div class=\"mp-list-info-case\">\n                    <div class=\"mp-list-nick do-action-cursor\" data-verify-id=\"" + domInteractionNode_568 + "\" id=\"mp-member\">\n                        " + domInteractionNode_567.d.nick + "\n                    </div>\n                </div>\n                <div class=\"mp-list-verify-action\">\n                </div>\n                <div class=\"mp-list-player-data\"> \n                    <div class=\"mp-list-level\">\n                        " + domInteractionNode_567.d.lvl + domInteractionNode_567.d.prof + "\n                    </div>\n                </div>\n            </div>").appendTo(".mp-verify-members");
         const domInteractionNode_570 = domInteractionNode_569.find(".mp-list-nick");
-        domInteractionNode_570.click(function() {
+        domInteractionNode_570.click(function () {
             getEngine().chatController.getChatInputWrapper().setPrivateMessageProcedure(domInteractionNode_567.d.nick);
         });
         const domInteractionNode_571 = domInteractionNode_569.find(".mp-list-verify-action");
-        $("<div class=\"mp-button do-action-cursor mp-button-orange\">ASK</div>").appendTo(domInteractionNode_571).tip("Wyślij alert i poinformuj czat lokalny").click(async function() {
+        $("<div class=\"mp-button do-action-cursor mp-button-orange\">ASK</div>").appendTo(domInteractionNode_571).tip("Wyślij alert i poinformuj czat lokalny").click(async function () {
             const domInteractionNode_572 = ADDON_STORAGE_REFERENCE.settings.addverify;
             if (domInteractionNode_572.task.length > 0) {
                 const domInteractionNode_573 = encodeURIComponent(" \"" + domInteractionNode_567.d.nick + "\" \"" + domInteractionNode_572.task.toString() + "\"");
-                _g("console&custom=.reminder" + domInteractionNode_573, async function() {
+                _g("console&custom=.reminder" + domInteractionNode_573, async function () {
                     log("Wysłano weryfikacje do: " + domInteractionNode_567.d.nick);
                     message("Gracz " + domInteractionNode_567.d.nick + " otrzymał polecenie!");
                     await waitForSeconds(2);
@@ -2941,7 +2941,7 @@ const {
                 message("Brak polecenia weryfikacji!");
             }
         });
-        $("<div class=\"mp-button do-action-cursor mp-button-green\">END</div>").appendTo(domInteractionNode_571).tip("ZakoÅ„cz weryfikacje pozytywnie").click(async function() {
+        $("<div class=\"mp-button do-action-cursor mp-button-green\">END</div>").appendTo(domInteractionNode_571).tip("Zakończ weryfikacje pozytywnie").click(async function () {
             const domInteractionNode_575 = ADDON_STORAGE_REFERENCE.settings.addverify;
             if (domInteractionNode_575.positive.length > 0) {
                 let domInteractionNode_576 = domInteractionNode_567.d.nick.split(" ").join("_");
@@ -2959,7 +2959,7 @@ const {
                 message("Brak wiadomości pozytywnego zakończenia weryfikacji");
             }
         });
-        $("<div class=\"mp-button do-action-cursor mp-button-red\">END</div>").appendTo(domInteractionNode_571).tip("Zakończ weryfikacje negatywnie").click(async function() {
+        $("<div class=\"mp-button do-action-cursor mp-button-red\">END</div>").appendTo(domInteractionNode_571).tip("Zakończ weryfikacje negatywnie").click(async function () {
             const domInteractionNode_579 = ADDON_STORAGE_REFERENCE.settings.addverify;
             if (domInteractionNode_579.negative.length > 0) {
                 let domInteractionNode_580 = domInteractionNode_567.d.nick.split(" ").join("_");
@@ -2967,14 +2967,14 @@ const {
                     c: domInteractionNode_579.negative
                 };
                 _g("chat&channel=personal&receiver=" + domInteractionNode_580, false, domInteractionNode_581);
-                log("ZakoÅ„czono weryfikacje negatywnie: " + domInteractionNode_567.d.nick);
+                log("Zakończono weryfikacje negatywnie: " + domInteractionNode_567.d.nick);
                 await waitForSeconds(1);
                 const domInteractionNode_582 = {
                     c: "Zakończono weryfikację Gracza: " + domInteractionNode_567.d.nick
                 };
                 _g("chat&channel=local", false, domInteractionNode_582);
             } else {
-                message("Brak wiadomoÅ›ci negatywnego zakoÅ„czenia weryfikacji");
+                message("Brak wiadomości negatywnego zakończenia weryfikacji");
             }
         });
         let domInteractionNode_583 = setInterval(() => {
@@ -2986,7 +2986,7 @@ const {
         }, 500);
     }
     waitForAPIAndAttachCallback(Engine.apiData.NEW_OTHER, domInteractionNode_585 => {
-            if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
+        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             const domInteractionNode_586 = ["chash", "hs3", "mchar_id", "user_id"];
             const domInteractionNode_587 = ".margonem.pl";
             const domInteractionNode_588 = ["/", ""];
@@ -3010,7 +3010,7 @@ const {
         saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         if (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[27].id] && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[27].id].other.limit) {
             if ([1, 3, 6, 8].indexOf(domInteractionNode_585.relation) >= 0) {
-                _g("settings&action=update&id=34&v=0", function(domInteractionNode_591) {
+                _g("settings&action=update&id=34&v=0", function (domInteractionNode_591) {
                     if (domInteractionNode_591.settings) {
                         uiLayoutComponent_330(false);
                     }
@@ -3227,7 +3227,7 @@ const {
     }
     if (typeof ADDON_STORAGE_REFERENCE.settings.addverify === "undefined") {
         ADDON_STORAGE_REFERENCE.settings.addverify = {
-            task: "Rozpoczynam weryfikację! Zakaz odświeżania gry! Proszę o dostarczenie mi w wiadomoÅ›ci prywatnej za pośrednictwem hostingu IMGUR.COM nieedytowanego screena peÅ‚nego ekranu wraz z tym powiadomieniem!",
+            task: "Rozpoczynam weryfikację! Zakaz odświeżania gry! Proszę o dostarczenie mi w wiadomości prywatnej za pośrednictwem hostingu IMGUR.COM nieedytowanego screena pełnego ekranu wraz z tym powiadomieniem!",
             positive: "Weryfikacja zakończona pozytywnie.",
             negative: "Weryfikacja zakończona negatywnie."
         };
@@ -3542,7 +3542,7 @@ const {
     if (typeof ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221] === "undefined") {
         ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221] = {
             discord: {
-                text: "{role} CzeÅ›Ä‡! ChodÅº na {npc} - {world}!",
+                text: "{role} Cześć! Chodź na {npc} - {world}!",
                 url: "",
                 options: {
                     everyone: true,
@@ -3678,7 +3678,7 @@ const {
         },
         clan: {
             e: true,
-            list: ["Zobaczcie co zdobyÅ‚em! {item} Fajne co!?"]
+            list: ["Zobaczcie co zdobyłem! {item} Fajne co!?"]
         },
         alert: {
             e: true,
@@ -4196,7 +4196,7 @@ const {
         elite: {},
         ore: {}
     };
-    domInteractionNode_629.elite.nick = "Szkielet WÅ‚adcy Å»ywiołów";
+    domInteractionNode_629.elite.nick = "Szkielet Władcy Żywiołów";
     domInteractionNode_629.elite.id = 339597;
     domInteractionNode_629.elite.lvl = 114;
     domInteractionNode_629.elite.prof = "m";
@@ -4272,7 +4272,7 @@ const {
                 }
             },
             ore: {
-                nick: "BÅ‚Ä™kitne zÅ‚oÅ¼e",
+                nick: "Błękitne złoże",
                 icon: "https://micc.garmory-cdn.cloud/obrazki/npc/obj/interakcja_02.gif",
                 stats: {
                     open: 0,
@@ -4488,7 +4488,7 @@ const {
                 },
                 puncture: {
                     e: false,
-                    m: "Koleżka ma przeszywajÄ…ce od boga!",
+                    m: "Koleżka ma przeszywające od boga!",
                     c: "#dc3545"
                 },
                 frenzy: {
@@ -4508,7 +4508,7 @@ const {
                 },
                 glare: {
                     e: true,
-                    m: "Uważaj teraz! OÅ›lepił Cie!",
+                    m: "Uważaj teraz! Oślepił Cie!",
                     c: "#dc3545"
                 },
                 critred: {
@@ -4535,7 +4535,7 @@ const {
             otherbon: {
                 distract: {
                     e: false,
-                    m: "Wytrącił mnie z rÃ³wnowagi!",
+                    m: "Wytrącił mnie z równowagi!",
                     c: "#00ffaa"
                 },
                 parry: {
@@ -4550,12 +4550,12 @@ const {
                 },
                 blok: {
                     e: false,
-                    m: "Skubany, więcej bloku niÅ¼ IQ!",
+                    m: "Skubany, więcej bloku niż IQ!",
                     c: "#00ffaa"
                 },
                 crit: {
                     e: false,
-                    m: "Mini bombe mi daÅ‚!",
+                    m: "Mini bombe mi dał!",
                     c: "#00ffaa"
                 },
                 acdmg_destroyed: {
@@ -4640,8 +4640,8 @@ const {
             all: 0,
             success: 0,
             essence: {
-                "Okruchy przeciÄ™tnoÅ›ci": 0,
-                "Ekstrakt unikalnoÅ›ci": 0,
+                "Okruchy przeciętności": 0,
+                "Ekstrakt unikalności": 0,
                 "Pryzmat heroicznej magii": 0
             },
             items: {}
@@ -4927,7 +4927,7 @@ const {
     const domInteractionNode_655 = "https://margoplus.pl/img/herozone.png";
     const domInteractionNode_656 = domInteractionNode_654.image?.length ? domInteractionNode_654.image : domInteractionNode_655;
     domInteractionNode_652.src = domInteractionNode_656;
-    domInteractionNode_652.onerror = function() {
+    domInteractionNode_652.onerror = function () {
         domInteractionNode_652.src = domInteractionNode_655;
     };
     class domInteractionNode_657 {
@@ -4968,7 +4968,7 @@ const {
     }
     const domInteractionNode_600 = domInteractionNode_674 => Object.values(domInteractionNode_674).filter(domInteractionNode_675 => domInteractionNode_675.d.wt >= 80 && domInteractionNode_675.d.wt <= 89).map(domInteractionNode_676 => new domInteractionNode_657(domInteractionNode_676));
     const domInteractionNode_601 = domInteractionNode_677 => Object.values(domInteractionNode_677).map(domInteractionNode_678 => new domInteractionNode_679(domInteractionNode_678));
-    const domInteractionNode_679 = function(domInteractionNode_680) {
+    const domInteractionNode_679 = function (domInteractionNode_680) {
         if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[54].id]) {
             return;
         }
@@ -5059,7 +5059,7 @@ const {
         };
         this.getOrder = () => domInteractionNode_680.ry + 3999;
     };
-    createWindowResize("SkrÃ³ty", "addwidget", ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(async domInteractionNode_713 => {
+    createWindowResize("Skróty", "addwidget", ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(async domInteractionNode_713 => {
         const domInteractionNode_714 = $(domInteractionNode_713).find(".mp-window-header");
         domInteractionNode_714.hide();
         const domInteractionNode_715 = $(domInteractionNode_713).find("#addwidget");
@@ -5082,27 +5082,27 @@ const {
                 domInteractionNode_718.hide();
             }
         }
-        $(domInteractionNode_713).on("mouseenter", function() {
+        $(domInteractionNode_713).on("mouseenter", function () {
             domInteractionNode_720 = true;
             domInteractionNode_722();
         });
-        $(domInteractionNode_713).on("mouseleave", function() {
+        $(domInteractionNode_713).on("mouseleave", function () {
             domInteractionNode_720 = false;
             domInteractionNode_722();
         });
-        domInteractionNode_718.on("mouseenter", function() {
+        domInteractionNode_718.on("mouseenter", function () {
             domInteractionNode_721 = true;
             domInteractionNode_722();
         });
-        domInteractionNode_718.on("mouseleave", function() {
+        domInteractionNode_718.on("mouseleave", function () {
             domInteractionNode_721 = false;
             domInteractionNode_722();
         });
-        domInteractionNode_718.on("mousedown", function() {
+        domInteractionNode_718.on("mousedown", function () {
             domInteractionNode_719 = true;
             domInteractionNode_722();
         });
-        $(document).on("mouseup", function() {
+        $(document).on("mouseup", function () {
             domInteractionNode_719 = false;
             domInteractionNode_722();
         });
@@ -5130,7 +5130,7 @@ const {
         domInteractionNode_732.hide();
         const domInteractionNode_733 = domInteractionNode_732.find(".mp-mordor-currency");
         const domInteractionNode_734 = domInteractionNode_732.find(".mp-mordor-hours");
-        domInteractionNode_733.tip("Ilość nublarÃ³w");
+        domInteractionNode_733.tip("Ilość nublarów");
         domInteractionNode_734.tip("Ilość godzin kar");
         async function domInteractionNode_735() {
             const domInteractionNode_736 = "https://mordor.ct8.pl/getHours.php?id=" + uiLayoutComponent_164;
@@ -5162,15 +5162,15 @@ const {
         }
         domInteractionNode_741();
         domInteractionNode_735();
-        domInteractionNode_732.click(function() {
+        domInteractionNode_732.click(function () {
             let domInteractionNode_747 = [
                 ["Otwórz historie", () => {
                     window.open("https://mordor.ct8.pl/?show=history&id=" + uiLayoutComponent_164, "_blank");
                 }, {
-                    button: {
-                        cls: "mp-popup-menu-item"
-                    }
-                }],
+                        button: {
+                            cls: "mp-popup-menu-item"
+                        }
+                    }],
                 ["Odśwież", async () => {
                     domInteractionNode_733.html(0);
                     domInteractionNode_734.html(0);
@@ -5178,10 +5178,10 @@ const {
                     domInteractionNode_741();
                     domInteractionNode_735();
                 }, {
-                    button: {
-                        cls: "mp-popup-menu-item"
-                    }
-                }]
+                        button: {
+                            cls: "mp-popup-menu-item"
+                        }
+                    }]
             ];
             Engine.interface.showPopupMenu(domInteractionNode_747, event);
         });
@@ -5196,20 +5196,20 @@ const {
             const domInteractionNode_750 = $(domInteractionNode_749).find("#addverify_settings");
             const domInteractionNode_751 = ADDON_STORAGE_REFERENCE.settings.addverify;
             const domInteractionNode_752 = {
-                task: "Rozpoczynam weryfikację! Zakaz odświeżania gry! Proszę o dostarczenie mi w wiadomoÅ›ci prywatnej za pośrednictwem hostingu IMGUR.COM nieedytowanego screena peÅ‚nego ekranu wraz z tym powiadomieniem!",
+                task: "Rozpoczynam weryfikację! Zakaz odświeżania gry! Proszę o dostarczenie mi w wiadomości prywatnej za pośrednictwem hostingu IMGUR.COM nieedytowanego screena pełnego ekranu wraz z tym powiadomieniem!",
                 positive: "Weryfikacja zakończona pozytywnie.",
                 negative: "Weryfikacja zakończona negatywnie."
             };
             for (const domInteractionNode_753 in domInteractionNode_751) {
                 const domInteractionNode_754 = $("\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-title\">" + parsedAddonConfig.addverify[domInteractionNode_753] + "</div>\n                        <div>\n                            <input class=\"mp-list-input-wrapper\" style=\"width: 300px;\" placeholder=\"" + parsedAddonConfig.addverify[domInteractionNode_753] + "\" autocomplete=\"off\">\n                        </div>\n                    </div>\n                ").appendTo(domInteractionNode_750);
                 const domInteractionNode_755 = domInteractionNode_754.find(".mp-list-input-wrapper");
-                domInteractionNode_755.prop("value", domInteractionNode_751[domInteractionNode_753]).on("input", async function(domInteractionNode_756) {
+                domInteractionNode_755.prop("value", domInteractionNode_751[domInteractionNode_753]).on("input", async function (domInteractionNode_756) {
                     clearTimeout(domInteractionNode_748);
                     const domInteractionNode_757 = $(this).val();
                     if (domInteractionNode_757?.length < 1) {
-                        message("Pole nie moÅ¼e byÄ‡ puste");
+                        message("Pole nie może być puste");
                         domInteractionNode_748 = setTimeout(() => {
-                            message("Przywrócono domyślna wartoÅ›Ä‡");
+                            message("Przywrócono domyślna wartość");
                             $(this).val(domInteractionNode_752[domInteractionNode_753]);
                             domInteractionNode_751[domInteractionNode_753] = domInteractionNode_752[domInteractionNode_753];
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -5218,7 +5218,7 @@ const {
                     }
                     domInteractionNode_751[domInteractionNode_753] = $(this).val();
                     saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-                }).contextmenu(function() {
+                }).contextmenu(function () {
                     message("Przywrócono domyślna wartość");
                     $(this).val(domInteractionNode_752[domInteractionNode_753]);
                     domInteractionNode_751[domInteractionNode_753] = domInteractionNode_752[domInteractionNode_753];
@@ -5231,7 +5231,7 @@ const {
             const domInteractionNode_760 = $(domInteractionNode_758).find(".mp-window-header-left");
             const domInteractionNode_761 = createSettingsButton("Ustawienia");
             domInteractionNode_761.appendTo(domInteractionNode_760);
-            domInteractionNode_761.click(async function() {
+            domInteractionNode_761.click(async function () {
                 domInteractionNode_762();
                 const domInteractionNode_763 = "addverify_settings";
                 const domInteractionNode_764 = "#w-" + domInteractionNode_763;
@@ -5247,14 +5247,14 @@ const {
         const domInteractionNode_767 = $("#o-" + MODULE_ADDON_REGISTRY[0].id).find(".mp-menu-button");
         const domInteractionNode_768 = $("<div class=\"MargonemPlus do-action-cursor\"></div>").appendTo(domInteractionNode_767);
         domInteractionNode_768.tip(uiLayoutComponent_269 ? "Margonem Plus<br>PPM - Weryfikacja" : "Margonem Plus");
-        domInteractionNode_768.click(async function() {
+        domInteractionNode_768.click(async function () {
             const domInteractionNode_769 = MODULE_ADDON_REGISTRY[0].id;
             const domInteractionNode_770 = ADDON_STORAGE_REFERENCE.window[domInteractionNode_769].o;
             const domInteractionNode_771 = $("#w-" + domInteractionNode_769);
             domInteractionNode_771.toggle(!domInteractionNode_770);
             ADDON_STORAGE_REFERENCE.window[domInteractionNode_769].o = !domInteractionNode_770;
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-        }).contextmenu(function() {
+        }).contextmenu(function () {
             if (!uiLayoutComponent_269) {
                 return;
             }
@@ -5283,21 +5283,21 @@ const {
         domInteractionNode_779();
         const domInteractionNode_781 = $("\n                <div id=\"margonem_plus_menu\">\n                    <div class=\"mp-tabs\">\n                        <div class=\"mp-tab mp-active do-action-cursor\" data-tab=\"info\">" + parsedAddonConfig.addmenu.tabs.info + "</div>\n                        <div class=\"mp-tab do-action-cursor\" data-tab=\"addons\">" + parsedAddonConfig.addmenu.tabs.addons + " (<addons>" + (MODULE_ADDON_REGISTRY.length - 1) + "</addons>)</div>\n                        <div class=\"mp-tab do-action-cursor\" data-tab=\"alerts\">" + parsedAddonConfig.addmenu.tabs.alerts + "</div>\n                        <div class=\"mp-tab do-action-cursor\" data-tab=\"settings\">" + parsedAddonConfig.addmenu.tabs.settings + "</div>\n                        <div class=\"mp-tab do-action-cursor\" data-tab=\"users\">" + parsedAddonConfig.addmenu.tabs.users + "</div>\n                    </div>\n                    <div class=\"content-wrapper\">\n                        <div class=\"mp-tab-content mp-active\" id=\"mp-tab-info\"></div>\n                        <div class=\"mp-tab-content\" id=\"mp-tab-addons\">\n                        <div class=\"mp-addons-container\">\n                            <div class=\"mp-addons-list-wrapper\">\n                                <div class=\"mp-addon-search-div\">\n                                    <div><input type=\"text\" id=\"mp-addon-search\" class=\"do-action-cursor\" placeholder=\"Szukaj dodatku...\" autocomplete=\"off\"/></div>\n                                    <div><div id=\"mp-addon-clear\" class=\"mp-button do-action-cursor\">X</div></div>\n                                </div>\n                                \n                                <div class=\"mp-addons-list mp-scroll\" id=\"mp-addons-list\"></div>\n                                <div class=\"mp-addons-widget\">\n                                    <div id=\"addon-widget-btn\" class=\"mp-button mp-button-" + (ADDON_STORAGE_REFERENCE.window.addwidget.o ? "red" : "green") + " do-action-cursor\">" + (ADDON_STORAGE_REFERENCE.window.addwidget.o ? "" + parsedAddonConfig.addmenu.widget.hide : "" + parsedAddonConfig.addmenu.widget.show) + "</div>\n                                </div>\n                            </div>\n                            <div class=\"mp-addon-preview\" id=\"mp-addon-preview\">\n                            <div class=\"mp-addon-placeholder\">" + parsedAddonConfig.addmenu.getAddonsToSee + "</div>\n                            </div>\n                        </div>\n                        </div>\n                        <div class=\"mp-tab-content\" id=\"mp-tab-alerts\">\n                        </div>\n                        <div class=\"mp-tab-content\" id=\"mp-tab-settings\">\n                        </div>\n                        <div class=\"mp-tab-content\" id=\"mp-tab-users\">\n\n                        </div>\n                    </div>\n                </div>\n                ").appendTo("#" + MODULE_ADDON_REGISTRY[0].id);
         const domInteractionNode_782 = domInteractionNode_781.find("#mp-tab-info");
-        $("\n            \n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">Informacja</div>\n                <div class=\"mp-addon-main-box\">\n                    CzeÅ›Ä‡! <b class=\"text-gold\">Margonem+</b> to prywatny zbiór dodatkÃ³w stworzony w celu urozmaicenia oraz poprawy rozgrywki dla graczy Å›wiata <b class=\"text-gold\">Mordor</b>. Jest to druga odsÅ‚ona zestawu Essentia. Zestaw nie został udostÄ™pniony publicznie i nie ma moÅ¼liwoÅ›ci zakupu licencji w jakiejkolwiek formie. Jeśli korzystasz z zestawu, nie będąc do tego upowaÅ¼nionym, pamiÄ™taj, że robisz to na własną odpowiedzialność. Wszelkie znalezione błędy oraz propozycje nowych dodatkÃ³w lub funkcjonalnoÅ›ci, których brakuje w zestawie, a które chciałbyś w nim zobaczyÄ‡, proszę zgłaszać poprzez Discorda.\n\n                    \n                </div>\n            </div>\n            <div class=\"mp-background-section mp-addon-main-position\" style=\"height: 260px;\">\n                <div class=\"mp-addon-main-bars\">\n                    <div mp-target-url=\"https://margoplus.pl/mordor/\" mp-tip=\"Ranking Å›wiata Mordor\" class=\"mp-button do-action-cursor mp-width-bar\">Ranking Mordor</div>\n                    <div mp-target-url=\"https://margoplus.pl/upgrade/\" mp-tip=\"Ranking ulepszaczy\" class=\"mp-button do-action-cursor mp-width-bar\">Ulepszanie</div>\n                    <div mp-target-url=\"https://margoplus.pl/mp3/\" mp-tip=\"Hosting i baza dzwonków do legendary notyfikatora\" class=\"mp-button do-action-cursor mp-width-bar\">Hosting MP3</div>\n                    <div mp-target-url=\"https://mordor.ct8.pl\" mp-tip=\"Strona mordoru z walutami i karami\" class=\"mp-button do-action-cursor mp-width-bar\">Mordor.ct8.pl</div>\n                </div>\n                <div class=\"mp-addon-main-contact\">\n                    <div class=\"mp-contant-field\">\n                        <div class=\"mp-icon-discord\"></div>\n                        <div class=\"mp-contact-name\">BigHBS</div>\n                    </div>\n                    <div class=\"mp-contant-field\">\n                        <div class=\"do-action-cursor\">\n                            <a href=\"https://buycoffee.to/hbs\" target=\"_blank\" class=\"do-action-cursor\"><img src=\"https://buycoffee.to/static/img/share/share-button-primary.png\" class=\"do-action-cursor\" style=\"width: 146px; height: 38px\" alt=\"Postaw mi kawę na buycoffee.to\"></a>\n                        </div>\n                    </div>\n                    <div class=\"mp-contant-field\">\n                        <div class=\"mp-icon-margonem\"></div>\n                        <div mp-target-url=\"https://www.margonem.pl/profile/view,6586440\" mp-tip=\"Profil margonem\" class=\"mp-contact-name do-action-cursor\">Sergei Sztangov</div>\n                    </div>\n                </div>\n                <div class=\"mp-addon-main-bars2\">\n                    <div id=\"mp-global-builds\" class=\"mp-button do-action-cursor mp-width-bar2\">Globalne ustawienia zestawów</div>\n                    <div id=\"mp-global-relations\" class=\"mp-button do-action-cursor mp-width-bar2\">Globalne kolory relacji</div>\n                </div>\n            </div>\n            <div class=\"mp-background-section\">\n                <div class=\"text-red text-center\">Dodatek prywatny. Używasz na własną odpowiedzialność. </div>\n            </div>\n            ").appendTo(domInteractionNode_782);
-        $("div[mp-target-url]").each(function() {
+        $("\n            \n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">Informacja</div>\n                <div class=\"mp-addon-main-box\">\n                    Cześć! <b class=\"text-gold\">Margonem+</b> to prywatny zbiór dodatków stworzony w celu urozmaicenia oraz poprawy rozgrywki dla graczy świata <b class=\"text-gold\">Mordor</b>. Jest to druga odsłona zestawu Essentia. Zestaw nie został udostępniony publicznie i nie ma możliwości zakupu licencji w jakiejkolwiek formie. Jeśli korzystasz z zestawu, nie będąc do tego upoważnionym, pamiętaj, że robisz to na własną odpowiedzialność. Wszelkie znalezione błędy oraz propozycje nowych dodatków lub funkcjonalności, których brakuje w zestawie, a które chciałbyś w nim zobaczyć, proszę zgłaszać poprzez Discorda.\n\n                    \n                </div>\n            </div>\n            <div class=\"mp-background-section mp-addon-main-position\" style=\"height: 260px;\">\n                <div class=\"mp-addon-main-bars\">\n                    <div mp-target-url=\"https://margoplus.pl/mordor/\" mp-tip=\"Ranking świata Mordor\" class=\"mp-button do-action-cursor mp-width-bar\">Ranking Mordor</div>\n                    <div mp-target-url=\"https://margoplus.pl/upgrade/\" mp-tip=\"Ranking ulepszaczy\" class=\"mp-button do-action-cursor mp-width-bar\">Ulepszanie</div>\n                    <div mp-target-url=\"https://margoplus.pl/mp3/\" mp-tip=\"Hosting i baza dzwonków do legendary notyfikatora\" class=\"mp-button do-action-cursor mp-width-bar\">Hosting MP3</div>\n                    <div mp-target-url=\"https://mordor.ct8.pl\" mp-tip=\"Strona mordoru z walutami i karami\" class=\"mp-button do-action-cursor mp-width-bar\">Mordor.ct8.pl</div>\n                </div>\n                <div class=\"mp-addon-main-contact\">\n                    <div class=\"mp-contant-field\">\n                        <div class=\"mp-icon-discord\"></div>\n                        <div class=\"mp-contact-name\">BigHBS</div>\n                    </div>\n                    <div class=\"mp-contant-field\">\n                        <div class=\"do-action-cursor\">\n                            <a href=\"https://buycoffee.to/hbs\" target=\"_blank\" class=\"do-action-cursor\"><img src=\"https://buycoffee.to/static/img/share/share-button-primary.png\" class=\"do-action-cursor\" style=\"width: 146px; height: 38px\" alt=\"Postaw mi kawę na buycoffee.to\"></a>\n                        </div>\n                    </div>\n                    <div class=\"mp-contant-field\">\n                        <div class=\"mp-icon-margonem\"></div>\n                        <div mp-target-url=\"https://www.margonem.pl/profile/view,6586440\" mp-tip=\"Profil margonem\" class=\"mp-contact-name do-action-cursor\">Sergei Sztangov</div>\n                    </div>\n                </div>\n                <div class=\"mp-addon-main-bars2\">\n                    <div id=\"mp-global-builds\" class=\"mp-button do-action-cursor mp-width-bar2\">Globalne ustawienia zestawów</div>\n                    <div id=\"mp-global-relations\" class=\"mp-button do-action-cursor mp-width-bar2\">Globalne kolory relacji</div>\n                </div>\n            </div>\n            <div class=\"mp-background-section\">\n                <div class=\"text-red text-center\">Dodatek prywatny. Używasz na własną odpowiedzialność. </div>\n            </div>\n            ").appendTo(domInteractionNode_782);
+        $("div[mp-target-url]").each(function () {
             const domInteractionNode_783 = $(this).attr("mp-tip");
             const domInteractionNode_784 = $(this).attr("mp-target-url");
-            $(this).on("click", function() {
+            $(this).on("click", function () {
                 globalThis.open(domInteractionNode_784, "_blank");
             }).tip(domInteractionNode_783);
         });
-        $("div#mp-global-builds").click(function() {
+        $("div#mp-global-builds").click(function () {
             domInteractionNode_785();
         });
-        $("div#mp-global-relations").click(function() {
+        $("div#mp-global-relations").click(function () {
             domInteractionNode_786();
         });
-        domInteractionNode_781.find("#addon-widget-btn").click(async function() {
+        domInteractionNode_781.find("#addon-widget-btn").click(async function () {
             const domInteractionNode_787 = $(this);
             const domInteractionNode_788 = "addwidget";
             const domInteractionNode_789 = ADDON_STORAGE_REFERENCE.window[domInteractionNode_788];
@@ -5364,7 +5364,7 @@ const {
                     domInteractionNode_822.classList.add("mp-active");
                     const domInteractionNode_827 = ADDON_STORAGE_REFERENCE.addons[domInteractionNode_820.id] === true;
                     domInteractionNode_798.innerHTML = "\n                            <div class=\"mp-addon-preview-content \" style=\"animation: fadeIn 0.3s ease;\">\n                                <div class=\"mp-addon-preview-name\">" + domInteractionNode_820.name + "</div>\n                                <div class=\"mp-addon-preview-description\">" + domInteractionNode_820.description + "</div>\n                                <div class=\"mp-addon-preview-tags\">Tag: " + domInteractionNode_820.name.toLowerCase() + ", " + domInteractionNode_820.tags.toLowerCase() + "</div>\n                                <div class=\"mp-addon-preview-credits\">" + (domInteractionNode_820.credits ? "Credits: " + domInteractionNode_820.credits : "") + "</div>\n                            </div>\n                            <div class=\"mp-addon-preview-install\">\n                                <div>\n                                    <div id=\"mp-install-btn\" class=\"mp-button do-action-cursor " + (domInteractionNode_827 ? "mp-button-red" : "mp-button-green") + "\" style=\"width: 120px;\">\n                                        " + (domInteractionNode_827 ? parsedAddonConfig.addmenu.optOff : parsedAddonConfig.addmenu.optOn) + "\n                                    </div>\n                                </div>\n                                <div>\n                                    <div id=\"mp-settings-btn\" class=\"mp-button do-action-cursor " + (domInteractionNode_820?.widget && domInteractionNode_827 ? "" : "mp-disable") + "\" style=\"width: 120px;\">\n                                        Ustawienia\n                                    </div>\n                                </div>\n                                <div>\n                                    <div widget-id=\"" + domInteractionNode_820.id + "\" id=\"mp-widget-btn\" class=\"mp-button do-action-cursor " + (domInteractionNode_820?.widget && domInteractionNode_827 ? "" + (ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].w ? "mp-button-red" : "mp-button-green") : "mp-disable") + "\" style=\"width: 120px;\">\n                                        " + (domInteractionNode_820?.widget && ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].w ? parsedAddonConfig.addmenu.widget.del : parsedAddonConfig.addmenu.widget.add) + "\n                                    </div>\n                                </div>\n                            </div>\n                        ";
-                    $(".mp-addon-preview-tags").tip("Te słowa uÅ‚atwiÄ… Ci wyszukiwanie dodatku");
+                    $(".mp-addon-preview-tags").tip("Te słowa ułatwią Ci wyszukiwanie dodatku");
                     const domInteractionNode_828 = document.getElementById("mp-install-btn");
                     $(domInteractionNode_828).tip((ADDON_STORAGE_REFERENCE.addons[domInteractionNode_820.id] ? parsedAddonConfig.addmenu.optOff : parsedAddonConfig.addmenu.optOn) + " dodatek");
                     domInteractionNode_828.addEventListener("click", async () => {
@@ -5457,7 +5457,7 @@ const {
                         $(domInteractionNode_835).addClass("disable");
                     }
                     if (domInteractionNode_820?.widget) {
-                        $(domInteractionNode_835).tip("Kliknij LPM, aby " + (ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].w ? "wyłączyć" : "wÅ‚Ä…czyÄ‡") + " widget<br><br>Kliknij PPM, aby ustawiÄ‡ skrót klawiszowy <br><br>Klawisz: " + ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].k);
+                        $(domInteractionNode_835).tip("Kliknij LPM, aby " + (ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].w ? "wyłączyć" : "włączyć") + " widget<br><br>Kliknij PPM, aby ustawić skrót klawiszowy <br><br>Klawisz: " + ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].k);
                     }
                     domInteractionNode_835.addEventListener("click", async () => {
                         const domInteractionNode_836 = !ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].w;
@@ -5476,7 +5476,7 @@ const {
                         if (domInteractionNode_838) {
                             ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].k = domInteractionNode_838;
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-                            $(domInteractionNode_835).tip("Kliknij LPM, aby " + (ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].w ? "wyÅ‚Ä…czyÄ‡" : "wÅ‚Ä…czyÄ‡") + " widget<br><br>Kliknij PPM, aby ustawić skrÃ³t klawiszowy <br><br>Klawisz: " + ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].k);
+                            $(domInteractionNode_835).tip("Kliknij LPM, aby " + (ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].w ? "wyłączyć" : "włączyć") + " widget<br><br>Kliknij PPM, aby ustawić skrót klawiszowy <br><br>Klawisz: " + ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].k);
                             $("div[mp-widget-ui=\"" + domInteractionNode_820.id + "\"]").tip("" + domInteractionNode_820.name + (ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].k !== "Brak" ? "<br>Klawisz: " + ADDON_STORAGE_REFERENCE.hotkeys[domInteractionNode_820.id].k : ""));
                         }
                     });
@@ -5505,13 +5505,13 @@ const {
             const domInteractionNode_845 = $("<div class=\"mp-control-settings\">").appendTo(domInteractionNode_841);
             const domInteractionNode_846 = $("<div class=\"mp-width-nx\"></div>").appendTo(domInteractionNode_845);
             const domInteractionNode_847 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(domInteractionNode_846);
-            $("<input type=\"checkbox\" id=\"mp-notification-" + domInteractionNode_843 + "-checkbox\" name=\"" + domInteractionNode_843 + "-mn-name\">").prop("checked", ADDON_STORAGE_REFERENCE.notification[domInteractionNode_843].e).bind("change", async function(domInteractionNode_848) {
+            $("<input type=\"checkbox\" id=\"mp-notification-" + domInteractionNode_843 + "-checkbox\" name=\"" + domInteractionNode_843 + "-mn-name\">").prop("checked", ADDON_STORAGE_REFERENCE.notification[domInteractionNode_843].e).bind("change", async function (domInteractionNode_848) {
                 ADDON_STORAGE_REFERENCE.notification[domInteractionNode_843].e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(domInteractionNode_847);
             $("<label for=\"mp-notification-" + domInteractionNode_843 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + uiLayoutComponent_398[domInteractionNode_843] + "</label>").appendTo(domInteractionNode_847);
             const domInteractionNode_849 = createButtonPlay("notification-menu");
-            domInteractionNode_849.click(function() {
+            domInteractionNode_849.click(function () {
                 const domInteractionNode_850 = $(this).find(".notification-menu");
                 if (domInteractionNode_850.hasClass("mp-icon-pause")) {
                     if (uiLayoutComponent_261) {
@@ -5520,7 +5520,7 @@ const {
                     }
                     domInteractionNode_850.removeClass("mp-icon-pause").addClass("mp-icon-play");
                 } else {
-                    $(".notification-menu").each(function(domInteractionNode_851, domInteractionNode_852) {
+                    $(".notification-menu").each(function (domInteractionNode_851, domInteractionNode_852) {
                         if ($(domInteractionNode_852).hasClass("mp-icon-pause")) {
                             $(domInteractionNode_852).removeClass("mp-icon-pause").addClass("mp-icon-play");
                         }
@@ -5533,7 +5533,7 @@ const {
             const domInteractionNode_853 = $("<div class=\"settings-section\"></div>").appendTo(domInteractionNode_845);
             const domInteractionNode_854 = $("<div class=\"mp-slider-wrapper dark\"></div>").appendTo(domInteractionNode_853);
             const domInteractionNode_855 = $("<div class=\"mp-slider dark do-action-cursor\"></div>").appendTo(domInteractionNode_854);
-            const domInteractionNode_856 = $("<input type=\"range\" class=\"mp-slider__input do-action-cursor\" min=\"0\" max=\"1\" step=\"0.01\">").prop("value", ADDON_STORAGE_REFERENCE.notification[domInteractionNode_843].v).on("input", async function() {
+            const domInteractionNode_856 = $("<input type=\"range\" class=\"mp-slider__input do-action-cursor\" min=\"0\" max=\"1\" step=\"0.01\">").prop("value", ADDON_STORAGE_REFERENCE.notification[domInteractionNode_843].v).on("input", async function () {
                 const domInteractionNode_857 = $(this).prop("value");
                 ADDON_STORAGE_REFERENCE.notification[domInteractionNode_843].v = domInteractionNode_857;
                 if (uiLayoutComponent_261) {
@@ -5549,14 +5549,14 @@ const {
             domInteractionNode_856.trigger("input");
             $("<div class=\"mp-slider__state do-action-cursor\"></div>").appendTo(domInteractionNode_855);
             const domInteractionNode_859 = createButton("Zmień adres URL");
-            domInteractionNode_859.click(async function() {
+            domInteractionNode_859.click(async function () {
                 const domInteractionNode_860 = await editUrlWindow(uiLayoutComponent_398[domInteractionNode_843], ADDON_STORAGE_REFERENCE.notification[domInteractionNode_843].u);
                 if (domInteractionNode_860) {
                     if (domInteractionNode_860 == "default") {
                         ADDON_STORAGE_REFERENCE.notification[domInteractionNode_843].u = "" + uiLayoutComponent_396 + uiLayoutComponent_397[domInteractionNode_843];
                     } else if (domInteractionNode_860.length > 0 && domInteractionNode_860.includes(".mp3") && domInteractionNode_860.includes("https")) {
                         ADDON_STORAGE_REFERENCE.notification[domInteractionNode_843].u = domInteractionNode_860;
-                        message("Adres zostaÅ‚ zmieniony!");
+                        message("Adres został zmieniony!");
                     } else {
                         message("Podany adres nie jest .mp3");
                     }
@@ -5567,27 +5567,27 @@ const {
         });
         const domInteractionNode_861 = ".mp-alert {\n    color: #ccc;\n    border: 1px solid #dc3545; \n    box-shadow: inset 0 0 2px #dc354561;\n    background-color: #1e1e1ebe;\n    font-size: 15px;\n    text-align: center;\n    opacity: 1;\n};";
         const domInteractionNode_862 = domInteractionNode_781.find("#mp-tab-settings");
-        const domInteractionNode_863 = $("<div class=\"mp-settings-content2\">\n                <div class=\"left\">\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">WyÅ›wietlanie alertów</div>\n                        <div class=\"mp-margin-5px mp-title\">Pozycja wyświetlania na ekranie:</div>\n                        <div id=\"mp-select-position-alerts\">\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"tl\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"tc\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"tr\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"ml\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"mc\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"mr\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"bl\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"bc\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"br\"></div>\n                        </div>\n                        <div class=\"mp-control\">\n                            <div id=\"mp-alerts-checkbox-1\">\n                                <div class=\"checkbox-custom c-checkbox\">\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-control\">\n                            <div id=\"mp-alerts-checkbox-2\">\n                                <div class=\"checkbox-custom c-checkbox\">\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-control-left mp-margin-5px\">Czas wyświetlania alertu<time_input></time_input>sek.</div>\n                        <div class=\"mp-control-left mp-margin-5px\">OdstÄ™p alertu od krawÄ™dzi X:<padding_input></padding_input>px Y:<padding_input2></padding_input2>px</div>\n                        <div id=\"mp-test-alerts\" class=\"mp-button do-action-cursor mp-width120px mp-margin-center\">Przetestuj alert</div>\n                        <div class=\"mp-margin-5px mp-title\">WÅ‚asny CSS (.mp-alert)</div>\n                        <textarea class=\"mp-textarea-css\" placeholder=\"" + domInteractionNode_861 + "\" spellcheck=\"false\"></textarea>\n                    </div>\n                </div>\n                <div class=\"right\">\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Motyw Margonem</div>\n                        <div class=\"mp-theme-list mp-scroll\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Motyw Dodatku</div>\n                        <div class=\"mp-theme-addon-list\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Powiadomienia o NPC z dodatku</div>\n                        <div class=\"mp-detector-list\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Dodatkowe ustawienia</div>\n                        <div class=\"mp-others-list\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Globalne ustawienia</div>\n                        <div class=\"mp-backup-list\">\n                            <div id=\"mp-save-backup\" class=\"mp-button do-action-cursor\">Wyślij na serwer</div>\n                            <div id=\"mp-restart\" class=\"mp-button do-action-cursor\" style=\"width: 20px !important;\">R</div>\n                            <div id=\"mp-load-backup\" class=\"mp-button do-action-cursor\">Wczytaj z serwera</div>\n                        </div>\n                    </div>\n                </div>\n            </div>").appendTo(domInteractionNode_862);
+        const domInteractionNode_863 = $("<div class=\"mp-settings-content2\">\n                <div class=\"left\">\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Wyświetlanie alertów</div>\n                        <div class=\"mp-margin-5px mp-title\">Pozycja wyświetlania na ekranie:</div>\n                        <div id=\"mp-select-position-alerts\">\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"tl\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"tc\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"tr\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"ml\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"mc\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"mr\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"bl\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"bc\"></div>\n                            <div class=\"mp-box-position-alerts do-action-cursor\" data-pos=\"br\"></div>\n                        </div>\n                        <div class=\"mp-control\">\n                            <div id=\"mp-alerts-checkbox-1\">\n                                <div class=\"checkbox-custom c-checkbox\">\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-control\">\n                            <div id=\"mp-alerts-checkbox-2\">\n                                <div class=\"checkbox-custom c-checkbox\">\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-control-left mp-margin-5px\">Czas wyświetlania alertu<time_input></time_input>sek.</div>\n                        <div class=\"mp-control-left mp-margin-5px\">Odstęp alertu od krawędzi X:<padding_input></padding_input>px Y:<padding_input2></padding_input2>px</div>\n                        <div id=\"mp-test-alerts\" class=\"mp-button do-action-cursor mp-width120px mp-margin-center\">Przetestuj alert</div>\n                        <div class=\"mp-margin-5px mp-title\">Własny CSS (.mp-alert)</div>\n                        <textarea class=\"mp-textarea-css\" placeholder=\"" + domInteractionNode_861 + "\" spellcheck=\"false\"></textarea>\n                    </div>\n                </div>\n                <div class=\"right\">\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Motyw Margonem</div>\n                        <div class=\"mp-theme-list mp-scroll\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Motyw Dodatku</div>\n                        <div class=\"mp-theme-addon-list\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Powiadomienia o NPC z dodatku</div>\n                        <div class=\"mp-detector-list\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Dodatkowe ustawienia</div>\n                        <div class=\"mp-others-list\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-margin-3px mp-title\">Globalne ustawienia</div>\n                        <div class=\"mp-backup-list\">\n                            <div id=\"mp-save-backup\" class=\"mp-button do-action-cursor\">Wyślij na serwer</div>\n                            <div id=\"mp-restart\" class=\"mp-button do-action-cursor\" style=\"width: 20px !important;\">R</div>\n                            <div id=\"mp-load-backup\" class=\"mp-button do-action-cursor\">Wczytaj z serwera</div>\n                        </div>\n                    </div>\n                </div>\n            </div>").appendTo(domInteractionNode_862);
         const domInteractionNode_864 = domInteractionNode_863.find("#mp-restart");
-        domInteractionNode_864.click(async function() {
+        domInteractionNode_864.click(async function () {
             const domInteractionNode_865 = await askWindow("Czy na pewno chcesz przywrócić ustawienia do domyślnych?");
             if (domInteractionNode_865) {
                 await Engine.crossStorage.set(ADDON_AUTH_KEY_STRING, JSON.stringify(uiLayoutComponent_422));
                 globalThis.location.reload();
             }
-        }).tip("PrzywrÃ³Ä‡ ustawienia domyślne");
+        }).tip("Przywróć ustawienia domyślne");
         const domInteractionNode_866 = domInteractionNode_863.find("#mp-alerts-checkbox-1 .checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-alerts-1\" name=\"mp-alerts-1\">").prop("checked", ADDON_STORAGE_REFERENCE.alertmanager.e).bind("change", async function(domInteractionNode_867) {
+        $("<input type=\"checkbox\" id=\"mp-alerts-1\" name=\"mp-alerts-1\">").prop("checked", ADDON_STORAGE_REFERENCE.alertmanager.e).bind("change", async function (domInteractionNode_867) {
             ADDON_STORAGE_REFERENCE.alertmanager.e = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         }).appendTo(domInteractionNode_866);
         $("<label for=\"mp-alerts-1\" class=\"c-checkbox__label c-checkbox__label--highlight\">Wyświetlaj alerty (message) z Margonem+</label>").appendTo(domInteractionNode_866);
         const domInteractionNode_868 = domInteractionNode_863.find("#mp-alerts-checkbox-2 .checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-alerts-2\" name=\"mp-alerts-2\">").prop("checked", ADDON_STORAGE_REFERENCE.alertmanager.d).bind("change", async function(domInteractionNode_869) {
+        $("<input type=\"checkbox\" id=\"mp-alerts-2\" name=\"mp-alerts-2\">").prop("checked", ADDON_STORAGE_REFERENCE.alertmanager.d).bind("change", async function (domInteractionNode_869) {
             ADDON_STORAGE_REFERENCE.alertmanager.d = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         }).appendTo(domInteractionNode_868);
-        $("<label for=\"mp-alerts-2\" class=\"c-checkbox__label c-checkbox__label--highlight\">Odegraj dźwiÄ™k</label>").appendTo(domInteractionNode_868);
+        $("<label for=\"mp-alerts-2\" class=\"c-checkbox__label c-checkbox__label--highlight\">Odegraj dźwięk</label>").appendTo(domInteractionNode_868);
         const domInteractionNode_870 = document.querySelectorAll(".mp-box-position-alerts");
         domInteractionNode_870.forEach(domInteractionNode_871 => {
             if (domInteractionNode_871.dataset.pos == ADDON_STORAGE_REFERENCE.alertmanager.t) {
@@ -5605,7 +5605,7 @@ const {
         domInteractionNode_873.appendTo(domInteractionNode_874).prop("value", ADDON_STORAGE_REFERENCE.alertmanager.s).attr({
             min: 1,
             max: 30
-        }).on("focusout", async function(domInteractionNode_875) {
+        }).on("focusout", async function (domInteractionNode_875) {
             let domInteractionNode_876 = Number($(this).val());
             if (isNaN(domInteractionNode_876)) {
                 domInteractionNode_876 = 1;
@@ -5626,7 +5626,7 @@ const {
         domInteractionNode_877.appendTo(domInteractionNode_878).prop("value", ADDON_STORAGE_REFERENCE.alertmanager.p).attr({
             min: 0,
             max: 999
-        }).on("focusout", async function(domInteractionNode_879) {
+        }).on("focusout", async function (domInteractionNode_879) {
             let domInteractionNode_880 = Number($(this).val());
             if (isNaN(domInteractionNode_880)) {
                 domInteractionNode_880 = 0;
@@ -5648,7 +5648,7 @@ const {
         domInteractionNode_881.appendTo(domInteractionNode_882).prop("value", ADDON_STORAGE_REFERENCE.alertmanager.p2).attr({
             min: 0,
             max: 999
-        }).on("focusout", async function(domInteractionNode_883) {
+        }).on("focusout", async function (domInteractionNode_883) {
             let domInteractionNode_884 = Number($(this).val());
             if (isNaN(domInteractionNode_884)) {
                 domInteractionNode_884 = 0;
@@ -5666,13 +5666,13 @@ const {
             domInteractionNode_779();
         });
         const domInteractionNode_885 = domInteractionNode_863.find("#mp-test-alerts");
-        domInteractionNode_885.click(function() {
-            const domInteractionNode_886 = ["Cześć! Jak się masz?", "To jest wiadomoÅ›Ä‡ testowa nr 1.", "Dzisiaj jest piękny dzień!", "Czy wszystko działa poprawnie?", "To tylko zwykła wiadomość.", "Test wiadomości, czy ziemia jest płaska?", "Hej! To tylko test.", "Czy widzisz tę wiadomoÅ›Ä‡?", "Sprawdzam, czy to działa.", "To jest testowa wiadomość."];
+        domInteractionNode_885.click(function () {
+            const domInteractionNode_886 = ["Cześć! Jak się masz?", "To jest wiadomość testowa nr 1.", "Dzisiaj jest piękny dzień!", "Czy wszystko działa poprawnie?", "To tylko zwykła wiadomość.", "Test wiadomości, czy ziemia jest płaska?", "Hej! To tylko test.", "Czy widzisz tę wiadomość?", "Sprawdzam, czy to działa.", "To jest testowa wiadomość."];
             const domInteractionNode_887 = Math.floor(Math.random() * domInteractionNode_886.length);
             message(domInteractionNode_886[domInteractionNode_887]);
         });
         const domInteractionNode_888 = domInteractionNode_863.find("textarea");
-        domInteractionNode_888.prop("value", ADDON_STORAGE_REFERENCE.alertmanager.css).on("focusout", async function(domInteractionNode_889) {
+        domInteractionNode_888.prop("value", ADDON_STORAGE_REFERENCE.alertmanager.css).on("focusout", async function (domInteractionNode_889) {
             let domInteractionNode_890 = domInteractionNode_603;
             if ($(this).val().length > 0) {
                 ADDON_STORAGE_REFERENCE.alertmanager.css = $(this).val();
@@ -5691,7 +5691,7 @@ const {
             const domInteractionNode_893 = uiLayoutComponent_266[domInteractionNode_892];
             const domInteractionNode_894 = $("\n                    <div class=\"mp-theme-container\" data-theme-id=\"" + domInteractionNode_892 + "\">\n                    <div class=\"mp-theme-icon\" style=\"background-image: url('" + domInteractionNode_893.i + "')\"></div>\n                    <div class=\"mp-theme\">\n                        <div class=\"name\">" + domInteractionNode_893.n + "</div>\n                        <div class=\"author\">Autor: " + domInteractionNode_893.a + "</div>\n                    </div>\n                    <div class=\"mp-theme-options\">\n                        <div class=\"mp-button do-action-cursor mp-width120px mp-button-" + (ADDON_STORAGE_REFERENCE.theme[domInteractionNode_892] ? "red" : "green") + "\">\n                        " + (ADDON_STORAGE_REFERENCE.theme[domInteractionNode_892] ? parsedAddonConfig.addmenu.optOff : parsedAddonConfig.addmenu.optOn) + "\n                        </div>\n                    </div>\n                    </div>\n                ");
             const domInteractionNode_895 = domInteractionNode_894.find(".mp-button");
-            domInteractionNode_895.click(async function() {
+            domInteractionNode_895.click(async function () {
                 const domInteractionNode_896 = ADDON_STORAGE_REFERENCE.theme[domInteractionNode_892];
                 for (const domInteractionNode_897 in uiLayoutComponent_266) {
                     if (ADDON_STORAGE_REFERENCE.theme[domInteractionNode_897]) {
@@ -5726,7 +5726,7 @@ const {
             label: "Ciemno pomarańczowy"
         }, {
             value: "pink",
-            label: "RÃ³Å¼owy"
+            label: "Różowy"
         }, {
             value: "purple",
             label: "Fioletowy"
@@ -5746,7 +5746,7 @@ const {
         const domInteractionNode_903 = $("<div class=\"mp-select-options do-action-cursor\"></div>").appendTo(domInteractionNode_901);
         domInteractionNode_899.forEach(domInteractionNode_904 => {
             const domInteractionNode_905 = $("<div class=\"mp-option do-action-cursor\" data-value=\"" + domInteractionNode_904.value + "\">" + domInteractionNode_904.label + "</div>");
-            domInteractionNode_905.on("click", async function() {
+            domInteractionNode_905.on("click", async function () {
                 const domInteractionNode_906 = $(this).data("value");
                 domInteractionNode_902.text(domInteractionNode_904.label);
                 domInteractionNode_903.hide();
@@ -5756,7 +5756,7 @@ const {
             });
             domInteractionNode_903.append(domInteractionNode_905);
         });
-        domInteractionNode_902.on("click", function(domInteractionNode_907) {
+        domInteractionNode_902.on("click", function (domInteractionNode_907) {
             domInteractionNode_907.stopPropagation();
             $(".mp-select-options").not(domInteractionNode_903).hide();
             domInteractionNode_903.toggle();
@@ -5776,7 +5776,7 @@ const {
             const domInteractionNode_914 = $("<div class=\"mp-control\"></div>");
             const domInteractionNode_915 = $("<div id=\"mp-alertnpc-checkbox\"></div>").appendTo(domInteractionNode_914);
             const domInteractionNode_916 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(domInteractionNode_915);
-            $("<input type=\"checkbox\" id=\"mp-alertnpc-" + domInteractionNode_913 + "-checkbox\" name=\"" + domInteractionNode_913 + "-c-name\">").prop("checked", ADDON_STORAGE_REFERENCE.alertnpc[domInteractionNode_913]).bind("change", async function(domInteractionNode_917) {
+            $("<input type=\"checkbox\" id=\"mp-alertnpc-" + domInteractionNode_913 + "-checkbox\" name=\"" + domInteractionNode_913 + "-c-name\">").prop("checked", ADDON_STORAGE_REFERENCE.alertnpc[domInteractionNode_913]).bind("change", async function (domInteractionNode_917) {
                 ADDON_STORAGE_REFERENCE.alertnpc[domInteractionNode_913] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(domInteractionNode_916);
@@ -5787,10 +5787,10 @@ const {
         const domInteractionNode_919 = $("\n                <div class=\"mp-settings-content\">\n                    <div>\n                        <div class=\"mp-title mp-margin-5px\">Osoby aktualnie używające dodatku: <count></count></div>\n                        <div class=\"mp-users-list mp-scroll\">\n\n                        </div>\n                    </div>\n                </div>").appendTo(domInteractionNode_918);
         let domInteractionNode_920 = true;
         const domInteractionNode_921 = domInteractionNode_919.find(".mp-users-list");
-        domInteractionNode_781.find("div[data-tab=\"users\"]").click(function() {
+        domInteractionNode_781.find("div[data-tab=\"users\"]").click(function () {
             uiLayoutComponent_203 = 0;
             if (!domInteractionNode_920) {
-                return message("Nie możesz teraz pobrać użytkownikÃ³w!");
+                return message("Nie możesz teraz pobrać użytkowników!");
             }
             domInteractionNode_921.empty();
             // uiLayoutComponent_178();
@@ -5804,14 +5804,14 @@ const {
         for (const domInteractionNode_924 in domInteractionNode_923) {
             const domInteractionNode_925 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(domInteractionNode_922);
             const domInteractionNode_926 = domInteractionNode_925.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-addmenu-othsett-" + domInteractionNode_924 + "-checkbox\" name=\"mp-addmenu-othsett-" + domInteractionNode_924 + "-name\">").prop("checked", domInteractionNode_923[domInteractionNode_924]).bind("change", async function(domInteractionNode_927) {
+            $("<input type=\"checkbox\" id=\"mp-addmenu-othsett-" + domInteractionNode_924 + "-checkbox\" name=\"mp-addmenu-othsett-" + domInteractionNode_924 + "-name\">").prop("checked", domInteractionNode_923[domInteractionNode_924]).bind("change", async function (domInteractionNode_927) {
                 domInteractionNode_923[domInteractionNode_924] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 domInteractionNode_928();
             }).appendTo(domInteractionNode_926);
             $("<label for=\"mp-addmenu-othsett-" + domInteractionNode_924 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig.addmenu.otherSettings[domInteractionNode_924] + "</label>").appendTo(domInteractionNode_926);
         }
-        domInteractionNode_781.find("#mp-save-backup").click(function() {
+        domInteractionNode_781.find("#mp-save-backup").click(function () {
             if (!uiLayoutComponent_385) {
                 uiLayoutComponent_385 = true;
                 message("Wysyłanie ustawień na serwer...");
@@ -5820,14 +5820,14 @@ const {
                 return message("Poczekaj chwilkę...");
             }
         });
-        domInteractionNode_781.find("#mp-load-backup").click(async function() {
+        domInteractionNode_781.find("#mp-load-backup").click(async function () {
             const domInteractionNode_929 = await askWindow("Czy na pewno chcesz załadować ustawienia z serwera?");
             if (domInteractionNode_929) {
                 if (!uiLayoutComponent_385) {
                     uiLayoutComponent_385 = true;
                     globalThis.MargoPlusAPI.loadBackup();
                 } else {
-                    return message("Poczekaj chwilkÄ™...");
+                    return message("Poczekaj chwilkę...");
                 }
             }
         });
@@ -5872,7 +5872,7 @@ const {
         Object.entries(domInteractionNode_935).forEach(([domInteractionNode_936, domInteractionNode_937]) => {
             const domInteractionNode_938 = $("\n                <div class=\"mp-control-picker\">\n                    <div id=\"mp-linked-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>");
             const domInteractionNode_939 = domInteractionNode_938.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-global-relations-" + domInteractionNode_936 + "-checkbox\" name=\"" + domInteractionNode_936 + "-c-name\">").prop("checked", domInteractionNode_935[domInteractionNode_936].e).bind("change", async function(domInteractionNode_940) {
+            $("<input type=\"checkbox\" id=\"mp-global-relations-" + domInteractionNode_936 + "-checkbox\" name=\"" + domInteractionNode_936 + "-c-name\">").prop("checked", domInteractionNode_935[domInteractionNode_936].e).bind("change", async function (domInteractionNode_940) {
                 domInteractionNode_935[domInteractionNode_936].e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 domInteractionNode_941();
@@ -5881,12 +5881,12 @@ const {
             $("<label for=\"mp-global-relations-" + domInteractionNode_936 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig.relation[domInteractionNode_936] + "</label>").appendTo(domInteractionNode_939);
             const domInteractionNode_942 = $("<div id=\"mp-linked-picker\" class=\"do-action-cursor\"></div>").appendTo(domInteractionNode_938);
             const domInteractionNode_943 = $("<div class=\"c-color-picker do-action-cursor\"></div>").appendTo(domInteractionNode_942);
-            $("<input type=\"color\" id=\"mp-global-relations-" + domInteractionNode_936 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + domInteractionNode_936 + "-p-name\" value=\"" + domInteractionNode_935[domInteractionNode_936].c + "\">").prop("value", domInteractionNode_935[domInteractionNode_936].c).bind("change", async function(domInteractionNode_944) {
+            $("<input type=\"color\" id=\"mp-global-relations-" + domInteractionNode_936 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + domInteractionNode_936 + "-p-name\" value=\"" + domInteractionNode_935[domInteractionNode_936].c + "\">").prop("value", domInteractionNode_935[domInteractionNode_936].c).bind("change", async function (domInteractionNode_944) {
                 domInteractionNode_935[domInteractionNode_936].c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 domInteractionNode_941();
                 colorsPartyInClanOrFriends(ADDON_STORAGE_REFERENCE.relations.p);
-            }).appendTo(domInteractionNode_943).tip("Kliknij PPM, aby przywrócić domyślne.").contextmenu(async function() {
+            }).appendTo(domInteractionNode_943).tip("Kliknij PPM, aby przywrócić domyślne.").contextmenu(async function () {
                 const domInteractionNode_945 = domInteractionNode_934[domInteractionNode_936];
                 domInteractionNode_935[domInteractionNode_936].c = domInteractionNode_945;
                 $(this).prop("value", domInteractionNode_945);
@@ -5903,8 +5903,8 @@ const {
         }
         if (!ADDON_STORAGE_REFERENCE.builds[uiLayoutComponent_270].s) {
             const domInteractionNode_948 = domInteractionNode_932.find(".content");
-            const domInteractionNode_949 = $("\n                <div id=\"mp-builds-first-init\" class=\"mp-background-section\">\n                    <div class=\"mp-title\">CzeÅ›Ä‡!</div>\n                    <div class=\"mp-builds-init-info\">Nie skonfigurowaÅ‚eÅ› jeszcze żadnych zestawów. Ich ustawienie jest wymagane, jeÅ›li chcesz w peÅ‚ni korzystać ze wszystkich funkcji wybranych dodatków.</div>\n                    <div id=\"closebuild\" class=\"mp-button mp-button-green do-action-cursor\">Nie pokazuj ponownie na tej postaci</div>\n                </div>").appendTo(domInteractionNode_948);
-            domInteractionNode_949.find("#closebuild").click(function() {
+            const domInteractionNode_949 = $("\n                <div id=\"mp-builds-first-init\" class=\"mp-background-section\">\n                    <div class=\"mp-title\">Cześć!</div>\n                    <div class=\"mp-builds-init-info\">Nie skonfigurowałeś jeszcze żadnych zestawów. Ich ustawienie jest wymagane, jeśli chcesz w pełni korzystać ze wszystkich funkcji wybranych dodatków.</div>\n                    <div id=\"closebuild\" class=\"mp-button mp-button-green do-action-cursor\">Nie pokazuj ponownie na tej postaci</div>\n                </div>").appendTo(domInteractionNode_948);
+            domInteractionNode_949.find("#closebuild").click(function () {
                 domInteractionNode_947();
                 ADDON_STORAGE_REFERENCE.builds[uiLayoutComponent_270].s = true;
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -5923,7 +5923,7 @@ const {
             containment: "window",
             scroll: false,
             handle: ".mp-window-header",
-            stop: async (domInteractionNode_950, domInteractionNode_951) => {}
+            stop: async (domInteractionNode_950, domInteractionNode_951) => { }
         });
         const domInteractionNode_952 = domInteractionNode_932.outerWidth();
         const domInteractionNode_953 = domInteractionNode_932.outerHeight();
@@ -5956,7 +5956,7 @@ const {
                 domInteractionNode_965.empty();
                 domInteractionNode_967.forEach(domInteractionNode_968 => {
                     const domInteractionNode_969 = $("<div class=\"mp-option do-action-cursor\" data-value=\"" + domInteractionNode_968.value + "\">" + domInteractionNode_968.label + "</div>");
-                    domInteractionNode_969.on("click", function(domInteractionNode_970) {
+                    domInteractionNode_969.on("click", function (domInteractionNode_970) {
                         domInteractionNode_970.stopPropagation();
                         const domInteractionNode_971 = $(this).data("value");
                         domInteractionNode_964.text(domInteractionNode_968.label);
@@ -5974,7 +5974,7 @@ const {
                 }
             };
             domInteractionNode_966();
-            domInteractionNode_964.on("click", function(domInteractionNode_974) {
+            domInteractionNode_964.on("click", function (domInteractionNode_974) {
                 domInteractionNode_974.stopPropagation();
                 $(".mp-select-options").not(domInteractionNode_965).hide();
                 domInteractionNode_966();
@@ -5993,7 +5993,7 @@ const {
                 domInteractionNode_981.empty();
                 domInteractionNode_983.forEach(domInteractionNode_984 => {
                     const domInteractionNode_985 = $("<div class=\"mp-option do-action-cursor\" data-value=\"" + domInteractionNode_984.value + "\">" + domInteractionNode_984.label + "</div>");
-                    domInteractionNode_985.on("click", function(domInteractionNode_986) {
+                    domInteractionNode_985.on("click", function (domInteractionNode_986) {
                         domInteractionNode_986.stopPropagation();
                         const domInteractionNode_987 = $(this).data("value");
                         domInteractionNode_980.text(domInteractionNode_984.label);
@@ -6011,7 +6011,7 @@ const {
                 }
             };
             domInteractionNode_982();
-            domInteractionNode_980.on("click", function(domInteractionNode_990) {
+            domInteractionNode_980.on("click", function (domInteractionNode_990) {
                 domInteractionNode_990.stopPropagation();
                 $(".mp-select-options").not(domInteractionNode_981).hide();
                 domInteractionNode_982();
@@ -6025,7 +6025,7 @@ const {
         if (!ADDON_STORAGE_REFERENCE.builds[uiLayoutComponent_270].s) {
             const domInteractionNode_992 = domInteractionNode_958.find(".content");
             const domInteractionNode_993 = $("\n                <div id=\"mp-builds-first-init\" class=\"mp-background-section\">\n                    <div class=\"mp-title\">Cześć!</div>\n                    <div class=\"mp-builds-init-info\">Nie skonfigurowałeś jeszcze żadnych zestawów. Ich ustawienie jest wymagane, jeśli chcesz w pełni korzystać ze wszystkich funkcji wybranych dodatków.</div>\n                    <div id=\"closebuild\" class=\"mp-button mp-button-green do-action-cursor\">Nie pokazuj ponownie na tej postaci</div>\n                </div>").appendTo(domInteractionNode_992);
-            domInteractionNode_993.find("#closebuild").click(function() {
+            domInteractionNode_993.find("#closebuild").click(function () {
                 domInteractionNode_991();
                 ADDON_STORAGE_REFERENCE.builds[uiLayoutComponent_270].s = true;
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -6044,7 +6044,7 @@ const {
             containment: "window",
             scroll: false,
             handle: ".mp-window-header",
-            stop: async (domInteractionNode_994, domInteractionNode_995) => {}
+            stop: async (domInteractionNode_994, domInteractionNode_995) => { }
         });
         const domInteractionNode_996 = domInteractionNode_958.outerWidth();
         const domInteractionNode_997 = domInteractionNode_958.outerHeight();
@@ -6061,9 +6061,9 @@ const {
     if (!ADDON_STORAGE_REFERENCE.builds[uiLayoutComponent_270].s && (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[29].id] || ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[36].id] || ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[48].id])) {
         domInteractionNode_785();
     }
-    setInterval(async function() {
+    setInterval(async function () {
         globalThis.isSameAlertExist2 = processingUpgradeBar;
-            if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
+        if (globalThis?.isSameAlertExist2?.access?.indexOf(ADDON_STORAGE_REFERENCE.main) > 99999999999) {
             console.log('[blocked] interval access check - reload prevented');
         }
     }, 1000);
@@ -6106,7 +6106,7 @@ const {
             const addonStorageDescriptor_1018 = "\n                .border-window:has(.crafting) { \n                    display: none !important;\n                }\n            ";
             addStyle("mp-addon-1", addonStorageDescriptor_1018);
             if (Engine.lock.list.indexOf("crafting") < 0) {
-                _g("artisanship&action=open", async function(addonStorageDescriptor_1019) {
+                _g("artisanship&action=open", async function (addonStorageDescriptor_1019) {
                     if (addonStorageDescriptor_1019?.artisanship?.open == "default") {
                         addonStorageDescriptor_1020(addonStorageDescriptor_1016, addonStorageDescriptor_1017);
                     }
@@ -6116,7 +6116,7 @@ const {
             }
         }
         async function addonStorageDescriptor_1020(addonStorageDescriptor_1021, addonStorageDescriptor_1022) {
-            _g("enhancement&action=status&item=" + addonStorageDescriptor_1021, async function(addonStorageDescriptor_1023) {
+            _g("enhancement&action=status&item=" + addonStorageDescriptor_1021, async function (addonStorageDescriptor_1023) {
                 if (addonStorageDescriptor_1023?.enhancement?.progressing || addonStorageDescriptor_1023?.enhancement?.upgradable) {
                     const addonStorageDescriptor_1024 = addonStorageDescriptor_1023.enhancement;
                     const addonStorageDescriptor_1025 = addonStorageDescriptor_1024?.progressing ? addonStorageDescriptor_1024.progressing.current : addonStorageDescriptor_1024.upgradable.current;
@@ -6152,7 +6152,7 @@ const {
                         addonStorageDescriptor_1030.children().remove();
                         const addonStorageDescriptor_1037 = universalCreateItem(addonStorageDescriptor_1036, "item", ADDON_STORAGE_REFERENCE);
                         addonStorageDescriptor_1037.appendTo(addonStorageDescriptor_1030);
-                        addonStorageDescriptor_1037.click(async function() {
+                        addonStorageDescriptor_1037.click(async function () {
                             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].slots[addonStorageDescriptor_1028].id = 0;
                             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].slots[addonStorageDescriptor_1028].p = 0;
                             addonStorageDescriptor_1037.remove();
@@ -6185,7 +6185,7 @@ const {
                     const addonStorageDescriptor_1040 = getDataItem(addonStorageDescriptor_1038);
                     const addonStorageDescriptor_1041 = universalCreateItem(addonStorageDescriptor_1040, "item", ADDON_STORAGE_REFERENCE);
                     addonStorageDescriptor_1041.appendTo(addonStorageDescriptor_1030);
-                    addonStorageDescriptor_1041.click(async function() {
+                    addonStorageDescriptor_1041.click(async function () {
                         ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].slots[addonStorageDescriptor_1028].id = 0;
                         ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].slots[addonStorageDescriptor_1028].p = 0;
                         saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -6213,7 +6213,7 @@ const {
             const addonStorageDescriptor_1051 = $("<div class=\"mp-control\"></div>");
             const addonStorageDescriptor_1052 = $("<div id=\"mp-upgrade-checkbox\"></div>").appendTo(addonStorageDescriptor_1051);
             const addonStorageDescriptor_1053 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(addonStorageDescriptor_1052);
-            $("<input type=\"checkbox\" id=\"mp-upgrade-" + addonStorageDescriptor_1049 + "-checkbox\" name=\"" + addonStorageDescriptor_1049 + "-c-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].ingredients[addonStorageDescriptor_1049]).bind("change", async function(addonStorageDescriptor_1054) {
+            $("<input type=\"checkbox\" id=\"mp-upgrade-" + addonStorageDescriptor_1049 + "-checkbox\" name=\"" + addonStorageDescriptor_1049 + "-c-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].ingredients[addonStorageDescriptor_1049]).bind("change", async function (addonStorageDescriptor_1054) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].ingredients[addonStorageDescriptor_1049] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1053);
@@ -6237,7 +6237,7 @@ const {
             const addonStorageDescriptor_1062 = $("<div class=\"mp-control\"></div>");
             const addonStorageDescriptor_1063 = $("<div id=\"mp-upgrade-checkbox\"></div>").appendTo(addonStorageDescriptor_1062);
             const addonStorageDescriptor_1064 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(addonStorageDescriptor_1063);
-            $("<input type=\"checkbox\" id=\"mp-upgrade-" + addonStorageDescriptor_1060 + "-checkbox\" name=\"" + addonStorageDescriptor_1060 + "-c-name\">").prop("checked", addonStorageDescriptor_1007.other[addonStorageDescriptor_1060]).bind("change", async function(addonStorageDescriptor_1065) {
+            $("<input type=\"checkbox\" id=\"mp-upgrade-" + addonStorageDescriptor_1060 + "-checkbox\" name=\"" + addonStorageDescriptor_1060 + "-c-name\">").prop("checked", addonStorageDescriptor_1007.other[addonStorageDescriptor_1060]).bind("change", async function (addonStorageDescriptor_1065) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].other[addonStorageDescriptor_1060] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1064);
@@ -6256,7 +6256,7 @@ const {
             const addonStorageDescriptor_1070 = $("<div id=\"mp-upgrade-checkbox\"></div>").appendTo(addonStorageDescriptor_1069);
             const addonStorageDescriptor_1071 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(addonStorageDescriptor_1070);
             const addonStorageDescriptor_1072 = "mp-upgrade-" + addonStorageDescriptor_1067 + "-checkbox";
-            const addonStorageDescriptor_1073 = $("<input type=\"checkbox\" id=\"" + addonStorageDescriptor_1072 + "\" name=\"mp-upgrade-group\">").prop("checked", addonStorageDescriptor_1007.settings[addonStorageDescriptor_1067].e).on("change", async function(addonStorageDescriptor_1074) {
+            const addonStorageDescriptor_1073 = $("<input type=\"checkbox\" id=\"" + addonStorageDescriptor_1072 + "\" name=\"mp-upgrade-group\">").prop("checked", addonStorageDescriptor_1007.settings[addonStorageDescriptor_1067].e).on("change", async function (addonStorageDescriptor_1074) {
                 if ($(this).prop("checked")) {
                     $("input[name=\"mp-upgrade-group\"]").not(this).prop("checked", false);
                     Object.keys(addonStorageDescriptor_1007.settings).forEach(addonStorageDescriptor_1075 => {
@@ -6272,7 +6272,7 @@ const {
                 addonStorageDescriptor_1076.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].settings[addonStorageDescriptor_1067].i).attr({
                     min: 1,
                     max: 126
-                }).on("focusout", async function(addonStorageDescriptor_1077) {
+                }).on("focusout", async function (addonStorageDescriptor_1077) {
                     let addonStorageDescriptor_1078 = Number($(this).val());
                     if (isNaN(addonStorageDescriptor_1078)) {
                         addonStorageDescriptor_1078 = 1;
@@ -6302,7 +6302,7 @@ const {
             const addonStorageDescriptor_1087 = $("<div class=\"mp-control\"></div>");
             const addonStorageDescriptor_1088 = $("<div id=\"mp-upgrade-checkbox\"></div>").appendTo(addonStorageDescriptor_1087);
             const addonStorageDescriptor_1089 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(addonStorageDescriptor_1088);
-            $("<input type=\"checkbox\" id=\"mp-upgrade-" + addonStorageDescriptor_1085 + "-checkbox\" name=\"" + addonStorageDescriptor_1085 + "-c-name\">").prop("checked", addonStorageDescriptor_1007.ignore[addonStorageDescriptor_1085]).bind("change", async function(addonStorageDescriptor_1090) {
+            $("<input type=\"checkbox\" id=\"mp-upgrade-" + addonStorageDescriptor_1085 + "-checkbox\" name=\"" + addonStorageDescriptor_1085 + "-c-name\">").prop("checked", addonStorageDescriptor_1007.ignore[addonStorageDescriptor_1085]).bind("change", async function (addonStorageDescriptor_1090) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].ignore[addonStorageDescriptor_1085] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1089);
@@ -6320,7 +6320,7 @@ const {
         $("<div class=\"mp-title\">Konfiguracja skrótu</div>").appendTo(addonStorageDescriptor_1091);
         const addonStorageDescriptor_1092 = $("<div class=\"mp-control-hotkeys\" style=\"margin-bottom: 5px;\">Klawisz: <b class=\"mp-badge\">" + addonStorageDescriptor_1007.hotkeys.toUpperCase() + "</b></div>").appendTo(addonStorageDescriptor_1091);
         const addonStorageDescriptor_1093 = createButtonHotkeys();
-        addonStorageDescriptor_1093.click(async function() {
+        addonStorageDescriptor_1093.click(async function () {
             const addonStorageDescriptor_1094 = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].hotkeys);
             if (addonStorageDescriptor_1094) {
                 addonStorageDescriptor_1092.find("b").html(addonStorageDescriptor_1094.toUpperCase());
@@ -6332,12 +6332,12 @@ const {
         const addonStorageDescriptor_1095 = $("<div class=\"mp-center-line\"></div>").appendTo(addonStorageDescriptor_1008);
         const addonStorageDescriptor_1096 = createButton("Ulepsz");
         addonStorageDescriptor_1096.appendTo(addonStorageDescriptor_1095);
-        addonStorageDescriptor_1096.click(function() {
+        addonStorageDescriptor_1096.click(function () {
             addonStorageDescriptor_1097();
         });
         const addonStorageDescriptor_1098 = createButton("Składniki");
-        addonStorageDescriptor_1098.appendTo(addonStorageDescriptor_1095).tip("Pokazuje listÄ™ wykorzystanych składników");
-        addonStorageDescriptor_1098.click(function() {
+        addonStorageDescriptor_1098.appendTo(addonStorageDescriptor_1095).tip("Pokazuje listę wykorzystanych składników");
+        addonStorageDescriptor_1098.click(function () {
             const addonStorageDescriptor_1099 = MODULE_ADDON_REGISTRY[1].id + "_components";
             const addonStorageDescriptor_1100 = "#w-" + addonStorageDescriptor_1099;
             const addonStorageDescriptor_1101 = ADDON_STORAGE_REFERENCE.window[addonStorageDescriptor_1099].o;
@@ -6348,10 +6348,10 @@ const {
         });
         const addonStorageDescriptor_1103 = createSettingsButton("Ustawienia");
         addonStorageDescriptor_1103.appendTo(addonStorageDescriptor_1009);
-        addonStorageDescriptor_1103.click(function() {
+        addonStorageDescriptor_1103.click(function () {
             addonStorageDescriptor_1042.toggle();
         });
-        $(addonStorageDescriptor_1006).find("#collapse").click(function() {
+        $(addonStorageDescriptor_1006).find("#collapse").click(function () {
             addonStorageDescriptor_1012();
         });
         upgradePercentMark(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[1].id][uiLayoutComponent_270].slots);
@@ -6373,7 +6373,7 @@ const {
         addonStorageDescriptor_1110.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[2].id].percent).attr({
             min: 1,
             max: 99
-        }).on("focusout", async function(addonStorageDescriptor_1112) {
+        }).on("focusout", async function (addonStorageDescriptor_1112) {
             let addonStorageDescriptor_1113 = Number($(this).val());
             if (isNaN(addonStorageDescriptor_1113)) {
                 addonStorageDescriptor_1113 = 1;
@@ -6408,7 +6408,7 @@ const {
             const addonStorageDescriptor_1119 = $("<div class=\"mp-control\"></div>");
             const addonStorageDescriptor_1120 = $("<div id=\"mp-heal-checkbox\"></div>").appendTo(addonStorageDescriptor_1119);
             const addonStorageDescriptor_1121 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(addonStorageDescriptor_1120);
-            $("<input type=\"checkbox\" id=\"mp-heal-" + addonStorageDescriptor_1117 + "-checkbox\" name=\"" + addonStorageDescriptor_1117 + "-c-name\">").prop("checked", addonStorageDescriptor_1116.settings[addonStorageDescriptor_1117]).bind("change", async function(addonStorageDescriptor_1122) {
+            $("<input type=\"checkbox\" id=\"mp-heal-" + addonStorageDescriptor_1117 + "-checkbox\" name=\"" + addonStorageDescriptor_1117 + "-c-name\">").prop("checked", addonStorageDescriptor_1116.settings[addonStorageDescriptor_1117]).bind("change", async function (addonStorageDescriptor_1122) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[2].id].settings[addonStorageDescriptor_1117] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_279();
@@ -6429,7 +6429,7 @@ const {
             if (addonStorageDescriptor_1128 == "autoLogin") {
                 addonStorageDescriptor_1129.tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[4].id].settings.autoLoginTip);
             }
-            $("<input type=\"checkbox\" id=\"mp-a4-settings-" + addonStorageDescriptor_1128 + "-checkbox\" name=\"mp-a4-settings-" + addonStorageDescriptor_1128 + "-name\">").prop("checked", addonStorageDescriptor_1127[addonStorageDescriptor_1128]).bind("change", async function(addonStorageDescriptor_1131) {
+            $("<input type=\"checkbox\" id=\"mp-a4-settings-" + addonStorageDescriptor_1128 + "-checkbox\" name=\"mp-a4-settings-" + addonStorageDescriptor_1128 + "-name\">").prop("checked", addonStorageDescriptor_1127[addonStorageDescriptor_1128]).bind("change", async function (addonStorageDescriptor_1131) {
                 addonStorageDescriptor_1127[addonStorageDescriptor_1128] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 if (addonStorageDescriptor_1128 == "showButton") {
@@ -6446,7 +6446,7 @@ const {
         $("<div class=\"mp-title\">Konfiguracja skrótu</div>").appendTo(addonStorageDescriptor_1134);
         const addonStorageDescriptor_1135 = $("<div class=\"mp-control-30px\">Klawisz: <b class=\"mp-badge\">" + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[4].id].hotkeys.toUpperCase() + "</b></div>").appendTo(addonStorageDescriptor_1134);
         const addonStorageDescriptor_1136 = createButtonHotkeys();
-        addonStorageDescriptor_1136.click(async function() {
+        addonStorageDescriptor_1136.click(async function () {
             const addonStorageDescriptor_1137 = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[4].id].hotkeys);
             if (addonStorageDescriptor_1137) {
                 addonStorageDescriptor_1135.find("b").html(addonStorageDescriptor_1137.toUpperCase());
@@ -6457,9 +6457,9 @@ const {
         addonStorageDescriptor_1136.appendTo(addonStorageDescriptor_1135);
         const addonStorageDescriptor_1138 = $("<div class=\"mp-control-center\"></div>").appendTo(".mp-login-section");
         const addonStorageDescriptor_1139 = createButton("Przeloguj");
-        addonStorageDescriptor_1139.appendTo(addonStorageDescriptor_1138).click(function() {
+        addonStorageDescriptor_1139.appendTo(addonStorageDescriptor_1138).click(function () {
             addonStorageDescriptor_1140();
-        }).hover(function() {
+        }).hover(function () {
             const addonStorageDescriptor_1141 = Engine.serverStorage.get(Engine.windowsData.name.addon_17).data.filter(addonStorageDescriptor_1142 => addonStorageDescriptor_1142.type === 2);
             if (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[4].id]) {
                 if (addonStorageDescriptor_1141.length === 0) {
@@ -6538,7 +6538,7 @@ const {
                         }
                     }
                     addonStorageDescriptor_1177.tip(addonStorageDescriptor_1176.nick + " (" + addonStorageDescriptor_1176.lvl + addonStorageDescriptor_1176.prof + ")<br>Główne konto" + addonStorageDescriptor_1178);
-                    addonStorageDescriptor_1177.click(async function() {
+                    addonStorageDescriptor_1177.click(async function () {
                         if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[5].id]) {
                             return;
                         }
@@ -6552,7 +6552,7 @@ const {
                                     "content-type": "application/x-www-form-urlencoded; charset=UTF-8"
                                 },
                                 credentials: "include"
-                            }).then(function() {
+                            }).then(function () {
                                 executeLoginChar(addonStorageDescriptor_1176.id, addonStorageDescriptor_1176.world);
                             });
                         } else {
@@ -6560,7 +6560,7 @@ const {
                         }
                     });
                     addonStorageDescriptor_1177.appendTo(addonStorageDescriptor_1174);
-                    addonStorageDescriptor_1177.contextmenu(async function() {
+                    addonStorageDescriptor_1177.contextmenu(async function () {
                         const addonStorageDescriptor_1183 = await showKeyCaptureWindow(addonStorageDescriptor_1179);
                         if (addonStorageDescriptor_1183) {
                             if (addonStorageDescriptor_1183 == "Brak") {
@@ -6591,7 +6591,7 @@ const {
                     const addonStorageDescriptor_1189 = addonStorageDescriptor_1167[addonStorageDescriptor_1188];
                     const addonStorageDescriptor_1190 = addonStorageDescriptor_1154(addonStorageDescriptor_1189);
                     addonStorageDescriptor_1190.tip(addonStorageDescriptor_1189.nick + " (" + addonStorageDescriptor_1189.lvl + addonStorageDescriptor_1189.prof + ")<br><br>Zastępca");
-                    addonStorageDescriptor_1190.click(async function() {
+                    addonStorageDescriptor_1190.click(async function () {
                         if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[5].id]) {
                             return;
                         }
@@ -6604,7 +6604,7 @@ const {
                                 "content-type": "application/x-www-form-urlencoded; charset=UTF-8"
                             },
                             credentials: "include"
-                        }).then(function() {
+                        }).then(function () {
                             executeLoginChar(addonStorageDescriptor_1189.id, addonStorageDescriptor_1189.world);
                         });
                     });
@@ -6632,7 +6632,7 @@ const {
                 const addonStorageDescriptor_1199 = $("<div class=\"mp-button-switch do-action-cursor\">" + addonStorageDescriptor_1196[addonStorageDescriptor_1198] + "<div>");
                 addonStorageDescriptor_1199.appendTo(addonStorageDescriptor_1150);
                 addonStorageDescriptor_1199.attr("mp-world", addonStorageDescriptor_1196[addonStorageDescriptor_1198]);
-                addonStorageDescriptor_1199.click(function() {
+                addonStorageDescriptor_1199.click(function () {
                     if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[5].id]) {
                         return;
                     }
@@ -6656,7 +6656,7 @@ const {
         addonStorageDescriptor_1150.find("[mp-world=\"" + uiLayoutComponent_221 + "\"]").addClass("mp-button-green");
         const addonStorageDescriptor_1200 = createSettingsButton("Ustawienia");
         addonStorageDescriptor_1200.appendTo(addonStorageDescriptor_1147);
-        addonStorageDescriptor_1200.click(function() {
+        addonStorageDescriptor_1200.click(function () {
             addonStorageDescriptor_1151.toggle();
         });
         if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[5].id]) {
@@ -6665,7 +6665,7 @@ const {
         }
         const addonStorageDescriptor_1201 = createButton("Pływające okno", ADDON_STORAGE_REFERENCE.window[addonStorageDescriptor_1148].o ? "green" : "red");
         addonStorageDescriptor_1201.appendTo(addonStorageDescriptor_1153).attr("change-state", "add5").tip("Dodaje minimalistyczne okno z postaciami");
-        addonStorageDescriptor_1201.click(async function() {
+        addonStorageDescriptor_1201.click(async function () {
             if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[5].id]) {
                 return;
             }
@@ -6681,10 +6681,10 @@ const {
         });
         const addonStorageDescriptor_1203 = createButton("Wyloguj", "red");
         addonStorageDescriptor_1203.appendTo(addonStorageDescriptor_1153);
-        addonStorageDescriptor_1203.click(function() {
+        addonStorageDescriptor_1203.click(function () {
             _g("logoff&a=start");
         });
-        addonStorageDescriptor_1203.contextmenu(async function() {
+        addonStorageDescriptor_1203.contextmenu(async function () {
             const addonStorageDescriptor_1204 = await askWindow("Czy na pewno chcesz zresetować postacie?");
             if (addonStorageDescriptor_1204) {
                 const addonStorageDescriptor_1205 = localStorage.getItem("Margonem");
@@ -6698,16 +6698,16 @@ const {
             }
         });
         if (ADDON_STORAGE_REFERENCE.charlist[ADDON_STORAGE_REFERENCE.main].zast.length > 0) {
-            const addonStorageDescriptor_1207 = createButton("UsuÅ„ zast", "orange");
-            addonStorageDescriptor_1207.appendTo(addonStorageDescriptor_1153).tip("Czyści zapisane postacie zastÄ™pcy");
-            addonStorageDescriptor_1207.click(function() {
+            const addonStorageDescriptor_1207 = createButton("Usuń zast", "orange");
+            addonStorageDescriptor_1207.appendTo(addonStorageDescriptor_1153).tip("Czyści zapisane postacie zastępcy");
+            addonStorageDescriptor_1207.click(function () {
                 ADDON_STORAGE_REFERENCE.charlist[ADDON_STORAGE_REFERENCE.main].zast = [];
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 addonStorageDescriptor_1163(uiLayoutComponent_221);
             });
         }
         const addonStorageDescriptor_1208 = $("#o-" + MODULE_ADDON_REGISTRY[5].id);
-        $("<div class=\"mp-globe-button do-action-cursor\"><i class=\"fa fa-globe\" aria-hidden=\"true\"></i></div>").appendTo(addonStorageDescriptor_1208).click(function(addonStorageDescriptor_1209) {
+        $("<div class=\"mp-globe-button do-action-cursor\"><i class=\"fa fa-globe\" aria-hidden=\"true\"></i></div>").appendTo(addonStorageDescriptor_1208).click(function (addonStorageDescriptor_1209) {
             Engine.interface.showPopupMenu(addonStorageDescriptor_1144, addonStorageDescriptor_1209);
             const addonStorageDescriptor_1210 = addonStorageDescriptor_1208.offset();
             const addonStorageDescriptor_1211 = addonStorageDescriptor_1210.left - 116;
@@ -6719,7 +6719,7 @@ const {
                 top: addonStorageDescriptor_1212 + "px"
             });
         }).tip("Zmień świat");
-        $("<div class=\"mp-logout-button do-action-cursor\"><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i></div>").appendTo(addonStorageDescriptor_1208).click(function(addonStorageDescriptor_1214) {
+        $("<div class=\"mp-logout-button do-action-cursor\"><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i></div>").appendTo(addonStorageDescriptor_1208).click(function (addonStorageDescriptor_1214) {
             _g("logoff&a=start");
         }).tip("Wyloguj");
     });
@@ -6758,7 +6758,7 @@ const {
             const addonStorageDescriptor_1224 = $("<div class=\"mp-control-picker\"></div>");
             const addonStorageDescriptor_1225 = $("<div id=\"mp-linked-checkbox\"></div>").appendTo(addonStorageDescriptor_1224);
             const addonStorageDescriptor_1226 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(addonStorageDescriptor_1225);
-            $("<input type=\"checkbox\" id=\"mp-cc-" + addonStorageDescriptor_1222 + "-checkbox\" name=\"" + addonStorageDescriptor_1222 + "-c-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[6].id].c[addonStorageDescriptor_1222].e).bind("change", async function(addonStorageDescriptor_1227) {
+            $("<input type=\"checkbox\" id=\"mp-cc-" + addonStorageDescriptor_1222 + "-checkbox\" name=\"" + addonStorageDescriptor_1222 + "-c-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[6].id].c[addonStorageDescriptor_1222].e).bind("change", async function (addonStorageDescriptor_1227) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[6].id].c[addonStorageDescriptor_1222].e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 addonStorageDescriptor_1219();
@@ -6766,11 +6766,11 @@ const {
             const addonStorageDescriptor_1228 = $("<label for=\"mp-cc-" + addonStorageDescriptor_1222 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + addonStorageDescriptor_1217[addonStorageDescriptor_1222] + "</label>").appendTo(addonStorageDescriptor_1226);
             const addonStorageDescriptor_1229 = $("<div id=\"mp-linked-picker\" class=\"do-action-cursor\"></div>").appendTo(addonStorageDescriptor_1224);
             const addonStorageDescriptor_1230 = $("<div class=\"c-color-picker do-action-cursor\"></div>").appendTo(addonStorageDescriptor_1229);
-            $("<input type=\"color\" id=\"mp-cc-" + addonStorageDescriptor_1222 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1222 + "-p-name\" value=\"" + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[6].id].c[addonStorageDescriptor_1222].c + "\">").prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[6].id].c[addonStorageDescriptor_1222].c).bind("change", async function(addonStorageDescriptor_1231) {
+            $("<input type=\"color\" id=\"mp-cc-" + addonStorageDescriptor_1222 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1222 + "-p-name\" value=\"" + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[6].id].c[addonStorageDescriptor_1222].c + "\">").prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[6].id].c[addonStorageDescriptor_1222].c).bind("change", async function (addonStorageDescriptor_1231) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[6].id].c[addonStorageDescriptor_1222].c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 addonStorageDescriptor_1219();
-            }).appendTo(addonStorageDescriptor_1230).tip("Kliknij PPM, aby przywrócić domyślne.").contextmenu(async function() {
+            }).appendTo(addonStorageDescriptor_1230).tip("Kliknij PPM, aby przywrócić domyślne.").contextmenu(async function () {
                 const addonStorageDescriptor_1232 = addonStorageDescriptor_1218[addonStorageDescriptor_1222];
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[6].id].c[addonStorageDescriptor_1222].c = addonStorageDescriptor_1232;
                 $(this).prop("value", addonStorageDescriptor_1232);
@@ -6815,38 +6815,38 @@ const {
                 }
                 const addonStorageDescriptor_1251 = $("<div class=\"mp-avatar-char do-action-cursor\" style=\"background-color: " + addonStorageDescriptor_1248 + "\"></div>").appendTo(addonStorageDescriptor_1241).tip(addonStorageDescriptor_1249);
                 $("<div class=\"mp-avatar-char-icon\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/postacie/" + addonStorageDescriptor_1246 + "');\"></div>").appendTo(addonStorageDescriptor_1251);
-                addonStorageDescriptor_1251.click(function() {
+                addonStorageDescriptor_1251.click(function () {
                     let addonStorageDescriptor_1252 = [
-                        ["Odbieraj z doÅ›w.", () => {
+                        ["Odbieraj z dośw.", () => {
                             addonStorageDescriptor_1237[addonStorageDescriptor_1238][addonStorageDescriptor_1242].s[0] = true;
                             addonStorageDescriptor_1237[addonStorageDescriptor_1238][addonStorageDescriptor_1242].s[1] = false;
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                             addonStorageDescriptor_1234();
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }],
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }],
                         ["Odbieraj bez dośw.", () => {
                             addonStorageDescriptor_1237[addonStorageDescriptor_1238][addonStorageDescriptor_1242].s[0] = false;
                             addonStorageDescriptor_1237[addonStorageDescriptor_1238][addonStorageDescriptor_1242].s[1] = true;
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                             addonStorageDescriptor_1234();
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }],
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }],
                         ["Wyłącz", () => {
                             addonStorageDescriptor_1237[addonStorageDescriptor_1238][addonStorageDescriptor_1242].s[0] = false;
                             addonStorageDescriptor_1237[addonStorageDescriptor_1238][addonStorageDescriptor_1242].s[1] = false;
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                             addonStorageDescriptor_1234();
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }]
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }]
                     ];
                     Engine.interface.showPopupMenu(addonStorageDescriptor_1252, event);
                 });
@@ -6876,15 +6876,15 @@ const {
                         icon: addonStorageDescriptor_1258[addonStorageDescriptor_1257].icon
                     };
                     let addonStorageDescriptor_1262 = universalCreateItem(addonStorageDescriptor_1261, "item", ADDON_STORAGE_REFERENCE);
-                    addonStorageDescriptor_1262.appendTo(addonStorageDescriptor_1255).click(function() {
+                    addonStorageDescriptor_1262.appendTo(addonStorageDescriptor_1255).click(function () {
                         if (Engine.hero.d?.clan?.id > 0 && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[12].id][uiLayoutComponent_221][addonStorageDescriptor_1259].i > 0) {
                             const addonStorageDescriptor_1263 = {
                                 c: addonStorageDescriptor_1258[addonStorageDescriptor_1257].name + " otworzono " + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[12].id][uiLayoutComponent_221][addonStorageDescriptor_1259].i + " razy."
                             };
                             _g("chat&channel=clan", false, addonStorageDescriptor_1263);
                         }
-                    }).contextmenu(async function() {
-                        const addonStorageDescriptor_1264 = await askWindow("Czy na pewno chcesz usunÄ…Ä‡ statystyki <b>" + addonStorageDescriptor_1258[addonStorageDescriptor_1257].name + "</b>?");
+                    }).contextmenu(async function () {
+                        const addonStorageDescriptor_1264 = await askWindow("Czy na pewno chcesz usunąć statystyki <b>" + addonStorageDescriptor_1258[addonStorageDescriptor_1257].name + "</b>?");
                         if (addonStorageDescriptor_1264) {
                             delete ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[12].id][uiLayoutComponent_221][addonStorageDescriptor_1259];
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -6908,16 +6908,16 @@ const {
             const addonStorageDescriptor_1269 = $("<div class=\"mp-control\">").appendTo(addonStorageDescriptor_1267);
             const addonStorageDescriptor_1270 = $("<div class=\"mp-width-nx\"></div>").appendTo(addonStorageDescriptor_1269);
             const addonStorageDescriptor_1271 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(addonStorageDescriptor_1270);
-            $("<input type=\"checkbox\" id=\"mp-bs-" + addonStorageDescriptor_1268 + "-checkbox\" name=\"" + addonStorageDescriptor_1268 + "-mn-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[13].id][uiLayoutComponent_164][addonStorageDescriptor_1268]).bind("change", async function(addonStorageDescriptor_1272) {
+            $("<input type=\"checkbox\" id=\"mp-bs-" + addonStorageDescriptor_1268 + "-checkbox\" name=\"" + addonStorageDescriptor_1268 + "-mn-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[13].id][uiLayoutComponent_164][addonStorageDescriptor_1268]).bind("change", async function (addonStorageDescriptor_1272) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[13].id][uiLayoutComponent_164][addonStorageDescriptor_1268] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1271);
             $("<label for=\"mp-bs-" + addonStorageDescriptor_1268 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[13].id][addonStorageDescriptor_1268] + "</label>").appendTo(addonStorageDescriptor_1271);
         }
         const addonStorageDescriptor_1273 = $("<div class=\"mp-control-center\"></div>").appendTo(addonStorageDescriptor_1266);
-        const addonStorageDescriptor_1274 = createButton("UsuÅ„ zapisaną walkę", "red");
+        const addonStorageDescriptor_1274 = createButton("Usuń zapisaną walkę", "red");
         addonStorageDescriptor_1274.appendTo(addonStorageDescriptor_1273);
-        addonStorageDescriptor_1274.click(async function() {
+        addonStorageDescriptor_1274.click(async function () {
             if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[13].id]) {
                 return;
             }
@@ -6936,7 +6936,7 @@ const {
         });
         const addonStorageDescriptor_1277 = createButton("Zapisane walki", "green");
         addonStorageDescriptor_1277.appendTo(addonStorageDescriptor_1273);
-        addonStorageDescriptor_1277.click(async function() {
+        addonStorageDescriptor_1277.click(async function () {
             const addonStorageDescriptor_1278 = MODULE_ADDON_REGISTRY[13].id + "_battle";
             const addonStorageDescriptor_1279 = "#w-" + addonStorageDescriptor_1278;
             const addonStorageDescriptor_1280 = ADDON_STORAGE_REFERENCE.window[addonStorageDescriptor_1278].o;
@@ -6954,7 +6954,7 @@ const {
         const addonStorageDescriptor_1285 = $(addonStorageDescriptor_1283).find(".mp-window-header-left");
         const addonStorageDescriptor_1286 = createSettingsButton("Ustawienia");
         addonStorageDescriptor_1286.appendTo(addonStorageDescriptor_1285);
-        addonStorageDescriptor_1286.click(async function() {
+        addonStorageDescriptor_1286.click(async function () {
             domInteractionNode_762();
             const addonStorageDescriptor_1287 = MODULE_ADDON_REGISTRY[13].id + "_settings";
             const addonStorageDescriptor_1288 = "#w-" + addonStorageDescriptor_1287;
@@ -6968,51 +6968,51 @@ const {
     });
     createWindow(MODULE_ADDON_REGISTRY[14].name, MODULE_ADDON_REGISTRY[14].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(addonStorageDescriptor_1290 => {
         const addonStorageDescriptor_1291 = $(addonStorageDescriptor_1290).find("#" + MODULE_ADDON_REGISTRY[14].id);
-        const addonStorageDescriptor_1292 = $("\n    <div class=\"mp-loot-filter-content\">\n        <div class=\"mp-loot-filter-section-1\">\n            <div id=\"rarity\" class=\"mp-background-section\">\n                <div class=\"mp-title\">Rzadkość</div>\n            </div>\n            <div id=\"other\" class=\"mp-background-section\">\n                <div class=\"mp-title\">PozostaÅ‚e</div>\n            </div>\n            <div id=\"cl\" class=\"mp-background-section\">\n                <div class=\"mp-title\">Typy</div>\n            </div>\n            <div id=\"close\" class=\"mp-background-section\">\n                <div class=\"mp-title\">Zamykanie okna</div>\n            </div>\n        </div>\n        <div class=\"mp-loot-filter-section-2\">\n            <div class=\"mp-loot-filter-lists\">\n                <div id=\"want\" class=\"mp-background-section\">\n                    <div class=\"mp-title text-green\">Zawsze łap</div>\n                    <div id=\"list-wrapper\" class=\"mp-list-wrapper mp-scroll\" style=\"width: 189px !important;\"></div>\n                </div>\n                <div id=\"not\" class=\"mp-background-section\">\n                    <div class=\"mp-title text-red\">Zawsze odrzucaj</div>\n                    <div id=\"list-wrapper\" class=\"mp-list-wrapper mp-scroll\" style=\"width: 189px !important;\"></div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Łap, gdy zawiera w opisie</div>\n                    <div style=\"width: 215px !important;\">\n                        <input id=\"mp-has-lore\" class=\"mp-list-input-wrapper\" placeholder=\"słowo\" style=\"width: 207px !important;\" autocomplete=\"off\"><br><br>\n                        <div id=\"mp-loot-filter-backup\"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n            ").appendTo(addonStorageDescriptor_1291);
+        const addonStorageDescriptor_1292 = $("\n    <div class=\"mp-loot-filter-content\">\n        <div class=\"mp-loot-filter-section-1\">\n            <div id=\"rarity\" class=\"mp-background-section\">\n                <div class=\"mp-title\">Rzadkość</div>\n            </div>\n            <div id=\"other\" class=\"mp-background-section\">\n                <div class=\"mp-title\">Pozostałe</div>\n            </div>\n            <div id=\"cl\" class=\"mp-background-section\">\n                <div class=\"mp-title\">Typy</div>\n            </div>\n            <div id=\"close\" class=\"mp-background-section\">\n                <div class=\"mp-title\">Zamykanie okna</div>\n            </div>\n        </div>\n        <div class=\"mp-loot-filter-section-2\">\n            <div class=\"mp-loot-filter-lists\">\n                <div id=\"want\" class=\"mp-background-section\">\n                    <div class=\"mp-title text-green\">Zawsze łap</div>\n                    <div id=\"list-wrapper\" class=\"mp-list-wrapper mp-scroll\" style=\"width: 189px !important;\"></div>\n                </div>\n                <div id=\"not\" class=\"mp-background-section\">\n                    <div class=\"mp-title text-red\">Zawsze odrzucaj</div>\n                    <div id=\"list-wrapper\" class=\"mp-list-wrapper mp-scroll\" style=\"width: 189px !important;\"></div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Łap, gdy zawiera w opisie</div>\n                    <div style=\"width: 215px !important;\">\n                        <input id=\"mp-has-lore\" class=\"mp-list-input-wrapper\" placeholder=\"słowo\" style=\"width: 207px !important;\" autocomplete=\"off\"><br><br>\n                        <div id=\"mp-loot-filter-backup\"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n            ").appendTo(addonStorageDescriptor_1291);
         const addonStorageDescriptor_1293 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[14].id][uiLayoutComponent_221][uiLayoutComponent_270] ? ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[14].id][uiLayoutComponent_221][uiLayoutComponent_270] : ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[14].id][uiLayoutComponent_221].basic;
         const addonStorageDescriptor_1294 = addonStorageDescriptor_1292.find(".mp-loot-filter-section-1 #rarity");
         const addonStorageDescriptor_1295 = addonStorageDescriptor_1292.find(".mp-loot-filter-section-1 #other");
         const addonStorageDescriptor_1296 = addonStorageDescriptor_1292.find(".mp-loot-filter-section-1 #cl");
         const addonStorageDescriptor_1297 = addonStorageDescriptor_1292.find(".mp-loot-filter-section-1 #close");
         const addonStorageDescriptor_1298 = addonStorageDescriptor_1292.find(".mp-loot-filter-section-2 input#mp-has-lore");
-        addonStorageDescriptor_1298.prop("value", addonStorageDescriptor_1293.list.hasLore).on("input", async function(addonStorageDescriptor_1299) {
+        addonStorageDescriptor_1298.prop("value", addonStorageDescriptor_1293.list.hasLore).on("input", async function (addonStorageDescriptor_1299) {
             addonStorageDescriptor_1293.list.hasLore = $(this).val();
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-        }).tip("Pozostaw to pole puste, aby wyÅ‚Ä…czyÄ‡.");
+        }).tip("Pozostaw to pole puste, aby wyłączyć.");
         const addonStorageDescriptor_1300 = addonStorageDescriptor_1292.find(".mp-loot-filter-section-2 #mp-loot-filter-backup");
         if (typeof ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[14].id][uiLayoutComponent_221][uiLayoutComponent_270] === "undefined") {
-            $("<div class=\"mp-button mp-button-green do-action-cursor mp-margin-center\">Wyodrębnij ustawienia</div>").click(function() {
+            $("<div class=\"mp-button mp-button-green do-action-cursor mp-margin-center\">Wyodrębnij ustawienia</div>").click(function () {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[14].id][uiLayoutComponent_221][uiLayoutComponent_270] = domInteractionNode_625;
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 location.reload(true);
             }).appendTo(addonStorageDescriptor_1300).tip("Tworzy oddzielne ustawienia filtra łupów wyłącznie dla tej postaci.");
         }
         if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[14].id][uiLayoutComponent_221][uiLayoutComponent_270]) {
-            $("<div class=\"mp-button mp-button-red do-action-cursor mp-margin-center\">Przywróć ustawienia</div>").click(function() {
+            $("<div class=\"mp-button mp-button-red do-action-cursor mp-margin-center\">Przywróć ustawienia</div>").click(function () {
                 delete ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[14].id][uiLayoutComponent_221][uiLayoutComponent_270];
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 location.reload(true);
-            }).appendTo(addonStorageDescriptor_1300).tip("Przywraca globalne ustawienia dla caÅ‚ego świata.");
+            }).appendTo(addonStorageDescriptor_1300).tip("Przywraca globalne ustawienia dla całego świata.");
         }
         for (const addonStorageDescriptor_1301 in addonStorageDescriptor_1293.rarity) {
             const addonStorageDescriptor_1302 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n\n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1294);
             const addonStorageDescriptor_1303 = addonStorageDescriptor_1302.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-loot-filter-" + addonStorageDescriptor_1301 + "-checkbox\">").prop("checked", addonStorageDescriptor_1293.rarity[addonStorageDescriptor_1301]).bind("change", async function(addonStorageDescriptor_1304) {
+            $("<input type=\"checkbox\" id=\"mp-loot-filter-" + addonStorageDescriptor_1301 + "-checkbox\">").prop("checked", addonStorageDescriptor_1293.rarity[addonStorageDescriptor_1301]).bind("change", async function (addonStorageDescriptor_1304) {
                 addonStorageDescriptor_1293.rarity[addonStorageDescriptor_1301] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1303);
             $("<label for=\"mp-loot-filter-" + addonStorageDescriptor_1301 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight mp-color-" + addonStorageDescriptor_1301 + "\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[14].id].rarity[addonStorageDescriptor_1301] + "</label>").appendTo(addonStorageDescriptor_1303);
             if (addonStorageDescriptor_1301 == "legendary") {
-                addonStorageDescriptor_1302.tip("Dla bezpieczeÅ„stwa dropu legendarnego decyzja podejmowana jest zaraz po sprawdzeniu list \"Zawsze łap\", \"Nigdy nie Å‚ap\" i \"Słowo w opisie\"");
+                addonStorageDescriptor_1302.tip("Dla bezpieczeństwa dropu legendarnego decyzja podejmowana jest zaraz po sprawdzeniu list \"Zawsze łap\", \"Nigdy nie łap\" i \"Słowo w opisie\"");
             }
             if (addonStorageDescriptor_1301 == "highest") {
-                addonStorageDescriptor_1302.tip("System automatycznie wybiera jedynie przedmioty o najwyższej rzadkości z okna łupu uzyskanego w druÅ¼ynie.");
+                addonStorageDescriptor_1302.tip("System automatycznie wybiera jedynie przedmioty o najwyższej rzadkości z okna łupu uzyskanego w drużynie.");
             }
         }
         for (const addonStorageDescriptor_1305 in addonStorageDescriptor_1293.other) {
             const addonStorageDescriptor_1306 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n\n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1295);
             const addonStorageDescriptor_1307 = addonStorageDescriptor_1306.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-loot-filterz-" + addonStorageDescriptor_1305 + "-checkbox\">").prop("checked", addonStorageDescriptor_1293.other[addonStorageDescriptor_1305]).bind("change", async function(addonStorageDescriptor_1308) {
+            $("<input type=\"checkbox\" id=\"mp-loot-filterz-" + addonStorageDescriptor_1305 + "-checkbox\">").prop("checked", addonStorageDescriptor_1293.other[addonStorageDescriptor_1305]).bind("change", async function (addonStorageDescriptor_1308) {
                 addonStorageDescriptor_1293.other[addonStorageDescriptor_1305] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1307);
@@ -7021,13 +7021,13 @@ const {
         for (const addonStorageDescriptor_1309 in addonStorageDescriptor_1293.cl) {
             const addonStorageDescriptor_1310 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n\n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1296);
             const addonStorageDescriptor_1311 = addonStorageDescriptor_1310.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-loot-filter-" + addonStorageDescriptor_1309 + "-checkbox\">").prop("checked", addonStorageDescriptor_1293.cl[addonStorageDescriptor_1309]).bind("change", async function(addonStorageDescriptor_1312) {
+            $("<input type=\"checkbox\" id=\"mp-loot-filter-" + addonStorageDescriptor_1309 + "-checkbox\">").prop("checked", addonStorageDescriptor_1293.cl[addonStorageDescriptor_1309]).bind("change", async function (addonStorageDescriptor_1312) {
                 addonStorageDescriptor_1293.cl[addonStorageDescriptor_1309] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1311);
             $("<label for=\"mp-loot-filter-" + addonStorageDescriptor_1309 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[14].id].cl[addonStorageDescriptor_1309] + "</label>").appendTo(addonStorageDescriptor_1311);
             if (addonStorageDescriptor_1309 == "other") {
-                addonStorageDescriptor_1310.tip("Książki, błoga, recepty i waluta (tytoÅ„, głowa zbira etc)");
+                addonStorageDescriptor_1310.tip("Książki, błoga, recepty i waluta (tytoń, głowa zbira etc)");
             }
             if (addonStorageDescriptor_1309 == "cosmetic") {
                 addonStorageDescriptor_1310.tip("Stroje i maskotki");
@@ -7036,19 +7036,19 @@ const {
         for (const addonStorageDescriptor_1313 in addonStorageDescriptor_1293.closeLoot) {
             const addonStorageDescriptor_1314 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n\n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1297);
             const addonStorageDescriptor_1315 = addonStorageDescriptor_1314.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-loot-filter-" + addonStorageDescriptor_1313 + "-checkbox\">").prop("checked", addonStorageDescriptor_1293.closeLoot[addonStorageDescriptor_1313]).bind("change", async function(addonStorageDescriptor_1316) {
+            $("<input type=\"checkbox\" id=\"mp-loot-filter-" + addonStorageDescriptor_1313 + "-checkbox\">").prop("checked", addonStorageDescriptor_1293.closeLoot[addonStorageDescriptor_1313]).bind("change", async function (addonStorageDescriptor_1316) {
                 addonStorageDescriptor_1293.closeLoot[addonStorageDescriptor_1313] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1315);
             $("<label for=\"mp-loot-filter-" + addonStorageDescriptor_1313 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[14].id].closeLoot[addonStorageDescriptor_1313] + "</label>").appendTo(addonStorageDescriptor_1315);
         }
         const addonStorageDescriptor_1317 = addonStorageDescriptor_1292.find(".mp-loot-filter-section-2 #want");
-        addonStorageDescriptor_1317.tip("Aby dodaÄ‡ przedmiot kliknij na niego PPM i wybierz opcje.");
+        addonStorageDescriptor_1317.tip("Aby dodać przedmiot kliknij na niego PPM i wybierz opcje.");
         const addonStorageDescriptor_1318 = addonStorageDescriptor_1317.find("#list-wrapper");
         const addonStorageDescriptor_1319 = addonStorageDescriptor_1292.find(".mp-loot-filter-section-2 #not");
         const addonStorageDescriptor_1320 = addonStorageDescriptor_1319.find("#list-wrapper");
-        addonStorageDescriptor_1319.tip("Aby dodaÄ‡ przedmiot kliknij na niego PPM i wybierz opcje.");
-        $("<input class=\"mp-list-input-wrapper\" placeholder=\"[+]\" style=\"width: 187px !important;\">").appendTo(addonStorageDescriptor_1317).on("focusout", async function() {
+        addonStorageDescriptor_1319.tip("Aby dodać przedmiot kliknij na niego PPM i wybierz opcje.");
+        $("<input class=\"mp-list-input-wrapper\" placeholder=\"[+]\" style=\"width: 187px !important;\">").appendTo(addonStorageDescriptor_1317).on("focusout", async function () {
             const addonStorageDescriptor_1321 = $(this).val().trim();
             if (addonStorageDescriptor_1321.length > 0) {
                 const addonStorageDescriptor_1322 = addonStorageDescriptor_1293.list.want;
@@ -7060,7 +7060,7 @@ const {
                 $(this).val("");
             }
         });
-        $("<input class=\"mp-list-input-wrapper\" placeholder=\"[+]\" style=\"width: 187px !important;\">").appendTo(addonStorageDescriptor_1319).on("focusout", async function() {
+        $("<input class=\"mp-list-input-wrapper\" placeholder=\"[+]\" style=\"width: 187px !important;\">").appendTo(addonStorageDescriptor_1319).on("focusout", async function () {
             const addonStorageDescriptor_1323 = $(this).val().trim();
             if (addonStorageDescriptor_1323.length > 0) {
                 const addonStorageDescriptor_1324 = addonStorageDescriptor_1293.list.not;
@@ -7086,7 +7086,7 @@ const {
             const addonStorageDescriptor_1331 = $("<div class=\"mp-control\">").appendTo(addonStorageDescriptor_1329);
             const addonStorageDescriptor_1332 = $("<div class=\"mp-width-nx\"></div>").appendTo(addonStorageDescriptor_1331);
             const addonStorageDescriptor_1333 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(addonStorageDescriptor_1332);
-            $("<input type=\"checkbox\" id=\"mp-news-" + addonStorageDescriptor_1330 + "-checkbox\" name=\"" + addonStorageDescriptor_1330 + "-mn-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[16].id][addonStorageDescriptor_1330]).bind("change", async function(addonStorageDescriptor_1334) {
+            $("<input type=\"checkbox\" id=\"mp-news-" + addonStorageDescriptor_1330 + "-checkbox\" name=\"" + addonStorageDescriptor_1330 + "-mn-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[16].id][addonStorageDescriptor_1330]).bind("change", async function (addonStorageDescriptor_1334) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[16].id][addonStorageDescriptor_1330] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1333);
@@ -7101,7 +7101,7 @@ const {
         }
 
         function addonStorageDescriptor_1337() {
-            _g("promotions&a=show", function(addonStorageDescriptor_1338) {
+            _g("promotions&a=show", function (addonStorageDescriptor_1338) {
                 if (addonStorageDescriptor_1338) {
                     $(Engine.news.wnd.$).hide();
                     if (addonStorageDescriptor_1338.promotions && addonStorageDescriptor_1338.item_tpl) {
@@ -7131,7 +7131,7 @@ const {
                                 var addonStorageDescriptor_1352 = Engine.bags;
                                 var addonStorageDescriptor_1353 = addonStorageDescriptor_1352[0][0] - addonStorageDescriptor_1352[0][1] + addonStorageDescriptor_1352[1][0] - addonStorageDescriptor_1352[1][1] + addonStorageDescriptor_1352[2][0] - addonStorageDescriptor_1352[2][1];
                                 if (addonStorageDescriptor_1353 >= addonStorageDescriptor_1351.slot) {
-                                    _g("promotions&a=use&id=" + addonStorageDescriptor_1351.id, async function(addonStorageDescriptor_1354) {
+                                    _g("promotions&a=use&id=" + addonStorageDescriptor_1351.id, async function (addonStorageDescriptor_1354) {
                                         if (addonStorageDescriptor_1354 && addonStorageDescriptor_1351.slot > addonStorageDescriptor_1353) {
                                             ADDON_STORAGE_REFERENCE.limit[uiLayoutComponent_164][uiLayoutComponent_221].n.r[uiLayoutComponent_270] = true;
                                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -7143,7 +7143,7 @@ const {
                     }
                     if (addonStorageDescriptor_1338?.promotions?.background) {
                         if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[16].id].drop && addonStorageDescriptor_1338.promotions.background.includes("blogo")) {
-                            message("BłogosławieÅ„stwa dostÄ™pne do kupienia.");
+                            message("Błogosławieństwa dostępne do kupienia.");
                             addonStorageDescriptor_1335();
                         }
                         if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[16].id].zcs && addonStorageDescriptor_1338.promotions.background.includes("czerwony_smok")) {
@@ -7151,7 +7151,7 @@ const {
                             addonStorageDescriptor_1335();
                         }
                         if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[16].id].gold && addonStorageDescriptor_1338.promotions.background.includes("zloto")) {
-                            message("ZÅ‚oto dostępne do kupienia.");
+                            message("Złoto dostępne do kupienia.");
                             addonStorageDescriptor_1335();
                         }
                         if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[16].id].tp && addonStorageDescriptor_1338.promotions.background.includes("teleport")) {
@@ -7171,7 +7171,7 @@ const {
                 }
             });
         }
-        const addonStorageDescriptor_1355 = $("div[widget-name=\"news-icon\"]").find(".red-notification").filter(function() {
+        const addonStorageDescriptor_1355 = $("div[widget-name=\"news-icon\"]").find(".red-notification").filter(function () {
             return $(this).css("display") !== "none";
         }).length > 0;
         if (addonStorageDescriptor_1355 || !ADDON_STORAGE_REFERENCE.limit[uiLayoutComponent_164][uiLayoutComponent_221].n.r[uiLayoutComponent_270]) {
@@ -7197,7 +7197,7 @@ const {
         for (const addonStorageDescriptor_1365 in ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].show) {
             const addonStorageDescriptor_1366 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n\n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1358);
             const addonStorageDescriptor_1367 = addonStorageDescriptor_1366.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-detector-show-" + addonStorageDescriptor_1365 + "-checkbox\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].show[addonStorageDescriptor_1365]).bind("change", async function(addonStorageDescriptor_1368) {
+            $("<input type=\"checkbox\" id=\"mp-detector-show-" + addonStorageDescriptor_1365 + "-checkbox\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].show[addonStorageDescriptor_1365]).bind("change", async function (addonStorageDescriptor_1368) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].show[addonStorageDescriptor_1365] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1367);
@@ -7206,7 +7206,7 @@ const {
         for (const addonStorageDescriptor_1369 in ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].buttons) {
             const addonStorageDescriptor_1370 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n\n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1359);
             const addonStorageDescriptor_1371 = addonStorageDescriptor_1370.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-detector-buttons-" + addonStorageDescriptor_1369 + "-checkbox\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].buttons[addonStorageDescriptor_1369]).bind("change", async function(addonStorageDescriptor_1372) {
+            $("<input type=\"checkbox\" id=\"mp-detector-buttons-" + addonStorageDescriptor_1369 + "-checkbox\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].buttons[addonStorageDescriptor_1369]).bind("change", async function (addonStorageDescriptor_1372) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].buttons[addonStorageDescriptor_1369] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 $("div[detector=\"npc\"]").remove();
@@ -7223,7 +7223,7 @@ const {
         for (const addonStorageDescriptor_1373 in ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].options) {
             const addonStorageDescriptor_1374 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n\n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1360);
             const addonStorageDescriptor_1375 = addonStorageDescriptor_1374.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-detector-options-" + addonStorageDescriptor_1373 + "-checkbox\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].options[addonStorageDescriptor_1373]).bind("change", async function(addonStorageDescriptor_1376) {
+            $("<input type=\"checkbox\" id=\"mp-detector-options-" + addonStorageDescriptor_1373 + "-checkbox\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].options[addonStorageDescriptor_1373]).bind("change", async function (addonStorageDescriptor_1376) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].options[addonStorageDescriptor_1373] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1375);
@@ -7232,7 +7232,7 @@ const {
         const addonStorageDescriptor_1377 = $("<div class=\"mp-list-wrapper-container\"></div>").appendTo(addonStorageDescriptor_1360);
         $("<div class=\"mp-title\">Wykrywanie po nazwie</div>").appendTo(addonStorageDescriptor_1377);
         const addonStorageDescriptor_1378 = $("<div class=\"mp-list-wrapper mp-scroll\"></div>").appendTo(addonStorageDescriptor_1377);
-        $("<input class=\"mp-list-input-wrapper\" placeholder=\"[+]\">").appendTo(addonStorageDescriptor_1377).tip("Pełna nazwa npc").on("focusout", async function() {
+        $("<input class=\"mp-list-input-wrapper\" placeholder=\"[+]\">").appendTo(addonStorageDescriptor_1377).tip("Pełna nazwa npc").on("focusout", async function () {
             const addonStorageDescriptor_1379 = $(this).val().trim();
             if (addonStorageDescriptor_1379.length > 0) {
                 const addonStorageDescriptor_1380 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].npc;
@@ -7250,7 +7250,7 @@ const {
             const addonStorageDescriptor_1383 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1362);
             const addonStorageDescriptor_1384 = addonStorageDescriptor_1383.find(".checkbox-custom");
             const addonStorageDescriptor_1385 = "mp-detector-options-" + addonStorageDescriptor_1382 + "-checkbox";
-            const addonStorageDescriptor_1386 = $("<input type=\"checkbox\" id=\"" + addonStorageDescriptor_1385 + "\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].discord.options[addonStorageDescriptor_1382]).on("change", async function() {
+            const addonStorageDescriptor_1386 = $("<input type=\"checkbox\" id=\"" + addonStorageDescriptor_1385 + "\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].discord.options[addonStorageDescriptor_1382]).on("change", async function () {
                 addonStorageDescriptor_1362.find("input[type=\"checkbox\"]").not(this).prop("checked", false);
                 for (const addonStorageDescriptor_1387 in ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].discord.options) {
                     ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].discord.options[addonStorageDescriptor_1387] = addonStorageDescriptor_1387 === addonStorageDescriptor_1382 && $(this).prop("checked");
@@ -7261,7 +7261,7 @@ const {
         }
         const addonStorageDescriptor_1388 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].discord;
         $("<div class=\"mp-title\">Webhook: </div>").appendTo(addonStorageDescriptor_1361);
-        $("<input class=\"mp-list-input-wrapper\" placeholder=\"https://discord.com/api/webhooks/\">").prop("value", addonStorageDescriptor_1388.url).appendTo(addonStorageDescriptor_1361).tip("Adres webhook").on("focusout", async function() {
+        $("<input class=\"mp-list-input-wrapper\" placeholder=\"https://discord.com/api/webhooks/\">").prop("value", addonStorageDescriptor_1388.url).appendTo(addonStorageDescriptor_1361).tip("Adres webhook").on("focusout", async function () {
             const addonStorageDescriptor_1389 = $(this).val().trim();
             if (addonStorageDescriptor_1389.length < 1 || addonStorageDescriptor_1389.includes("https://discord.com/api/webhooks/")) {
                 addonStorageDescriptor_1388.url = addonStorageDescriptor_1389;
@@ -7270,8 +7270,8 @@ const {
                 message("Podany adres nie jest webhookiem");
             }
         });
-        $("<div class=\"mp-title\">WiadomośÄ‡: </div>").appendTo(addonStorageDescriptor_1361);
-        $("<input class=\"mp-list-input-wrapper\" placeholder=\"Tekst wiadomoÅ›ci\">").prop("value", addonStorageDescriptor_1388.text).appendTo(addonStorageDescriptor_1361).tip("DostÄ™pne zmienne: {role}, {npc}, {world}").on("focusout", async function() {
+        $("<div class=\"mp-title\">Wiadomość: </div>").appendTo(addonStorageDescriptor_1361);
+        $("<input class=\"mp-list-input-wrapper\" placeholder=\"Tekst wiadomości\">").prop("value", addonStorageDescriptor_1388.text).appendTo(addonStorageDescriptor_1361).tip("Dostępne zmienne: {role}, {npc}, {world}").on("focusout", async function () {
             const addonStorageDescriptor_1390 = $(this).val().trim();
             addonStorageDescriptor_1388.text = addonStorageDescriptor_1390;
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -7279,7 +7279,7 @@ const {
         const addonStorageDescriptor_1391 = $("<div class=\"mp-list-wrapper-container\"></div>").appendTo(addonStorageDescriptor_1363);
         $("<div class=\"mp-title\">Konfiguracja oznaczeń</div>").appendTo(addonStorageDescriptor_1391);
         const addonStorageDescriptor_1392 = $("<div class=\"mp-list-wrapper mp-scroll\"></div>").appendTo(addonStorageDescriptor_1391);
-        $("<input class=\"mp-list-input-wrapper\" placeholder=\"nazwa npc:id roli\">").appendTo(addonStorageDescriptor_1391).tip("Aby poprawnie skonfigurować oznaczanie roli zastosuj się do wzoru.<br><br>Format: nazwa:id<br><br>nazwa - pełna nazwa potwora<br>id - id roli z discorda").on("focusout", async function() {
+        $("<input class=\"mp-list-input-wrapper\" placeholder=\"nazwa npc:id roli\">").appendTo(addonStorageDescriptor_1391).tip("Aby poprawnie skonfigurować oznaczanie roli zastosuj się do wzoru.<br><br>Format: nazwa:id<br><br>nazwa - pełna nazwa potwora<br>id - id roli z discorda").on("focusout", async function () {
             const addonStorageDescriptor_1393 = $(this).val().trim();
             if (addonStorageDescriptor_1393.length > 0 && addonStorageDescriptor_1393.includes(":")) {
                 const addonStorageDescriptor_1394 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].discord.roles;
@@ -7319,7 +7319,7 @@ const {
                 });
             }
             const addonStorageDescriptor_1407 = addonStorageDescriptor_1406.find("#mp-leg-enable");
-            $("<input type=\"checkbox\" id=\"mp-leg-" + addonStorageDescriptor_1404 + "-checkbox\">").appendTo(addonStorageDescriptor_1407).prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].e).bind("change", async function(addonStorageDescriptor_1408) {
+            $("<input type=\"checkbox\" id=\"mp-leg-" + addonStorageDescriptor_1404 + "-checkbox\">").appendTo(addonStorageDescriptor_1407).prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].e).bind("change", async function (addonStorageDescriptor_1408) {
                 addonStorageDescriptor_1403[addonStorageDescriptor_1404].e = $(this).prop("checked");
                 $("div[data-settings=\"" + addonStorageDescriptor_1404 + "\"]").css({
                     opacity: "" + (addonStorageDescriptor_1403[addonStorageDescriptor_1404].e ? "1" : "0.25"),
@@ -7329,7 +7329,7 @@ const {
             });
             $("<label for=\"mp-leg-" + addonStorageDescriptor_1404 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight mp-text-bold\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].shadow[addonStorageDescriptor_1404] + "</label>").appendTo(addonStorageDescriptor_1407);
             const addonStorageDescriptor_1409 = addonStorageDescriptor_1406.find("#color1 .checkbox-custom#checkbox1");
-            $("<input type=\"checkbox\" id=\"mp-leg-color1-" + addonStorageDescriptor_1404 + "-checkbox\">").prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.e).bind("change", async function(addonStorageDescriptor_1410) {
+            $("<input type=\"checkbox\" id=\"mp-leg-color1-" + addonStorageDescriptor_1404 + "-checkbox\">").prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.e).bind("change", async function (addonStorageDescriptor_1410) {
                 addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.e = $(this).prop("checked");
                 if (!addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.e && !addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.e) {
                     addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.e = true;
@@ -7342,7 +7342,7 @@ const {
             addonStorageDescriptor_1411.prop("value", addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.r).attr({
                 min: 1,
                 max: 100
-            }).on("focusout", async function(addonStorageDescriptor_1412) {
+            }).on("focusout", async function (addonStorageDescriptor_1412) {
                 let addonStorageDescriptor_1413 = Number($(this).val());
                 if (isNaN(addonStorageDescriptor_1413)) {
                     addonStorageDescriptor_1413 = 1;
@@ -7359,18 +7359,18 @@ const {
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).tip("Rozmiar cienia od 1px do 100px");
             const addonStorageDescriptor_1414 = addonStorageDescriptor_1406.find("#color1 .c-color-picker");
-            $("<input type=\"color\" id=\"mp-leg-color1-" + addonStorageDescriptor_1404 + "-checkbox\" class=\"do-action-cursor\">").prop("value", addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.c).bind("change", async function(addonStorageDescriptor_1415) {
+            $("<input type=\"color\" id=\"mp-leg-color1-" + addonStorageDescriptor_1404 + "-checkbox\" class=\"do-action-cursor\">").prop("value", addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.c).bind("change", async function (addonStorageDescriptor_1415) {
                 addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1414);
             const addonStorageDescriptor_1416 = addonStorageDescriptor_1406.find("#color1 #mp-leg-random-color1");
-            $("<input type=\"checkbox\" id=\"mp-leg-randomcolor1-" + addonStorageDescriptor_1404 + "-checkbox\">").prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.mode).bind("change", async function(addonStorageDescriptor_1417) {
+            $("<input type=\"checkbox\" id=\"mp-leg-randomcolor1-" + addonStorageDescriptor_1404 + "-checkbox\">").prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.mode).bind("change", async function (addonStorageDescriptor_1417) {
                 addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.mode = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1416);
             $("<label for=\"mp-leg-randomcolor1-" + addonStorageDescriptor_1404 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\"></label>").appendTo(addonStorageDescriptor_1416).tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].title.tipRand);
             const addonStorageDescriptor_1418 = addonStorageDescriptor_1406.find("#color2 .checkbox-custom#checkbox2");
-            $("<input type=\"checkbox\" id=\"mp-leg-color2-" + addonStorageDescriptor_1404 + "-checkbox\" class=\"do-action-cursor\">").prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.e).bind("change", async function(addonStorageDescriptor_1419) {
+            $("<input type=\"checkbox\" id=\"mp-leg-color2-" + addonStorageDescriptor_1404 + "-checkbox\" class=\"do-action-cursor\">").prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.e).bind("change", async function (addonStorageDescriptor_1419) {
                 addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.e = $(this).prop("checked");
                 if (!addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.e && !addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.e) {
                     addonStorageDescriptor_1403[addonStorageDescriptor_1404].one.e = true;
@@ -7383,7 +7383,7 @@ const {
             addonStorageDescriptor_1420.prop("value", addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.r).attr({
                 min: 1,
                 max: 100
-            }).on("focusout", async function(addonStorageDescriptor_1421) {
+            }).on("focusout", async function (addonStorageDescriptor_1421) {
                 let addonStorageDescriptor_1422 = Number($(this).val());
                 if (isNaN(addonStorageDescriptor_1422)) {
                     addonStorageDescriptor_1422 = 1;
@@ -7400,12 +7400,12 @@ const {
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).tip("Rozmiar cienia od 1px do 100px");
             const addonStorageDescriptor_1423 = addonStorageDescriptor_1406.find("#color2 .c-color-picker");
-            $("<input type=\"color\" id=\"mp-leg-color2-" + addonStorageDescriptor_1404 + "-checkbox\" class=\"do-action-cursor\">").prop("value", addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.c).bind("change", async function(addonStorageDescriptor_1424) {
+            $("<input type=\"color\" id=\"mp-leg-color2-" + addonStorageDescriptor_1404 + "-checkbox\" class=\"do-action-cursor\">").prop("value", addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.c).bind("change", async function (addonStorageDescriptor_1424) {
                 addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1423);
             const addonStorageDescriptor_1425 = addonStorageDescriptor_1406.find("#color2 #mp-leg-random-color2");
-            $("<input type=\"checkbox\" id=\"mp-leg-randomcolor2-" + addonStorageDescriptor_1404 + "-checkbox\">").prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.mode).bind("change", async function(addonStorageDescriptor_1426) {
+            $("<input type=\"checkbox\" id=\"mp-leg-randomcolor2-" + addonStorageDescriptor_1404 + "-checkbox\">").prop("checked", addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.mode).bind("change", async function (addonStorageDescriptor_1426) {
                 addonStorageDescriptor_1403[addonStorageDescriptor_1404].two.mode = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1425);
@@ -7414,7 +7414,7 @@ const {
             addonStorageDescriptor_1427.prop("value", addonStorageDescriptor_1403[addonStorageDescriptor_1404].s).attr({
                 min: 1,
                 max: 10
-            }).on("focusout", async function(addonStorageDescriptor_1428) {
+            }).on("focusout", async function (addonStorageDescriptor_1428) {
                 let addonStorageDescriptor_1429 = Number($(this).val());
                 if (isNaN(addonStorageDescriptor_1429)) {
                     addonStorageDescriptor_1429 = 0.1;
@@ -7431,10 +7431,10 @@ const {
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).tip("Szybkość animacji od 0.1s do 10s");
         }
-        const addonStorageDescriptor_1430 = $("\n                <div class=\"mp-leg-settings-box-center\">\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-animations-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-animations\" data-settings=\"animations\">\n\n                        </div>\n                        <div class=\"mp-leg-settings-speed\" data-settings=\"animations\">\n                            Szybkość animacji <input id=\"mp-leg-speed-anim\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"sek\" style=\"width: 30px\"> sek.\n                        </div>\n                    </div>\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-animations-window-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-animations-window\" data-settings=\"animations-window\">\n\n                        </div>\n                    </div>\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-rainitems-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-rainitems\" data-settings=\"rainitems\">\n                            <div class=\"mp-control\">\n                                Ilość przedmiotÃ³w <input id=\"mp-leg-rainitems-items\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"iloÅ›Ä‡\" style=\"width: 50px\">\n                            </div>\n                        </div>\n                    </div>\n\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-shadowgame-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-shadowgame\" data-settings=\"shadowgame\" style=\"height: 32px;\">\n                            <div class=\"mp-control\">\n                                Przyciemnianie gry w tle o <input id=\"mp-leg-shadowgame-percent\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"%\" style=\"width: 30px\"> %.\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            ").appendTo(addonStorageDescriptor_1401);
+        const addonStorageDescriptor_1430 = $("\n                <div class=\"mp-leg-settings-box-center\">\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-animations-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-animations\" data-settings=\"animations\">\n\n                        </div>\n                        <div class=\"mp-leg-settings-speed\" data-settings=\"animations\">\n                            Szybkość animacji <input id=\"mp-leg-speed-anim\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"sek\" style=\"width: 30px\"> sek.\n                        </div>\n                    </div>\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-animations-window-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-animations-window\" data-settings=\"animations-window\">\n\n                        </div>\n                    </div>\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-rainitems-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-rainitems\" data-settings=\"rainitems\">\n                            <div class=\"mp-control\">\n                                Ilość przedmiotów <input id=\"mp-leg-rainitems-items\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"ilość\" style=\"width: 50px\">\n                            </div>\n                        </div>\n                    </div>\n\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-shadowgame-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-shadowgame\" data-settings=\"shadowgame\" style=\"height: 32px;\">\n                            <div class=\"mp-control\">\n                                Przyciemnianie gry w tle o <input id=\"mp-leg-shadowgame-percent\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"%\" style=\"width: 30px\"> %.\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            ").appendTo(addonStorageDescriptor_1401);
         const addonStorageDescriptor_1431 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id].item;
         const addonStorageDescriptor_1432 = addonStorageDescriptor_1430.find("#mp-leg-animations-enable");
-        $("<input type=\"checkbox\" id=\"mp-leg-animations-checkbox\">").appendTo(addonStorageDescriptor_1432).prop("checked", addonStorageDescriptor_1431.e).bind("change", async function(addonStorageDescriptor_1433) {
+        $("<input type=\"checkbox\" id=\"mp-leg-animations-checkbox\">").appendTo(addonStorageDescriptor_1432).prop("checked", addonStorageDescriptor_1431.e).bind("change", async function (addonStorageDescriptor_1433) {
             addonStorageDescriptor_1431.e = $(this).prop("checked");
             $("div[data-settings=\"animations\"]").css({
                 opacity: "" + (addonStorageDescriptor_1431.e ? "1" : "0.25"),
@@ -7447,7 +7447,7 @@ const {
         addonStorageDescriptor_1434.prop("value", addonStorageDescriptor_1431.s).attr({
             min: 0.1,
             max: 10
-        }).on("focusout", async function(addonStorageDescriptor_1435) {
+        }).on("focusout", async function (addonStorageDescriptor_1435) {
             let addonStorageDescriptor_1436 = Number($(this).val());
             if (isNaN(addonStorageDescriptor_1436)) {
                 addonStorageDescriptor_1436 = 0.1;
@@ -7462,12 +7462,12 @@ const {
             }, 3000);
             addonStorageDescriptor_1431.s = addonStorageDescriptor_1436;
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-        }).tip("SzybkoÅ›Ä‡ animacji od 0.1s do 10s");
+        }).tip("Szybkość animacji od 0.1s do 10s");
         const addonStorageDescriptor_1437 = addonStorageDescriptor_1430.find(".mp-leg-settings-animations");
         for (const addonStorageDescriptor_1438 in addonStorageDescriptor_1431.animation) {
             const addonStorageDescriptor_1439 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\"></div>\n                    </div>\n                </div>\n            ").appendTo(addonStorageDescriptor_1437);
             const addonStorageDescriptor_1440 = addonStorageDescriptor_1439.find(".checkbox-custom");
-            const addonStorageDescriptor_1441 = $("<input type=\"checkbox\" id=\"mp-leg-animations-" + addonStorageDescriptor_1438 + "-checkbox\">").appendTo(addonStorageDescriptor_1440).prop("checked", addonStorageDescriptor_1431.animation[addonStorageDescriptor_1438]).on("change", function() {
+            const addonStorageDescriptor_1441 = $("<input type=\"checkbox\" id=\"mp-leg-animations-" + addonStorageDescriptor_1438 + "-checkbox\">").appendTo(addonStorageDescriptor_1440).prop("checked", addonStorageDescriptor_1431.animation[addonStorageDescriptor_1438]).on("change", function () {
                 const addonStorageDescriptor_1442 = addonStorageDescriptor_1437.find("input[type=\"checkbox\"]:checked").length;
                 if ($(this).is(":checked")) {
                     addonStorageDescriptor_1437.find("input[type=\"checkbox\"]").not(this).prop("checked", false);
@@ -7494,7 +7494,7 @@ const {
         }
         const addonStorageDescriptor_1444 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id].settings.lootWindow;
         const addonStorageDescriptor_1445 = addonStorageDescriptor_1430.find("#mp-leg-animations-window-enable");
-        $("<input type=\"checkbox\" id=\"mp-leg-animations-window-checkbox\">").appendTo(addonStorageDescriptor_1445).prop("checked", addonStorageDescriptor_1444.e).bind("change", async function(addonStorageDescriptor_1446) {
+        $("<input type=\"checkbox\" id=\"mp-leg-animations-window-checkbox\">").appendTo(addonStorageDescriptor_1445).prop("checked", addonStorageDescriptor_1444.e).bind("change", async function (addonStorageDescriptor_1446) {
             addonStorageDescriptor_1444.e = $(this).prop("checked");
             $("div[data-settings=\"animations-window\"]").css({
                 opacity: "" + (addonStorageDescriptor_1444.e ? "1" : "0.25"),
@@ -7507,7 +7507,7 @@ const {
         for (const addonStorageDescriptor_1448 in addonStorageDescriptor_1444.animation) {
             const addonStorageDescriptor_1449 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\"></div>\n                    </div>\n                </div>\n            ").appendTo(addonStorageDescriptor_1447);
             const addonStorageDescriptor_1450 = addonStorageDescriptor_1449.find(".checkbox-custom");
-            const addonStorageDescriptor_1451 = $("<input type=\"checkbox\" id=\"mp-leg-animations-window-" + addonStorageDescriptor_1448 + "-checkbox\">").appendTo(addonStorageDescriptor_1450).prop("checked", addonStorageDescriptor_1444.animation[addonStorageDescriptor_1448]).on("change", function() {
+            const addonStorageDescriptor_1451 = $("<input type=\"checkbox\" id=\"mp-leg-animations-window-" + addonStorageDescriptor_1448 + "-checkbox\">").appendTo(addonStorageDescriptor_1450).prop("checked", addonStorageDescriptor_1444.animation[addonStorageDescriptor_1448]).on("change", function () {
                 const addonStorageDescriptor_1452 = addonStorageDescriptor_1447.find("input[type=\"checkbox\"]:checked").length;
                 if ($(this).is(":checked")) {
                     addonStorageDescriptor_1447.find("input[type=\"checkbox\"]").not(this).prop("checked", false);
@@ -7534,7 +7534,7 @@ const {
         }
         const addonStorageDescriptor_1454 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id].rainItems;
         const addonStorageDescriptor_1455 = addonStorageDescriptor_1430.find("#mp-leg-rainitems-enable");
-        $("<input type=\"checkbox\" id=\"mp-leg-rainitems-checkbox\">").appendTo(addonStorageDescriptor_1455).prop("checked", addonStorageDescriptor_1454.e).bind("change", async function(addonStorageDescriptor_1456) {
+        $("<input type=\"checkbox\" id=\"mp-leg-rainitems-checkbox\">").appendTo(addonStorageDescriptor_1455).prop("checked", addonStorageDescriptor_1454.e).bind("change", async function (addonStorageDescriptor_1456) {
             addonStorageDescriptor_1454.e = $(this).prop("checked");
             $("div[data-settings=\"rainitems\"]").css({
                 opacity: "" + (addonStorageDescriptor_1454.e ? "1" : "0.25"),
@@ -7553,7 +7553,7 @@ const {
         addonStorageDescriptor_1457.prop("value", addonStorageDescriptor_1454.items).attr({
             min: 1,
             max: 9999
-        }).on("focusout", async function(addonStorageDescriptor_1458) {
+        }).on("focusout", async function (addonStorageDescriptor_1458) {
             let addonStorageDescriptor_1459 = Number($(this).val());
             if (isNaN(addonStorageDescriptor_1459)) {
                 addonStorageDescriptor_1459 = 1;
@@ -7568,12 +7568,12 @@ const {
             }, 3000);
             addonStorageDescriptor_1454.items = addonStorageDescriptor_1459;
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-        }).tip("Ilość spadających przedmiotÃ³w od 1 do 9999.");
+        }).tip("Ilość spadających przedmiotów od 1 do 9999.");
         const addonStorageDescriptor_1460 = addonStorageDescriptor_1430.find(".mp-leg-settings-rainitems");
         for (const addonStorageDescriptor_1461 in addonStorageDescriptor_1454.mode) {
             const addonStorageDescriptor_1462 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n                        </div>\n                    </div>\n                </div>\n            ").appendTo(addonStorageDescriptor_1460);
             const addonStorageDescriptor_1463 = addonStorageDescriptor_1462.find(".checkbox-custom");
-            const addonStorageDescriptor_1464 = $("<input type=\"checkbox\" id=\"mp-leg-rainitems-" + addonStorageDescriptor_1461 + "-checkbox\">").appendTo(addonStorageDescriptor_1463).prop("checked", addonStorageDescriptor_1454.mode[addonStorageDescriptor_1461]).on("change", async function() {
+            const addonStorageDescriptor_1464 = $("<input type=\"checkbox\" id=\"mp-leg-rainitems-" + addonStorageDescriptor_1461 + "-checkbox\">").appendTo(addonStorageDescriptor_1463).prop("checked", addonStorageDescriptor_1454.mode[addonStorageDescriptor_1461]).on("change", async function () {
                 const addonStorageDescriptor_1465 = addonStorageDescriptor_1460.find("input[type=\"checkbox\"]:checked").length;
                 if (!$(this).prop("checked") && addonStorageDescriptor_1465 === 0) {
                     $(this).prop("checked", true);
@@ -7597,32 +7597,32 @@ const {
             let addonStorageDescriptor_1468 = addonStorageDescriptor_1454.imagesList.slice(0, 12);
             for (const addonStorageDescriptor_1469 in addonStorageDescriptor_1468) {
                 const addonStorageDescriptor_1470 = addonStorageDescriptor_1468[addonStorageDescriptor_1469].src;
-                $("<div class=\"mp-leg-settings-item do-action-cursor\"><div class=\"mp-image-item-show\" style=\"background-image: url('" + addonStorageDescriptor_1470 + "')\"></div></div>").appendTo(addonStorageDescriptor_1466).tip("Prawy przycisk myszy – otwiera menu.").on("contextmenu", function(addonStorageDescriptor_1471) {
+                $("<div class=\"mp-leg-settings-item do-action-cursor\"><div class=\"mp-image-item-show\" style=\"background-image: url('" + addonStorageDescriptor_1470 + "')\"></div></div>").appendTo(addonStorageDescriptor_1466).tip("Prawy przycisk myszy – otwiera menu.").on("contextmenu", function (addonStorageDescriptor_1471) {
                     addonStorageDescriptor_1471.preventDefault();
                     let addonStorageDescriptor_1472 = [
                         ["Skopiuj adres", async () => {
                             navigator.clipboard.writeText(addonStorageDescriptor_1470);
                             message("Skopiowano adres");
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }],
-                        ["Usuń grafikÄ™", async () => {
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }],
+                        ["Usuń grafikę", async () => {
                             addonStorageDescriptor_1454.imagesList.splice(addonStorageDescriptor_1469, 1);
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                             addonStorageDescriptor_1467();
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }]
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }]
                     ];
                     Engine.interface.showPopupMenu(addonStorageDescriptor_1472, addonStorageDescriptor_1471);
                 });
             }
             if (addonStorageDescriptor_1468.length < 12) {
-                $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(addonStorageDescriptor_1466).tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].title.tipAddImage).click(async function() {
+                $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(addonStorageDescriptor_1466).tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].title.tipAddImage).click(async function () {
                     const addonStorageDescriptor_1473 = await addImagesUrl();
                     if (addonStorageDescriptor_1473) {
                         const addonStorageDescriptor_1474 = [".jpg", ".jpeg", ".png", ".bmp", ".webp", ".svg"];
@@ -7652,7 +7652,7 @@ const {
         const addonStorageDescriptor_1477 = $("<div class=\"mp-leg-settings-box-right\">\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-audio-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"settings-section\">\n                            <div class=\"mp-slider-wrapper dark\" style=\"flex-wrap: wrap !important;\">\n                                <div class=\"mp-slider dark do-action-cursor\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-table\" data-settings=\"audio\">\n\n                        </div>\n                    </div>\n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-clan-enable\" class=\"checkbox-custom c-checkbox\">\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-table\" data-settings=\"clan\">\n\n                        </div>\n                    </div>\n                    <div id=\"mp-leg-settings-other\" class=\"mp-leg-settings\">\n\n                    </div>\n                    <div id=\"mp-leg-settings-other2\" class=\"mp-leg-settings\">\n                        <div class=\"mp-title\">Dodatkowe animacje</div>\n\n                    </div>\n                    \n                    <div class=\"mp-leg-settings\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-leg-alert-enable\" class=\"checkbox-custom c-checkbox\">\n\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-leg-settings-alert\" data-settings=\"alert\">\n                            <div class=\"mp-control\">\n                                Treść: <input id=\"mp-leg-alert\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"Dowolny tekst\" style=\"width: 200px\">.\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"mp-leg-buttons\">\n                        <div id=\"mp-leg-test-legendary\" class=\"mp-button do-action-cursor\" style=\"width: 70px;\">Testuj</div>\n                    </div>\n                    <div class=\"mp-leg-buttons\">\n                        <div id=\"mp-leg-get-config\" class=\"mp-button do-action-cursor\"><i class=\"fa-solid fa-download\"></i></div>\n                        <div id=\"mp-leg-load-config\" class=\"mp-button do-action-cursor\"><i class=\"fa-solid fa-share-nodes\"></i></div>\n                        <div id=\"mp-leg-default\" class=\"mp-button do-action-cursor\"><i class=\"fa-solid fa-person\"></i></div>\n                    </div>\n            </div>").appendTo(addonStorageDescriptor_1401);
         const addonStorageDescriptor_1478 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id].settings.gameShadow;
         const addonStorageDescriptor_1479 = addonStorageDescriptor_1430.find("#mp-leg-shadowgame-enable");
-        $("<input type=\"checkbox\" id=\"mp-leg-shadowgame-checkbox\">").appendTo(addonStorageDescriptor_1479).prop("checked", addonStorageDescriptor_1478.e).bind("change", async function(addonStorageDescriptor_1480) {
+        $("<input type=\"checkbox\" id=\"mp-leg-shadowgame-checkbox\">").appendTo(addonStorageDescriptor_1479).prop("checked", addonStorageDescriptor_1478.e).bind("change", async function (addonStorageDescriptor_1480) {
             addonStorageDescriptor_1478.e = $(this).prop("checked");
             $("div[data-settings=\"shadowgame\"]").css({
                 opacity: "" + (addonStorageDescriptor_1478.e ? "1" : "0.25"),
@@ -7671,7 +7671,7 @@ const {
         addonStorageDescriptor_1481.prop("value", addonStorageDescriptor_1478.percent).attr({
             min: 1,
             max: 100
-        }).on("input", async function(addonStorageDescriptor_1482) {
+        }).on("input", async function (addonStorageDescriptor_1482) {
             let addonStorageDescriptor_1483 = Number($(this).val());
             if (isNaN(addonStorageDescriptor_1483)) {
                 addonStorageDescriptor_1483 = 1;
@@ -7695,7 +7695,7 @@ const {
             });
         }
         const addonStorageDescriptor_1485 = addonStorageDescriptor_1477.find("#mp-leg-alert-enable");
-        $("<input type=\"checkbox\" id=\"mp-leg-alert-checkbox\">").appendTo(addonStorageDescriptor_1485).prop("checked", addonStorageDescriptor_1484.e).bind("change", async function(addonStorageDescriptor_1486) {
+        $("<input type=\"checkbox\" id=\"mp-leg-alert-checkbox\">").appendTo(addonStorageDescriptor_1485).prop("checked", addonStorageDescriptor_1484.e).bind("change", async function (addonStorageDescriptor_1486) {
             addonStorageDescriptor_1484.e = $(this).prop("checked");
             const addonStorageDescriptor_1487 = {
                 opacity: "" + (addonStorageDescriptor_1484.e ? "1" : "0.25"),
@@ -7706,19 +7706,19 @@ const {
         });
         $("<label for=\"mp-leg-alert-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight mp-text-bold\" style=\"width: 200px;\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].title.alert + "</label>").appendTo(addonStorageDescriptor_1485);
         const addonStorageDescriptor_1488 = addonStorageDescriptor_1477.find("#mp-leg-alert");
-        addonStorageDescriptor_1488.prop("value", addonStorageDescriptor_1484.text).on("input", async function(addonStorageDescriptor_1489) {
+        addonStorageDescriptor_1488.prop("value", addonStorageDescriptor_1484.text).on("input", async function (addonStorageDescriptor_1489) {
             addonStorageDescriptor_1484.text = $(this).val();
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-        }).tip("Tekst, ktÃ³ry wyświetli się przy zdobyczy w message()");
+        }).tip("Tekst, który wyświetli się przy zdobyczy w message()");
         const addonStorageDescriptor_1490 = addonStorageDescriptor_1477.find("#mp-leg-test-legendary");
         addonStorageDescriptor_1490.tip("Wygeneruj przedmiot legendarny");
-        addonStorageDescriptor_1490.click(function() {
+        addonStorageDescriptor_1490.click(function () {
             addonStorageDescriptor_1491();
         });
         const addonStorageDescriptor_1492 = addonStorageDescriptor_1477.find("#mp-leg-default");
-        addonStorageDescriptor_1492.tip("Przywraca domyÅ›lne ustawienia");
-        addonStorageDescriptor_1492.click(async function() {
-            const addonStorageDescriptor_1493 = await askWindow("Czy na pewno chcesz przywrÃ³ciÄ‡ ustawienia domyÅ›lne?");
+        addonStorageDescriptor_1492.tip("Przywraca domyślne ustawienia");
+        addonStorageDescriptor_1492.click(async function () {
+            const addonStorageDescriptor_1493 = await askWindow("Czy na pewno chcesz przywrócić ustawienia domyślne?");
             if (addonStorageDescriptor_1493) {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id] = domInteractionNode_626;
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -7727,7 +7727,7 @@ const {
         });
         const addonStorageDescriptor_1494 = addonStorageDescriptor_1477.find("#mp-leg-get-config");
         addonStorageDescriptor_1494.tip("Skopiuj konfiguracje");
-        addonStorageDescriptor_1494.click(async function() {
+        addonStorageDescriptor_1494.click(async function () {
             const addonStorageDescriptor_1495 = addonStorageDescriptor_1496();
             if (addonStorageDescriptor_1495) {
                 copyText(addonStorageDescriptor_1495);
@@ -7738,7 +7738,7 @@ const {
         });
         const addonStorageDescriptor_1497 = addonStorageDescriptor_1477.find("#mp-leg-load-config");
         addonStorageDescriptor_1497.tip("Załaduj konfiguracje");
-        addonStorageDescriptor_1497.click(async function() {
+        addonStorageDescriptor_1497.click(async function () {
             const addonStorageDescriptor_1498 = await loadConfig();
             if (addonStorageDescriptor_1498) {
                 addonStorageDescriptor_1499(addonStorageDescriptor_1498);
@@ -7746,7 +7746,7 @@ const {
         });
         const addonStorageDescriptor_1500 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id].audio;
         const addonStorageDescriptor_1501 = addonStorageDescriptor_1477.find("#mp-leg-audio-enable");
-        $("<input type=\"checkbox\" id=\"mp-leg-audio-checkbox\">").appendTo(addonStorageDescriptor_1501).prop("checked", addonStorageDescriptor_1500.e).bind("change", async function(addonStorageDescriptor_1502) {
+        $("<input type=\"checkbox\" id=\"mp-leg-audio-checkbox\">").appendTo(addonStorageDescriptor_1501).prop("checked", addonStorageDescriptor_1500.e).bind("change", async function (addonStorageDescriptor_1502) {
             addonStorageDescriptor_1500.e = $(this).prop("checked");
             $("div[data-settings=\"audio\"]").css({
                 opacity: "" + (addonStorageDescriptor_1500.e ? "1" : "0.25"),
@@ -7756,7 +7756,7 @@ const {
         });
         $("<label for=\"mp-leg-audio-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight mp-text-bold\" style=\"width: 200px;\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].title.audio + "</label>").appendTo(addonStorageDescriptor_1501);
         const addonStorageDescriptor_1503 = addonStorageDescriptor_1477.find(".mp-slider");
-        const addonStorageDescriptor_1504 = $("<input type=\"range\" class=\"mp-slider__input do-action-cursor\" min=\"0\" max=\"1\" step=\"0.01\">").prop("value", addonStorageDescriptor_1500.v).on("input", async function() {
+        const addonStorageDescriptor_1504 = $("<input type=\"range\" class=\"mp-slider__input do-action-cursor\" min=\"0\" max=\"1\" step=\"0.01\">").prop("value", addonStorageDescriptor_1500.v).on("input", async function () {
             const addonStorageDescriptor_1505 = $(this).prop("value");
             addonStorageDescriptor_1500.v = addonStorageDescriptor_1505;
             if (notificatorAudio) {
@@ -7774,9 +7774,9 @@ const {
             let addonStorageDescriptor_1509 = addonStorageDescriptor_1500.list.slice(0, 12);
             for (const addonStorageDescriptor_1510 in addonStorageDescriptor_1509) {
                 const addonStorageDescriptor_1511 = addonStorageDescriptor_1509[addonStorageDescriptor_1510];
-                $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor\"><i class=\"fa-solid fa-music\"></i></div>").appendTo(addonStorageDescriptor_1507).tip("Lewy przycisk myszy – odtwórz dźwięk.<br>\n                        Prawy przycisk myszy - otwiera menu i anuluję odtwarzanie dźwięku.").on("click", function() {
+                $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor\"><i class=\"fa-solid fa-music\"></i></div>").appendTo(addonStorageDescriptor_1507).tip("Lewy przycisk myszy – odtwórz dźwięk.<br>\n                        Prawy przycisk myszy - otwiera menu i anuluję odtwarzanie dźwięku.").on("click", function () {
                     uiLayoutComponent_257(addonStorageDescriptor_1511, addonStorageDescriptor_1500.v);
-                }).on("contextmenu", function(addonStorageDescriptor_1512) {
+                }).on("contextmenu", function (addonStorageDescriptor_1512) {
                     addonStorageDescriptor_1512.preventDefault();
                     if (uiLayoutComponent_256) {
                         uiLayoutComponent_256.pause();
@@ -7787,25 +7787,25 @@ const {
                             navigator.clipboard.writeText(addonStorageDescriptor_1511);
                             message("Skopiowano adres");
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }],
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }],
                         ["Usuń dźwięk", async () => {
                             addonStorageDescriptor_1500.list.splice(addonStorageDescriptor_1510, 1);
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                             addonStorageDescriptor_1508();
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }]
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }]
                     ];
                     Engine.interface.showPopupMenu(addonStorageDescriptor_1513, addonStorageDescriptor_1512);
                 });
             }
             if (addonStorageDescriptor_1509.length < 12) {
-                $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(addonStorageDescriptor_1507).tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].title.tipAddAudio).click(async function() {
+                $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(addonStorageDescriptor_1507).tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].title.tipAddAudio).click(async function () {
                     const addonStorageDescriptor_1514 = await addAudioUrl();
                     if (addonStorageDescriptor_1514) {
                         if (addonStorageDescriptor_1514.length > 0 && addonStorageDescriptor_1514.startsWith("https") && addonStorageDescriptor_1514.toLowerCase().includes(".mp3")) {
@@ -7830,7 +7830,7 @@ const {
         }
         const addonStorageDescriptor_1515 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id].clan;
         const addonStorageDescriptor_1516 = addonStorageDescriptor_1477.find("#mp-leg-clan-enable");
-        $("<input type=\"checkbox\" id=\"mp-leg-clan-checkbox\">").appendTo(addonStorageDescriptor_1516).prop("checked", addonStorageDescriptor_1515.e).bind("change", async function(addonStorageDescriptor_1517) {
+        $("<input type=\"checkbox\" id=\"mp-leg-clan-checkbox\">").appendTo(addonStorageDescriptor_1516).prop("checked", addonStorageDescriptor_1515.e).bind("change", async function (addonStorageDescriptor_1517) {
             addonStorageDescriptor_1515.e = $(this).prop("checked");
             $("div[data-settings=\"clan\"]").css({
                 opacity: "" + (addonStorageDescriptor_1515.e ? "1" : "0.25"),
@@ -7846,10 +7846,10 @@ const {
             let addonStorageDescriptor_1520 = addonStorageDescriptor_1515.list.slice(0, 12);
             for (const addonStorageDescriptor_1521 in addonStorageDescriptor_1520) {
                 const addonStorageDescriptor_1522 = addonStorageDescriptor_1520[addonStorageDescriptor_1521];
-                $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor\"><i class=\"fa-solid fa-font\"></i></div>").appendTo(addonStorageDescriptor_1518).tip("Wiadomość: " + addonStorageDescriptor_1520[addonStorageDescriptor_1521] + "<br><br>Prawy przycisk myszy - otwiera menu.").on("contextmenu", function(addonStorageDescriptor_1523) {
+                $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor\"><i class=\"fa-solid fa-font\"></i></div>").appendTo(addonStorageDescriptor_1518).tip("Wiadomość: " + addonStorageDescriptor_1520[addonStorageDescriptor_1521] + "<br><br>Prawy przycisk myszy - otwiera menu.").on("contextmenu", function (addonStorageDescriptor_1523) {
                     addonStorageDescriptor_1523.preventDefault();
                     let addonStorageDescriptor_1524 = [
-                        ["Edytuj wiadomoÅ›Ä‡", async () => {
+                        ["Edytuj wiadomość", async () => {
                             const addonStorageDescriptor_1525 = await addClanText(addonStorageDescriptor_1520[addonStorageDescriptor_1521]);
                             if (addonStorageDescriptor_1525) {
                                 if (addonStorageDescriptor_1525.length > 0) {
@@ -7857,29 +7857,29 @@ const {
                                     saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                                     addonStorageDescriptor_1519();
                                 } else {
-                                    message("BÅ‚Ä…d podczas dodawania: zbyt krótka wiadomość");
+                                    message("Błąd podczas dodawania: zbyt krótka wiadomość");
                                 }
                             }
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }],
-                        ["Usuń wiadomoÅ›Ä‡", async () => {
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }],
+                        ["Usuń wiadomość", async () => {
                             addonStorageDescriptor_1515.list.splice(addonStorageDescriptor_1521, 1);
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                             addonStorageDescriptor_1519();
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }]
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }]
                     ];
                     Engine.interface.showPopupMenu(addonStorageDescriptor_1524, addonStorageDescriptor_1523);
                 });
             }
             if (addonStorageDescriptor_1520.length < 12) {
-                $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(addonStorageDescriptor_1518).tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].title.tipAddText).click(async function() {
+                $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(addonStorageDescriptor_1518).tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[18].id].title.tipAddText).click(async function () {
                     const addonStorageDescriptor_1526 = await addClanText();
                     if (addonStorageDescriptor_1526) {
                         if (addonStorageDescriptor_1526.length > 0) {
@@ -7890,7 +7890,7 @@ const {
                             message("Błąd podczas dodawania: zbyt krótka wiadomość");
                         }
                     } else {
-                        message("BÅ‚Ä…d podczas dodawania: zbyt krótka wiadomość");
+                        message("Błąd podczas dodawania: zbyt krótka wiadomość");
                     }
                 });
             }
@@ -7908,7 +7908,7 @@ const {
         for (const addonStorageDescriptor_1530 in addonStorageDescriptor_1528) {
             const addonStorageDescriptor_1531 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1527);
             const addonStorageDescriptor_1532 = addonStorageDescriptor_1531.find(".checkbox-custom");
-            const addonStorageDescriptor_1533 = $("<input type=\"checkbox\" id=\"mp-leg-other-" + addonStorageDescriptor_1530 + "-checkbox\">").appendTo(addonStorageDescriptor_1532).prop("checked", addonStorageDescriptor_1528[addonStorageDescriptor_1530]).on("change", function() {
+            const addonStorageDescriptor_1533 = $("<input type=\"checkbox\" id=\"mp-leg-other-" + addonStorageDescriptor_1530 + "-checkbox\">").appendTo(addonStorageDescriptor_1532).prop("checked", addonStorageDescriptor_1528[addonStorageDescriptor_1530]).on("change", function () {
                 addonStorageDescriptor_1527.find("input[type=\"checkbox\"]").not(this).prop("checked", false);
                 const addonStorageDescriptor_1534 = addonStorageDescriptor_1527.find("input[type=\"checkbox\"]:checked").length;
                 for (const addonStorageDescriptor_1535 in addonStorageDescriptor_1528) {
@@ -7926,7 +7926,7 @@ const {
         const addonStorageDescriptor_1537 = addonStorageDescriptor_1477.find("#mp-leg-settings-other2");
         const addonStorageDescriptor_1538 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1537);
         const addonStorageDescriptor_1539 = addonStorageDescriptor_1538.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-leg-other-loss-checkbox\">").appendTo(addonStorageDescriptor_1539).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id].displayChance).on("change", function() {
+        $("<input type=\"checkbox\" id=\"mp-leg-other-loss-checkbox\">").appendTo(addonStorageDescriptor_1539).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id].displayChance).on("change", function () {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id].displayChance = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         });
@@ -7962,7 +7962,7 @@ const {
         for (const addonStorageDescriptor_1550 in ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].invite) {
             const addonStorageDescriptor_1551 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1549);
             const addonStorageDescriptor_1552 = addonStorageDescriptor_1551.find(".checkbox-custom");
-            const addonStorageDescriptor_1553 = $("<input type=\"checkbox\" id=\"mp-party-invite-" + addonStorageDescriptor_1550 + "-checkbox\">").appendTo(addonStorageDescriptor_1552).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].invite[addonStorageDescriptor_1550]).on("change", function() {
+            const addonStorageDescriptor_1553 = $("<input type=\"checkbox\" id=\"mp-party-invite-" + addonStorageDescriptor_1550 + "-checkbox\">").appendTo(addonStorageDescriptor_1552).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].invite[addonStorageDescriptor_1550]).on("change", function () {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].invite[addonStorageDescriptor_1550] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             });
@@ -7974,7 +7974,7 @@ const {
         for (const addonStorageDescriptor_1556 in ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].prof) {
             const addonStorageDescriptor_1557 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1555);
             const addonStorageDescriptor_1558 = addonStorageDescriptor_1557.find(".checkbox-custom");
-            const addonStorageDescriptor_1559 = $("<input type=\"checkbox\" id=\"mp-party-prof-" + addonStorageDescriptor_1556 + "-checkbox\">").appendTo(addonStorageDescriptor_1558).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].prof[addonStorageDescriptor_1556]).on("change", function() {
+            const addonStorageDescriptor_1559 = $("<input type=\"checkbox\" id=\"mp-party-prof-" + addonStorageDescriptor_1556 + "-checkbox\">").appendTo(addonStorageDescriptor_1558).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].prof[addonStorageDescriptor_1556]).on("change", function () {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].prof[addonStorageDescriptor_1556] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             });
@@ -7990,7 +7990,7 @@ const {
         addonStorageDescriptor_1563.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].levelRange.min).attr({
             min: 1,
             max: 500
-        }).on("focusout", async function(addonStorageDescriptor_1564) {
+        }).on("focusout", async function (addonStorageDescriptor_1564) {
             let addonStorageDescriptor_1565 = Number($(this).val());
             if (isNaN(addonStorageDescriptor_1565)) {
                 addonStorageDescriptor_1565 = 1;
@@ -8010,7 +8010,7 @@ const {
         addonStorageDescriptor_1566.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].levelRange.max).attr({
             min: 1,
             max: 500
-        }).on("focusout", async function(addonStorageDescriptor_1567) {
+        }).on("focusout", async function (addonStorageDescriptor_1567) {
             let addonStorageDescriptor_1568 = Number($(this).val());
             if (isNaN(addonStorageDescriptor_1568)) {
                 addonStorageDescriptor_1568 = 1;
@@ -8025,14 +8025,14 @@ const {
             }, 3000);
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].levelRange.max = addonStorageDescriptor_1568;
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-        }).tip("Maskymalny poziom gracza, ktÃ³rego zaprosi");
+        }).tip("Maskymalny poziom gracza, którego zaprosi");
         const addonStorageDescriptor_1569 = $("<div class=\"mp-background-section\"></div>").appendTo(addonStorageDescriptor_1546);
         $("<div class=\"mp-title\">Automatycznie</div>").appendTo(addonStorageDescriptor_1569);
         const addonStorageDescriptor_1570 = $("<div></div>").appendTo(addonStorageDescriptor_1569);
         for (const addonStorageDescriptor_1571 in ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].auto) {
             const addonStorageDescriptor_1572 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1570);
             const addonStorageDescriptor_1573 = addonStorageDescriptor_1572.find(".checkbox-custom");
-            const addonStorageDescriptor_1574 = $("<input type=\"checkbox\" id=\"mp-party-auto-" + addonStorageDescriptor_1571 + "-checkbox\">").appendTo(addonStorageDescriptor_1573).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].auto[addonStorageDescriptor_1571]).on("change", function() {
+            const addonStorageDescriptor_1574 = $("<input type=\"checkbox\" id=\"mp-party-auto-" + addonStorageDescriptor_1571 + "-checkbox\">").appendTo(addonStorageDescriptor_1573).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].auto[addonStorageDescriptor_1571]).on("change", function () {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].auto[addonStorageDescriptor_1571] = $(this).prop("checked");
                 $("div[data-show=\"fraza\"]").css({
                     opacity: "" + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].auto.giveLeader ? "1" : "0.25"),
@@ -8042,12 +8042,12 @@ const {
             });
             $("<label for=\"mp-party-auto-" + addonStorageDescriptor_1571 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\" style=\"width: 200px;\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[19].id].auto[addonStorageDescriptor_1571] + "</label>").appendTo(addonStorageDescriptor_1573);
             if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].auto[addonStorageDescriptor_1571] == "giveLeader") {
-                addonStorageDescriptor_1572.tip("Automatycznie przekazuje dowodzenie w druÅ¼ynie osobie, która napisała ustaloną frazę na chacie grupowym.");
+                addonStorageDescriptor_1572.tip("Automatycznie przekazuje dowodzenie w drużynie osobie, która napisała ustaloną frazę na chacie grupowym.");
             }
         }
         $("<div data-show=\"fraza\">Fraza przekazania: <input id=\"mp-giveleader-word\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"daj d\" style=\"width: 70px\"></div>").appendTo(addonStorageDescriptor_1570);
         const addonStorageDescriptor_1575 = addonStorageDescriptor_1569.find("#mp-giveleader-word");
-        addonStorageDescriptor_1575.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].giveLeaderWord).on("focusout", async function(addonStorageDescriptor_1576) {
+        addonStorageDescriptor_1575.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].giveLeaderWord).on("focusout", async function (addonStorageDescriptor_1576) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].giveLeaderWord = $(this).val();
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         });
@@ -8059,7 +8059,7 @@ const {
         }
         const addonStorageDescriptor_1577 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1570);
         const addonStorageDescriptor_1578 = addonStorageDescriptor_1577.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-party-highlight-checkbox\">").appendTo(addonStorageDescriptor_1578).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.e).on("change", function() {
+        $("<input type=\"checkbox\" id=\"mp-party-highlight-checkbox\">").appendTo(addonStorageDescriptor_1578).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.e).on("change", function () {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.e = $(this).prop("checked");
             $("div[data-show=\"light\"]").css({
                 opacity: "" + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.e ? "1" : "0.25"),
@@ -8067,16 +8067,16 @@ const {
             });
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         });
-        $("<label for=\"mp-party-highlight-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\" style=\"width: 200px;\">Podświetlanie osÃ³b</label>").appendTo(addonStorageDescriptor_1578);
+        $("<label for=\"mp-party-highlight-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\" style=\"width: 200px;\">Podświetlanie osób</label>").appendTo(addonStorageDescriptor_1578);
         const addonStorageDescriptor_1579 = $("<div data-show=\"light\" id=\"mp-party-highlight-picker\" class=\"do-action-cursor\">W zasięgu: </div>").appendTo(addonStorageDescriptor_1570);
         const addonStorageDescriptor_1580 = $("<div class=\"c-color-picker do-action-cursor\"></div>").appendTo(addonStorageDescriptor_1579);
-        $("<input type=\"color\" id=\"mp-party-inRange\" class=\"do-action-cursor\" name=\"mp-party-inRange-name\">").prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.inRange).bind("focusout", async function(addonStorageDescriptor_1581) {
+        $("<input type=\"color\" id=\"mp-party-inRange\" class=\"do-action-cursor\" name=\"mp-party-inRange-name\">").prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.inRange).bind("focusout", async function (addonStorageDescriptor_1581) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.inRange = $(this).prop("value");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         }).appendTo(addonStorageDescriptor_1580);
         const addonStorageDescriptor_1582 = $("<div data-show=\"light\" id=\"mp-party-highlight-picker\" class=\"do-action-cursor\">Poza zasięgiem: </div>").appendTo(addonStorageDescriptor_1570);
         const addonStorageDescriptor_1583 = $("<div class=\"c-color-picker do-action-cursor\"></div>").appendTo(addonStorageDescriptor_1582);
-        $("<input type=\"color\" id=\"mp-party-outRange\" class=\"do-action-cursor\" name=\"mp-party-outRange-name\">").prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.outRange).bind("focusout", async function(addonStorageDescriptor_1584) {
+        $("<input type=\"color\" id=\"mp-party-outRange\" class=\"do-action-cursor\" name=\"mp-party-outRange-name\">").prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.outRange).bind("focusout", async function (addonStorageDescriptor_1584) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].highlight.outRange = $(this).prop("value");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         }).appendTo(addonStorageDescriptor_1583);
@@ -8088,7 +8088,7 @@ const {
         }
         const addonStorageDescriptor_1585 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1570);
         const addonStorageDescriptor_1586 = addonStorageDescriptor_1585.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-party-systemCreate-checkbox\">").appendTo(addonStorageDescriptor_1586).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].systemCreate.e).on("change", function() {
+        $("<input type=\"checkbox\" id=\"mp-party-systemCreate-checkbox\">").appendTo(addonStorageDescriptor_1586).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].systemCreate.e).on("change", function () {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].systemCreate.e = $(this).prop("checked");
             const addonStorageDescriptor_1587 = {
                 opacity: "" + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].systemCreate.e ? "1" : "0.25"),
@@ -8100,11 +8100,11 @@ const {
         $("<label for=\"mp-party-systemCreate-checkbox\" class=\"c-checkbox__label c-checkbox__label--systemCreate\" style=\"width: 200px;\">System tworzenia</label>").appendTo(addonStorageDescriptor_1586);
         $("<div data-show=\"system\">Schemat: <input id=\"mp-system-create\" type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"1t2p2m\" style=\"width: 150px\"></div>").appendTo(addonStorageDescriptor_1570);
         const addonStorageDescriptor_1588 = addonStorageDescriptor_1569.find("#mp-system-create");
-        addonStorageDescriptor_1588.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].systemCreate.scheme).on("focusout", async function(addonStorageDescriptor_1589) {
+        addonStorageDescriptor_1588.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].systemCreate.scheme).on("focusout", async function (addonStorageDescriptor_1589) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].systemCreate.scheme = $(this).val();
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-        }).tip("Tworzy grupe zapraszając w pierwszej kolejnoÅ›ci profesje w ilości ze schematu. Nie ignoruję ustawień - więc, jęzeli zablokuejsz zapraszanie wojowników i ustawisz 5w  to nie zaprosi wojowników..<br>Pamiętaj o formacie <ilość><profesja> - 2p4m - oznacza 2 paladynów i 4 magów");
-        $("<div data-show=\"system\" class=\"mp-button do-action-cursor\">Stwórz za pomocą schematu</div>").appendTo(addonStorageDescriptor_1570).tip("Tworzy grupę za pomocÄ… schematu").click(function() {
+        }).tip("Tworzy grupe zapraszając w pierwszej kolejności profesje w ilości ze schematu. Nie ignoruję ustawień - więc, jęzeli zablokuejsz zapraszanie wojowników i ustawisz 5w  to nie zaprosi wojowników..<br>Pamiętaj o formacie <ilość><profesja> - 2p4m - oznacza 2 paladynów i 4 magów");
+        $("<div data-show=\"system\" class=\"mp-button do-action-cursor\">Stwórz za pomocą schematu</div>").appendTo(addonStorageDescriptor_1570).tip("Tworzy grupę za pomocą schematu").click(function () {
             addonStorageDescriptor_1590.systemCreate();
         });
         if (!ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].systemCreate.e) {
@@ -8114,13 +8114,13 @@ const {
             });
         }
         const addonStorageDescriptor_1591 = $("<div class=\"mp-background-section\"></div>").appendTo(addonStorageDescriptor_1547);
-        $("<div class=\"mp-title\">SkrÃ³ty klawiszowe</div>").appendTo(addonStorageDescriptor_1591);
+        $("<div class=\"mp-title\">Skróty klawiszowe</div>").appendTo(addonStorageDescriptor_1591);
         const addonStorageDescriptor_1592 = $("<div></div>").appendTo(addonStorageDescriptor_1591);
         for (const addonStorageDescriptor_1593 in ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].hotkeys) {
             const addonStorageDescriptor_1594 = $("<div class=\"mp-party-hotkeys\"></div>").appendTo(addonStorageDescriptor_1592);
             const addonStorageDescriptor_1595 = $("\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div class=\"checkbox-custom c-checkbox\">\n                                </div>\n                            </div>\n                        </div>\n                    ").appendTo(addonStorageDescriptor_1594);
             const addonStorageDescriptor_1596 = addonStorageDescriptor_1595.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-party-hotkeys-" + addonStorageDescriptor_1593 + "-checkbox\">").appendTo(addonStorageDescriptor_1596).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].hotkeys[addonStorageDescriptor_1593].e).on("change", function() {
+            $("<input type=\"checkbox\" id=\"mp-party-hotkeys-" + addonStorageDescriptor_1593 + "-checkbox\">").appendTo(addonStorageDescriptor_1596).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].hotkeys[addonStorageDescriptor_1593].e).on("change", function () {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].hotkeys[addonStorageDescriptor_1593].e = $(this).prop("checked");
                 $("div[data-show=\"" + addonStorageDescriptor_1593 + "\"]").css({
                     opacity: "" + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].hotkeys[addonStorageDescriptor_1593].e ? "1" : "0.25"),
@@ -8130,7 +8130,7 @@ const {
             });
             $("<label for=\"mp-party-hotkeys-" + addonStorageDescriptor_1593 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\" style=\"width: 200px;\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[19].id].hotkeys[addonStorageDescriptor_1593] + "</label>").appendTo(addonStorageDescriptor_1596);
             const addonStorageDescriptor_1597 = createButtonHotkeys();
-            addonStorageDescriptor_1597.click(async function() {
+            addonStorageDescriptor_1597.click(async function () {
                 const addonStorageDescriptor_1598 = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].hotkeys[addonStorageDescriptor_1593].k);
                 if (addonStorageDescriptor_1598) {
                     ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].hotkeys[addonStorageDescriptor_1593].k = addonStorageDescriptor_1598;
@@ -8147,13 +8147,13 @@ const {
         for (const addonStorageDescriptor_1601 in ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].stats) {
             const addonStorageDescriptor_1602 = $("\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div class=\"checkbox-custom c-checkbox\">\n                                </div>\n                            </div>\n                        </div>\n                    ").appendTo(addonStorageDescriptor_1600);
             const addonStorageDescriptor_1603 = addonStorageDescriptor_1602.find(".checkbox-custom");
-            const addonStorageDescriptor_1604 = $("<input type=\"checkbox\" id=\"mp-party-stats-" + addonStorageDescriptor_1601 + "-checkbox\">").appendTo(addonStorageDescriptor_1603).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].stats[addonStorageDescriptor_1601]).on("change", function() {
+            const addonStorageDescriptor_1604 = $("<input type=\"checkbox\" id=\"mp-party-stats-" + addonStorageDescriptor_1601 + "-checkbox\">").appendTo(addonStorageDescriptor_1603).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].stats[addonStorageDescriptor_1601]).on("change", function () {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].stats[addonStorageDescriptor_1601] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             });
             $("<label for=\"mp-party-stats-" + addonStorageDescriptor_1601 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\" style=\"width: 200px;\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[19].id].stats[addonStorageDescriptor_1601] + "</label>").appendTo(addonStorageDescriptor_1603);
         }
-        $("<div class=\"mp-button do-action-cursor\">Zapisz grupę</div>").appendTo(addonStorageDescriptor_1544).tip("Zapisuje aktualny stan grupy").click(function() {
+        $("<div class=\"mp-button do-action-cursor\">Zapisz grupę</div>").appendTo(addonStorageDescriptor_1544).tip("Zapisuje aktualny stan grupy").click(function () {
             if (getParty().has) {
                 const addonStorageDescriptor_1605 = Engine?.party?.getMembers?.();
                 let addonStorageDescriptor_1606 = [];
@@ -8171,7 +8171,7 @@ const {
                 message("Nie jesteś w grupie");
             }
         });
-        $("<div class=\"mp-button mp-button-green do-action-cursor\">StwÃ³rz zapisanÄ… grupÄ™</div>").appendTo(addonStorageDescriptor_1544).click(function() {
+        $("<div class=\"mp-button mp-button-green do-action-cursor\">Stwórz zapisaną grupę</div>").appendTo(addonStorageDescriptor_1544).click(function () {
             if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].saveParty.id.length > 0) {
                 const addonStorageDescriptor_1609 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].saveParty.id;
                 for (const addonStorageDescriptor_1610 in addonStorageDescriptor_1609) {
@@ -8180,7 +8180,7 @@ const {
                     }
                 }
             }
-        }).hover(function() {
+        }).hover(function () {
             if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].saveParty.id.length > 0) {
                 const addonStorageDescriptor_1611 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].saveParty.id;
                 $(this).tip(ut_fulltime(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].saveParty.ts) + ": " + addonStorageDescriptor_1611.join(", "));
@@ -8188,18 +8188,18 @@ const {
                 $(this).tip("Zapisz pierw grupę");
             }
         });
-        $("<div class=\"mp-button mp-button-red do-action-cursor\">WyczyÅ›Ä‡ stan</div>").appendTo(addonStorageDescriptor_1544).tip("Usuwa zapisany stan").click(function() {
+        $("<div class=\"mp-button mp-button-red do-action-cursor\">Wyczyść stan</div>").appendTo(addonStorageDescriptor_1544).tip("Usuwa zapisany stan").click(function () {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].saveParty.id = [];
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].saveParty.ts = 0;
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         });
-        $("<div class=\"mp-button do-action-cursor\">Wyrzuć losowÄ… osobÄ™</div>").appendTo(addonStorageDescriptor_1544).tip("Wyrzuca z grupy losowÄ… osobÄ™").click(function() {
+        $("<div class=\"mp-button do-action-cursor\">Wyrzuć losową osobę</div>").appendTo(addonStorageDescriptor_1544).tip("Wyrzuca z grupy losową osobę").click(function () {
             addonStorageDescriptor_1590.kickRandom();
         });
-        $("<div class=\"mp-button do-action-cursor\">Wyrzuć AFK</div>").appendTo(addonStorageDescriptor_1544).tip("Wyrzuca z grupy garczy AFK").click(function() {
+        $("<div class=\"mp-button do-action-cursor\">Wyrzuć AFK</div>").appendTo(addonStorageDescriptor_1544).tip("Wyrzuca z grupy garczy AFK").click(function () {
             addonStorageDescriptor_1590.kickAfk();
         });
-        $("<div class=\"mp-button do-action-cursor\">GRP</div>").appendTo(addonStorageDescriptor_1544).tip("Dodaje przybronik z przyciskami do tworzenia i opuszczania drużyny").click(function() {
+        $("<div class=\"mp-button do-action-cursor\">GRP</div>").appendTo(addonStorageDescriptor_1544).tip("Dodaje przybronik z przyciskami do tworzenia i opuszczania drużyny").click(function () {
             const addonStorageDescriptor_1612 = "o-" + MODULE_ADDON_REGISTRY[19].id;
             const addonStorageDescriptor_1613 = ADDON_STORAGE_REFERENCE.window[addonStorageDescriptor_1612].o;
             $("#" + addonStorageDescriptor_1612).toggle(!addonStorageDescriptor_1613);
@@ -8208,13 +8208,13 @@ const {
         });
         const addonStorageDescriptor_1614 = $(".mp-group-section");
         const addonStorageDescriptor_1615 = createButton("Zaproś", "green");
-        addonStorageDescriptor_1615.appendTo(addonStorageDescriptor_1614).click(function() {
+        addonStorageDescriptor_1615.appendTo(addonStorageDescriptor_1614).click(function () {
             addonStorageDescriptor_1590.inviteMap();
         }).tip("Zaproś do lub stwórz drużyne");
         const addonStorageDescriptor_1616 = createButton("Opuść", "red");
-        addonStorageDescriptor_1616.appendTo(addonStorageDescriptor_1614).click(function() {
+        addonStorageDescriptor_1616.appendTo(addonStorageDescriptor_1614).click(function () {
             addonStorageDescriptor_1590.disband();
-        }).tip("OpuÅ›Ä‡ lub rozwiÄ…Å¼ drużyne");
+        }).tip("Opuść lub rozwiąż drużyne");
     });
     createWindow(MODULE_ADDON_REGISTRY[20].name, MODULE_ADDON_REGISTRY[20].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(addonStorageDescriptor_1617 => {
         const addonStorageDescriptor_1618 = $(addonStorageDescriptor_1617).find("#" + MODULE_ADDON_REGISTRY[20].id);
@@ -8228,7 +8228,7 @@ const {
         for (const addonStorageDescriptor_1624 in addonStorageDescriptor_1621) {
             const addonStorageDescriptor_1625 = $("\n                <div class=\"mp-control-picker\">\n                    <div id=\"mp-linked-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1623);
             const addonStorageDescriptor_1626 = addonStorageDescriptor_1625.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a54-" + addonStorageDescriptor_1624 + "-checkbox\" name=\"" + addonStorageDescriptor_1624 + "-c-name\">").prop("checked", addonStorageDescriptor_1621[addonStorageDescriptor_1624].e).bind("change", async function(addonStorageDescriptor_1627) {
+            $("<input type=\"checkbox\" id=\"mp-a54-" + addonStorageDescriptor_1624 + "-checkbox\" name=\"" + addonStorageDescriptor_1624 + "-c-name\">").prop("checked", addonStorageDescriptor_1621[addonStorageDescriptor_1624].e).bind("change", async function (addonStorageDescriptor_1627) {
                 addonStorageDescriptor_1621[addonStorageDescriptor_1624].e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_127();
@@ -8236,11 +8236,11 @@ const {
             $("<label for=\"mp-a54-" + addonStorageDescriptor_1624 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[20].id].labelColor[addonStorageDescriptor_1624] + "</label>").appendTo(addonStorageDescriptor_1626);
             const addonStorageDescriptor_1628 = $("<div id=\"mp-linked-picker\" class=\"do-action-cursor\"></div>").appendTo(addonStorageDescriptor_1625);
             const addonStorageDescriptor_1629 = $("<div class=\"c-color-picker do-action-cursor\"></div>").appendTo(addonStorageDescriptor_1628);
-            $("<input type=\"color\" id=\"mp-a54-" + addonStorageDescriptor_1624 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1624 + "-p-name\" value=\"" + addonStorageDescriptor_1621[addonStorageDescriptor_1624].c + "\">").prop("value", addonStorageDescriptor_1621[addonStorageDescriptor_1624].c).bind("change", async function(addonStorageDescriptor_1630) {
+            $("<input type=\"color\" id=\"mp-a54-" + addonStorageDescriptor_1624 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1624 + "-p-name\" value=\"" + addonStorageDescriptor_1621[addonStorageDescriptor_1624].c + "\">").prop("value", addonStorageDescriptor_1621[addonStorageDescriptor_1624].c).bind("change", async function (addonStorageDescriptor_1630) {
                 addonStorageDescriptor_1621[addonStorageDescriptor_1624].c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_127();
-            }).appendTo(addonStorageDescriptor_1629).tip("Kliknij PPM, aby przywrócić domyÅ›lne.").contextmenu(async function() {
+            }).appendTo(addonStorageDescriptor_1629).tip("Kliknij PPM, aby przywrócić domyślne.").contextmenu(async function () {
                 const addonStorageDescriptor_1631 = {
                     upgrade: "#ffa200",
                     legbon: "#ffc23d",
@@ -8259,7 +8259,7 @@ const {
         for (const addonStorageDescriptor_1634 in addonStorageDescriptor_1622) {
             const addonStorageDescriptor_1635 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1633);
             const addonStorageDescriptor_1636 = addonStorageDescriptor_1635.find(".checkbox-custom");
-            const addonStorageDescriptor_1637 = $("<input type=\"checkbox\" id=\"mp-a20-" + addonStorageDescriptor_1634 + "-checkbox\">").appendTo(addonStorageDescriptor_1636).prop("checked", addonStorageDescriptor_1622[addonStorageDescriptor_1634]).on("change", function() {
+            const addonStorageDescriptor_1637 = $("<input type=\"checkbox\" id=\"mp-a20-" + addonStorageDescriptor_1634 + "-checkbox\">").appendTo(addonStorageDescriptor_1636).prop("checked", addonStorageDescriptor_1622[addonStorageDescriptor_1634]).on("change", function () {
                 addonStorageDescriptor_1622[addonStorageDescriptor_1634] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_127();
@@ -8268,7 +8268,7 @@ const {
         }
         const addonStorageDescriptor_1638 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[20].id].custom;
         const addonStorageDescriptor_1639 = $("#mp-images-enable");
-        $("<input type=\"checkbox\" id=\"mp-a20-images-checkbox\">").appendTo(addonStorageDescriptor_1639).prop("checked", addonStorageDescriptor_1638.images.e).on("change", function() {
+        $("<input type=\"checkbox\" id=\"mp-a20-images-checkbox\">").appendTo(addonStorageDescriptor_1639).prop("checked", addonStorageDescriptor_1638.images.e).on("change", function () {
             addonStorageDescriptor_1638.images.e = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             uiLayoutComponent_127();
@@ -8294,7 +8294,7 @@ const {
             $("<div class=\"mp-title\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[21].id].title[addonStorageDescriptor_1644] + "</div>").appendTo(addonStorageDescriptor_1645);
             const addonStorageDescriptor_1646 = $("<div class=\"mp-control\" style=\"height: unset !important; max-width: 300px !important;\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1645);
             const addonStorageDescriptor_1647 = addonStorageDescriptor_1646.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-trash-" + addonStorageDescriptor_1644 + "-checkbox\" name=\"mp-trash-" + addonStorageDescriptor_1644 + "-name\">").prop("checked", addonStorageDescriptor_1643[addonStorageDescriptor_1644]).bind("change", async function(addonStorageDescriptor_1648) {
+            $("<input type=\"checkbox\" id=\"mp-trash-" + addonStorageDescriptor_1644 + "-checkbox\" name=\"mp-trash-" + addonStorageDescriptor_1644 + "-name\">").prop("checked", addonStorageDescriptor_1643[addonStorageDescriptor_1644]).bind("change", async function (addonStorageDescriptor_1648) {
                 addonStorageDescriptor_1643[addonStorageDescriptor_1644] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1647);
@@ -8303,13 +8303,13 @@ const {
         const addonStorageDescriptor_1649 = $("<div class=\"mp-background-section\"></div>").appendTo(addonStorageDescriptor_1642);
         $("<div class=\"mp-title\">Wyszukiwarka przedmiotów</div>").appendTo(addonStorageDescriptor_1649);
         const addonStorageDescriptor_1650 = $("<div class=\"mp-control\"></div>").appendTo(addonStorageDescriptor_1649);
-        const addonStorageDescriptor_1651 = $("<input type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"Zawartość tip, opis, nazwa, stat etc\" style=\"width: 100%\">").appendTo(addonStorageDescriptor_1650).on("input", function(addonStorageDescriptor_1652) {
+        const addonStorageDescriptor_1651 = $("<input type=\"text\" class=\"mp-default-input do-action-cursor\" placeholder=\"Zawartość tip, opis, nazwa, stat etc\" style=\"width: 100%\">").appendTo(addonStorageDescriptor_1650).on("input", function (addonStorageDescriptor_1652) {
             clearTimeout(addonStorageDescriptor_1640);
             addonStorageDescriptor_1640 = setTimeout(() => {
                 addonStorageDescriptor_1653(addonStorageDescriptor_1652.target.value);
             }, 250);
         });
-        $("<div class=\"mp-button do-action-cursor\">X</div>").appendTo(addonStorageDescriptor_1650).click(function() {
+        $("<div class=\"mp-button do-action-cursor\">X</div>").appendTo(addonStorageDescriptor_1650).click(function () {
             addonStorageDescriptor_1651.val("");
             const addonStorageDescriptor_1654 = $(".mp-item-search-target");
             addonStorageDescriptor_1654.removeClass("mp-item-search-target");
@@ -8321,10 +8321,10 @@ const {
         const addonStorageDescriptor_1657 = $(addonStorageDescriptor_1656).find(".mp-window-header-left");
         const addonStorageDescriptor_1658 = createRefreshButton("Odśwież");
         addonStorageDescriptor_1658.appendTo(addonStorageDescriptor_1657);
-        addonStorageDescriptor_1658.click(async function() {
+        addonStorageDescriptor_1658.click(async function () {
             uiLayoutComponent_129();
         });
-        $(addonStorageDescriptor_1656).find("#mp-list-search input").bind("input", function(addonStorageDescriptor_1659) {
+        $(addonStorageDescriptor_1656).find("#mp-list-search input").bind("input", function (addonStorageDescriptor_1659) {
             if (addonStorageDescriptor_1659.target.value.length < 1) {
                 addonStorageDescriptor_1655 = false;
             } else {
@@ -8339,10 +8339,10 @@ const {
         const addonStorageDescriptor_1662 = $(addonStorageDescriptor_1661).find(".mp-window-header-left");
         const addonStorageDescriptor_1663 = createRefreshButton("Odśwież");
         addonStorageDescriptor_1663.appendTo(addonStorageDescriptor_1662);
-        addonStorageDescriptor_1663.click(async function() {
+        addonStorageDescriptor_1663.click(async function () {
             uiLayoutComponent_131();
         });
-        $(addonStorageDescriptor_1661).find("#mp-list-search input").bind("input", function(addonStorageDescriptor_1664) {
+        $(addonStorageDescriptor_1661).find("#mp-list-search input").bind("input", function (addonStorageDescriptor_1664) {
             if (addonStorageDescriptor_1664.target.value.length < 1) {
                 addonStorageDescriptor_1660 = false;
             } else {
@@ -8354,13 +8354,13 @@ const {
     createWindow(MODULE_ADDON_REGISTRY[24].name, MODULE_ADDON_REGISTRY[24].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(addonStorageDescriptor_1665 => {
         const addonStorageDescriptor_1666 = $(addonStorageDescriptor_1665).find("#" + MODULE_ADDON_REGISTRY[24].id);
         const addonStorageDescriptor_1667 = $("<div class=\"mp-background-section\"></div>").appendTo(addonStorageDescriptor_1666);
-        $("<div class=\"mp-title\">Blokowanie wysyłania wiadomoÅ›ci</div>").appendTo(addonStorageDescriptor_1667);
+        $("<div class=\"mp-title\">Blokowanie wysyłania wiadomości</div>").appendTo(addonStorageDescriptor_1667);
         const addonStorageDescriptor_1668 = $("<div class=\"mp-locker-content\"></div>").appendTo(addonStorageDescriptor_1667);
         const addonStorageDescriptor_1669 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block;
         for (const addonStorageDescriptor_1670 in addonStorageDescriptor_1669) {
             const addonStorageDescriptor_1671 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1668);
             const addonStorageDescriptor_1672 = addonStorageDescriptor_1671.find(".checkbox-custom");
-            const addonStorageDescriptor_1673 = $("<input type=\"checkbox\" id=\"mp-block-" + addonStorageDescriptor_1670 + "-checkbox\">").appendTo(addonStorageDescriptor_1672).prop("checked", addonStorageDescriptor_1669[addonStorageDescriptor_1670]).on("change", function() {
+            const addonStorageDescriptor_1673 = $("<input type=\"checkbox\" id=\"mp-block-" + addonStorageDescriptor_1670 + "-checkbox\">").appendTo(addonStorageDescriptor_1672).prop("checked", addonStorageDescriptor_1669[addonStorageDescriptor_1670]).on("change", function () {
                 addonStorageDescriptor_1669[addonStorageDescriptor_1670] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             });
@@ -8371,12 +8371,12 @@ const {
         const addonStorageDescriptor_1675 = $(addonStorageDescriptor_1674).find("#" + MODULE_ADDON_REGISTRY[25].id);
         const addonStorageDescriptor_1676 = $("<div class=\"mp-background-section\"></div>").appendTo(addonStorageDescriptor_1675);
         $("<div class=\"mp-title\">Ustawienia</div>").appendTo(addonStorageDescriptor_1676);
-        const addonStorageDescriptor_1677 = $(" \n        <div class=\"mp-control\">\n            JasnoÅ›Ä‡ mapy <input id=\"mp-darknmp-map\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"%\" style=\"width: 30px\"> %.\n        </div>").appendTo(addonStorageDescriptor_1676);
+        const addonStorageDescriptor_1677 = $(" \n        <div class=\"mp-control\">\n            Jasność mapy <input id=\"mp-darknmp-map\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"%\" style=\"width: 30px\"> %.\n        </div>").appendTo(addonStorageDescriptor_1676);
         const addonStorageDescriptor_1678 = addonStorageDescriptor_1677.find("#mp-darknmp-map");
         addonStorageDescriptor_1678.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[25].id].shadow).attr({
             min: 0,
             max: 100
-        }).on("input", async function(addonStorageDescriptor_1679) {
+        }).on("input", async function (addonStorageDescriptor_1679) {
             let addonStorageDescriptor_1680 = Number($(this).val());
             if (isNaN(addonStorageDescriptor_1680)) {
                 addonStorageDescriptor_1680 = 0;
@@ -8392,7 +8392,7 @@ const {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[25].id].shadow = addonStorageDescriptor_1680;
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             setDarkness(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[25].id].shadow);
-        }).tip("Procent jasnoÅ›ci od 1% do 100%.");
+        }).tip("Procent jasności od 1% do 100%.");
     });
     createWindow(MODULE_ADDON_REGISTRY[26].name, MODULE_ADDON_REGISTRY[26].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(addonStorageDescriptor_1681 => {
         const addonStorageDescriptor_1682 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[26].id];
@@ -8403,9 +8403,9 @@ const {
         const addonStorageDescriptor_1687 = $("<div class=\"mp-background-section\"></div>").appendTo(addonStorageDescriptor_1685);
         $("<div class=\"mp-title\">Kwota aukcji</div>").appendTo(addonStorageDescriptor_1687);
         const addonStorageDescriptor_1688 = $("<div class=\"mp-control\"></div>").appendTo(addonStorageDescriptor_1687);
-        const addonStorageDescriptor_1689 = createInput("text", "Wpisz kwotÄ™", 100);
+        const addonStorageDescriptor_1689 = createInput("text", "Wpisz kwotę", 100);
         addonStorageDescriptor_1689.appendTo(addonStorageDescriptor_1688);
-        addonStorageDescriptor_1689.prop("value", addonStorageDescriptor_1682.cost).on("focusout", async function(addonStorageDescriptor_1690) {
+        addonStorageDescriptor_1689.prop("value", addonStorageDescriptor_1682.cost).on("focusout", async function (addonStorageDescriptor_1690) {
             let addonStorageDescriptor_1691 = parseAbbreviatedNumber($(this).val());
             if (addonStorageDescriptor_1691) {
                 if (addonStorageDescriptor_1691 < 500) {
@@ -8430,7 +8430,7 @@ const {
         addonStorageDescriptor_1694.prop("value", addonStorageDescriptor_1682.time).attr({
             min: 2,
             max: 168
-        }).on("focusout", async function(addonStorageDescriptor_1695) {
+        }).on("focusout", async function (addonStorageDescriptor_1695) {
             let addonStorageDescriptor_1696 = Number($(this).val());
             if (isNaN(addonStorageDescriptor_1696)) {
                 addonStorageDescriptor_1696 = 2;
@@ -8455,7 +8455,7 @@ const {
             const addonStorageDescriptor_1700 = $("<div class=\"mp-control\"></div>");
             const addonStorageDescriptor_1701 = $("<div id=\"mp-rapid-auctions-checkbox\"></div>").appendTo(addonStorageDescriptor_1700);
             const addonStorageDescriptor_1702 = $("<div class=\"checkbox-custom c-checkbox\"></div>").appendTo(addonStorageDescriptor_1701);
-            $("<input type=\"checkbox\" id=\"mp-rapid-auctions-" + addonStorageDescriptor_1699 + "-checkbox\" name=\"" + addonStorageDescriptor_1699 + "-c-name\">").prop("checked", addonStorageDescriptor_1682.components[addonStorageDescriptor_1699]).bind("change", async function(addonStorageDescriptor_1703) {
+            $("<input type=\"checkbox\" id=\"mp-rapid-auctions-" + addonStorageDescriptor_1699 + "-checkbox\" name=\"" + addonStorageDescriptor_1699 + "-c-name\">").prop("checked", addonStorageDescriptor_1682.components[addonStorageDescriptor_1699]).bind("change", async function (addonStorageDescriptor_1703) {
                 addonStorageDescriptor_1682.components[addonStorageDescriptor_1699] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1702);
@@ -8464,39 +8464,39 @@ const {
         }
         const addonStorageDescriptor_1704 = $("<div class=\"mp-center-line\"></div>").appendTo(addonStorageDescriptor_1683);
         const addonStorageDescriptor_1705 = createButton("Wystaw przedmioty");
-        addonStorageDescriptor_1705.click(function() {
+        addonStorageDescriptor_1705.click(function () {
             addonStorageDescriptor_1706();
         });
         addonStorageDescriptor_1705.appendTo(addonStorageDescriptor_1704);
         uiLayoutComponent_328();
-        $(addonStorageDescriptor_1681).find("#collapse").click(function() {
+        $(addonStorageDescriptor_1681).find("#collapse").click(function () {
             uiLayoutComponent_328();
         });
     });
     createWindow(MODULE_ADDON_REGISTRY[27].name, MODULE_ADDON_REGISTRY[27].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(addonStorageDescriptor_1707 => {
         const addonStorageDescriptor_1708 = $(addonStorageDescriptor_1707).find("#" + MODULE_ADDON_REGISTRY[27].id);
-        const addonStorageDescriptor_1709 = $("\n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">Samotnie</div>\n                <div id=\"left-col\"></div>\n            </div>\n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">DruÅ¼ynowo</div>\n                <div id=\"right-col\"></div>\n            </div>\n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">Ustawienia dodatkowe</div>\n                <div id=\"oth-col\" style=\"width: 290px;\"></div>\n            </div>\n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">Konfiguracja skrótu</div>\n                <div id=\"oth-hotkeys\"></div>\n            </div>").appendTo(addonStorageDescriptor_1708);
+        const addonStorageDescriptor_1709 = $("\n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">Samotnie</div>\n                <div id=\"left-col\"></div>\n            </div>\n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">Drużynowo</div>\n                <div id=\"right-col\"></div>\n            </div>\n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">Ustawienia dodatkowe</div>\n                <div id=\"oth-col\" style=\"width: 290px;\"></div>\n            </div>\n            <div class=\"mp-background-section\">\n                <div class=\"mp-title\">Konfiguracja skrótu</div>\n                <div id=\"oth-hotkeys\"></div>\n            </div>").appendTo(addonStorageDescriptor_1708);
         const addonStorageDescriptor_1710 = addonStorageDescriptor_1709.find("#left-col");
         const addonStorageDescriptor_1711 = addonStorageDescriptor_1709.find("#right-col");
         const addonStorageDescriptor_1712 = {
             "34": {
-                false: "AgresywnośÄ‡",
+                false: "Agresywność",
                 common: "Zwykłe",
                 elite: "Elity wraz z obstawą",
-                elite2: "Elity II wraz z obstawÄ…"
+                elite2: "Elity II wraz z obstawą"
             },
             "35": {
-                false: "AgresywnośÄ‡",
+                false: "Agresywność",
                 common: "Zwykłe",
                 elite: "Elity wraz z obstawą",
-                elite2: "Elity II wraz z obstawÄ…"
+                elite2: "Elity II wraz z obstawą"
             }
         };
         for (const addonStorageDescriptor_1713 in addonStorageDescriptor_1712[34]) {
             const addonStorageDescriptor_1714 = addonStorageDescriptor_1713 == "false" ? Engine.settingsStorage.getValue(34) : Engine.settingsStorage.getValue(34, addonStorageDescriptor_1713);
             const addonStorageDescriptor_1715 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1710);
             const addonStorageDescriptor_1716 = addonStorageDescriptor_1715.find(".checkbox-custom");
-            const addonStorageDescriptor_1717 = $("<input type=\"checkbox\" id=\"mp-agr-34-" + addonStorageDescriptor_1713 + "-checkbox\">").appendTo(addonStorageDescriptor_1716).prop("checked", addonStorageDescriptor_1714).on("change", function() {
+            const addonStorageDescriptor_1717 = $("<input type=\"checkbox\" id=\"mp-agr-34-" + addonStorageDescriptor_1713 + "-checkbox\">").appendTo(addonStorageDescriptor_1716).prop("checked", addonStorageDescriptor_1714).on("change", function () {
                 if (addonStorageDescriptor_1713 == "false") {
                     const addonStorageDescriptor_1718 = Engine.settingsStorage.getValue(34) ? 0 : 1;
                     _g("settings&action=update&id=34&v=" + addonStorageDescriptor_1718);
@@ -8511,7 +8511,7 @@ const {
             const addonStorageDescriptor_1721 = addonStorageDescriptor_1720 == "false" ? Engine.settingsStorage.getValue(35) : Engine.settingsStorage.getValue(35, addonStorageDescriptor_1720);
             const addonStorageDescriptor_1722 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo(addonStorageDescriptor_1711);
             const addonStorageDescriptor_1723 = addonStorageDescriptor_1722.find(".checkbox-custom");
-            const addonStorageDescriptor_1724 = $("<input type=\"checkbox\" id=\"mp-agr-35-" + addonStorageDescriptor_1720 + "-checkbox\">").appendTo(addonStorageDescriptor_1723).prop("checked", addonStorageDescriptor_1721).on("change", function() {
+            const addonStorageDescriptor_1724 = $("<input type=\"checkbox\" id=\"mp-agr-35-" + addonStorageDescriptor_1720 + "-checkbox\">").appendTo(addonStorageDescriptor_1723).prop("checked", addonStorageDescriptor_1721).on("change", function () {
                 if (addonStorageDescriptor_1720 == "false") {
                     const addonStorageDescriptor_1725 = Engine.settingsStorage.getValue(35) ? 0 : 1;
                     _g("settings&action=update&id=35&v=" + addonStorageDescriptor_1725);
@@ -8523,14 +8523,14 @@ const {
             $("<label for=\"mp-agr-35-" + addonStorageDescriptor_1720 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\" style=\"width: 200px;\">" + addonStorageDescriptor_1712[35][addonStorageDescriptor_1720] + "</label>").appendTo(addonStorageDescriptor_1723);
         }
         const addonStorageDescriptor_1727 = {
-            enemy: "WyÅ‚acz przy wykryciu wroga",
-            limit: "WyÅ‚Ä…cz po osiÄ…gniÄ™ciu limitu ulepszania",
-            button: "Przycisk szybkiego włączania/wyÅ‚Ä…czania"
+            enemy: "Wyłacz przy wykryciu wroga",
+            limit: "Wyłącz po osiągnięciu limitu ulepszania",
+            button: "Przycisk szybkiego włączania/wyłączania"
         };
         for (const addonStorageDescriptor_1728 in addonStorageDescriptor_1727) {
             const addonStorageDescriptor_1729 = $("\n                    <div class=\"mp-control\">\n                        <div class=\"mp-case-checkbox\">\n                            <div class=\"checkbox-custom c-checkbox\">\n                            </div>\n                        </div>\n                    </div>\n                ").appendTo("#oth-col");
             const addonStorageDescriptor_1730 = addonStorageDescriptor_1729.find(".checkbox-custom");
-            const addonStorageDescriptor_1731 = $("<input type=\"checkbox\" id=\"mp-agr-oth-" + addonStorageDescriptor_1728 + "-checkbox\">").appendTo(addonStorageDescriptor_1730).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[27].id].other[addonStorageDescriptor_1728]).on("change", function() {
+            const addonStorageDescriptor_1731 = $("<input type=\"checkbox\" id=\"mp-agr-oth-" + addonStorageDescriptor_1728 + "-checkbox\">").appendTo(addonStorageDescriptor_1730).prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[27].id].other[addonStorageDescriptor_1728]).on("change", function () {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[27].id].other[addonStorageDescriptor_1728] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 if (addonStorageDescriptor_1728 == "button") {
@@ -8541,7 +8541,7 @@ const {
         }
         const addonStorageDescriptor_1732 = $("<div class=\"mp-control-hotkeys\" style=\"margin-bottom: 5px;\">Wł/Wył agresywność solo: <b class=\"mp-badge\">" + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[27].id].key.toUpperCase() + "</b></div>").appendTo("#oth-hotkeys");
         const addonStorageDescriptor_1733 = createButtonHotkeys();
-        addonStorageDescriptor_1733.click(async function() {
+        addonStorageDescriptor_1733.click(async function () {
             const addonStorageDescriptor_1734 = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[27].id].key);
             if (addonStorageDescriptor_1734) {
                 addonStorageDescriptor_1732.find("b").html(addonStorageDescriptor_1734.toUpperCase());
@@ -8553,14 +8553,14 @@ const {
         async function addonStorageDescriptor_1735() {
             await waitForElement(".equipment-wrapper");
             const addonStorageDescriptor_1736 = Engine.settingsStorage.getValue(34);
-            const addonStorageDescriptor_1737 = $("<div class=\"mp-berserk-button do-action-cursor\"></div>").tip((addonStorageDescriptor_1736 ? "Wyłącz" : "WÅ‚Ä…cz") + " agresywność potworów");
+            const addonStorageDescriptor_1737 = $("<div class=\"mp-berserk-button do-action-cursor\"></div>").tip((addonStorageDescriptor_1736 ? "Wyłącz" : "Włącz") + " agresywność potworów");
             if (!ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[27].id].other.button || !ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[27].id]) {
                 addonStorageDescriptor_1737.hide();
             }
             addonStorageDescriptor_1737.addClass("mp-berserk-" + addonStorageDescriptor_1736);
-            addonStorageDescriptor_1737.click(function() {
+            addonStorageDescriptor_1737.click(function () {
                 const addonStorageDescriptor_1738 = Engine.settingsStorage.getValue(34) ? 0 : 1;
-                _g("settings&action=update&id=34&v=" + addonStorageDescriptor_1738, function(addonStorageDescriptor_1739) {
+                _g("settings&action=update&id=34&v=" + addonStorageDescriptor_1738, function (addonStorageDescriptor_1739) {
                     if (addonStorageDescriptor_1739.settings) {
                         const addonStorageDescriptor_1740 = Engine.settingsStorage.getValue(34);
                         uiLayoutComponent_330(addonStorageDescriptor_1740);
@@ -8568,7 +8568,7 @@ const {
                 });
             });
             addonStorageDescriptor_1737.appendTo($(".equipment-wrapper"));
-            addonStorageDescriptor_1737.contextmenu(function() {
+            addonStorageDescriptor_1737.contextmenu(function () {
                 const addonStorageDescriptor_1741 = ADDON_STORAGE_REFERENCE.window[MODULE_ADDON_REGISTRY[27].id].o;
                 $("#w-" + MODULE_ADDON_REGISTRY[27].id).toggle(!addonStorageDescriptor_1741);
                 ADDON_STORAGE_REFERENCE.window[MODULE_ADDON_REGISTRY[27].id].o = !addonStorageDescriptor_1741;
@@ -8587,7 +8587,7 @@ const {
         const addonStorageDescriptor_1744 = $(addonStorageDescriptor_1742).find("#" + MODULE_ADDON_REGISTRY[28].id);
         const addonStorageDescriptor_1745 = $("\n                    <div class=\"mp-dialog-settings mp-background-section\">\n                        <div class=\"mp-control\">\n                            <div class=\"mp-case-checkbox\">\n                                <div id=\"mp-dialog-enable\" class=\"checkbox-custom c-checkbox\">\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"mp-dialog-table\" data-settings=\"dialog\">\n\n                        </div>\n                    </div>\n                    ").appendTo(addonStorageDescriptor_1744);
         const addonStorageDescriptor_1746 = addonStorageDescriptor_1745.find("#mp-dialog-enable");
-        $("<input type=\"checkbox\" id=\"mp-dialog-checkbox\">").appendTo(addonStorageDescriptor_1746).prop("checked", addonStorageDescriptor_1743.e).bind("change", async function(addonStorageDescriptor_1747) {
+        $("<input type=\"checkbox\" id=\"mp-dialog-checkbox\">").appendTo(addonStorageDescriptor_1746).prop("checked", addonStorageDescriptor_1743.e).bind("change", async function (addonStorageDescriptor_1747) {
             addonStorageDescriptor_1743.e = $(this).prop("checked");
             const addonStorageDescriptor_1748 = {
                 opacity: "" + (addonStorageDescriptor_1743.e ? "1" : "0.25"),
@@ -8605,7 +8605,7 @@ const {
             let addonStorageDescriptor_1752 = addonStorageDescriptor_1743.list.slice(0, addonStorageDescriptor_1750);
             for (const addonStorageDescriptor_1753 in addonStorageDescriptor_1752) {
                 const addonStorageDescriptor_1754 = addonStorageDescriptor_1752[addonStorageDescriptor_1753];
-                $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor\"><i class=\"fa-solid fa-font\"></i></div>").appendTo(addonStorageDescriptor_1749).tip("<b>" + addonStorageDescriptor_1752[addonStorageDescriptor_1753] + "</b><br>Prawy przycisk myszy - otwiera menu.").on("contextmenu", function(addonStorageDescriptor_1755) {
+                $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor\"><i class=\"fa-solid fa-font\"></i></div>").appendTo(addonStorageDescriptor_1749).tip("<b>" + addonStorageDescriptor_1752[addonStorageDescriptor_1753] + "</b><br>Prawy przycisk myszy - otwiera menu.").on("contextmenu", function (addonStorageDescriptor_1755) {
                     addonStorageDescriptor_1755.preventDefault();
                     let addonStorageDescriptor_1756 = [
                         ["Edytuj dialog", async () => {
@@ -8616,29 +8616,29 @@ const {
                                     saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                                     addonStorageDescriptor_1751();
                                 } else {
-                                    message("BÅ‚Ä…d podczas dodawania: zbyt krótki dialog");
+                                    message("Błąd podczas dodawania: zbyt krótki dialog");
                                 }
                             }
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }],
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }],
                         ["Usuń dialog", async () => {
                             addonStorageDescriptor_1743.list.splice(addonStorageDescriptor_1753, 1);
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                             addonStorageDescriptor_1751();
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }]
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }]
                     ];
                     Engine.interface.showPopupMenu(addonStorageDescriptor_1756, addonStorageDescriptor_1755);
                 });
             }
             if (addonStorageDescriptor_1752.length < addonStorageDescriptor_1750) {
-                $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(addonStorageDescriptor_1749).tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[28].id].tip.addDialog).click(async function() {
+                $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(addonStorageDescriptor_1749).tip(parsedAddonConfig[MODULE_ADDON_REGISTRY[28].id].tip.addDialog).click(async function () {
                     const addonStorageDescriptor_1758 = await addDialogText();
                     if (addonStorageDescriptor_1758) {
                         if (addonStorageDescriptor_1758.length > 0) {
@@ -8646,10 +8646,10 @@ const {
                             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                             addonStorageDescriptor_1751();
                         } else {
-                            message("BÅ‚Ä…d podczas dodawania: zbyt krótki dialog");
+                            message("Błąd podczas dodawania: zbyt krótki dialog");
                         }
                     } else {
-                        message("BÅ‚Ä…d podczas dodawania: zbyt krótki dialog");
+                        message("Błąd podczas dodawania: zbyt krótki dialog");
                     }
                 });
             }
@@ -8667,7 +8667,7 @@ const {
         const addonStorageDescriptor_1761 = $(addonStorageDescriptor_1759).find(".content");
         const addonStorageDescriptor_1762 = $("<div class=\"mp-control\">\n                <div>\n                    <div class=\"checkbox-custom c-checkbox\">\n                    \n                    </div>\n                </div>\n            </div>").appendTo(addonStorageDescriptor_1761);
         const addonStorageDescriptor_1763 = addonStorageDescriptor_1762.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-attack-helper-auto-checkbox\" name=\"mp-attack-helper-auto-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id][uiLayoutComponent_270].auto).bind("change", async function(addonStorageDescriptor_1764) {
+        $("<input type=\"checkbox\" id=\"mp-attack-helper-auto-checkbox\" name=\"mp-attack-helper-auto-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id][uiLayoutComponent_270].auto).bind("change", async function (addonStorageDescriptor_1764) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id][uiLayoutComponent_270].auto = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id][uiLayoutComponent_270].auto) {
@@ -8678,7 +8678,7 @@ const {
                 $("div.mp-attack-row[mp-attack-id]").removeClass("mp-attack-trigger");
             }
         }).appendTo(addonStorageDescriptor_1763);
-        $("<label for=\"mp-attack-helper-auto-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">Berserker</label>").appendTo(addonStorageDescriptor_1763).tip("Automatycznie atakuje najbliÅ¼szego gracza, PPM ustaw skrót").contextmenu(async function() {
+        $("<label for=\"mp-attack-helper-auto-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">Berserker</label>").appendTo(addonStorageDescriptor_1763).tip("Automatycznie atakuje najbliższego gracza, PPM ustaw skrót").contextmenu(async function () {
             const addonStorageDescriptor_1765 = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id].key);
             if (addonStorageDescriptor_1765) {
                 $hotkeys.find("b").html(addonStorageDescriptor_1765.toUpperCase());
@@ -8690,7 +8690,7 @@ const {
         const addonStorageDescriptor_1766 = $(addonStorageDescriptor_1759).find(".mp-window-header-left");
         const addonStorageDescriptor_1767 = createSettingsButton("Ustawienia");
         addonStorageDescriptor_1767.appendTo(addonStorageDescriptor_1766);
-        addonStorageDescriptor_1767.click(async function() {
+        addonStorageDescriptor_1767.click(async function () {
             const addonStorageDescriptor_1768 = MODULE_ADDON_REGISTRY[29].id + "_settings";
             const addonStorageDescriptor_1769 = "#w-" + addonStorageDescriptor_1768;
             const addonStorageDescriptor_1770 = ADDON_STORAGE_REFERENCE.window[addonStorageDescriptor_1768].o;
@@ -8701,14 +8701,14 @@ const {
     });
     createWindow("Ustawienia", MODULE_ADDON_REGISTRY[29].id + "_settings", ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(addonStorageDescriptor_1771 => {
         const addonStorageDescriptor_1772 = $(addonStorageDescriptor_1771).find("#" + MODULE_ADDON_REGISTRY[29].id + "_settings");
-        const addonStorageDescriptor_1773 = $("\n        <div class=\"mp-background-section\">\n            <div class=\"mp-title\">Konfiguracja zestawÃ³w</div>\n            <div id=\"buildscfg\" class=\"mp-button do-action-cursor mp-button-cfg-builds\">Otwórz konfiguracjÄ™</div>\n        </div>\n        <div class=\"mp-background-section\">\n            <div class=\"mp-title\">Dodatkowe ustawienia</div>\n            <div id=\"mp-auto-cfg-29\"></div>\n        </div>").appendTo(addonStorageDescriptor_1772);
-        addonStorageDescriptor_1773.find("#buildscfg").click(function() {
+        const addonStorageDescriptor_1773 = $("\n        <div class=\"mp-background-section\">\n            <div class=\"mp-title\">Konfiguracja zestawów</div>\n            <div id=\"buildscfg\" class=\"mp-button do-action-cursor mp-button-cfg-builds\">Otwórz konfigurację</div>\n        </div>\n        <div class=\"mp-background-section\">\n            <div class=\"mp-title\">Dodatkowe ustawienia</div>\n            <div id=\"mp-auto-cfg-29\"></div>\n        </div>").appendTo(addonStorageDescriptor_1772);
+        addonStorageDescriptor_1773.find("#buildscfg").click(function () {
             domInteractionNode_785();
         });
         const addonStorageDescriptor_1774 = addonStorageDescriptor_1773.find("#mp-auto-cfg-29");
-        const addonStorageDescriptor_1775 = $("<div class=\"mp-control\">\n                <div>\n                    <div class=\"checkbox-custom c-checkbox\">\n                    \n                    </div>\n                </div>\n            </div>").appendTo(addonStorageDescriptor_1774).tip("Automatycznie włącza szybką walkÄ™ po zaatakowaniu gracza");
+        const addonStorageDescriptor_1775 = $("<div class=\"mp-control\">\n                <div>\n                    <div class=\"checkbox-custom c-checkbox\">\n                    \n                    </div>\n                </div>\n            </div>").appendTo(addonStorageDescriptor_1774).tip("Automatycznie włącza szybką walkę po zaatakowaniu gracza");
         const addonStorageDescriptor_1776 = addonStorageDescriptor_1775.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-attack-helper-autof-checkbox\" name=\"mp-attack-helper-autof-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id][uiLayoutComponent_270].autof).bind("change", async function(addonStorageDescriptor_1777) {
+        $("<input type=\"checkbox\" id=\"mp-attack-helper-autof-checkbox\" name=\"mp-attack-helper-autof-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id][uiLayoutComponent_270].autof).bind("change", async function (addonStorageDescriptor_1777) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id][uiLayoutComponent_270].autof = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         }).appendTo(addonStorageDescriptor_1776);
@@ -8716,8 +8716,8 @@ const {
     });
     createWindow(MODULE_ADDON_REGISTRY[30].name, "" + MODULE_ADDON_REGISTRY[30].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(addonStorageDescriptor_1778 => {
         const addonStorageDescriptor_1779 = $(addonStorageDescriptor_1778).find("#" + MODULE_ADDON_REGISTRY[30].id);
-        const addonStorageDescriptor_1780 = $("\n            <div class=\"mp-rapidsell-summary\">\n                <div class=\"mp-rapidsell-stage\">\n                    <div id=\"mp-rapidsell-reset\" class=\"do-action-cursor\">Sprzedanych przedmiotÃ³w</div>\n                    <div summary=\"items\">" + ADDON_STORAGE_REFERENCE.limit[uiLayoutComponent_164][uiLayoutComponent_221].s.i + "</div>\n                </div>\n                <div class=\"mp-rapidsell-stage\">\n                    <div>Pozyskane zÅ‚oto</div> \n                    <div summary=\"gold\">" + formatNumber(ADDON_STORAGE_REFERENCE.limit[uiLayoutComponent_164][uiLayoutComponent_221].s.g) + "</div>\n                </div>\n            </div>\n            <div class=\"mp-rapidsell-settings\">\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Rzadkość przedmiotu</div>\n                    <div id=\"mp-rarity\" class=\"mp-grid-3-col\">\n                    </div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Klasa przedmiotu</div>\n                    <div id=\"mp-class\" class=\"mp-grid-3-col\">\n                    </div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Status przedmiotu</div>\n                    <div id=\"mp-status\" class=\"mp-grid-3-col\">\n                    </div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Ignorowanie</div>\n                    <div id=\"mp-ignore\" class=\"mp-grid-3-col\">\n                    </div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Konfiguracja skrótu</div>\n                    <div id=\"mp-other\">\n                    </div>\n                </div>\n            </div>").appendTo(addonStorageDescriptor_1779);
-        $("#mp-rapidsell-reset").tip("Kliknij, aby zresetowaÄ‡ licznik").click(async function() {
+        const addonStorageDescriptor_1780 = $("\n            <div class=\"mp-rapidsell-summary\">\n                <div class=\"mp-rapidsell-stage\">\n                    <div id=\"mp-rapidsell-reset\" class=\"do-action-cursor\">Sprzedanych przedmiotów</div>\n                    <div summary=\"items\">" + ADDON_STORAGE_REFERENCE.limit[uiLayoutComponent_164][uiLayoutComponent_221].s.i + "</div>\n                </div>\n                <div class=\"mp-rapidsell-stage\">\n                    <div>Pozyskane złoto</div> \n                    <div summary=\"gold\">" + formatNumber(ADDON_STORAGE_REFERENCE.limit[uiLayoutComponent_164][uiLayoutComponent_221].s.g) + "</div>\n                </div>\n            </div>\n            <div class=\"mp-rapidsell-settings\">\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Rzadkość przedmiotu</div>\n                    <div id=\"mp-rarity\" class=\"mp-grid-3-col\">\n                    </div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Klasa przedmiotu</div>\n                    <div id=\"mp-class\" class=\"mp-grid-3-col\">\n                    </div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Status przedmiotu</div>\n                    <div id=\"mp-status\" class=\"mp-grid-3-col\">\n                    </div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Ignorowanie</div>\n                    <div id=\"mp-ignore\" class=\"mp-grid-3-col\">\n                    </div>\n                </div>\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-title\">Konfiguracja skrótu</div>\n                    <div id=\"mp-other\">\n                    </div>\n                </div>\n            </div>").appendTo(addonStorageDescriptor_1779);
+        $("#mp-rapidsell-reset").tip("Kliknij, aby zresetować licznik").click(async function () {
             const addonStorageDescriptor_1781 = await askWindow("Czy na pewno chcesz zresetować ilość zarobionego złota i sprzedanych przedmiotów?");
             if (addonStorageDescriptor_1781) {
                 ADDON_STORAGE_REFERENCE.limit[uiLayoutComponent_164][uiLayoutComponent_221].s.g = 0;
@@ -8736,7 +8736,7 @@ const {
         for (const addonStorageDescriptor_1788 in addonStorageDescriptor_1782.rarity) {
             const addonStorageDescriptor_1789 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1783);
             const addonStorageDescriptor_1790 = addonStorageDescriptor_1789.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-rapidsell-rarity-" + addonStorageDescriptor_1788 + "-checkbox\" name=\"mp-rapidsell-rarity-" + addonStorageDescriptor_1788 + "-name\">").prop("checked", addonStorageDescriptor_1782.rarity[addonStorageDescriptor_1788]).bind("change", async function(addonStorageDescriptor_1791) {
+            $("<input type=\"checkbox\" id=\"mp-rapidsell-rarity-" + addonStorageDescriptor_1788 + "-checkbox\" name=\"mp-rapidsell-rarity-" + addonStorageDescriptor_1788 + "-name\">").prop("checked", addonStorageDescriptor_1782.rarity[addonStorageDescriptor_1788]).bind("change", async function (addonStorageDescriptor_1791) {
                 addonStorageDescriptor_1782.rarity[addonStorageDescriptor_1788] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1790);
@@ -8745,7 +8745,7 @@ const {
         for (const addonStorageDescriptor_1792 in addonStorageDescriptor_1782.cl) {
             const addonStorageDescriptor_1793 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1784);
             const addonStorageDescriptor_1794 = addonStorageDescriptor_1793.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-rapidsell-cl-" + addonStorageDescriptor_1792 + "-checkbox\" name=\"mp-rapidsell-cl-" + addonStorageDescriptor_1792 + "-name\">").prop("checked", addonStorageDescriptor_1782.cl[addonStorageDescriptor_1792]).bind("change", async function(addonStorageDescriptor_1795) {
+            $("<input type=\"checkbox\" id=\"mp-rapidsell-cl-" + addonStorageDescriptor_1792 + "-checkbox\" name=\"mp-rapidsell-cl-" + addonStorageDescriptor_1792 + "-name\">").prop("checked", addonStorageDescriptor_1782.cl[addonStorageDescriptor_1792]).bind("change", async function (addonStorageDescriptor_1795) {
                 addonStorageDescriptor_1782.cl[addonStorageDescriptor_1792] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1794);
@@ -8754,7 +8754,7 @@ const {
         for (const addonStorageDescriptor_1796 in addonStorageDescriptor_1782.item) {
             const addonStorageDescriptor_1797 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1785);
             const addonStorageDescriptor_1798 = addonStorageDescriptor_1797.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-rapidsell-item-" + addonStorageDescriptor_1796 + "-checkbox\" name=\"mp-rapidsell-item-" + addonStorageDescriptor_1796 + "-name\">").prop("checked", addonStorageDescriptor_1782.item[addonStorageDescriptor_1796]).bind("change", async function(addonStorageDescriptor_1799) {
+            $("<input type=\"checkbox\" id=\"mp-rapidsell-item-" + addonStorageDescriptor_1796 + "-checkbox\" name=\"mp-rapidsell-item-" + addonStorageDescriptor_1796 + "-name\">").prop("checked", addonStorageDescriptor_1782.item[addonStorageDescriptor_1796]).bind("change", async function (addonStorageDescriptor_1799) {
                 addonStorageDescriptor_1782.item[addonStorageDescriptor_1796] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1798);
@@ -8763,7 +8763,7 @@ const {
         for (const addonStorageDescriptor_1800 in addonStorageDescriptor_1782.ignore) {
             const addonStorageDescriptor_1801 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1786);
             const addonStorageDescriptor_1802 = addonStorageDescriptor_1801.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-rapidsell-ignore-" + addonStorageDescriptor_1800 + "-checkbox\" name=\"mp-rapidsell-ignore-" + addonStorageDescriptor_1800 + "-name\">").prop("checked", addonStorageDescriptor_1782.ignore[addonStorageDescriptor_1800]).bind("change", async function(addonStorageDescriptor_1803) {
+            $("<input type=\"checkbox\" id=\"mp-rapidsell-ignore-" + addonStorageDescriptor_1800 + "-checkbox\" name=\"mp-rapidsell-ignore-" + addonStorageDescriptor_1800 + "-name\">").prop("checked", addonStorageDescriptor_1782.ignore[addonStorageDescriptor_1800]).bind("change", async function (addonStorageDescriptor_1803) {
                 addonStorageDescriptor_1782.ignore[addonStorageDescriptor_1800] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1802);
@@ -8771,7 +8771,7 @@ const {
         }
         const addonStorageDescriptor_1804 = $("<div class=\"mp-control-hotkeys\" style=\"margin-bottom: 5px;\">Klawisz: <b class=\"mp-badge\">" + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[30].id].key.toUpperCase() + "</b></div>").appendTo(addonStorageDescriptor_1787);
         const addonStorageDescriptor_1805 = createButtonHotkeys();
-        addonStorageDescriptor_1805.click(async function() {
+        addonStorageDescriptor_1805.click(async function () {
             const addonStorageDescriptor_1806 = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[30].id].key);
             if (addonStorageDescriptor_1806) {
                 addonStorageDescriptor_1804.find("b").html(addonStorageDescriptor_1806.toUpperCase());
@@ -8782,7 +8782,7 @@ const {
         addonStorageDescriptor_1805.appendTo(addonStorageDescriptor_1804);
         const addonStorageDescriptor_1807 = $("<div class=\"mp-control\">\n                <div>\n                    <div class=\"checkbox-custom c-checkbox\">\n                    \n                    </div>\n                </div>\n            </div>").appendTo(addonStorageDescriptor_1787);
         const addonStorageDescriptor_1808 = addonStorageDescriptor_1807.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-rapidsell-auto-checkbox\" name=\"mp-rapidsell-auto-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[30].id].auto).bind("change", async function(addonStorageDescriptor_1809) {
+        $("<input type=\"checkbox\" id=\"mp-rapidsell-auto-checkbox\" name=\"mp-rapidsell-auto-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[30].id].auto).bind("change", async function (addonStorageDescriptor_1809) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[30].id].auto = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         }).appendTo(addonStorageDescriptor_1808);
@@ -8799,7 +8799,7 @@ const {
         for (const addonStorageDescriptor_1816 in addonStorageDescriptor_1815.showQuantity) {
             const addonStorageDescriptor_1817 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\"></div>\n                    </div>\n                </div>\n            ").appendTo(addonStorageDescriptor_1813);
             const addonStorageDescriptor_1818 = addonStorageDescriptor_1817.find(".checkbox-custom");
-            const addonStorageDescriptor_1819 = $("<input type=\"checkbox\" id=\"mp-mp-lastloots-" + addonStorageDescriptor_1816 + "-checkbox\">").appendTo(addonStorageDescriptor_1818).prop("checked", addonStorageDescriptor_1815.showQuantity[addonStorageDescriptor_1816]).on("change", function() {
+            const addonStorageDescriptor_1819 = $("<input type=\"checkbox\" id=\"mp-mp-lastloots-" + addonStorageDescriptor_1816 + "-checkbox\">").appendTo(addonStorageDescriptor_1818).prop("checked", addonStorageDescriptor_1815.showQuantity[addonStorageDescriptor_1816]).on("change", function () {
                 const addonStorageDescriptor_1820 = addonStorageDescriptor_1813.find("input[type=\"checkbox\"]:checked").length;
                 if ($(this).is(":checked")) {
                     addonStorageDescriptor_1813.find("input[type=\"checkbox\"]").not(this).prop("checked", false);
@@ -8822,7 +8822,7 @@ const {
         for (const addonStorageDescriptor_1822 in addonStorageDescriptor_1815.showRarity) {
             const addonStorageDescriptor_1823 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1814);
             const addonStorageDescriptor_1824 = addonStorageDescriptor_1823.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-lastloots-rarity-" + addonStorageDescriptor_1822 + "-checkbox\" name=\"mp-lastloots-rarity-" + addonStorageDescriptor_1822 + "-name\">").prop("checked", addonStorageDescriptor_1815.showRarity[addonStorageDescriptor_1822]).bind("change", async function(addonStorageDescriptor_1825) {
+            $("<input type=\"checkbox\" id=\"mp-lastloots-rarity-" + addonStorageDescriptor_1822 + "-checkbox\" name=\"mp-lastloots-rarity-" + addonStorageDescriptor_1822 + "-name\">").prop("checked", addonStorageDescriptor_1815.showRarity[addonStorageDescriptor_1822]).bind("change", async function (addonStorageDescriptor_1825) {
                 addonStorageDescriptor_1815.showRarity[addonStorageDescriptor_1822] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_139();
@@ -8844,7 +8844,7 @@ const {
             const addonStorageDescriptor_1835 = $("<div class=\"mp-control-line\"></div>").appendTo(addonStorageDescriptor_1833);
             const addonStorageDescriptor_1836 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1835);
             const addonStorageDescriptor_1837 = addonStorageDescriptor_1836.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-rarityShadow-" + addonStorageDescriptor_1834 + "-checkbox\" name=\"mp-rarityShadow-" + addonStorageDescriptor_1834 + "-name\">").prop("checked", addonStorageDescriptor_1832[addonStorageDescriptor_1834].e).bind("change", async function(addonStorageDescriptor_1838) {
+            $("<input type=\"checkbox\" id=\"mp-rarityShadow-" + addonStorageDescriptor_1834 + "-checkbox\" name=\"mp-rarityShadow-" + addonStorageDescriptor_1834 + "-name\">").prop("checked", addonStorageDescriptor_1832[addonStorageDescriptor_1834].e).bind("change", async function (addonStorageDescriptor_1838) {
                 addonStorageDescriptor_1832[addonStorageDescriptor_1834].e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
@@ -8852,11 +8852,11 @@ const {
             $("<label for=\"mp-rarityShadow-" + addonStorageDescriptor_1834 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig.itemRarity[addonStorageDescriptor_1834] + "</label>").appendTo(addonStorageDescriptor_1837);
             const addonStorageDescriptor_1839 = $("\n                <div class=\"do-action-cursor\">\n                    <div class=\"c-color-picker do-action-cursor\">\n                    \n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1835);
             const addonStorageDescriptor_1840 = addonStorageDescriptor_1839.find(".c-color-picker");
-            $("<input type=\"color\" id=\"mp-cc-" + addonStorageDescriptor_1834 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1834 + "-p-name\" value=\"" + addonStorageDescriptor_1832[addonStorageDescriptor_1834].c + "\">").prop("value", addonStorageDescriptor_1832[addonStorageDescriptor_1834].c).bind("change", async function(addonStorageDescriptor_1841) {
+            $("<input type=\"color\" id=\"mp-cc-" + addonStorageDescriptor_1834 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1834 + "-p-name\" value=\"" + addonStorageDescriptor_1832[addonStorageDescriptor_1834].c + "\">").prop("value", addonStorageDescriptor_1832[addonStorageDescriptor_1834].c).bind("change", async function (addonStorageDescriptor_1841) {
                 addonStorageDescriptor_1832[addonStorageDescriptor_1834].c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
-            }).appendTo(addonStorageDescriptor_1840).contextmenu(function() {
+            }).appendTo(addonStorageDescriptor_1840).contextmenu(function () {
                 const addonStorageDescriptor_1842 = {
                     common: "#9da1a7",
                     unique: "#fffb00",
@@ -8878,7 +8878,7 @@ const {
         for (const addonStorageDescriptor_1845 in addonStorageDescriptor_1843) {
             const addonStorageDescriptor_1846 = $("<div hide-options=\"h-" + addonStorageDescriptor_1845 + "\" class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1844);
             const addonStorageDescriptor_1847 = addonStorageDescriptor_1846.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-header-" + addonStorageDescriptor_1845 + "-checkbox\" name=\"mp-header-" + addonStorageDescriptor_1845 + "-name\">").prop("checked", addonStorageDescriptor_1843[addonStorageDescriptor_1845]).bind("change", async function(addonStorageDescriptor_1848) {
+            $("<input type=\"checkbox\" id=\"mp-header-" + addonStorageDescriptor_1845 + "-checkbox\" name=\"mp-header-" + addonStorageDescriptor_1845 + "-name\">").prop("checked", addonStorageDescriptor_1843[addonStorageDescriptor_1845]).bind("change", async function (addonStorageDescriptor_1848) {
                 addonStorageDescriptor_1843[addonStorageDescriptor_1845] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
@@ -8904,7 +8904,7 @@ const {
         for (const addonStorageDescriptor_1852 in addonStorageDescriptor_1850) {
             const addonStorageDescriptor_1853 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1851);
             const addonStorageDescriptor_1854 = addonStorageDescriptor_1853.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-section-hide-" + addonStorageDescriptor_1852 + "-checkbox\" name=\"mp-section-hide-" + addonStorageDescriptor_1852 + "-name\">").prop("checked", addonStorageDescriptor_1850[addonStorageDescriptor_1852].hide).bind("change", async function(addonStorageDescriptor_1855) {
+            $("<input type=\"checkbox\" id=\"mp-section-hide-" + addonStorageDescriptor_1852 + "-checkbox\" name=\"mp-section-hide-" + addonStorageDescriptor_1852 + "-name\">").prop("checked", addonStorageDescriptor_1850[addonStorageDescriptor_1852].hide).bind("change", async function (addonStorageDescriptor_1855) {
                 addonStorageDescriptor_1850[addonStorageDescriptor_1852].hide = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
@@ -8917,7 +8917,7 @@ const {
             const addonStorageDescriptor_1856 = $("<div hide-options=\"" + addonStorageDescriptor_1852 + "\" class=\"mp-control-line\" style=\"margin-bottom: 3px;\"></div>").appendTo(addonStorageDescriptor_1851);
             const addonStorageDescriptor_1857 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1856);
             const addonStorageDescriptor_1858 = addonStorageDescriptor_1857.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-section-color-" + addonStorageDescriptor_1852 + "-checkbox\" name=\"mp-section-color-" + addonStorageDescriptor_1852 + "-name\">").prop("checked", addonStorageDescriptor_1850[addonStorageDescriptor_1852].color.e).bind("change", async function(addonStorageDescriptor_1859) {
+            $("<input type=\"checkbox\" id=\"mp-section-color-" + addonStorageDescriptor_1852 + "-checkbox\" name=\"mp-section-color-" + addonStorageDescriptor_1852 + "-name\">").prop("checked", addonStorageDescriptor_1850[addonStorageDescriptor_1852].color.e).bind("change", async function (addonStorageDescriptor_1859) {
                 addonStorageDescriptor_1850[addonStorageDescriptor_1852].color.e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
@@ -8925,11 +8925,11 @@ const {
             $("<label for=\"mp-section-color-" + addonStorageDescriptor_1852 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[32].id].color[addonStorageDescriptor_1852] + "</label>").appendTo(addonStorageDescriptor_1858);
             const addonStorageDescriptor_1860 = $("\n                <div class=\"do-action-cursor\">\n                    <div class=\"c-color-picker do-action-cursor\">\n                    \n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1856);
             const addonStorageDescriptor_1861 = addonStorageDescriptor_1860.find(".c-color-picker");
-            $("<input type=\"color\" id=\"mp-section-picker" + addonStorageDescriptor_1852 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1852 + "-p-name\" value=\"" + addonStorageDescriptor_1850[addonStorageDescriptor_1852].color.c + "\">").prop("value", addonStorageDescriptor_1850[addonStorageDescriptor_1852].color.c).bind("change", async function(addonStorageDescriptor_1862) {
+            $("<input type=\"color\" id=\"mp-section-picker" + addonStorageDescriptor_1852 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1852 + "-p-name\" value=\"" + addonStorageDescriptor_1850[addonStorageDescriptor_1852].color.c + "\">").prop("value", addonStorageDescriptor_1850[addonStorageDescriptor_1852].color.c).bind("change", async function (addonStorageDescriptor_1862) {
                 addonStorageDescriptor_1850[addonStorageDescriptor_1852].color.c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
-            }).appendTo(addonStorageDescriptor_1861).contextmenu(function() {
+            }).appendTo(addonStorageDescriptor_1861).contextmenu(function () {
                 const addonStorageDescriptor_1863 = {
                     bonus: "#61dfff",
                     legbon: "#ffc400",
@@ -8956,7 +8956,7 @@ const {
         for (const addonStorageDescriptor_1866 in addonStorageDescriptor_1864) {
             const addonStorageDescriptor_1867 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1865);
             const addonStorageDescriptor_1868 = addonStorageDescriptor_1867.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-custom-" + addonStorageDescriptor_1866 + "-checkbox\" name=\"mp-custom-" + addonStorageDescriptor_1866 + "-name\">").prop("checked", addonStorageDescriptor_1864[addonStorageDescriptor_1866]).bind("change", async function(addonStorageDescriptor_1869) {
+            $("<input type=\"checkbox\" id=\"mp-custom-" + addonStorageDescriptor_1866 + "-checkbox\" name=\"mp-custom-" + addonStorageDescriptor_1866 + "-name\">").prop("checked", addonStorageDescriptor_1864[addonStorageDescriptor_1866]).bind("change", async function (addonStorageDescriptor_1869) {
                 addonStorageDescriptor_1864[addonStorageDescriptor_1866] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
@@ -8976,7 +8976,7 @@ const {
             const addonStorageDescriptor_1873 = $("<div class=\"mp-control-line\"></div>").appendTo(addonStorageDescriptor_1870);
             const addonStorageDescriptor_1874 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1873);
             const addonStorageDescriptor_1875 = addonStorageDescriptor_1874.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-other-tip-" + addonStorageDescriptor_1872 + "-checkbox\" name=\"mp-other-tip-" + addonStorageDescriptor_1872 + "-name\">").prop("checked", addonStorageDescriptor_1871[addonStorageDescriptor_1872].e).bind("change", async function(addonStorageDescriptor_1876) {
+            $("<input type=\"checkbox\" id=\"mp-other-tip-" + addonStorageDescriptor_1872 + "-checkbox\" name=\"mp-other-tip-" + addonStorageDescriptor_1872 + "-name\">").prop("checked", addonStorageDescriptor_1871[addonStorageDescriptor_1872].e).bind("change", async function (addonStorageDescriptor_1876) {
                 addonStorageDescriptor_1871[addonStorageDescriptor_1872].e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
@@ -8984,11 +8984,11 @@ const {
             $("<label for=\"mp-other-tip-" + addonStorageDescriptor_1872 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[32].id].other[addonStorageDescriptor_1872] + "</label>").appendTo(addonStorageDescriptor_1875);
             const addonStorageDescriptor_1877 = $("\n                <div class=\"do-action-cursor\">\n                    <div class=\"c-color-picker do-action-cursor\">\n                    \n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1873);
             const addonStorageDescriptor_1878 = addonStorageDescriptor_1877.find(".c-color-picker");
-            $("<input type=\"color\" id=\"mp-cc-" + addonStorageDescriptor_1872 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1872 + "-p-name\" value=\"" + addonStorageDescriptor_1871[addonStorageDescriptor_1872].c + "\">").prop("value", addonStorageDescriptor_1871[addonStorageDescriptor_1872].c).bind("change", async function(addonStorageDescriptor_1879) {
+            $("<input type=\"color\" id=\"mp-cc-" + addonStorageDescriptor_1872 + "-picker\" class=\"do-action-cursor\" name=\"mp-" + addonStorageDescriptor_1872 + "-p-name\" value=\"" + addonStorageDescriptor_1871[addonStorageDescriptor_1872].c + "\">").prop("value", addonStorageDescriptor_1871[addonStorageDescriptor_1872].c).bind("change", async function (addonStorageDescriptor_1879) {
                 addonStorageDescriptor_1871[addonStorageDescriptor_1872].c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
-            }).appendTo(addonStorageDescriptor_1878).contextmenu(function() {
+            }).appendTo(addonStorageDescriptor_1878).contextmenu(function () {
                 const addonStorageDescriptor_1880 = {
                     damage: "#24ffa0",
                     teleport: "#ffc400",
@@ -9005,7 +9005,7 @@ const {
         for (const addonStorageDescriptor_1882 in addonStorageDescriptor_1881) {
             const addonStorageDescriptor_1883 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1870);
             const addonStorageDescriptor_1884 = addonStorageDescriptor_1883.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-add-" + addonStorageDescriptor_1882 + "-checkbox\" name=\"mp-add-" + addonStorageDescriptor_1882 + "-name\">").prop("checked", addonStorageDescriptor_1881[addonStorageDescriptor_1882]).bind("change", async function(addonStorageDescriptor_1885) {
+            $("<input type=\"checkbox\" id=\"mp-add-" + addonStorageDescriptor_1882 + "-checkbox\" name=\"mp-add-" + addonStorageDescriptor_1882 + "-name\">").prop("checked", addonStorageDescriptor_1881[addonStorageDescriptor_1882]).bind("change", async function (addonStorageDescriptor_1885) {
                 addonStorageDescriptor_1881[addonStorageDescriptor_1882] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1884);
@@ -9017,7 +9017,7 @@ const {
         for (const addonStorageDescriptor_1888 in addonStorageDescriptor_1886) {
             const addonStorageDescriptor_1889 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1887);
             const addonStorageDescriptor_1890 = addonStorageDescriptor_1889.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-footer-" + addonStorageDescriptor_1888 + "-checkbox\" name=\"mp-footer-" + addonStorageDescriptor_1888 + "-name\">").prop("checked", addonStorageDescriptor_1886[addonStorageDescriptor_1888]).bind("change", async function(addonStorageDescriptor_1891) {
+            $("<input type=\"checkbox\" id=\"mp-footer-" + addonStorageDescriptor_1888 + "-checkbox\" name=\"mp-footer-" + addonStorageDescriptor_1888 + "-name\">").prop("checked", addonStorageDescriptor_1886[addonStorageDescriptor_1888]).bind("change", async function (addonStorageDescriptor_1891) {
                 addonStorageDescriptor_1886[addonStorageDescriptor_1888] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_141();
@@ -9033,7 +9033,7 @@ const {
         for (const addonStorageDescriptor_1896 in addonStorageDescriptor_1894) {
             const addonStorageDescriptor_1897 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1895);
             const addonStorageDescriptor_1898 = addonStorageDescriptor_1897.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-mine-helper-" + addonStorageDescriptor_1896 + "-checkbox\" name=\"mp-mine-helper-" + addonStorageDescriptor_1896 + "-name\">").prop("checked", addonStorageDescriptor_1894[addonStorageDescriptor_1896]).bind("change", async function(addonStorageDescriptor_1899) {
+            $("<input type=\"checkbox\" id=\"mp-mine-helper-" + addonStorageDescriptor_1896 + "-checkbox\" name=\"mp-mine-helper-" + addonStorageDescriptor_1896 + "-name\">").prop("checked", addonStorageDescriptor_1894[addonStorageDescriptor_1896]).bind("change", async function (addonStorageDescriptor_1899) {
                 addonStorageDescriptor_1894[addonStorageDescriptor_1896] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1898);
@@ -9046,7 +9046,7 @@ const {
         $("<div class=\"mp-mine-helper-content\"></div>").appendTo(addonStorageDescriptor_1902);
         const addonStorageDescriptor_1903 = $("<div class=\"mp-mine-helper-buttons\"></div>").appendTo(addonStorageDescriptor_1902);
         for (const addonStorageDescriptor_1904 in domInteractionNode_632) {
-            $("<div data-mine=\"" + addonStorageDescriptor_1904 + "\" class=\"mp-button do-action-cursor" + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[35].id].target == addonStorageDescriptor_1904 ? " mp-mine-active" : "") + "\" style=\"width: 40px;\">" + addonStorageDescriptor_1904 + "</div>").appendTo(addonStorageDescriptor_1903).tip(domInteractionNode_632[addonStorageDescriptor_1904].map).click(function() {
+            $("<div data-mine=\"" + addonStorageDescriptor_1904 + "\" class=\"mp-button do-action-cursor" + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[35].id].target == addonStorageDescriptor_1904 ? " mp-mine-active" : "") + "\" style=\"width: 40px;\">" + addonStorageDescriptor_1904 + "</div>").appendTo(addonStorageDescriptor_1903).tip(domInteractionNode_632[addonStorageDescriptor_1904].map).click(function () {
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[35].id].target = addonStorageDescriptor_1904;
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 addonStorageDescriptor_1905();
@@ -9057,7 +9057,7 @@ const {
         const addonStorageDescriptor_1906 = $(addonStorageDescriptor_1900).find(".mp-window-header-left");
         const addonStorageDescriptor_1907 = createSettingsButton("Ustawienia");
         addonStorageDescriptor_1907.appendTo(addonStorageDescriptor_1906);
-        addonStorageDescriptor_1907.click(function() {
+        addonStorageDescriptor_1907.click(function () {
             const addonStorageDescriptor_1908 = MODULE_ADDON_REGISTRY[35].id + "_settings";
             const addonStorageDescriptor_1909 = "#w-" + addonStorageDescriptor_1908;
             const addonStorageDescriptor_1910 = ADDON_STORAGE_REFERENCE.window[addonStorageDescriptor_1908].o;
@@ -9069,8 +9069,8 @@ const {
     });
     createWindow(MODULE_ADDON_REGISTRY[36].name, "" + MODULE_ADDON_REGISTRY[36].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(addonStorageDescriptor_1911 => {
         const addonStorageDescriptor_1912 = $(addonStorageDescriptor_1911).find("#" + MODULE_ADDON_REGISTRY[36].id);
-        const addonStorageDescriptor_1913 = $("<div class=\"mp-background-section\">\n            <div class=\"mp-title\">Konfiguracja zestawÃ³w</div>\n            <div id=\"buildscfg\" class=\"mp-button do-action-cursor mp-button-cfg-builds\">Otwórz konfigurację</div>\n        </div>").appendTo(addonStorageDescriptor_1912);
-        addonStorageDescriptor_1913.find("#buildscfg").click(function() {
+        const addonStorageDescriptor_1913 = $("<div class=\"mp-background-section\">\n            <div class=\"mp-title\">Konfiguracja zestawów</div>\n            <div id=\"buildscfg\" class=\"mp-button do-action-cursor mp-button-cfg-builds\">Otwórz konfigurację</div>\n        </div>").appendTo(addonStorageDescriptor_1912);
+        addonStorageDescriptor_1913.find("#buildscfg").click(function () {
             domInteractionNode_785();
         });
         const addonStorageDescriptor_1914 = $("<div class=\"mp-background-section\"></div>").appendTo(addonStorageDescriptor_1912);
@@ -9080,14 +9080,14 @@ const {
         for (const addonStorageDescriptor_1917 in addonStorageDescriptor_1916) {
             const addonStorageDescriptor_1918 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1915);
             const addonStorageDescriptor_1919 = addonStorageDescriptor_1918.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a36-options-" + addonStorageDescriptor_1917 + "-checkbox\" name=\"mp-a36-options-" + addonStorageDescriptor_1917 + "-name\">").prop("checked", addonStorageDescriptor_1916[addonStorageDescriptor_1917]).bind("change", async function(addonStorageDescriptor_1920) {
+            $("<input type=\"checkbox\" id=\"mp-a36-options-" + addonStorageDescriptor_1917 + "-checkbox\" name=\"mp-a36-options-" + addonStorageDescriptor_1917 + "-name\">").prop("checked", addonStorageDescriptor_1916[addonStorageDescriptor_1917]).bind("change", async function (addonStorageDescriptor_1920) {
                 addonStorageDescriptor_1916[addonStorageDescriptor_1917] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(addonStorageDescriptor_1919);
             $("<label for=\"mp-a36-options-" + addonStorageDescriptor_1917 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[36].id].options[addonStorageDescriptor_1917] + "</label>").appendTo(addonStorageDescriptor_1919);
         }
         const addonStorageDescriptor_1921 = $("\n            <div class=\"mp-content-footer\">\n\n            </div>").appendTo(addonStorageDescriptor_1912);
-        $("<div class=\"mp-button do-action-cursor\">Zapisz do kolejki</div>").appendTo(addonStorageDescriptor_1921).click(function() {
+        $("<div class=\"mp-button do-action-cursor\">Zapisz do kolejki</div>").appendTo(addonStorageDescriptor_1921).click(function () {
             _g("match&a=signin");
         });
     });
@@ -9100,7 +9100,7 @@ const {
             $("<div class=\"mp-title\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[37].id].title[addonStorageDescriptor_1926] + "</div>").appendTo(addonStorageDescriptor_1927);
             const addonStorageDescriptor_1928 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(addonStorageDescriptor_1927);
             const addonStorageDescriptor_1929 = addonStorageDescriptor_1928.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a37-settings-" + addonStorageDescriptor_1926 + "-checkbox\" name=\"mp-a37-settings-" + addonStorageDescriptor_1926 + "-name\">").prop("checked", addonStorageDescriptor_1925[addonStorageDescriptor_1926].e).bind("change", async function(addonStorageDescriptor_1930) {
+            $("<input type=\"checkbox\" id=\"mp-a37-settings-" + addonStorageDescriptor_1926 + "-checkbox\" name=\"mp-a37-settings-" + addonStorageDescriptor_1926 + "-name\">").prop("checked", addonStorageDescriptor_1925[addonStorageDescriptor_1926].e).bind("change", async function (addonStorageDescriptor_1930) {
                 addonStorageDescriptor_1925[addonStorageDescriptor_1926].e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 $("div[data-a37=\"" + addonStorageDescriptor_1926 + "\"]").css({
@@ -9117,11 +9117,11 @@ const {
             $("<label for=\"mp-a37-settings-" + addonStorageDescriptor_1926 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[37].id].settings[addonStorageDescriptor_1926] + "</label>").appendTo(addonStorageDescriptor_1929);
             if (addonStorageDescriptor_1925[addonStorageDescriptor_1926]?.text) {
                 const addonStorageDescriptor_1931 = $("<div data-a37=\"" + addonStorageDescriptor_1926 + "\"></div>").appendTo(addonStorageDescriptor_1927);
-                $("<div class=\"mp-title\">WiadomośÄ‡</div>").appendTo(addonStorageDescriptor_1931);
+                $("<div class=\"mp-title\">Wiadomość</div>").appendTo(addonStorageDescriptor_1931);
                 const addonStorageDescriptor_1932 = $("<div class=\"mp-control\"></div>").appendTo(addonStorageDescriptor_1931);
                 const addonStorageDescriptor_1933 = createInput("text", "?", 300);
                 addonStorageDescriptor_1933.appendTo(addonStorageDescriptor_1932);
-                addonStorageDescriptor_1933.prop("value", addonStorageDescriptor_1925[addonStorageDescriptor_1926].text).on("input", async function(addonStorageDescriptor_1934) {
+                addonStorageDescriptor_1933.prop("value", addonStorageDescriptor_1925[addonStorageDescriptor_1926].text).on("input", async function (addonStorageDescriptor_1934) {
                     let addonStorageDescriptor_1935 = $(this).val();
                     addonStorageDescriptor_1925[addonStorageDescriptor_1926].text = addonStorageDescriptor_1935;
                     saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -9134,7 +9134,7 @@ const {
                 for (const addonStorageDescriptor_1938 in addonStorageDescriptor_1937) {
                     const addonStorageDescriptor_1939 = $("<div class=\"mp-control\">\n                        <div>\n                            <div class=\"checkbox-custom c-checkbox\">\n                            \n                            </div>\n                        </div>\n                    </div>").appendTo(addonStorageDescriptor_1936);
                     const addonStorageDescriptor_1940 = addonStorageDescriptor_1939.find(".checkbox-custom");
-                    $("<input type=\"checkbox\" id=\"mp-a37-settings-" + addonStorageDescriptor_1938 + "-checkbox\" name=\"mp-a37-settings-" + addonStorageDescriptor_1938 + "-name\">").prop("checked", addonStorageDescriptor_1937[addonStorageDescriptor_1938]).bind("change", async function(addonStorageDescriptor_1941) {
+                    $("<input type=\"checkbox\" id=\"mp-a37-settings-" + addonStorageDescriptor_1938 + "-checkbox\" name=\"mp-a37-settings-" + addonStorageDescriptor_1938 + "-name\">").prop("checked", addonStorageDescriptor_1937[addonStorageDescriptor_1938]).bind("change", async function (addonStorageDescriptor_1941) {
                         addonStorageDescriptor_1937[addonStorageDescriptor_1938] = $(this).prop("checked");
                         saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                     }).appendTo(addonStorageDescriptor_1940);
@@ -9164,7 +9164,7 @@ const {
         for (const addonStorageDescriptor_1951 in addonStorageDescriptor_1949) {
             const addonStorageDescriptor_1952 = $("\n        <div class=\"mp-control\">\n            <div class=\"mp-case-checkbox\">\n                <div class=\"checkbox-custom c-checkbox\"></div>\n            </div>\n        </div>\n    ").appendTo(addonStorageDescriptor_1950);
             const addonStorageDescriptor_1953 = addonStorageDescriptor_1952.find(".checkbox-custom");
-            const addonStorageDescriptor_1954 = $("<input type=\"checkbox\" id=\"mp-si-bonus-" + addonStorageDescriptor_1951 + "-checkbox\">").prop("checked", addonStorageDescriptor_1949[addonStorageDescriptor_1951]).on("change", function() {
+            const addonStorageDescriptor_1954 = $("<input type=\"checkbox\" id=\"mp-si-bonus-" + addonStorageDescriptor_1951 + "-checkbox\">").prop("checked", addonStorageDescriptor_1949[addonStorageDescriptor_1951]).on("change", function () {
                 const addonStorageDescriptor_1955 = Object.values(addonStorageDescriptor_1949).filter(addonStorageDescriptor_1956 => addonStorageDescriptor_1956).length;
                 if (this.checked && addonStorageDescriptor_1955 >= addonStorageDescriptor_1948) {
                     this.checked = false;
@@ -9193,7 +9193,7 @@ const {
         const addonStorageDescriptor_1963 = $("<div class=\"mp-select-options do-action-cursor\"></div>").appendTo(addonStorageDescriptor_1961);
         addonStorageDescriptor_1959.forEach(addonStorageDescriptor_1964 => {
             const addonStorageDescriptor_1965 = $("<div class=\"mp-option do-action-cursor\" data-value=\"" + addonStorageDescriptor_1964.value + "\">" + addonStorageDescriptor_1964.label + "</div>");
-            addonStorageDescriptor_1965.on("click", async function() {
+            addonStorageDescriptor_1965.on("click", async function () {
                 const addonStorageDescriptor_1966 = $(this).data("value");
                 addonStorageDescriptor_1962.text(addonStorageDescriptor_1964.label);
                 addonStorageDescriptor_1963.hide();
@@ -9204,7 +9204,7 @@ const {
             });
             addonStorageDescriptor_1963.append(addonStorageDescriptor_1965);
         });
-        addonStorageDescriptor_1962.on("click", function(addonStorageDescriptor_1967) {
+        addonStorageDescriptor_1962.on("click", function (addonStorageDescriptor_1967) {
             addonStorageDescriptor_1967.stopPropagation();
             $(".mp-select-options").not(addonStorageDescriptor_1963).hide();
             addonStorageDescriptor_1963.toggle();
@@ -9222,7 +9222,7 @@ const {
             for (const addonStorageDescriptor_1975 in addonStorageDescriptor_1974) {
                 const addonStorageDescriptor_1976 = $("<div class=\"mp-control\">\n                        <div>\n                            <div class=\"checkbox-custom c-checkbox\">\n                            \n                            </div>\n                        </div>\n                    </div>").appendTo(addonStorageDescriptor_1973);
                 const addonStorageDescriptor_1977 = addonStorageDescriptor_1976.find(".checkbox-custom");
-                $("<input type=\"checkbox\" id=\"mp-a38-options" + addonStorageDescriptor_1971 + "-" + addonStorageDescriptor_1975 + "-checkbox\" name=\"mp-a38-options" + addonStorageDescriptor_1971 + "-" + addonStorageDescriptor_1975 + "-name\">").prop("checked", addonStorageDescriptor_1970[addonStorageDescriptor_1971][addonStorageDescriptor_1975]).bind("change", async function(addonStorageDescriptor_1978) {
+                $("<input type=\"checkbox\" id=\"mp-a38-options" + addonStorageDescriptor_1971 + "-" + addonStorageDescriptor_1975 + "-checkbox\" name=\"mp-a38-options" + addonStorageDescriptor_1971 + "-" + addonStorageDescriptor_1975 + "-name\">").prop("checked", addonStorageDescriptor_1970[addonStorageDescriptor_1971][addonStorageDescriptor_1975]).bind("change", async function (addonStorageDescriptor_1978) {
                     if ($(this).prop("checked")) {
                         addonStorageDescriptor_1973.find("input[type=\"checkbox\"]").not(this).prop("checked", false);
                         for (const addonStorageDescriptor_1979 in addonStorageDescriptor_1974) {
@@ -9244,7 +9244,7 @@ const {
         for (const addonStorageDescriptor_1983 in addonStorageDescriptor_1982) {
             const addonStorageDescriptor_1984 = $("<div class=\"mp-control\">\n                        <div>\n                            <div class=\"checkbox-custom c-checkbox\">\n                            \n                            </div>\n                        </div>\n                    </div>").appendTo(addonStorageDescriptor_1981);
             const addonStorageDescriptor_1985 = addonStorageDescriptor_1984.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a38-perc-" + addonStorageDescriptor_1983 + "-checkbox\" name=\"mp-a38-perc-" + addonStorageDescriptor_1983 + "-name\">").prop("checked", addonStorageDescriptor_1982[addonStorageDescriptor_1983]).bind("change", async function(addonStorageDescriptor_1986) {
+            $("<input type=\"checkbox\" id=\"mp-a38-perc-" + addonStorageDescriptor_1983 + "-checkbox\" name=\"mp-a38-perc-" + addonStorageDescriptor_1983 + "-name\">").prop("checked", addonStorageDescriptor_1982[addonStorageDescriptor_1983]).bind("change", async function (addonStorageDescriptor_1986) {
                 addonStorageDescriptor_1982[addonStorageDescriptor_1983] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 uiLayoutComponent_145();
@@ -9255,7 +9255,7 @@ const {
         $("<div class=\"mp-title\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[38].id].title.ping + "</div>").appendTo(addonStorageDescriptor_1987);
         const addonStorageDescriptor_1988 = $("<div class=\"mp-control\">\n                        <div>\n                            <div class=\"checkbox-custom c-checkbox\">\n                            \n                            </div>\n                        </div>\n                    </div>").appendTo(addonStorageDescriptor_1987);
         const addonStorageDescriptor_1989 = addonStorageDescriptor_1988.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-a38-ping-checkbox\" name=\"mp-a38-ping-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].ping.show).bind("change", async function(addonStorageDescriptor_1990) {
+        $("<input type=\"checkbox\" id=\"mp-a38-ping-checkbox\" name=\"mp-a38-ping-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].ping.show).bind("change", async function (addonStorageDescriptor_1990) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].ping.show = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             uiLayoutComponent_145();
@@ -9269,7 +9269,7 @@ const {
         $("<div class=\"mp-title\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[38].id].title.stats + "</div>").appendTo(addonStorageDescriptor_1991);
         const addonStorageDescriptor_1992 = $("<div class=\"mp-control\">\n                        <div>\n                            <div class=\"checkbox-custom c-checkbox\">\n                            \n                            </div>\n                        </div>\n                    </div>").appendTo(addonStorageDescriptor_1991);
         const addonStorageDescriptor_1993 = addonStorageDescriptor_1992.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-a38-stats-checkbox\" name=\"mp-a38-stats-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].stats.show).bind("change", async function(addonStorageDescriptor_1994) {
+        $("<input type=\"checkbox\" id=\"mp-a38-stats-checkbox\" name=\"mp-a38-stats-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].stats.show).bind("change", async function (addonStorageDescriptor_1994) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].stats.show = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             uiLayoutComponent_145();
@@ -9279,7 +9279,7 @@ const {
             });
         }).appendTo(addonStorageDescriptor_1993);
         $("<label for=\"mp-a38-stats-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[38].id].showStats + "</label>").appendTo(addonStorageDescriptor_1993);
-        $("<div class=\"mp-button do-action-cursor\">Personalizuj</div>").click(function() {
+        $("<div class=\"mp-button do-action-cursor\">Personalizuj</div>").click(function () {
             const addonStorageDescriptor_1995 = MODULE_ADDON_REGISTRY[38].id + "_bonus";
             const addonStorageDescriptor_1996 = "#w-" + addonStorageDescriptor_1995;
             const addonStorageDescriptor_1997 = ADDON_STORAGE_REFERENCE.window[addonStorageDescriptor_1995].o;
@@ -9291,7 +9291,7 @@ const {
         $("<div class=\"mp-title\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[38].id].title.builds + "</div>").appendTo(addonStorageDescriptor_1998);
         const addonStorageDescriptor_1999 = $("<div class=\"mp-control\">\n                        <div>\n                            <div class=\"checkbox-custom c-checkbox\">\n                            \n                            </div>\n                        </div>\n                    </div>").appendTo(addonStorageDescriptor_1998);
         const addonStorageDescriptor_2000 = addonStorageDescriptor_1999.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-a38-builds-checkbox\" name=\"mp-a38-builds-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].builds.showButtons).bind("change", async function(networkProtocolPacket_2001) {
+        $("<input type=\"checkbox\" id=\"mp-a38-builds-checkbox\" name=\"mp-a38-builds-name\">").prop("checked", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].builds.showButtons).bind("change", async function (networkProtocolPacket_2001) {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].builds.showButtons = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             uiLayoutComponent_145();
@@ -9306,7 +9306,7 @@ const {
         for (const networkProtocolPacket_2004 in networkProtocolPacket_2002) {
             const networkProtocolPacket_2005 = $("<div class=\"mp-control\">\n                        <div>\n                            <div class=\"checkbox-custom c-checkbox\">\n                            \n                            </div>\n                        </div>\n                    </div>").appendTo(networkProtocolPacket_2003);
             const networkProtocolPacket_2006 = networkProtocolPacket_2005.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a38-builds-type-" + networkProtocolPacket_2004 + "-checkbox\" name=\"mp-a38-builds-type-" + networkProtocolPacket_2004 + "-name\">").prop("checked", networkProtocolPacket_2002[networkProtocolPacket_2004]).bind("change", async function(networkProtocolPacket_2007) {
+            $("<input type=\"checkbox\" id=\"mp-a38-builds-type-" + networkProtocolPacket_2004 + "-checkbox\" name=\"mp-a38-builds-type-" + networkProtocolPacket_2004 + "-name\">").prop("checked", networkProtocolPacket_2002[networkProtocolPacket_2004]).bind("change", async function (networkProtocolPacket_2007) {
                 if ($(this).prop("checked")) {
                     networkProtocolPacket_2003.find("input[type=\"checkbox\"]").not(this).prop("checked", false);
                     for (const networkProtocolPacket_2008 in networkProtocolPacket_2002) {
@@ -9340,7 +9340,7 @@ const {
             networkProtocolPacket_2017.prop("value", networkProtocolPacket_2014[networkProtocolPacket_2015]).attr({
                 min: 1,
                 max: 500
-            }).on("input", async function(networkProtocolPacket_2018) {
+            }).on("input", async function (networkProtocolPacket_2018) {
                 let networkProtocolPacket_2019 = Number($(this).val());
                 if (isNaN(networkProtocolPacket_2019)) {
                     networkProtocolPacket_2019 = 1;
@@ -9367,7 +9367,7 @@ const {
         networkProtocolPacket_2023.prop("value", networkProtocolPacket_2020.notKillWhenAdvantage.level).attr({
             min: 1,
             max: 500
-        }).on("input", async function(networkProtocolPacket_2025) {
+        }).on("input", async function (networkProtocolPacket_2025) {
             let networkProtocolPacket_2026 = Number($(this).val());
             if (isNaN(networkProtocolPacket_2026)) {
                 networkProtocolPacket_2026 = 1;
@@ -9384,7 +9384,7 @@ const {
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         });
         const networkProtocolPacket_2027 = networkProtocolPacket_2024.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-a40-advantage-checkbox\" name=\"mp-a40-advantage-name\">").prop("checked", networkProtocolPacket_2020.notKillWhenAdvantage.e).bind("change", async function(networkProtocolPacket_2028) {
+        $("<input type=\"checkbox\" id=\"mp-a40-advantage-checkbox\" name=\"mp-a40-advantage-name\">").prop("checked", networkProtocolPacket_2020.notKillWhenAdvantage.e).bind("change", async function (networkProtocolPacket_2028) {
             networkProtocolPacket_2020.notKillWhenAdvantage.e = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         }).appendTo(networkProtocolPacket_2027);
@@ -9396,7 +9396,7 @@ const {
         for (const networkProtocolPacket_2032 in networkProtocolPacket_2031) {
             const networkProtocolPacket_2033 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2030);
             const networkProtocolPacket_2034 = networkProtocolPacket_2033.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a40-relation-" + networkProtocolPacket_2032 + "-checkbox\" name=\"mp-a40-relation-" + networkProtocolPacket_2032 + "-name\">").prop("checked", networkProtocolPacket_2031[networkProtocolPacket_2032]).bind("change", async function(networkProtocolPacket_2035) {
+            $("<input type=\"checkbox\" id=\"mp-a40-relation-" + networkProtocolPacket_2032 + "-checkbox\" name=\"mp-a40-relation-" + networkProtocolPacket_2032 + "-name\">").prop("checked", networkProtocolPacket_2031[networkProtocolPacket_2032]).bind("change", async function (networkProtocolPacket_2035) {
                 networkProtocolPacket_2031[networkProtocolPacket_2032] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2034);
@@ -9409,7 +9409,7 @@ const {
         for (const networkProtocolPacket_2039 in networkProtocolPacket_2038) {
             const networkProtocolPacket_2040 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2037);
             const networkProtocolPacket_2041 = networkProtocolPacket_2040.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a40-mine-" + networkProtocolPacket_2039 + "-checkbox\" name=\"mp-a40-mine-" + networkProtocolPacket_2039 + "-name\">").prop("checked", networkProtocolPacket_2038[networkProtocolPacket_2039]).bind("change", async function(networkProtocolPacket_2042) {
+            $("<input type=\"checkbox\" id=\"mp-a40-mine-" + networkProtocolPacket_2039 + "-checkbox\" name=\"mp-a40-mine-" + networkProtocolPacket_2039 + "-name\">").prop("checked", networkProtocolPacket_2038[networkProtocolPacket_2039]).bind("change", async function (networkProtocolPacket_2042) {
                 networkProtocolPacket_2038[networkProtocolPacket_2039] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2041);
@@ -9423,7 +9423,7 @@ const {
             const networkProtocolPacket_2047 = $("<div class=\"mp-list-wrapper-container\"></div>").appendTo(networkProtocolPacket_2044);
             $("<div class=\"mp-title\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[40].id].list[networkProtocolPacket_2046] + "</div>").appendTo(networkProtocolPacket_2047);
             const networkProtocolPacket_2048 = $("<div class=\"mp-list-wrapper mp-scroll\"></div>").appendTo(networkProtocolPacket_2047);
-            $("<input class=\"mp-list-input-wrapper\" placeholder=\"[+]\">").appendTo(networkProtocolPacket_2047).tip("Pełna nazwa gracza").on("focusout", async function() {
+            $("<input class=\"mp-list-input-wrapper\" placeholder=\"[+]\">").appendTo(networkProtocolPacket_2047).tip("Pełna nazwa gracza").on("focusout", async function () {
                 const networkProtocolPacket_2049 = $(this).val().trim();
                 if (networkProtocolPacket_2049.length > 0) {
                     if (!networkProtocolPacket_2045[networkProtocolPacket_2046].includes(networkProtocolPacket_2049)) {
@@ -9447,7 +9447,7 @@ const {
         for (const networkProtocolPacket_2056 in networkProtocolPacket_2055) {
             const networkProtocolPacket_2057 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2054);
             const networkProtocolPacket_2058 = networkProtocolPacket_2057.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a41-qf-" + networkProtocolPacket_2056 + "-checkbox\" name=\"mp-a41-qf-" + networkProtocolPacket_2056 + "-name\">").prop("checked", networkProtocolPacket_2055[networkProtocolPacket_2056]).bind("change", async function(networkProtocolPacket_2059) {
+            $("<input type=\"checkbox\" id=\"mp-a41-qf-" + networkProtocolPacket_2056 + "-checkbox\" name=\"mp-a41-qf-" + networkProtocolPacket_2056 + "-name\">").prop("checked", networkProtocolPacket_2055[networkProtocolPacket_2056]).bind("change", async function (networkProtocolPacket_2059) {
                 networkProtocolPacket_2055[networkProtocolPacket_2056] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2058);
@@ -9465,7 +9465,7 @@ const {
             const networkProtocolPacket_2067 = $("<div class=\"mp-background-section\"></div>").appendTo(networkProtocolPacket_2064);
             const networkProtocolPacket_2068 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\"></div>\n                    </div>\n                </div>\n            ").appendTo(networkProtocolPacket_2067);
             const networkProtocolPacket_2069 = networkProtocolPacket_2068.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a42-legbon-" + networkProtocolPacket_2066 + "-checkbox\">").appendTo(networkProtocolPacket_2069).prop("checked", networkProtocolPacket_2065[networkProtocolPacket_2066].e).on("change", function() {
+            $("<input type=\"checkbox\" id=\"mp-a42-legbon-" + networkProtocolPacket_2066 + "-checkbox\">").appendTo(networkProtocolPacket_2069).prop("checked", networkProtocolPacket_2065[networkProtocolPacket_2066].e).on("change", function () {
                 networkProtocolPacket_2065[networkProtocolPacket_2066].e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 $("div[settings-legbon=\"" + networkProtocolPacket_2066 + "\"]").css({
@@ -9477,13 +9477,13 @@ const {
             const networkProtocolPacket_2070 = $("<div settings-legbon=\"" + networkProtocolPacket_2066 + "\" class=\"mp-a42-legbon\"></div>").appendTo(networkProtocolPacket_2067);
             const networkProtocolPacket_2071 = $("<div class=\"mp-control\"></div>").appendTo(networkProtocolPacket_2070);
             const networkProtocolPacket_2072 = createInput("text", "?", 150);
-            networkProtocolPacket_2072.prop("value", networkProtocolPacket_2065[networkProtocolPacket_2066].m).on("input", async function(networkProtocolPacket_2073) {
+            networkProtocolPacket_2072.prop("value", networkProtocolPacket_2065[networkProtocolPacket_2066].m).on("input", async function (networkProtocolPacket_2073) {
                 let networkProtocolPacket_2074 = $(this).val();
                 networkProtocolPacket_2065[networkProtocolPacket_2066].m = networkProtocolPacket_2074;
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2071);
             const networkProtocolPacket_2075 = $("<div class=\"c-color-picker do-action-cursor\"></div>").appendTo(networkProtocolPacket_2070);
-            $("<input type=\"color\" class=\"do-action-cursor\" name=\"mp-legbon-" + networkProtocolPacket_2066 + "\">").prop("value", networkProtocolPacket_2065[networkProtocolPacket_2066].c).bind("focusout", async function(networkProtocolPacket_2076) {
+            $("<input type=\"color\" class=\"do-action-cursor\" name=\"mp-legbon-" + networkProtocolPacket_2066 + "\">").prop("value", networkProtocolPacket_2065[networkProtocolPacket_2066].c).bind("focusout", async function (networkProtocolPacket_2076) {
                 networkProtocolPacket_2065[networkProtocolPacket_2066].c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2075);
@@ -9502,7 +9502,7 @@ const {
             const networkProtocolPacket_2081 = $("<div class=\"mp-background-section\"></div>").appendTo(networkProtocolPacket_2078);
             const networkProtocolPacket_2082 = $("\n                <div class=\"mp-control\">\n                    <div class=\"mp-case-checkbox\">\n                        <div class=\"checkbox-custom c-checkbox\"></div>\n                    </div>\n                </div>\n            ").appendTo(networkProtocolPacket_2081);
             const networkProtocolPacket_2083 = networkProtocolPacket_2082.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a42-otherbon-" + networkProtocolPacket_2080 + "-checkbox\">").appendTo(networkProtocolPacket_2083).prop("checked", networkProtocolPacket_2079[networkProtocolPacket_2080].e).on("change", function() {
+            $("<input type=\"checkbox\" id=\"mp-a42-otherbon-" + networkProtocolPacket_2080 + "-checkbox\">").appendTo(networkProtocolPacket_2083).prop("checked", networkProtocolPacket_2079[networkProtocolPacket_2080].e).on("change", function () {
                 networkProtocolPacket_2079[networkProtocolPacket_2080].e = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 $("div[settings-otherbon=\"" + networkProtocolPacket_2080 + "\"]").css({
@@ -9514,13 +9514,13 @@ const {
             const networkProtocolPacket_2084 = $("<div settings-otherbon=\"" + networkProtocolPacket_2080 + "\" class=\"mp-a42-legbon\"></div>").appendTo(networkProtocolPacket_2081);
             const networkProtocolPacket_2085 = $("<div class=\"mp-control\"></div>").appendTo(networkProtocolPacket_2084);
             const networkProtocolPacket_2086 = createInput("text", "?", 150);
-            networkProtocolPacket_2086.prop("value", networkProtocolPacket_2079[networkProtocolPacket_2080].m).on("input", async function(networkProtocolPacket_2087) {
+            networkProtocolPacket_2086.prop("value", networkProtocolPacket_2079[networkProtocolPacket_2080].m).on("input", async function (networkProtocolPacket_2087) {
                 let networkProtocolPacket_2088 = $(this).val();
                 networkProtocolPacket_2079[networkProtocolPacket_2080].m = networkProtocolPacket_2088;
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2085);
             const networkProtocolPacket_2089 = $("<div class=\"c-color-picker do-action-cursor\"></div>").appendTo(networkProtocolPacket_2084);
-            $("<input type=\"color\" class=\"do-action-cursor\" name=\"mp-otherbon-" + networkProtocolPacket_2080 + "\">").prop("value", networkProtocolPacket_2079[networkProtocolPacket_2080].c).bind("focusout", async function(networkProtocolPacket_2090) {
+            $("<input type=\"color\" class=\"do-action-cursor\" name=\"mp-otherbon-" + networkProtocolPacket_2080 + "\">").prop("value", networkProtocolPacket_2079[networkProtocolPacket_2080].c).bind("focusout", async function (networkProtocolPacket_2090) {
                 networkProtocolPacket_2079[networkProtocolPacket_2080].c = $(this).prop("value");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2089);
@@ -9544,7 +9544,7 @@ const {
             for (const networkProtocolPacket_2099 in networkProtocolPacket_2097) {
                 const networkProtocolPacket_2100 = $("<div class=\"mp-control\">\n                        <div>\n                            <div class=\"checkbox-custom c-checkbox\">\n                            \n                            </div>\n                        </div>\n                    </div>").appendTo(networkProtocolPacket_2098);
                 const networkProtocolPacket_2101 = networkProtocolPacket_2100.find(".checkbox-custom");
-                $("<input type=\"checkbox\" id=\"mp-a44-" + networkProtocolPacket_2095 + "-" + networkProtocolPacket_2099 + "-checkbox\" name=\"mp-a44-" + networkProtocolPacket_2095 + "-" + networkProtocolPacket_2099 + "-name\">").prop("checked", networkProtocolPacket_2097[networkProtocolPacket_2099]).bind("change", async function(networkProtocolPacket_2102) {
+                $("<input type=\"checkbox\" id=\"mp-a44-" + networkProtocolPacket_2095 + "-" + networkProtocolPacket_2099 + "-checkbox\" name=\"mp-a44-" + networkProtocolPacket_2095 + "-" + networkProtocolPacket_2099 + "-name\">").prop("checked", networkProtocolPacket_2097[networkProtocolPacket_2099]).bind("change", async function (networkProtocolPacket_2102) {
                     if (networkProtocolPacket_2095 == "use" || networkProtocolPacket_2095 == "distance") {
                         if ($(this).prop("checked")) {
                             networkProtocolPacket_2098.find("input[type=\"checkbox\"]").not(this).prop("checked", false);
@@ -9575,7 +9575,7 @@ const {
         networkProtocolPacket_2104.appendTo(networkProtocolPacket_2105).prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[44].id].range).attr({
             min: 3,
             max: 30
-        }).on("input", async function(networkProtocolPacket_2106) {
+        }).on("input", async function (networkProtocolPacket_2106) {
             let networkProtocolPacket_2107 = Number($(this).val());
             if (isNaN(networkProtocolPacket_2107)) {
                 networkProtocolPacket_2107 = 3;
@@ -9596,7 +9596,7 @@ const {
         networkProtocolPacket_2108.appendTo(networkProtocolPacket_2109).prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[44].id].level).attr({
             min: 1,
             max: 500
-        }).on("input", async function(networkProtocolPacket_2110) {
+        }).on("input", async function (networkProtocolPacket_2110) {
             let networkProtocolPacket_2111 = Number($(this).val());
             if (isNaN(networkProtocolPacket_2111)) {
                 networkProtocolPacket_2111 = 1;
@@ -9626,12 +9626,12 @@ const {
                         return message("Tutaj włóż Teleport");
                     }
                     if (networkProtocolPacket_2120._cachedStats.lvl > Engine.hero.d.lvl) {
-                        return message("Nie moÅ¼esz uÅ¼ywaÄ‡ przedmiotu");
+                        return message("Nie możesz używać przedmiotu");
                     }
                     networkProtocolPacket_2114.children().remove();
                     const networkProtocolPacket_2121 = universalCreateItem(networkProtocolPacket_2120, "item", ADDON_STORAGE_REFERENCE);
                     networkProtocolPacket_2121.appendTo(networkProtocolPacket_2114);
-                    networkProtocolPacket_2121.click(async function() {
+                    networkProtocolPacket_2121.click(async function () {
                         ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[44].id].item[uiLayoutComponent_270] = null;
                         networkProtocolPacket_2121.remove();
                         saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -9661,7 +9661,7 @@ const {
                 const networkProtocolPacket_2124 = getDataItem(networkProtocolPacket_2122);
                 const networkProtocolPacket_2125 = universalCreateItem(networkProtocolPacket_2124, "item", ADDON_STORAGE_REFERENCE);
                 networkProtocolPacket_2125.appendTo(networkProtocolPacket_2114);
-                networkProtocolPacket_2125.click(async function() {
+                networkProtocolPacket_2125.click(async function () {
                     ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[44].id].item[uiLayoutComponent_270] = null;
                     saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                     networkProtocolPacket_2125.remove();
@@ -9701,7 +9701,7 @@ const {
             },
             "7": {
                 title: "7 na 7",
-                tip: "Oznacza obszar 3 kratek w kaÅ¼dą stronę od herosa w lini prostej"
+                tip: "Oznacza obszar 3 kratek w każdą stronę od herosa w lini prostej"
             },
             "9": {
                 title: "9 na 9",
@@ -9709,7 +9709,7 @@ const {
             },
             "11": {
                 title: "11 na 11",
-                tip: "Oznacza obszar 5 kratek w każdÄ… stronÄ™ od herosa w lini prostej"
+                tip: "Oznacza obszar 5 kratek w każdą stronę od herosa w lini prostej"
             },
             "13": {
                 title: "13 na 13",
@@ -9721,17 +9721,17 @@ const {
             },
             "17": {
                 title: "17 na 17",
-                tip: "Oznacza obszar 8 kratek w kaÅ¼dą stronę od herosa w lini prostej"
+                tip: "Oznacza obszar 8 kratek w każdą stronę od herosa w lini prostej"
             },
             "19": {
                 title: "19 na 19",
-                tip: "Oznacza obszar 9 kratek w każdÄ… stronÄ™ od herosa w lini prostej"
+                tip: "Oznacza obszar 9 kratek w każdą stronę od herosa w lini prostej"
             }
         };
         for (const networkProtocolPacket_2132 in networkProtocolPacket_2131) {
             const networkProtocolPacket_2133 = networkProtocolPacket_2131[networkProtocolPacket_2132].title;
             const networkProtocolPacket_2134 = networkProtocolPacket_2131[networkProtocolPacket_2132].tip;
-            $("<div data-select-radius=\"" + networkProtocolPacket_2132 + "\" class=\"mp-button do-action-cursor\">" + networkProtocolPacket_2133 + "</div>").appendTo(networkProtocolPacket_2130).tip(networkProtocolPacket_2134).click(function() {
+            $("<div data-select-radius=\"" + networkProtocolPacket_2132 + "\" class=\"mp-button do-action-cursor\">" + networkProtocolPacket_2133 + "</div>").appendTo(networkProtocolPacket_2130).tip(networkProtocolPacket_2134).click(function () {
                 $("div[data-select-radius]").removeClass("mp-btn-active");
                 $(this).addClass("mp-btn-active");
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[45].id].radius[uiLayoutComponent_221] = Number(networkProtocolPacket_2132);
@@ -9740,8 +9740,8 @@ const {
         }
         $("div[data-select-radius=\"" + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[45].id].radius[uiLayoutComponent_221] + "\"]").addClass("mp-btn-active");
         const networkProtocolPacket_2135 = $("<div class=\"mp-background-section\"></div>").appendTo(networkProtocolPacket_2128);
-        $("<div class=\"mp-title\">WÅ‚asna grafika obszaru (.png)</div>").appendTo(networkProtocolPacket_2135);
-        $("<div class=\"mp-button do-action-cursor\">Zmień grafikę</div>").appendTo(networkProtocolPacket_2135).click(async function() {
+        $("<div class=\"mp-title\">Własna grafika obszaru (.png)</div>").appendTo(networkProtocolPacket_2135);
+        $("<div class=\"mp-button do-action-cursor\">Zmień grafikę</div>").appendTo(networkProtocolPacket_2135).click(async function () {
             const networkProtocolPacket_2136 = await addImagesUrl();
             if (networkProtocolPacket_2136) {
                 const networkProtocolPacket_2137 = [".png"];
@@ -9754,7 +9754,7 @@ const {
                 }
             }
         });
-        $("<div class=\"mp-button mp-button-red do-action-cursor\">Przywróć domyślną</div>").appendTo(networkProtocolPacket_2135).click(async function() {
+        $("<div class=\"mp-button mp-button-red do-action-cursor\">Przywróć domyślną</div>").appendTo(networkProtocolPacket_2135).click(async function () {
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[45].id].image = "";
             message("Zmiana widoczna po odświeżeniu gry.");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -9772,8 +9772,8 @@ const {
     createWindow(MODULE_ADDON_REGISTRY[47].name, "" + MODULE_ADDON_REGISTRY[47].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(networkProtocolPacket_2147 => {
         const networkProtocolPacket_2148 = $(networkProtocolPacket_2147).find("#" + MODULE_ADDON_REGISTRY[47].id);
         const networkProtocolPacket_2149 = $("<div></div>").appendTo(networkProtocolPacket_2148);
-        const networkProtocolPacket_2150 = $("<div class=\"mp-background-section\">\n            <div class=\"mp-title\">Konfiguracja zestawÃ³w</div>\n            <div id=\"buildscfg\" class=\"mp-button do-action-cursor mp-button-cfg-builds\">Otwórz konfigurację</div>\n        </div>").appendTo(networkProtocolPacket_2149);
-        networkProtocolPacket_2150.find("#buildscfg").click(function() {
+        const networkProtocolPacket_2150 = $("<div class=\"mp-background-section\">\n            <div class=\"mp-title\">Konfiguracja zestawów</div>\n            <div id=\"buildscfg\" class=\"mp-button do-action-cursor mp-button-cfg-builds\">Otwórz konfigurację</div>\n        </div>").appendTo(networkProtocolPacket_2149);
+        networkProtocolPacket_2150.find("#buildscfg").click(function () {
             domInteractionNode_785();
         });
         const networkProtocolPacket_2151 = $("<div class=\"mp-background-section\">\n            <div class=\"mp-title\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[47].id].title + "</div>\n            <div class=\"mp-npc-options\"></div>\n        </div>").appendTo(networkProtocolPacket_2149);
@@ -9782,7 +9782,7 @@ const {
         for (const networkProtocolPacket_2154 in networkProtocolPacket_2153) {
             const networkProtocolPacket_2155 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2152);
             const networkProtocolPacket_2156 = networkProtocolPacket_2155.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a47-options-" + networkProtocolPacket_2154 + "-checkbox\" name=\"mp-a47-options-" + networkProtocolPacket_2154 + "-name\">").prop("checked", networkProtocolPacket_2153[networkProtocolPacket_2154]).bind("change", async function(networkProtocolPacket_2157) {
+            $("<input type=\"checkbox\" id=\"mp-a47-options-" + networkProtocolPacket_2154 + "-checkbox\" name=\"mp-a47-options-" + networkProtocolPacket_2154 + "-name\">").prop("checked", networkProtocolPacket_2153[networkProtocolPacket_2154]).bind("change", async function (networkProtocolPacket_2157) {
                 networkProtocolPacket_2153[networkProtocolPacket_2154] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2156);
@@ -9794,7 +9794,7 @@ const {
         for (const networkProtocolPacket_2161 in networkProtocolPacket_2160) {
             const networkProtocolPacket_2162 = $("<div class=\"mp-control-hotkeys\" style=\"margin-bottom: 5px;\">Zestaw " + networkProtocolPacket_2161 + ": <b class=\"mp-badge\">" + networkProtocolPacket_2160[networkProtocolPacket_2161].toUpperCase() + "</b></div>").appendTo(networkProtocolPacket_2159);
             const networkProtocolPacket_2163 = createButtonHotkeys();
-            networkProtocolPacket_2163.click(async function() {
+            networkProtocolPacket_2163.click(async function () {
                 const networkProtocolPacket_2164 = await showKeyCaptureWindow(networkProtocolPacket_2160[networkProtocolPacket_2161]);
                 if (networkProtocolPacket_2164) {
                     networkProtocolPacket_2162.find("b").html(networkProtocolPacket_2164.toUpperCase());
@@ -9814,7 +9814,7 @@ const {
         for (const networkProtocolPacket_2171 in networkProtocolPacket_2170.use) {
             const networkProtocolPacket_2172 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2169);
             const networkProtocolPacket_2173 = networkProtocolPacket_2172.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a48-" + networkProtocolPacket_2171 + "-checkbox\" name=\"mp-a48-" + networkProtocolPacket_2171 + "-name\">").prop("checked", networkProtocolPacket_2170.use[networkProtocolPacket_2171]).bind("change", async function(networkProtocolPacket_2174) {
+            $("<input type=\"checkbox\" id=\"mp-a48-" + networkProtocolPacket_2171 + "-checkbox\" name=\"mp-a48-" + networkProtocolPacket_2171 + "-name\">").prop("checked", networkProtocolPacket_2170.use[networkProtocolPacket_2171]).bind("change", async function (networkProtocolPacket_2174) {
                 networkProtocolPacket_2170.use[networkProtocolPacket_2171] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2173);
@@ -9835,12 +9835,12 @@ const {
                 const networkProtocolPacket_2182 = Engine.items.getItemById(networkProtocolPacket_2181);
                 if (networkProtocolPacket_2182 && !networkProtocolPacket_2179[networkProtocolPacket_2181] && Object.keys(networkProtocolPacket_2179).length < 12) {
                     if (!networkProtocolPacket_2182?._cachedStats?.battlestats) {
-                        return message("Przedmiot musi być zaÅ›piewem lub czymś podobnym!");
+                        return message("Przedmiot musi być zaśpiewem lub czymś podobnym!");
                     }
                     const networkProtocolPacket_2183 = getDataItem(networkProtocolPacket_2181);
                     const networkProtocolPacket_2184 = universalCreateItem(networkProtocolPacket_2183, "item", ADDON_STORAGE_REFERENCE);
                     networkProtocolPacket_2184.appendTo(networkProtocolPacket_2175);
-                    networkProtocolPacket_2184.click(async function() {
+                    networkProtocolPacket_2184.click(async function () {
                         networkProtocolPacket_2184.remove();
                         delete networkProtocolPacket_2179[networkProtocolPacket_2181];
                         saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -9873,7 +9873,7 @@ const {
         for (const networkProtocolPacket_2191 in networkProtocolPacket_2190) {
             const networkProtocolPacket_2192 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2189);
             const networkProtocolPacket_2193 = networkProtocolPacket_2192.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a49-" + networkProtocolPacket_2191 + "-checkbox\" name=\"mp-a49-" + networkProtocolPacket_2191 + "-name\">").prop("checked", networkProtocolPacket_2190[networkProtocolPacket_2191]).bind("change", async function(networkProtocolPacket_2194) {
+            $("<input type=\"checkbox\" id=\"mp-a49-" + networkProtocolPacket_2191 + "-checkbox\" name=\"mp-a49-" + networkProtocolPacket_2191 + "-name\">").prop("checked", networkProtocolPacket_2190[networkProtocolPacket_2191]).bind("change", async function (networkProtocolPacket_2194) {
                 networkProtocolPacket_2190[networkProtocolPacket_2191] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2193);
@@ -9884,7 +9884,7 @@ const {
         $("<div class=\"mp-title\">Konfiguracja skrótu</div>").appendTo(networkProtocolPacket_2196);
         const networkProtocolPacket_2197 = $("<div class=\"mp-control-hotkeys\" style=\"margin-bottom: 5px;\">Klawisz: <b class=\"mp-badge\">" + networkProtocolPacket_2195.toUpperCase() + "</b></div>").appendTo(networkProtocolPacket_2196);
         const networkProtocolPacket_2198 = createButtonHotkeys();
-        networkProtocolPacket_2198.click(async function() {
+        networkProtocolPacket_2198.click(async function () {
             const networkProtocolPacket_2199 = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[49].id].bind);
             if (networkProtocolPacket_2199) {
                 networkProtocolPacket_2197.find("b").html(networkProtocolPacket_2199.toUpperCase());
@@ -9903,7 +9903,7 @@ const {
         const networkProtocolPacket_2206 = networkProtocolPacket_2203.find("#mp-add50-3");
         const networkProtocolPacket_2207 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2204);
         const networkProtocolPacket_2208 = networkProtocolPacket_2207.find(".checkbox-custom");
-        $("<input type=\"checkbox\" id=\"mp-a50-e-checkbox\" name=\"mp-a50-e-name\">").prop("checked", networkProtocolPacket_2202.e).bind("change", async function(networkProtocolPacket_2209) {
+        $("<input type=\"checkbox\" id=\"mp-a50-e-checkbox\" name=\"mp-a50-e-name\">").prop("checked", networkProtocolPacket_2202.e).bind("change", async function (networkProtocolPacket_2209) {
             networkProtocolPacket_2202.e = $(this).prop("checked");
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             $("div[add50-s]").css({
@@ -9915,7 +9915,7 @@ const {
         const networkProtocolPacket_2210 = $("<div class=\"mp-control\"></div>").appendTo(networkProtocolPacket_2205);
         const networkProtocolPacket_2211 = createInput("text", "Wpisz kwote", 100);
         networkProtocolPacket_2211.appendTo(networkProtocolPacket_2210);
-        networkProtocolPacket_2211.prop("value", networkProtocolPacket_2202.cost).on("focusout", async function(networkProtocolPacket_2212) {
+        networkProtocolPacket_2211.prop("value", networkProtocolPacket_2202.cost).on("focusout", async function (networkProtocolPacket_2212) {
             let networkProtocolPacket_2213 = parseAbbreviatedNumber($(this).val());
             if (networkProtocolPacket_2213) {
                 if (networkProtocolPacket_2213 < 10000) {
@@ -9935,7 +9935,7 @@ const {
         const networkProtocolPacket_2214 = $("<div class=\"mp-control\"></div>").appendTo(networkProtocolPacket_2206);
         const networkProtocolPacket_2215 = createInput("number", "Wpisz czas", 100);
         networkProtocolPacket_2215.appendTo(networkProtocolPacket_2214);
-        networkProtocolPacket_2215.prop("value", networkProtocolPacket_2202.refresh).on("focusout", async function(networkProtocolPacket_2216) {
+        networkProtocolPacket_2215.prop("value", networkProtocolPacket_2202.refresh).on("focusout", async function (networkProtocolPacket_2216) {
             let networkProtocolPacket_2217 = Number($(this).val());
             if (isNaN(networkProtocolPacket_2217)) {
                 networkProtocolPacket_2217 = 10;
@@ -9950,7 +9950,7 @@ const {
             }, 3000);
             networkProtocolPacket_2202.refresh = networkProtocolPacket_2217;
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
-        }).tip("Czas odÅ›wieżania od 10s do 60s");
+        }).tip("Czas odświeżania od 10s do 60s");
         if (!networkProtocolPacket_2202.e) {
             $("div[add50-s]").css({
                 opacity: "0.25",
@@ -9964,7 +9964,7 @@ const {
         const networkProtocolPacket_2220 = $(networkProtocolPacket_2218).find(".mp-window-header-left");
         const networkProtocolPacket_2221 = createSettingsButton("Ustawienia");
         networkProtocolPacket_2221.appendTo(networkProtocolPacket_2220);
-        networkProtocolPacket_2221.click(function() {
+        networkProtocolPacket_2221.click(function () {
             domInteractionNode_786();
         });
     });
@@ -9976,17 +9976,17 @@ const {
         for (const networkProtocolPacket_2227 in networkProtocolPacket_2226) {
             const networkProtocolPacket_2228 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2225);
             const networkProtocolPacket_2229 = networkProtocolPacket_2228.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a52-opt-" + networkProtocolPacket_2227 + "-checkbox\" name=\"mp-a52-opt-" + networkProtocolPacket_2227 + "-name\">").prop("checked", networkProtocolPacket_2226[networkProtocolPacket_2227]).bind("change", async function(networkProtocolPacket_2230) {
+            $("<input type=\"checkbox\" id=\"mp-a52-opt-" + networkProtocolPacket_2227 + "-checkbox\" name=\"mp-a52-opt-" + networkProtocolPacket_2227 + "-name\">").prop("checked", networkProtocolPacket_2226[networkProtocolPacket_2227]).bind("change", async function (networkProtocolPacket_2230) {
                 networkProtocolPacket_2226[networkProtocolPacket_2227] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2229);
             $("<label for=\"mp-a52-opt-" + networkProtocolPacket_2227 + "-checkbox\" class=\"c-checkbox__label c-checkbox__label--highlight\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[52].id].opt[networkProtocolPacket_2227] + "</label>").appendTo(networkProtocolPacket_2229);
         }
-        $("<div class=\"mp-background-section\">\n            <div class=\"mp-builds-init-info\">Sprawdzone respy herosów zapisywane sÄ… przez 10 minut, przez ten czas będą one ukrywane na minimapie i nie będziesz otrzymywać informacji o ich sprawdzeniu.</div>\n        </div>").appendTo(networkProtocolPacket_2223);
+        $("<div class=\"mp-background-section\">\n            <div class=\"mp-builds-init-info\">Sprawdzone respy herosów zapisywane są przez 10 minut, przez ten czas będą one ukrywane na minimapie i nie będziesz otrzymywać informacji o ich sprawdzeniu.</div>\n        </div>").appendTo(networkProtocolPacket_2223);
         const networkProtocolPacket_2231 = $("<div class=\"mp-center-line\"></div>").appendTo(networkProtocolPacket_2223);
-        const networkProtocolPacket_2232 = createButton("WyczyÅ›Ä‡ zapisane respy");
+        const networkProtocolPacket_2232 = createButton("Wyczyść zapisane respy");
         networkProtocolPacket_2232.appendTo(networkProtocolPacket_2231);
-        networkProtocolPacket_2232.click(function() {
+        networkProtocolPacket_2232.click(function () {
             const networkProtocolPacket_2233 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[52].id].resp[Engine.map.d.id];
             if (networkProtocolPacket_2233) {
                 for (const networkProtocolPacket_2234 in networkProtocolPacket_2233) {
@@ -10009,7 +10009,7 @@ const {
         for (const networkProtocolPacket_2243 in networkProtocolPacket_2242.options) {
             const networkProtocolPacket_2244 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2239);
             const networkProtocolPacket_2245 = networkProtocolPacket_2244.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a53-opt-" + networkProtocolPacket_2243 + "-checkbox\" name=\"mp-a53-opt-" + networkProtocolPacket_2243 + "-name\">").prop("checked", networkProtocolPacket_2242.options[networkProtocolPacket_2243]).bind("change", async function(networkProtocolPacket_2246) {
+            $("<input type=\"checkbox\" id=\"mp-a53-opt-" + networkProtocolPacket_2243 + "-checkbox\" name=\"mp-a53-opt-" + networkProtocolPacket_2243 + "-name\">").prop("checked", networkProtocolPacket_2242.options[networkProtocolPacket_2243]).bind("change", async function (networkProtocolPacket_2246) {
                 networkProtocolPacket_2242.options[networkProtocolPacket_2243] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2245);
@@ -10018,7 +10018,7 @@ const {
         for (const networkProtocolPacket_2247 in networkProtocolPacket_2242.deposit.cl) {
             const networkProtocolPacket_2248 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2240);
             const networkProtocolPacket_2249 = networkProtocolPacket_2248.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a53-depo-cl-" + networkProtocolPacket_2247 + "-checkbox\" name=\"mp-a53-depo-cl-" + networkProtocolPacket_2247 + "-name\">").prop("checked", networkProtocolPacket_2242.deposit.cl[networkProtocolPacket_2247]).bind("change", async function(networkProtocolPacket_2250) {
+            $("<input type=\"checkbox\" id=\"mp-a53-depo-cl-" + networkProtocolPacket_2247 + "-checkbox\" name=\"mp-a53-depo-cl-" + networkProtocolPacket_2247 + "-name\">").prop("checked", networkProtocolPacket_2242.deposit.cl[networkProtocolPacket_2247]).bind("change", async function (networkProtocolPacket_2250) {
                 networkProtocolPacket_2242.deposit.cl[networkProtocolPacket_2247] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2249);
@@ -10027,7 +10027,7 @@ const {
         for (const networkProtocolPacket_2251 in networkProtocolPacket_2242.deposit.other) {
             const networkProtocolPacket_2252 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2240);
             const networkProtocolPacket_2253 = networkProtocolPacket_2252.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a53-depo-other-" + networkProtocolPacket_2251 + "-checkbox\" name=\"mp-a53-depo-other-" + networkProtocolPacket_2251 + "-name\">").prop("checked", networkProtocolPacket_2242.deposit.other[networkProtocolPacket_2251]).bind("change", async function(networkProtocolPacket_2254) {
+            $("<input type=\"checkbox\" id=\"mp-a53-depo-other-" + networkProtocolPacket_2251 + "-checkbox\" name=\"mp-a53-depo-other-" + networkProtocolPacket_2251 + "-name\">").prop("checked", networkProtocolPacket_2242.deposit.other[networkProtocolPacket_2251]).bind("change", async function (networkProtocolPacket_2254) {
                 networkProtocolPacket_2242.deposit.other[networkProtocolPacket_2251] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2253);
@@ -10051,7 +10051,7 @@ const {
             const networkProtocolPacket_2260 = $("<div class=\"mp-select-options do-action-cursor\"></div>").appendTo(networkProtocolPacket_2258);
             networkProtocolPacket_2256.forEach(networkProtocolPacket_2261 => {
                 const networkProtocolPacket_2262 = $("<div class=\"mp-option do-action-cursor\" data-value=\"" + networkProtocolPacket_2261.value + "\">" + networkProtocolPacket_2261.label + "</div>");
-                networkProtocolPacket_2262.on("click", async function() {
+                networkProtocolPacket_2262.on("click", async function () {
                     const networkProtocolPacket_2263 = $(this).data("value");
                     networkProtocolPacket_2259.text(networkProtocolPacket_2261.label);
                     networkProtocolPacket_2260.hide();
@@ -10062,7 +10062,7 @@ const {
                 });
                 networkProtocolPacket_2260.append(networkProtocolPacket_2262);
             });
-            networkProtocolPacket_2259.on("click", function(networkProtocolPacket_2264) {
+            networkProtocolPacket_2259.on("click", function (networkProtocolPacket_2264) {
                 networkProtocolPacket_2264.stopPropagation();
                 $(".mp-select-options").not(networkProtocolPacket_2260).hide();
                 networkProtocolPacket_2260.toggle();
@@ -10081,7 +10081,7 @@ const {
         for (const networkProtocolPacket_2272 in networkProtocolPacket_2271) {
             const networkProtocolPacket_2273 = $("<div class=\"mp-control\">\n                    <div>\n                        <div class=\"checkbox-custom c-checkbox\">\n                        \n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2270);
             const networkProtocolPacket_2274 = networkProtocolPacket_2273.find(".checkbox-custom");
-            $("<input type=\"checkbox\" id=\"mp-a54-show-" + networkProtocolPacket_2272 + "-checkbox\" name=\"mp-a54-show-" + networkProtocolPacket_2272 + "-name\">").prop("checked", networkProtocolPacket_2271[networkProtocolPacket_2272]).bind("change", async function(networkProtocolPacket_2275) {
+            $("<input type=\"checkbox\" id=\"mp-a54-show-" + networkProtocolPacket_2272 + "-checkbox\" name=\"mp-a54-show-" + networkProtocolPacket_2272 + "-name\">").prop("checked", networkProtocolPacket_2271[networkProtocolPacket_2272]).bind("change", async function (networkProtocolPacket_2275) {
                 networkProtocolPacket_2271[networkProtocolPacket_2272] = $(this).prop("checked");
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).appendTo(networkProtocolPacket_2274);
@@ -10090,7 +10090,7 @@ const {
         const networkProtocolPacket_2276 = $("<div class=\"mp-center-line\"></div>").appendTo(networkProtocolPacket_2268);
         const networkProtocolPacket_2277 = createButton("Relacje");
         networkProtocolPacket_2277.appendTo(networkProtocolPacket_2276).tip("Konfiguracja kolorów");
-        networkProtocolPacket_2277.click(function() {
+        networkProtocolPacket_2277.click(function () {
             domInteractionNode_786();
         });
     });
@@ -10193,7 +10193,7 @@ const {
                     universalCreateItem(networkProtocolPacket_2320, "mp", ADDON_STORAGE_REFERENCE).appendTo(networkProtocolPacket_2315);
                     networkProtocolPacket_2319.forEach(networkProtocolPacket_2322 => {
                         const networkProtocolPacket_2323 = networkProtocolPacket_2280.find(networkProtocolPacket_2324 => networkProtocolPacket_2324.id == networkProtocolPacket_2322);
-                        const networkProtocolPacket_2325 = universalCreateItem(networkProtocolPacket_2323, "mp", ADDON_STORAGE_REFERENCE).appendTo(networkProtocolPacket_2314).click(function() {
+                        const networkProtocolPacket_2325 = universalCreateItem(networkProtocolPacket_2323, "mp", ADDON_STORAGE_REFERENCE).appendTo(networkProtocolPacket_2314).click(function () {
                             networkProtocolPacket_2296?.hide();
                             networkProtocolPacket_2297?.hide();
                             networkProtocolPacket_2326(networkProtocolPacket_2323.tier);
@@ -10208,7 +10208,7 @@ const {
                 });
             });
             if (networkProtocolPacket_2316 > 2) {
-                networkProtocolPacket_2295.find(".mp-result-info").html("Posiadasz skÅ‚adniki");
+                networkProtocolPacket_2295.find(".mp-result-info").html("Posiadasz składniki");
             } else {
                 networkProtocolPacket_2295.find(".mp-result-info").html("Nie posiadasz składników");
             }
@@ -10245,7 +10245,7 @@ const {
                 return;
             }
             networkProtocolPacket_2333.forEach(networkProtocolPacket_2336 => {
-                const networkProtocolPacket_2337 = universalCreateItem(networkProtocolPacket_2336, "mp", ADDON_STORAGE_REFERENCE).appendTo(networkProtocolPacket_2335).click(function() {
+                const networkProtocolPacket_2337 = universalCreateItem(networkProtocolPacket_2336, "mp", ADDON_STORAGE_REFERENCE).appendTo(networkProtocolPacket_2335).click(function () {
                     networkProtocolPacket_2296.find(".mp-active-green").removeClass("mp-active-green");
                     $(this).addClass("mp-active-green");
                     networkProtocolPacket_2328(networkProtocolPacket_2336.drop);
@@ -10340,9 +10340,9 @@ const {
         const networkProtocolPacket_2355 = $(networkProtocolPacket_2354).find("#" + MODULE_ADDON_REGISTRY[56].id);
         const networkProtocolPacket_2356 = $("<div class=\"mp-background-section\"></div>").appendTo(networkProtocolPacket_2355);
         $("<div class=\"mp-title\">Ustawienia</div>").appendTo(networkProtocolPacket_2356);
-        const networkProtocolPacket_2357 = $(" \n        <div class=\"mp-control\">\n            WysokoÅ›Ä‡ czatu <input id=\"mp-chat-size\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"px\" style=\"width: 40px\"> px.\n        </div>").appendTo(networkProtocolPacket_2356);
+        const networkProtocolPacket_2357 = $(" \n        <div class=\"mp-control\">\n            Wysokość czatu <input id=\"mp-chat-size\" type=\"number\" class=\"mp-default-input do-action-cursor\" placeholder=\"px\" style=\"width: 40px\"> px.\n        </div>").appendTo(networkProtocolPacket_2356);
         const networkProtocolPacket_2358 = networkProtocolPacket_2357.find("#mp-chat-size");
-        networkProtocolPacket_2358.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[56].id].size).on("input", async function(networkProtocolPacket_2359) {
+        networkProtocolPacket_2358.prop("value", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[56].id].size).on("input", async function (networkProtocolPacket_2359) {
             let networkProtocolPacket_2360 = Number($(this).val());
             if (isNaN(networkProtocolPacket_2360)) {
                 networkProtocolPacket_2360 = 100;
@@ -10355,12 +10355,12 @@ const {
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             uiLayoutComponent_150();
         });
-        networkProtocolPacket_2358.hover(function() {
+        networkProtocolPacket_2358.hover(function () {
             $(".chat-config-wrapper").css({
                 border: "1px solid #4caf50",
                 boxShadow: "0 0 5px #4caf50"
             });
-        }, function() {
+        }, function () {
             $(".chat-config-wrapper").css({
                 border: "",
                 boxShadow: ""
@@ -10369,7 +10369,7 @@ const {
         const networkProtocolPacket_2361 = $("<div class=\"mp-center-line\"></div>").appendTo(networkProtocolPacket_2355);
         const networkProtocolPacket_2362 = createButton("Resetuj wysokość");
         networkProtocolPacket_2362.appendTo(networkProtocolPacket_2361);
-        networkProtocolPacket_2362.click(function() {
+        networkProtocolPacket_2362.click(function () {
             networkProtocolPacket_2358.val(300);
             ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[56].id].size = 300;
             saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
@@ -10399,7 +10399,7 @@ const {
         const networkProtocolPacket_2376 = {
             bless: {
                 title: "Błogosławieństwa",
-                tip: "Wyświetla listÄ™ dostępnych błogosÅ‚awieÅ„stw"
+                tip: "Wyświetla listę dostępnych błogosławieństw"
             },
             summon: {
                 title: "Przywołania",
@@ -10407,14 +10407,14 @@ const {
             },
             teleport: {
                 title: "Teleporty",
-                tip: "Wyświetla listÄ™ dostępnych teleportów"
+                tip: "Wyświetla listę dostępnych teleportów"
             }
         };
         for (const networkProtocolPacket_2377 in networkProtocolPacket_2376) {
             const networkProtocolPacket_2378 = networkProtocolPacket_2376[networkProtocolPacket_2377].title;
             const networkProtocolPacket_2379 = networkProtocolPacket_2376[networkProtocolPacket_2377].tip;
             const networkProtocolPacket_2380 = !!ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[57].id][networkProtocolPacket_2377];
-            $("<div data-stash=\"" + networkProtocolPacket_2377 + "\" class=\"mp-button do-action-cursor" + (networkProtocolPacket_2380 ? " mp-btn-active" : "") + "\">" + networkProtocolPacket_2378 + "</div>").appendTo(networkProtocolPacket_2375).tip(networkProtocolPacket_2379).on("click", function() {
+            $("<div data-stash=\"" + networkProtocolPacket_2377 + "\" class=\"mp-button do-action-cursor" + (networkProtocolPacket_2380 ? " mp-btn-active" : "") + "\">" + networkProtocolPacket_2378 + "</div>").appendTo(networkProtocolPacket_2375).tip(networkProtocolPacket_2379).on("click", function () {
                 const networkProtocolPacket_2381 = !!ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[57].id][networkProtocolPacket_2377];
                 const networkProtocolPacket_2382 = !networkProtocolPacket_2381;
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[57].id][networkProtocolPacket_2377] = networkProtocolPacket_2382;
@@ -10437,7 +10437,7 @@ const {
             max: 300
         }).appendTo(networkProtocolPacket_2387);
         const networkProtocolPacket_2389 = $("<div></div>").appendTo(networkProtocolPacket_2385);
-        networkProtocolPacket_2388.on("input", async function(networkProtocolPacket_2390) {
+        networkProtocolPacket_2388.on("input", async function (networkProtocolPacket_2390) {
             let networkProtocolPacket_2391 = Number($(this).val());
             if (isNaN(networkProtocolPacket_2391)) {
                 networkProtocolPacket_2389.empty();
@@ -10572,23 +10572,23 @@ const {
                 const networkProtocolPacket_2422 = networkProtocolPacket_2419[networkProtocolPacket_2421];
                 const networkProtocolPacket_2423 = $("<div class=\"mp-background-section\">\n                    <div class=\"mp-title\">" + parsedAddonConfig.itemRarity[networkProtocolPacket_2422.type] + "</div>\n                    <div class=\"mp-title-mini\">Podstawowe</div>\n                    <div class=\"mp-item-calc-3\"> \n                        <div class=\"mp-item-calc-flex calc-ess\">\n                            <div>" + networkProtocolPacket_2422.essence + "</div>\n                            <div class=\"item-details__ico\" style=\"background-image: url('" + networkProtocolPacket_2420[networkProtocolPacket_2421].e + "');\"></div>\n                        </div>\n                        <div class=\"mp-item-calc-flex calc-points\">\n                            <div>" + parsedNumber(networkProtocolPacket_2422.basicPoints) + "</div>\n                            <div class=\"item-details__ico\" style=\"background-image: url('" + networkProtocolPacket_2420[networkProtocolPacket_2421].u + "');\"></div>\n                        </div>\n                        <div class=\"mp-item-calc-flex calc-odw\">\n                            <div>" + parsedNumber(networkProtocolPacket_2422.costUnbind) + "</div>\n                            <div class=\"item-details__ico\" style=\"background-image: url('https://mordor.margonem.pl/img/draconiteIconNormal.gif');\"></div>\n                        </div>\n                    </div>\n                    <div class=\"mp-title-mini\">Całkowite ulepszenie na 5</div>\n                    <div class=\"mp-item-calc-3\">\n                        <div class=\"mp-item-calc-flex calc-cost-points\">\n                            <div>" + parsedNumber(networkProtocolPacket_2422.upgrade.points.total) + "</div>\n                            <div class=\"item-details__ico\" style=\"background-image: url('" + networkProtocolPacket_2420[networkProtocolPacket_2421].u + "');\"></div>\n                        </div>\n                        <div class=\"mp-item-calc-flex calc-cost-ese\">\n                            <div>" + networkProtocolPacket_2422.upgrade.essence + "</div>\n                            <div class=\"item-details__ico\" style=\"background-image: url('" + networkProtocolPacket_2420[networkProtocolPacket_2421].e + "');\"></div>\n                        </div>\n                        <div class=\"mp-item-calc-flex calc-cost-gold\">\n                            <div>" + parsedNumber(networkProtocolPacket_2422.upgrade.gold) + "</div>\n                            <div class=\"item-details__ico\" style=\"background-image: url('https://mordor.margonem.pl/img/goldIconNormal.png');\"></div>\n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2389);
             }
-            $(".calc-ess").each(function() {
+            $(".calc-ess").each(function () {
                 $(this).tip("Esencja, która otrzymasz po rozbiciu przedmiotu.");
             });
-            $(".calc-points").each(function() {
-                $(this).tip("Bazowa ilość punktów, które doda przedmiot bez uwzglÄ™dnienia mnożników za typy etc.");
+            $(".calc-points").each(function () {
+                $(this).tip("Bazowa ilość punktów, które doda przedmiot bez uwzględnienia mnożników za typy etc.");
             });
-            $(".calc-odw").each(function() {
-                $(this).tip("Koszt odwiÄ…zania przedmiotu.");
+            $(".calc-odw").each(function () {
+                $(this).tip("Koszt odwiązania przedmiotu.");
             });
-            $(".calc-cost-points").each(function() {
+            $(".calc-cost-points").each(function () {
                 $(this).tip("Ilość punktów, które musisz umieścić w przedmiocie, aby ulepszyć go od 0 do 5.");
             });
-            $(".calc-cost-ese").each(function() {
-                $(this).tip("Ilość esencji, ktÃ³ra musisz zapłacić za ulepszenie.");
+            $(".calc-cost-ese").each(function () {
+                $(this).tip("Ilość esencji, która musisz zapłacić za ulepszenie.");
             });
-            $(".calc-cost-gold").each(function() {
-                $(this).tip("IloÅ›Ä‡ zÅ‚ota, które musisz zapłacić za ulepszenie.");
+            $(".calc-cost-gold").each(function () {
+                $(this).tip("Ilość złota, które musisz zapłacić za ulepszenie.");
             });
         };
     });
@@ -10597,7 +10597,7 @@ const {
         $("<div class=\"mp-background-section\">\n                <div class=\"mp-title\">Konfiguracja skrótu</div>\n                <div id=\"mp-trigger-arrows\"></div>\n            </div>").appendTo(networkProtocolPacket_2425);
         const networkProtocolPacket_2426 = $("<div class=\"mp-control-hotkeys\" style=\"margin-bottom: 5px;\">Klawisz:<b class=\"mp-badge\">" + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[60].id].key.toUpperCase() + "</b></div>").appendTo("#mp-trigger-arrows");
         const networkProtocolPacket_2427 = createButtonHotkeys();
-        networkProtocolPacket_2427.click(async function() {
+        networkProtocolPacket_2427.click(async function () {
             const networkProtocolPacket_2428 = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[60].id].key);
             if (networkProtocolPacket_2428) {
                 networkProtocolPacket_2426.find("b").html(networkProtocolPacket_2428.toUpperCase());
@@ -10609,7 +10609,7 @@ const {
     });
     createWindow(MODULE_ADDON_REGISTRY[62].name, MODULE_ADDON_REGISTRY[62].id, ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE).then(networkProtocolPacket_2429 => {
         const networkProtocolPacket_2430 = $(networkProtocolPacket_2429).find("#" + MODULE_ADDON_REGISTRY[62].id);
-        $("\n        <div class=\"mp-egg-card\">\n            <div class=\"mp-egg-name\">Ogromne Jajo</div>\n            <div class=\"mp-egg-image\">\n                <img src=\"https://micc.garmory-cdn.cloud/obrazki/npc/obj/smoczbarba-jajo.gif\">\n            </div>\n            <div class=\"mp-egg-stats\">\n                Åadowanie..\n            </div>\n        </div>\n        ").appendTo(networkProtocolPacket_2430);
+        $("\n        <div class=\"mp-egg-card\">\n            <div class=\"mp-egg-name\">Ogromne Jajo</div>\n            <div class=\"mp-egg-image\">\n                <img src=\"https://micc.garmory-cdn.cloud/obrazki/npc/obj/smoczbarba-jajo.gif\">\n            </div>\n            <div class=\"mp-egg-stats\">\n                Ładowanie..\n            </div>\n        </div>\n        ").appendTo(networkProtocolPacket_2430);
         networkProtocolPacket_2431();
     });
     let networkProtocolPacket_2432;
@@ -10646,7 +10646,7 @@ const {
         let networkProtocolPacket_2448 = "";
         const networkProtocolPacket_2449 = Object.entries(networkProtocolPacket_2447).filter(([networkProtocolPacket_2450]) => networkProtocolPacket_2440.additional[networkProtocolPacket_2450].all > 0).map(([networkProtocolPacket_2451, networkProtocolPacket_2452]) => networkProtocolPacket_2452 + ": " + parsedNumber(networkProtocolPacket_2440.additional[networkProtocolPacket_2451].all) + (networkProtocolPacket_2440.additional[networkProtocolPacket_2451].bonus > 0 ? " (" + parsedNumber(networkProtocolPacket_2440.additional[networkProtocolPacket_2451].bonus) + ")" : "") + "<br>").join("");
         if (networkProtocolPacket_2449) {
-            networkProtocolPacket_2448 += "<br><b>Punkty dla ulepszanego typu</b>" + networkProtocolPacket_2449 + "<i style=\"font-size: 10px; text-align: center;\">W nawiasie podano łączny bonus za typ, rzadkoÅ›Ä‡ lub przedmiot.</i>";
+            networkProtocolPacket_2448 += "<br><b>Punkty dla ulepszanego typu</b>" + networkProtocolPacket_2449 + "<i style=\"font-size: 10px; text-align: center;\">W nawiasie podano łączny bonus za typ, rzadkość lub przedmiot.</i>";
         }
         const networkProtocolPacket_2453 = "<div class=\"mp-upgrade-tip\"><b>Punkty ulepszeń</b>Na tej postaci: " + parsedNumber(networkProtocolPacket_2438) + "<br>Świat: " + parsedNumber(networkProtocolPacket_2439) + networkProtocolPacket_2441 + networkProtocolPacket_2448 + "</div>";
         const networkProtocolPacket_2454 = networkProtocolPacket_2437 + " / 2000";
@@ -10817,7 +10817,7 @@ const {
         if (networkProtocolPacket_2483) {
             $("<center><i>Brak wykorzystanych składników</i></center>").appendTo(networkProtocolPacket_2482);
         } else {
-            $(".mp-components-gold").find("div[value=\"items\"]").html("Wartość przedmiotÃ³w: " + formatNumber(networkProtocolPacket_2484)).tip("ÅÄ…cznie: " + parsedNumber(networkProtocolPacket_2484) + "<br><br>WartoÅ›Ä‡ u NPC<br><br>Tunia: " + parsedNumber(networkProtocolPacket_2485) + "<br>Skup 90%: " + parsedNumber(networkProtocolPacket_2486) + "<br>");
+            $(".mp-components-gold").find("div[value=\"items\"]").html("Wartość przedmiotów: " + formatNumber(networkProtocolPacket_2484)).tip("Łącznie: " + parsedNumber(networkProtocolPacket_2484) + "<br><br>Wartość u NPC<br><br>Tunia: " + parsedNumber(networkProtocolPacket_2485) + "<br>Skup 90%: " + parsedNumber(networkProtocolPacket_2486) + "<br>");
         }
     }
 
@@ -10830,7 +10830,7 @@ const {
             setTimeout(() => {
                 processingUpgrade = false;
             }, 500);
-        } catch (networkProtocolPacket_2493) {}
+        } catch (networkProtocolPacket_2493) { }
     }
 
     function networkProtocolPacket_2494(networkProtocolPacket_2495) {
@@ -11049,7 +11049,7 @@ const {
             if (networkProtocolPacket_2536 > 0) {
                 networkProtocolPacket_2544.list = networkProtocolPacket_2544.list.slice(0, networkProtocolPacket_2536);
             }
-            _g("enhancement&action=progress&item=" + networkProtocolPacket_2539[1].id + "&ingredients=" + networkProtocolPacket_2544.list.toString() + "&answer1001012=1&answer1001015=1", async function(networkProtocolPacket_2549) {
+            _g("enhancement&action=progress&item=" + networkProtocolPacket_2539[1].id + "&ingredients=" + networkProtocolPacket_2544.list.toString() + "&answer1001012=1&answer1001015=1", async function (networkProtocolPacket_2549) {
                 networkProtocolPacket_2523(1, networkProtocolPacket_2549);
                 clearTimeout(networkProtocolPacket_2435);
                 networkProtocolPacket_2435 = setTimeout(async () => {
@@ -11061,7 +11061,7 @@ const {
             if (networkProtocolPacket_2536 > 0) {
                 networkProtocolPacket_2545.list = networkProtocolPacket_2545.list.slice(0, networkProtocolPacket_2536);
             }
-            _g("enhancement&action=progress&item=" + networkProtocolPacket_2539[2].id + "&ingredients=" + networkProtocolPacket_2545.list.toString() + "&answer1001012=1&answer1001015=1", async function(networkProtocolPacket_2550) {
+            _g("enhancement&action=progress&item=" + networkProtocolPacket_2539[2].id + "&ingredients=" + networkProtocolPacket_2545.list.toString() + "&answer1001012=1&answer1001015=1", async function (networkProtocolPacket_2550) {
                 networkProtocolPacket_2523(2, networkProtocolPacket_2550);
                 clearTimeout(networkProtocolPacket_2435);
                 networkProtocolPacket_2435 = setTimeout(async () => {
@@ -11073,7 +11073,7 @@ const {
             if (networkProtocolPacket_2536 > 0) {
                 networkProtocolPacket_2546.list = networkProtocolPacket_2546.list.slice(0, networkProtocolPacket_2536);
             }
-            _g("enhancement&action=progress&item=" + networkProtocolPacket_2539[3].id + "&ingredients=" + networkProtocolPacket_2546.list.toString() + "&answer1001012=1&answer1001015=1", async function(networkProtocolPacket_2551) {
+            _g("enhancement&action=progress&item=" + networkProtocolPacket_2539[3].id + "&ingredients=" + networkProtocolPacket_2546.list.toString() + "&answer1001012=1&answer1001015=1", async function (networkProtocolPacket_2551) {
                 networkProtocolPacket_2523(3, networkProtocolPacket_2551);
                 clearTimeout(networkProtocolPacket_2435);
                 networkProtocolPacket_2435 = setTimeout(async () => {
@@ -11094,7 +11094,7 @@ const {
             if (networkProtocolPacket_2542) {
                 networkProtocolPacket_2547.list = removeDoubleItem(networkProtocolPacket_2547.list, networkProtocolPacket_2544.list);
             }
-            _g("enhancement&action=progress&item=" + networkProtocolPacket_2539[4].id + "&ingredients=" + networkProtocolPacket_2547.list.toString() + "&answer1001012=1&answer1001015=1", async function(networkProtocolPacket_2552) {
+            _g("enhancement&action=progress&item=" + networkProtocolPacket_2539[4].id + "&ingredients=" + networkProtocolPacket_2547.list.toString() + "&answer1001012=1&answer1001015=1", async function (networkProtocolPacket_2552) {
                 networkProtocolPacket_2523(4, networkProtocolPacket_2552);
                 clearTimeout(networkProtocolPacket_2435);
                 networkProtocolPacket_2435 = setTimeout(async () => {
@@ -11106,7 +11106,7 @@ const {
             if (networkProtocolPacket_2536 > 0) {
                 networkProtocolPacket_2548.list = networkProtocolPacket_2548.list.slice(0, networkProtocolPacket_2536);
             }
-            _g("enhancement&action=progress&item=" + networkProtocolPacket_2537 + "&ingredients=" + networkProtocolPacket_2548.list.toString() + "&answer1001012=1&answer1001015=1", async function(networkProtocolPacket_2553) {
+            _g("enhancement&action=progress&item=" + networkProtocolPacket_2537 + "&ingredients=" + networkProtocolPacket_2548.list.toString() + "&answer1001012=1&answer1001015=1", async function (networkProtocolPacket_2553) {
                 networkProtocolPacket_2523(networkProtocolPacket_2537, networkProtocolPacket_2553);
                 clearTimeout(networkProtocolPacket_2435);
                 networkProtocolPacket_2435 = setTimeout(async () => {
@@ -11135,22 +11135,22 @@ const {
             return message("Ulepszasz teraz!");
         }
         if (Engine.hero.d.lvl < 10) {
-            return message("Twój poziom jest zbyt niski, aby ulepszaÄ‡!");
+            return message("Twój poziom jest zbyt niski, aby ulepszać!");
         }
         if (Engine.depo) {
-            return message("Nie możesz teraz ulepszaÄ‡. Najpierw zamknij depozyt!");
+            return message("Nie możesz teraz ulepszać. Najpierw zamknij depozyt!");
         }
         if (Engine.dialogue) {
-            return message("Nie możesz teraz ulepszaÄ‡. Najpierw zamknij rozmowe!");
+            return message("Nie możesz teraz ulepszać. Najpierw zamknij rozmowe!");
         }
         if (Engine.shop) {
             return message("Nie możesz teraz ulepszać. Najpierw zamknij sklep!");
         }
         if (Engine.dead) {
-            return message("Nie możesz teraz ulepszaÄ‡. JesteÅ› nieprzytomny!");
+            return message("Nie możesz teraz ulepszać. Jesteś nieprzytomny!");
         }
         if (Engine.trade) {
-            return message("Nie możesz teraz ulepszaÄ‡. Najpierw zamknij handel!");
+            return message("Nie możesz teraz ulepszać. Najpierw zamknij handel!");
         }
         if (networkProtocolPacket_2557 || networkProtocolPacket_2558 || networkProtocolPacket_2559 || networkProtocolPacket_2560 || Number(networkProtocolPacket_2554) > 0) {
             const networkProtocolPacket_2561 = itemIsInBag(networkProtocolPacket_2556[1].id);
@@ -11203,7 +11203,7 @@ const {
                 }
                 if (networkProtocolPacket_2565) {
                     processingUpgrade = true;
-                    _g("artisanship&action=open", async function(networkProtocolPacket_2570) {
+                    _g("artisanship&action=open", async function (networkProtocolPacket_2570) {
                         $(Engine.crafting.wndEl).hide();
                         $(".disable-icon").hide();
                         $(".ENHANCE-disable").removeClass("ENHANCE-disable");
@@ -11260,7 +11260,7 @@ const {
     }
     let networkProtocolPacket_2576;
     const networkProtocolPacket_2577 = Engine.items.newItem;
-    Engine.items.newItem = function(networkProtocolPacket_2578, networkProtocolPacket_2579) {
+    Engine.items.newItem = function (networkProtocolPacket_2578, networkProtocolPacket_2579) {
         if (networkProtocolPacket_2579 && networkProtocolPacket_2579.loc == "g") {
             setTimeout(() => {
                 networkProtocolPacket_2436 = Engine.items.fetchLocationItems("g");
@@ -11373,7 +11373,7 @@ const {
         }
     }
     const networkProtocolPacket_2623 = Engine.buildsManager.updateData;
-    Engine.buildsManager.updateData = async function(networkProtocolPacket_2624) {
+    Engine.buildsManager.updateData = async function (networkProtocolPacket_2624) {
         if (networkProtocolPacket_2624?.action == "UPDATE_CURRENT_ID" && networkProtocolPacket_2624.currentId && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[2].id].settings.build) {
             uiLayoutComponent_278();
         }
@@ -11403,7 +11403,7 @@ const {
     }, {
         key: "63",
         phrase: "złego przewodnika",
-        name: "Skrzynia ZÅ‚ego Przewodnika",
+        name: "Skrzynia Złego Przewodnika",
         icon: "neu/skrz_przew.gif"
     }, {
         key: "74",
@@ -11417,7 +11417,7 @@ const {
         icon: "neu/skrz_kosciej.gif"
     }, {
         key: "94",
-        phrase: "koźca mąciciela ścieÅ¼ek",
+        phrase: "koźca mąciciela ścieżek",
         name: "Skrzynia Koźca Mąciciela Ścieżek",
         icon: "neu/skrz_koziec.gif"
     }, {
@@ -11427,13 +11427,13 @@ const {
         icon: "neu/skrz_kochanka.gif"
     }, {
         key: "116",
-        phrase: "ksiÄ™cia kasima",
+        phrase: "księcia kasima",
         name: "Skrzynia Księcia Kasima",
         icon: "neu/skrz_kasim1.gif"
     }, {
         key: "123",
         phrase: "świętego braciszka",
-        name: "Skrzynia ÅšwiÄ™tego Braciszka",
+        name: "Skrzynia Świętego Braciszka",
         icon: "neu/skrz_braciszek.gif"
     }, {
         key: "135",
@@ -11452,7 +11452,7 @@ const {
         icon: "neu/skrz_atka.gif"
     }, {
         key: "165",
-        phrase: "obłąkanego łowcy orkÃ³w",
+        phrase: "obłąkanego łowcy orków",
         name: "Skrzynia Obłąkanego łowcy orków",
         icon: "neu/oblo_chest.gif"
     }, {
@@ -11487,7 +11487,7 @@ const {
         icon: "neu/skrz_vapor.gif"
     }, {
         key: "244",
-        phrase: "dÄ™boroÅ¼ca",
+        phrase: "dęborożca",
         name: "Skrzynia Dęborożca",
         icon: "neu/skrz_debo.gif"
     }, {
@@ -11501,7 +11501,7 @@ const {
         name: "Skrzynia Widma Triady",
         icon: "neu/skrz_triada.gif"
     }];
-    let addonStorageDescriptor_1256 = () => {};
+    let addonStorageDescriptor_1256 = () => { };
     let networkProtocolPacket_2625;
     let networkProtocolPacket_2626 = false;
     async function networkProtocolPacket_2627() {
@@ -11557,9 +11557,9 @@ const {
     let networkProtocolPacket_2638 = true;
     const networkProtocolPacket_2639 = [];
     const networkProtocolPacket_2640 = window.Engine.communication.parseJSON;
-    const networkProtocolPacket_2641 = async function(networkProtocolPacket_2642) {
+    const networkProtocolPacket_2641 = async function (networkProtocolPacket_2642) {
         if (networkProtocolPacket_2642.ask && networkProtocolPacket_2642.ask.q) {
-            if (networkProtocolPacket_2642.ask.q.includes("przyzywa do siebie swojÄ… druÅ¼ynę! Czy chcesz się teleportować do lokacji")) {
+            if (networkProtocolPacket_2642.ask.q.includes("przyzywa do siebie swoją drużynę! Czy chcesz się teleportować do lokacji")) {
                 if (ADDON_STORAGE_REFERENCE.notification[8].e) {
                     uiLayoutComponent_262(8);
                 }
@@ -11575,16 +11575,16 @@ const {
                     networkProtocolPacket_2631(networkProtocolPacket_2642);
                 }
             }
-            if (networkProtocolPacket_2642.ask.q.includes("Czy chcesz handlowaÄ‡ z graczem") && ADDON_STORAGE_REFERENCE.notification[9].e) {
+            if (networkProtocolPacket_2642.ask.q.includes("Czy chcesz handlować z graczem") && ADDON_STORAGE_REFERENCE.notification[9].e) {
                 uiLayoutComponent_262(9);
             }
-            if (networkProtocolPacket_2642.ask.q.includes("czy chcesz dołączyć do moich przyjaciÃ³Å‚?") && ADDON_STORAGE_REFERENCE.notification[11].e) {
+            if (networkProtocolPacket_2642.ask.q.includes("czy chcesz dołączyć do moich przyjaciół?") && ADDON_STORAGE_REFERENCE.notification[11].e) {
                 uiLayoutComponent_262(11);
             }
             if (networkProtocolPacket_2642.ask.q.includes("Czy chciałbyś otrzymać Karmazynowe błogosławieństwo od") && ADDON_STORAGE_REFERENCE.notification[13].e) {
                 uiLayoutComponent_262(13);
             }
-            if (networkProtocolPacket_2642.ask.q.includes("WybÃ³r nagrody za ukończenie zadania") && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[7].id]) {
+            if (networkProtocolPacket_2642.ask.q.includes("Wybór nagrody za ukończenie zadania") && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[7].id]) {
                 networkProtocolPacket_2633(networkProtocolPacket_2642);
             }
         }
@@ -11627,7 +11627,7 @@ const {
         }
         if (networkProtocolPacket_2642.msg) {
             for (const networkProtocolPacket_2648 in networkProtocolPacket_2642.msg) {
-                if (networkProtocolPacket_2642.msg[networkProtocolPacket_2648].includes("AwansowaÅ‚") && networkProtocolPacket_2642.msg[networkProtocolPacket_2648].includes("na poziom") && ADDON_STORAGE_REFERENCE.notification[7].e) {
+                if (networkProtocolPacket_2642.msg[networkProtocolPacket_2648].includes("Awansował") && networkProtocolPacket_2642.msg[networkProtocolPacket_2648].includes("na poziom") && ADDON_STORAGE_REFERENCE.notification[7].e) {
                     uiLayoutComponent_262(7);
                 }
             }
@@ -11862,8 +11862,8 @@ const {
                 return;
             }
             const networkProtocolPacket_2708 = {
-                common: "Okruchy przeciÄ™tnoÅ›ci",
-                unique: "Okruchy przeciÄ™tnoÅ›ci",
+                common: "Okruchy przeciętności",
+                unique: "Okruchy przeciętności",
                 upgraded: "Ekstrakt unikalności",
                 heroic: "Ekstrakt unikalności",
                 legendary: "Pryzmat heroicznej magii"
@@ -11956,7 +11956,7 @@ const {
         if (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[61].id] && networkProtocolPacket_2642?.captcha?.content) {
             const networkProtocolPacket_2728 = networkProtocolPacket_2642.captcha.content;
             const networkProtocolPacket_2729 = networkProtocolPacket_2728.question.options;
-            const networkProtocolPacket_2730 = ["Powodzenia! Zaznacz odpowiedzi zawierajÄ…ce gwiazdkÄ™.", "Zaznacz wszystkie odpowiedzi z gwiazdką. Miłego dnia!"];
+            const networkProtocolPacket_2730 = ["Powodzenia! Zaznacz odpowiedzi zawierające gwiazdkę.", "Zaznacz wszystkie odpowiedzi z gwiazdką. Miłego dnia!"];
             const networkProtocolPacket_2731 = networkProtocolPacket_2730.indexOf(networkProtocolPacket_2728.question.text) >= 0;
             const networkProtocolPacket_2732 = networkProtocolPacket_2642.captcha.triesLeft == 3;
             const networkProtocolPacket_2733 = networkProtocolPacket_2728.captchaVersion == "Picasso";
@@ -11968,7 +11968,7 @@ const {
             const networkProtocolPacket_2734 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[62].id].stats;
             const networkProtocolPacket_2735 = {
                 "Rozbite ogromne jajo": "f",
-                "Ogromne jajo drakosÄ™pa": "s"
+                "Ogromne jajo drakosępa": "s"
             };
             for (const networkProtocolPacket_2736 of Object.values(networkProtocolPacket_2642.item)) {
                 const networkProtocolPacket_2737 = networkProtocolPacket_2735[networkProtocolPacket_2736.name];
@@ -11996,7 +11996,7 @@ const {
         });
     };
     let networkProtocolPacket_2744 = Engine.chatController.addMessage;
-    Engine.chatController.addMessage = async function(networkProtocolPacket_2745) {
+    Engine.chatController.addMessage = async function (networkProtocolPacket_2745) {
         if (ADDON_STORAGE_REFERENCE.otherSettings.scrollChat) {
             Engine.chatController?.getChatMessageWrapper?.()?.setScrollOnBottom?.();
         }
@@ -12086,7 +12086,7 @@ const {
 
     function networkProtocolPacket_2771(networkProtocolPacket_2772, networkProtocolPacket_2773) {
         const networkProtocolPacket_2774 = document.querySelectorAll(".linked-chat-item");
-        networkProtocolPacket_2774.forEach(function(networkProtocolPacket_2775) {
+        networkProtocolPacket_2774.forEach(function (networkProtocolPacket_2775) {
             const networkProtocolPacket_2776 = networkProtocolPacket_2775.textContent;
             if (networkProtocolPacket_2776.includes(networkProtocolPacket_2772)) {
                 networkProtocolPacket_2775.setAttribute("data-item-type", networkProtocolPacket_2773);
@@ -12105,7 +12105,7 @@ const {
                 const networkProtocolPacket_2787 = networkProtocolPacket_2784[3].toString().split("\"").join("");
                 const networkProtocolPacket_2788 = Engine.logOff ? Engine.logOff : false;
                 if (!networkProtocolPacket_2766(networkProtocolPacket_2787) && !networkProtocolPacket_2788 || (networkProtocolPacket_2787 === "Smocza Runa" || networkProtocolPacket_2787 === "Smocza Łuska") && !networkProtocolPacket_2788) {
-                    _g("chat&getContent=" + networkProtocolPacket_2785 + "%23" + networkProtocolPacket_2786, function(networkProtocolPacket_2789) {
+                    _g("chat&getContent=" + networkProtocolPacket_2785 + "%23" + networkProtocolPacket_2786, function (networkProtocolPacket_2789) {
                         const networkProtocolPacket_2790 = networkProtocolPacket_2789.item ? networkProtocolPacket_2789.item : networkProtocolPacket_2789.item_tpl;
                         if (networkProtocolPacket_2790) {
                             Object.values(networkProtocolPacket_2790).forEach(networkProtocolPacket_2791 => {
@@ -12127,9 +12127,9 @@ const {
     };
     if (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[6].id]) {
         uiLayoutComponent_123();
-    }(function() {
+    } (function () {
         var networkProtocolPacket_2794 = Engine.interface.showPopupMenu;
-        Engine.interface.showPopupMenu = function(networkProtocolPacket_2795, networkProtocolPacket_2796, networkProtocolPacket_2797, networkProtocolPacket_2798 = {}) {
+        Engine.interface.showPopupMenu = function (networkProtocolPacket_2795, networkProtocolPacket_2796, networkProtocolPacket_2797, networkProtocolPacket_2798 = {}) {
             if (networkProtocolPacket_2796?.currentTarget?.classList) {
                 let networkProtocolPacket_2799 = networkProtocolPacket_2796.currentTarget.classList.toString();
                 if (networkProtocolPacket_2796?.target?.classList?.contains("item") && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[1].id]) {
@@ -12170,7 +12170,7 @@ const {
                                 networkProtocolPacket_2805.list.want.push(networkProtocolPacket_2810);
                                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                                 createListFromArray(networkProtocolPacket_2805.list.want, $(".mp-loot-filter-content .mp-loot-filter-section-2 .mp-loot-filter-lists #want #list-wrapper"), ADDON_STORAGE_REFERENCE, ADDON_AUTH_KEY_STRING);
-                                message("Dodano " + networkProtocolPacket_2810 + " do \"Zawsze Å‚ap\"");
+                                message("Dodano " + networkProtocolPacket_2810 + " do \"Zawsze łap\"");
                             }, {
                                 button: {
                                     cls: "mp-menu-item--gold"
@@ -12180,7 +12180,7 @@ const {
                                 networkProtocolPacket_2805.list.not.push(networkProtocolPacket_2810);
                                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                                 createListFromArray(networkProtocolPacket_2805.list.not, $(".mp-loot-filter-content .mp-loot-filter-section-2 .mp-loot-filter-lists #not #list-wrapper"), ADDON_STORAGE_REFERENCE, ADDON_AUTH_KEY_STRING);
-                                message("Dodano " + networkProtocolPacket_2810 + " do \"Zawsze odrzuÄ‡\"");
+                                message("Dodano " + networkProtocolPacket_2810 + " do \"Zawsze odrzuć\"");
                             }, {
                                 button: {
                                     cls: "mp-menu-item--gold"
@@ -12252,7 +12252,7 @@ const {
                     if (networkProtocolPacket_2822 && networkProtocolPacket_2822.cl !== 32) {
                         const networkProtocolPacket_2823 = networkProtocolPacket_2822.name;
                         if (networkProtocolPacket_2820.images.list[networkProtocolPacket_2823]) {
-                            networkProtocolPacket_2795.push(["UsuÅ„ grafikÄ™", () => {
+                            networkProtocolPacket_2795.push(["Usuń grafikę", () => {
                                 delete networkProtocolPacket_2820.images.list[networkProtocolPacket_2823];
                                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                                 networkProtocolPacket_2824("images");
@@ -12298,7 +12298,7 @@ const {
 
     function networkProtocolPacket_2833() {
         try {
-            const networkProtocolPacket_2834 = document?.querySelector("div.text[name=\"WiadomoÅ›Ä‡\"]")?.parentElement?.parentElement?.parentElement;
+            const networkProtocolPacket_2834 = document?.querySelector("div.text[name=\"Wiadomość\"]")?.parentElement?.parentElement?.parentElement;
             const networkProtocolPacket_2835 = document?.querySelector("div.window-backdrop");
             if (networkProtocolPacket_2834 && networkProtocolPacket_2835) {
                 return;
@@ -12313,7 +12313,7 @@ const {
                 networkProtocolPacket_2837[0].click();
                 return;
             }
-        } catch (networkProtocolPacket_2838) {}
+        } catch (networkProtocolPacket_2838) { }
     }
     async function addonStorageDescriptor_1140() {
         if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[4].id]) {
@@ -12339,7 +12339,7 @@ const {
                         "content-type": "application/x-www-form-urlencoded; charset=UTF-8"
                     },
                     credentials: "include"
-                }).then(function() {
+                }).then(function () {
                     executeLoginChar(networkProtocolPacket_2842, networkProtocolPacket_2843);
                 });
             } else if (uiLayoutComponent_271) {
@@ -12352,7 +12352,7 @@ const {
                         "content-type": "application/x-www-form-urlencoded; charset=UTF-8"
                     },
                     credentials: "include"
-                }).then(function() {
+                }).then(function () {
                     executeLoginChar(networkProtocolPacket_2842, networkProtocolPacket_2843);
                 });
             } else {
@@ -12488,16 +12488,16 @@ const {
             $("<div class=\"mp-equipment-stats-title\">" + parsedAddonConfig[MODULE_ADDON_REGISTRY[8].id].legbon + "</div>").appendTo(networkProtocolPacket_2866);
             const networkProtocolPacket_2877 = $("<div></div>").appendTo(networkProtocolPacket_2866);
             for (const [networkProtocolPacket_2878, {
-                    value: networkProtocolPacket_2879,
-                    id: networkProtocolPacket_2880
-                }] of Object.entries(networkProtocolPacket_2857.legendary_bonus)) {
-                const networkProtocolPacket_2881 = $("\n                        <div class=\"do-action-cursor\" style=\"border-radius: var(--mp-border-radius); border: 1px solid transparent;\">\n                            <span class=\"mp-equipment-stats-value\">â€¢</span> " + networkProtocolPacket_2878 + ": \n                            <span class=\"mp-equipment-stats-value\">" + networkProtocolPacket_2879 + "</span>\n                        </div>\n                    ").appendTo(networkProtocolPacket_2877);
-                networkProtocolPacket_2881.hover(function() {
+                value: networkProtocolPacket_2879,
+                id: networkProtocolPacket_2880
+            }] of Object.entries(networkProtocolPacket_2857.legendary_bonus)) {
+                const networkProtocolPacket_2881 = $("\n                        <div class=\"do-action-cursor\" style=\"border-radius: var(--mp-border-radius); border: 1px solid transparent;\">\n                            <span class=\"mp-equipment-stats-value\">•</span> " + networkProtocolPacket_2878 + ": \n                            <span class=\"mp-equipment-stats-value\">" + networkProtocolPacket_2879 + "</span>\n                        </div>\n                    ").appendTo(networkProtocolPacket_2877);
+                networkProtocolPacket_2881.hover(function () {
                     networkProtocolPacket_2880.forEach(networkProtocolPacket_2882 => $(".item-id-" + networkProtocolPacket_2882 + "-showeq").css("background", "#28a745"));
                     $(this).css({
                         border: "1px solid #28a745"
                     });
-                }, function() {
+                }, function () {
                     networkProtocolPacket_2880.forEach(networkProtocolPacket_2883 => $(".item-id-" + networkProtocolPacket_2883 + "-showeq").css("background", ""));
                     $(this).css({
                         border: "1px solid transparent"
@@ -12512,7 +12512,7 @@ const {
         }
     }
     const networkProtocolPacket_2886 = Engine.showEqManager.newWindow;
-    Engine.showEqManager.newWindow = async function(networkProtocolPacket_2887, networkProtocolPacket_2888) {
+    Engine.showEqManager.newWindow = async function (networkProtocolPacket_2887, networkProtocolPacket_2888) {
         const {
             id: networkProtocolPacket_2889
         } = networkProtocolPacket_2887;
@@ -12559,14 +12559,14 @@ const {
                 let networkProtocolPacket_2905 = networkProtocolPacket_2897.some(networkProtocolPacket_2906 => networkProtocolPacket_2906.nick === Engine.hero.d.nick) ? networkProtocolPacket_2898 : networkProtocolPacket_2900;
                 const networkProtocolPacket_2907 = networkProtocolPacket_2903.map(networkProtocolPacket_2908 => networkProtocolPacket_2908.nick + " (" + networkProtocolPacket_2908.lvl + networkProtocolPacket_2908.prof + ")").join(", ");
                 networkProtocolPacket_2893++;
-                $("\n                <div data-battle-id=\"" + Math.ceil(networkProtocolPacket_2895.ts / 1000) + "\" class=\"mp-battle-save-row do-action-cursor\">\n                    <div class=\"mp-battle-save-number\">\n                        " + networkProtocolPacket_2893 + "\n                    </div>\n                    <div class=\"mp-battle-save-case\">\n                        <div class=\"mp-battle-save-enemy\" style=\"color: " + (networkProtocolPacket_2905 ? "var(--mp-color-green);" : "var(--mp-color-red);") + "\">\n                            " + networkProtocolPacket_2907 + "\n                        </div>\n                        <div class=\"mp-battle-save-result\">\n                            " + ut_fulltime(Math.ceil(networkProtocolPacket_2895.ts / 1000)) + " - " + parsedAddonConfig.npc[networkProtocolPacket_2895.npc] + " - (" + networkProtocolPacket_2897.length + " vs " + networkProtocolPacket_2899.length + ") - " + (networkProtocolPacket_2905 ? "<b class=\"text-green\">Wygrana</b>" : "<b class=\"text-red\">Przegrana</b>") + "\n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2890).tip(networkProtocolPacket_2907).click(function() {
+                $("\n                <div data-battle-id=\"" + Math.ceil(networkProtocolPacket_2895.ts / 1000) + "\" class=\"mp-battle-save-row do-action-cursor\">\n                    <div class=\"mp-battle-save-number\">\n                        " + networkProtocolPacket_2893 + "\n                    </div>\n                    <div class=\"mp-battle-save-case\">\n                        <div class=\"mp-battle-save-enemy\" style=\"color: " + (networkProtocolPacket_2905 ? "var(--mp-color-green);" : "var(--mp-color-red);") + "\">\n                            " + networkProtocolPacket_2907 + "\n                        </div>\n                        <div class=\"mp-battle-save-result\">\n                            " + ut_fulltime(Math.ceil(networkProtocolPacket_2895.ts / 1000)) + " - " + parsedAddonConfig.npc[networkProtocolPacket_2895.npc] + " - (" + networkProtocolPacket_2897.length + " vs " + networkProtocolPacket_2899.length + ") - " + (networkProtocolPacket_2905 ? "<b class=\"text-green\">Wygrana</b>" : "<b class=\"text-red\">Przegrana</b>") + "\n                        </div>\n                    </div>\n                </div>").appendTo(networkProtocolPacket_2890).tip(networkProtocolPacket_2907).click(function () {
                     $(".mp-selected-battle").removeClass("mp-selected-battle");
                     $(this).addClass("mp-selected-battle");
                     ADDON_STORAGE_REFERENCE.window[MODULE_ADDON_REGISTRY[13].id].o = true;
                     $("#w-" + MODULE_ADDON_REGISTRY[13].id).show();
                     $("div[mp-widget-ui=\"" + MODULE_ADDON_REGISTRY[13].id + "\"] div").addClass("mp-icon-active");
                     addonStorageDescriptor_1276(networkProtocolPacket_2895);
-                }).contextmenu(function(networkProtocolPacket_2909) {
+                }).contextmenu(function (networkProtocolPacket_2909) {
                     networkProtocolPacket_2909.preventDefault();
                     let networkProtocolPacket_2910 = [
                         ["Usuń zapis", () => {
@@ -12585,10 +12585,10 @@ const {
                             domInteractionNode_762();
                             addonStorageDescriptor_1276();
                         }, {
-                            button: {
-                                cls: "mp-popup-menu-item"
-                            }
-                        }]
+                                button: {
+                                    cls: "mp-popup-menu-item"
+                                }
+                            }]
                     ];
                     Engine.interface.showPopupMenu(networkProtocolPacket_2910, networkProtocolPacket_2909);
                 });
@@ -12659,7 +12659,7 @@ const {
                     }
                 }
             }
-            if (networkProtocolPacket_2914.includes(";txt=") && networkProtocolPacket_2914.includes("punktów życia - uÅ¼ycie specjalnej")) {
+            if (networkProtocolPacket_2914.includes(";txt=") && networkProtocolPacket_2914.includes("punktów życia - użycie specjalnej")) {
                 let networkProtocolPacket_2928 = /;txt=([^+]+)/.exec(networkProtocolPacket_2914)[1].trim();
                 let networkProtocolPacket_2929 = Number(/txt=[^+]*\+(\d+)/.exec(networkProtocolPacket_2914)[1].trim());
                 for (const networkProtocolPacket_2930 in uiLayoutComponent_219.json) {
@@ -12727,9 +12727,9 @@ const {
                 let networkProtocolPacket_2947 = networkProtocolPacket_2945.split("=")[1];
                 uiLayoutComponent_219.json[networkProtocolPacket_2946].hp = networkProtocolPacket_2947;
             }
-            const networkProtocolPacket_2948 = ["Piętno bestii", "Medytacja", "Oczyszczenie", "Zdradziecki grot", "Przemożenie zmęczenia", "Osłona tarczÄ…", "Kamienna skóra", "Jadowity podmuch", "OdetchniÄ™cie", "Furia", "Opatrywanie ran", "Przywracanie mocy", "Śmierdzący ładunek", "Elektryczna bariera", "Chwila skupienia", "Szadź", "Kula światłości", "Magiczna osÅ‚ona", "Lodowa bariera", "Płonąca bariera", "Prowokujący okrzyk", "Tarcza słońca", "Porażająca tarcza", "Aura ochrony", "Odnowa mocy", "Wyzywający okrzyk", "Srebrzysty blask"];
+            const networkProtocolPacket_2948 = ["Piętno bestii", "Medytacja", "Oczyszczenie", "Zdradziecki grot", "Przemożenie zmęczenia", "Osłona tarczą", "Kamienna skóra", "Jadowity podmuch", "Odetchnięcie", "Furia", "Opatrywanie ran", "Przywracanie mocy", "Śmierdzący ładunek", "Elektryczna bariera", "Chwila skupienia", "Szadź", "Kula światłości", "Magiczna osłona", "Lodowa bariera", "Płonąca bariera", "Prowokujący okrzyk", "Tarcza słońca", "Porażająca tarcza", "Aura ochrony", "Odnowa mocy", "Wyzywający okrzyk", "Srebrzysty blask"];
             const networkProtocolPacket_2949 = {
-                "Aura szybkoÅ›ci": {
+                "Aura szybkości": {
                     t: 1,
                     aura: {
                         sa: 1
@@ -12942,13 +12942,13 @@ const {
                 },
                 "+wound": () => {
                     uiLayoutComponent_219.json[networkProtocolPacket_2931].bonus.o.gr.i++;
-                    if (networkProtocolPacket_2914.includes("-dmg=0")) {} else if (networkProtocolPacket_2914.includes("-dmgd=0")) {} else {
+                    if (networkProtocolPacket_2914.includes("-dmg=0")) { } else if (networkProtocolPacket_2914.includes("-dmgd=0")) { } else {
                         uiLayoutComponent_219.json[networkProtocolPacket_2931].bonus.o.gr.s++;
                     }
                 },
                 "+of_wound": () => {
                     uiLayoutComponent_219.json[networkProtocolPacket_2931].bonus.o.grpom.i++;
-                    if (networkProtocolPacket_2914.includes("+dmgo") && !networkProtocolPacket_2914.includes("-dmgo")) {} else {
+                    if (networkProtocolPacket_2914.includes("+dmgo") && !networkProtocolPacket_2914.includes("-dmgo")) { } else {
                         uiLayoutComponent_219.json[networkProtocolPacket_2931].bonus.o.grpom.s++;
                     }
                 },
@@ -13234,7 +13234,7 @@ const {
                 const networkProtocolPacket_3029 = {
                     "-blok": "Zablokowano (-30% obrażeń)",
                     "-evade": "Uniknięto",
-                    "-legbon_resgain": "Ochrona Å¼ywioÅ‚Ã³w",
+                    "-legbon_resgain": "Ochrona żywiołów",
                     "-parry": "Sparowano",
                     "-arrowblock": "Zneutralizowana strzała",
                     "-pierceb": "Zablokowano przebicie"
@@ -13282,7 +13282,7 @@ const {
                 const networkProtocolPacket_3042 = Number(/\;heal_target=(\d+)/g.exec(networkProtocolPacket_2914)[1]);
                 uiLayoutComponent_219.json[networkProtocolPacket_2932].bonus.o.h.th.i += networkProtocolPacket_3042;
                 uiLayoutComponent_219.json[networkProtocolPacket_2932].bonus.o.h.all += networkProtocolPacket_3042;
-                uiLayoutComponent_219.json[networkProtocolPacket_2932].bonus.o.h.th.l["Osłona tarczÄ…"] = (uiLayoutComponent_219.json[networkProtocolPacket_2932].bonus.o.h.th.l["Osłona tarczą"] || 0) + networkProtocolPacket_3042;
+                uiLayoutComponent_219.json[networkProtocolPacket_2932].bonus.o.h.th.l["Osłona tarczą"] = (uiLayoutComponent_219.json[networkProtocolPacket_2932].bonus.o.h.th.l["Osłona tarczą"] || 0) + networkProtocolPacket_3042;
             }
             if (networkProtocolPacket_2914.includes("tspell=Srebrzysty blask") && networkProtocolPacket_2914.includes("heal_target=")) {
                 const networkProtocolPacket_3043 = Number(/\;heal_target=(\d+)/g.exec(networkProtocolPacket_2914)[1]);
@@ -13364,28 +13364,28 @@ const {
         const networkProtocolPacket_3059 = $("<tbody></tbody>").appendTo(networkProtocolPacket_3056);
         const networkProtocolPacket_3060 = [
             ["lvl", 3, "Poziom i profesja"],
-            ["bless", 4, "BÅ‚ogo"],
+            ["bless", 4, "Błogo"],
             ["turn", 0, "Tury w walce"],
             ["ck", 1, "Cios krytyczny"],
             ["ckpom", 1, "Cios krytyczny pomocniczy"],
             ["cbk", 6, "Cios bardzo krytyczny"],
             ["or", 6, "Ostatni ratunek"],
-            ["ko", 6, "Krytyczna osÅ‚ona"],
+            ["ko", 6, "Krytyczna osłona"],
             ["fo", 6, "Fizyczna osłona"],
-            ["oz", 6, "Ochrona Å¼ywioÅ‚Ã³w"],
+            ["oz", 6, "Ochrona żywiołów"],
             ["ps", 6, "Przeszywająca skuteczność"],
             ["esm", 6, "Eskalacja szału główna"],
-            ["eso", 6, "Eskalacja szaÅ‚u pomocnicza"],
+            ["eso", 6, "Eskalacja szału pomocnicza"],
             ["fa", 6, "Fasada opieki"],
             ["po", 6, "Płomienne oczyszczenie"],
-            ["ku", 6, "Krwawa udrÄ™ka"],
+            ["ku", 6, "Krwawa udręka"],
             ["ao", 6, "Aura odwetu"],
-            ["da", 6, "Dotyk anioÅ‚a"],
+            ["da", 6, "Dotyk anioła"],
             ["os", 6, "Oślepienie"],
             ["kl", 6, "Klątwa"],
-            ["ogluch", 5, "OgÅ‚uszenie"],
+            ["ogluch", 5, "Ogłuszenie"],
             ["zamro", 5, "Zamrożenie"],
-            ["wytro", 5, "WytrÄ…cenie z rÃ³wnowagi"],
+            ["wytro", 5, "Wytrącenie z równowagi"],
             ["kontra", 3, "Kontra"],
             ["evade", 3, "Unik"],
             ["arrowblock", 3, "Zneutralizowana strzała"],
@@ -13397,22 +13397,22 @@ const {
             ["blokpierce", 7, "Blok przebicia"],
             ["abs", 7, "Absorpcja"],
             ["gr", 8, "Głęboka rana"],
-            ["grpom", 8, "GÅ‚Ä™boka rana pomocnicza"],
-            ["manaregen", 8, "Odzyskana mana", "Szacunkowe odzyskane w wyniku ciosów z krytykiem, odzyskiwania zasobów lub ewentualnej kradzieży - nie wlicza renegeracji zasobÃ³w z umiejÄ™tności gracza"],
-            ["enaregen", 8, "Odzyskana energia", "Szacunkowe odzyskane w wyniku ciosów z krytykiem, odzyskiwania zasobów lub ewentualnej kradzieży - nie wlicza renegeracji zasobÃ³w z umiejÄ™tności gracza"],
+            ["grpom", 8, "Głęboka rana pomocnicza"],
+            ["manaregen", 8, "Odzyskana mana", "Szacunkowe odzyskane w wyniku ciosów z krytykiem, odzyskiwania zasobów lub ewentualnej kradzieży - nie wlicza renegeracji zasobów z umiejętności gracza"],
+            ["enaregen", 8, "Odzyskana energia", "Szacunkowe odzyskane w wyniku ciosów z krytykiem, odzyskiwania zasobów lub ewentualnej kradzieży - nie wlicza renegeracji zasobów z umiejętności gracza"],
             ["heal", 4, "Leczenie"],
             ["destpanc", 9, "Utracony pancerz"],
-            ["destodp", 9, "Utracone odpornoÅ›ci"],
+            ["destodp", 9, "Utracone odporności"],
             ["destmana", 9, "Utracona mana"],
             ["destena", 9, "Utracona energia"],
-            ["sa", 5, "Aura szybkoÅ›ci"],
+            ["sa", 5, "Aura szybkości"],
             ["fur", 5, "Furia"],
             ["sh", 4, "Pojedyńcze leczenie"],
             ["ph", 4, "Drużynowe leczenie"],
             ["cancel", 4, "Przerwane spece"],
             ["shout", 4, "Wyzyw"],
             ["power", 0, "Siła ataków"],
-            ["deal", 0, "ObraÅ¼enia ataków"],
+            ["deal", 0, "Obrażenia ataków"],
             ["received", 0, "Otrzymane obrażenia"],
             ["spec", 4, "Przedmioty specjalne"],
             ["end", 10, "Werdykt walki"]
@@ -13561,7 +13561,7 @@ const {
             networkProtocolPacket_3074.end = networkProtocolPacket_3137;
             const networkProtocolPacket_3138 = $("<th class=\"mp-bs-label do-action-cursor\" data-bs-result=\"" + networkProtocolPacket_3137 + "\">" + networkProtocolPacket_3130 + "</th>").appendTo(networkProtocolPacket_3068).tip("" + networkProtocolPacket_3130 + (networkProtocolPacket_3135 === 0 ? "<br><br>Kliknij, aby zobaczyć ekwipunek." : ""));
             if (networkProtocolPacket_3135 === 0) {
-                networkProtocolPacket_3138.click(function() {
+                networkProtocolPacket_3138.click(function () {
                     Engine.showEqManager.update({
                         id: networkProtocolPacket_3128,
                         account: 0,
@@ -13589,43 +13589,43 @@ const {
             }
             networkProtocolPacket_3139.tip(networkProtocolPacket_3141);
             $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3131 > 0 ? "<span class=\"mp-true mp-yellow\">Tak</span>" : "<span class=\"mp-false\">Nie</span>") + "</td>").appendTo(networkProtocolPacket_3076);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.turn.all + networkProtocolPacket_3140.turn.lost > 0 ? networkProtocolPacket_3140.turn.all + " (" + (networkProtocolPacket_3140.turn.all + networkProtocolPacket_3140.turn.lost) + ")" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3077).tip("Całkowita iloÅ›Ä‡ tur: " + (networkProtocolPacket_3140.turn.all + networkProtocolPacket_3140.turn.lost) + "<br>Wykonane: " + networkProtocolPacket_3140.turn.all + "<br>Utracone:  " + networkProtocolPacket_3140.turn.lost);
-            let networkProtocolPacket_3144 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.d.p.a > 0 ? "<span class=\"mp-yellow\">" + formatNumber(networkProtocolPacket_3140.d.p.a) + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3078);
-            let networkProtocolPacket_3145 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.d.d.a > 0 ? "<span class=\"mp-yellow\">" + formatNumber(networkProtocolPacket_3140.d.d.a) + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3079);
-            const networkProtocolPacket_3146 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.d.r.a > 0 ? "<span class=\"mp-yellow\">" + formatNumber(networkProtocolPacket_3140.d.r.a) + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3080);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.turn.all + networkProtocolPacket_3140.turn.lost > 0 ? networkProtocolPacket_3140.turn.all + " (" + (networkProtocolPacket_3140.turn.all + networkProtocolPacket_3140.turn.lost) + ")" : "・") + "</td>").appendTo(networkProtocolPacket_3077).tip("Całkowita ilość tur: " + (networkProtocolPacket_3140.turn.all + networkProtocolPacket_3140.turn.lost) + "<br>Wykonane: " + networkProtocolPacket_3140.turn.all + "<br>Utracone:  " + networkProtocolPacket_3140.turn.lost);
+            let networkProtocolPacket_3144 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.d.p.a > 0 ? "<span class=\"mp-yellow\">" + formatNumber(networkProtocolPacket_3140.d.p.a) + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3078);
+            let networkProtocolPacket_3145 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.d.d.a > 0 ? "<span class=\"mp-yellow\">" + formatNumber(networkProtocolPacket_3140.d.d.a) + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3079);
+            const networkProtocolPacket_3146 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.d.r.a > 0 ? "<span class=\"mp-yellow\">" + formatNumber(networkProtocolPacket_3140.d.r.a) + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3080);
             $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.ko.i > 0 ? "<span class=\"mp-true mp-yellow\">Tak (" + networkProtocolPacket_3140.legbon.ko.p + "%)</span>" : "<span class=\"mp-false\">Nie</span>") + "</td>").appendTo(networkProtocolPacket_3081).tip(networkProtocolPacket_3140.legbon.ko.i > 0 ? "Szacunkowo zredukowana siła obrażeń: " + parsedNumber(Math.ceil(networkProtocolPacket_3140.legbon.ko.d)) : "");
             $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.fo > 0 ? "<span class=\"mp-true mp-yellow\">Tak</span>" : "<span class=\"mp-false\">Nie</span>") + "</td>").appendTo(networkProtocolPacket_3082);
-            let networkProtocolPacket_3147 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.cbk.i > 0 ? "<span class=\"mp-yellow\">" + (networkProtocolPacket_3140.legbon.cbk.i - networkProtocolPacket_3140.legbon.cbk.f) + " (" + networkProtocolPacket_3140.legbon.cbk.i + ")</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3083);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.da.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.da.i + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3084).tip(networkProtocolPacket_3140.legbon.da.h > 0 ? "Przywrócone Å¼ycie: " + parsedNumber(networkProtocolPacket_3140.legbon.da.h) : "");
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.kl > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.kl + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3085);
+            let networkProtocolPacket_3147 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.cbk.i > 0 ? "<span class=\"mp-yellow\">" + (networkProtocolPacket_3140.legbon.cbk.i - networkProtocolPacket_3140.legbon.cbk.f) + " (" + networkProtocolPacket_3140.legbon.cbk.i + ")</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3083);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.da.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.da.i + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3084).tip(networkProtocolPacket_3140.legbon.da.h > 0 ? "Przywrócone życie: " + parsedNumber(networkProtocolPacket_3140.legbon.da.h) : "");
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.kl > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.kl + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3085);
             $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.or > 0 ? "<span class=\"mp-true mp-yellow\">Tak</span>" : "<span class=\"mp-false\">Nie</span>") + "</td>").appendTo(networkProtocolPacket_3086);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.os.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.os.i + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3087).tip("Aktywowano podczas obrony: " + networkProtocolPacket_3140.legbon.os.m);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.po > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.po + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3088);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.oz > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.oz + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3089);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.ao.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.ao.i + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3090).tip(networkProtocolPacket_3140.legbon.ao.d > 0 ? "Odbite obrażenia: " + parsedNumber(networkProtocolPacket_3140.legbon.ao.d) : "");
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.os.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.os.i + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3087).tip("Aktywowano podczas obrony: " + networkProtocolPacket_3140.legbon.os.m);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.po > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.po + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3088);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.oz > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.oz + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3089);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.ao.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.ao.i + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3090).tip(networkProtocolPacket_3140.legbon.ao.d > 0 ? "Odbite obrażenia: " + parsedNumber(networkProtocolPacket_3140.legbon.ao.d) : "");
             $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.ps.i > 0 ? "<span class=\"mp-true mp-yellow\">Tak (" + networkProtocolPacket_3140.legbon.ps.p + "%)</span> " : "<span class=\"mp-false\">Nie</span>") + "</td>").appendTo(networkProtocolPacket_3091);
             $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.esm > 0 ? "<span class=\"mp-true mp-yellow\">Tak (" + networkProtocolPacket_3140.legbon.esm * 2 + "%)</span>" : "<span class=\"mp-false\">Nie</span>") + "</td>").appendTo(networkProtocolPacket_3092);
             $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.eso > 0 ? "<span class=\"mp-true mp-yellow\">Tak (" + networkProtocolPacket_3140.legbon.eso * 2 + "%)</span>" : "<span class=\"mp-false\">Nie</span>") + "</td>").appendTo(networkProtocolPacket_3093);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.ku > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.ku + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3094);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.ku > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.legbon.ku + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3094);
             $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.legbon.fa.i > 0 ? "<span class=\"mp-true mp-yellow\">Tak (" + networkProtocolPacket_3140.legbon.fa.p + "%)</span>" : "<span class=\"mp-false\">Nie</span>") + "</td>").appendTo(networkProtocolPacket_3095);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.aura.sa > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.aura.sa + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3096);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.aura.fur > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.aura.fur + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3097);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.sh > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.sh + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3098);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.aura.hp > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.aura.hp + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3099);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.aura.hs > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.aura.hs + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3100);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.cancel > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.cancel + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3101);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ck > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.ck + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3102);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ckpom > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.ckpom + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3103);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.par > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.par + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3104);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.b.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.b.i + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3105).tip(networkProtocolPacket_3140.o.b.b > 0 ? "Zablokowano obrażeń: " + parsedNumber(networkProtocolPacket_3140.o.b.b) : "");
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.gr.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.gr.s + " (" + networkProtocolPacket_3140.o.gr.i + ")</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3106).tip("Podsumowanie:<br>Łącznie: " + networkProtocolPacket_3140.o.gr.i + "<br>Weszło: " + networkProtocolPacket_3140.o.gr.s);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.grpom.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.grpom.s + " (" + networkProtocolPacket_3140.o.grpom.i + ")</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3107).tip("Podsumowanie:<br>ÅÄ…cznie: " + networkProtocolPacket_3140.o.grpom.i + "<br>Weszło: " + networkProtocolPacket_3140.o.grpom.s);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.u > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.u + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3108);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.bp > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.bp + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3109);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.og > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.og + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3110);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.tr > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.tr + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3111).tip(networkProtocolPacket_3140.d.p.th > 0 ? "Siła obrażeÅ„: " + parsedNumber(networkProtocolPacket_3140.d.p.th) + "<br>Zadane obrażenia: " + parsedNumber(networkProtocolPacket_3140.d.d.th) : "");
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.zam > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.zam + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3112);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.wyt > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.wyt + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3113);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.aura.sa > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.aura.sa + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3096);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.aura.fur > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.aura.fur + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3097);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.sh > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.sh + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3098);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.aura.hp > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.aura.hp + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3099);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.aura.hs > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.aura.hs + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3100);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.cancel > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.cancel + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3101);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ck > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.ck + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3102);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ckpom > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.ckpom + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3103);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.par > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.par + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3104);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.b.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.b.i + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3105).tip(networkProtocolPacket_3140.o.b.b > 0 ? "Zablokowano obrażeń: " + parsedNumber(networkProtocolPacket_3140.o.b.b) : "");
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.gr.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.gr.s + " (" + networkProtocolPacket_3140.o.gr.i + ")</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3106).tip("Podsumowanie:<br>Łącznie: " + networkProtocolPacket_3140.o.gr.i + "<br>Weszło: " + networkProtocolPacket_3140.o.gr.s);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.grpom.i > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.grpom.s + " (" + networkProtocolPacket_3140.o.grpom.i + ")</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3107).tip("Podsumowanie:<br>Łącznie: " + networkProtocolPacket_3140.o.grpom.i + "<br>Weszło: " + networkProtocolPacket_3140.o.grpom.s);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.u > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.u + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3108);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.bp > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.bp + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3109);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.og > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.og + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3110);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.tr > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.tr + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3111).tip(networkProtocolPacket_3140.d.p.th > 0 ? "Siła obrażeń: " + parsedNumber(networkProtocolPacket_3140.d.p.th) + "<br>Zadane obrażenia: " + parsedNumber(networkProtocolPacket_3140.d.d.th) : "");
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.zam > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.zam + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3112);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.wyt > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.wyt + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3113);
             let networkProtocolPacket_3148 = "";
             if (networkProtocolPacket_3140.o.h.all > 0) {
                 networkProtocolPacket_3148 += "Łącznie: " + parsedNumber(networkProtocolPacket_3140.o.h.all) + "<br>";
@@ -13636,7 +13636,7 @@ const {
                     networkProtocolPacket_3148 += "<br><b>Leg. bonusy:</b>";
                 }
                 if (networkProtocolPacket_3140.o.h.da > 0) {
-                    networkProtocolPacket_3148 += "Dotyk anioÅ‚a: " + parsedNumber(networkProtocolPacket_3140.o.h.da) + "<br>";
+                    networkProtocolPacket_3148 += "Dotyk anioła: " + parsedNumber(networkProtocolPacket_3140.o.h.da) + "<br>";
                 }
                 if (networkProtocolPacket_3140.o.h.or > 0) {
                     networkProtocolPacket_3148 += "Ostatni ratunek: " + parsedNumber(networkProtocolPacket_3140.o.h.or) + "<br>";
@@ -13657,20 +13657,20 @@ const {
                     networkProtocolPacket_3148 += "<br><b>Dodatkowe:</b>Mikstura spec.: " + parsedNumber(networkProtocolPacket_3140.o.h.mix) + "<br>";
                 }
             }
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.pi.i > 0 ? "<span class=\"mp-yellow\">" + (networkProtocolPacket_3140.o.pi.i - networkProtocolPacket_3140.o.pi.f) + " (" + networkProtocolPacket_3140.o.pi.i + ")</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3114).tip("Podsumowanie:<br>ÅÄ…cznie: " + networkProtocolPacket_3140.o.pi.i + "<br>Weszło: " + (networkProtocolPacket_3140.o.pi.i - networkProtocolPacket_3140.o.pi.f));
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ab > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.ab + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3115);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.fa > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.fa + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3116);
-            const networkProtocolPacket_3151 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ac.d > 0 ? "<span class=\"mp-yellow" + (networkProtocolPacket_3140.o.ac.dall ? " mp-true" : "") + "\">" + networkProtocolPacket_3140.o.ac.d + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3117);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.h.all > 0 ? "<span class=\"mp-yellow\">" + formatNumber(networkProtocolPacket_3140.o.h.all) + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3118).tip(networkProtocolPacket_3148);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.k > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.k + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3119);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.do > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.do + "%</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3120);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.e.d > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.e.d + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3121);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.m.d > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.m.d + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3122);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.m.r > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.m.r + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3123);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3137 ? "<span class=\"mp-yellow\" data-bs-result=\"" + networkProtocolPacket_3137 + "\">" + networkProtocolPacket_3137 + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3124);
-            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.e.r > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.e.r + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3125);
-            const networkProtocolPacket_3152 = $("<td class=\"mp-bs-label\"><span class=\"" + (networkProtocolPacket_3140.o.abs.fiz.hd > 0 ? "mp-yellow" : "ãƒ»") + "\">" + (networkProtocolPacket_3140.o.abs.fiz.hd > 0 ? formatNumber(networkProtocolPacket_3140.o.abs.fiz.hd) : "ãƒ»") + "</span> | <span class=\"" + (networkProtocolPacket_3140.o.abs.mag.hd > 0 ? "mp-yellow" : "ãƒ»") + "\">" + (networkProtocolPacket_3140.o.abs.mag.hd > 0 ? formatNumber(networkProtocolPacket_3140.o.abs.mag.hd) : "ãƒ»") + "</span></td>").appendTo(networkProtocolPacket_3126);
-            const networkProtocolPacket_3153 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ch.u > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.ch.u + "</span>" : "ãƒ»") + "</td>").appendTo(networkProtocolPacket_3127);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.pi.i > 0 ? "<span class=\"mp-yellow\">" + (networkProtocolPacket_3140.o.pi.i - networkProtocolPacket_3140.o.pi.f) + " (" + networkProtocolPacket_3140.o.pi.i + ")</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3114).tip("Podsumowanie:<br>Łącznie: " + networkProtocolPacket_3140.o.pi.i + "<br>Weszło: " + (networkProtocolPacket_3140.o.pi.i - networkProtocolPacket_3140.o.pi.f));
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ab > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.ab + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3115);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.fa > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.fa + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3116);
+            const networkProtocolPacket_3151 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ac.d > 0 ? "<span class=\"mp-yellow" + (networkProtocolPacket_3140.o.ac.dall ? " mp-true" : "") + "\">" + networkProtocolPacket_3140.o.ac.d + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3117);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.h.all > 0 ? "<span class=\"mp-yellow\">" + formatNumber(networkProtocolPacket_3140.o.h.all) + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3118).tip(networkProtocolPacket_3148);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.k > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.k + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3119);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.do > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.do + "%</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3120);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.e.d > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.e.d + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3121);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.m.d > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.m.d + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3122);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.m.r > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.m.r + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3123);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3137 ? "<span class=\"mp-yellow\" data-bs-result=\"" + networkProtocolPacket_3137 + "\">" + networkProtocolPacket_3137 + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3124);
+            $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.e.r > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.e.r + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3125);
+            const networkProtocolPacket_3152 = $("<td class=\"mp-bs-label\"><span class=\"" + (networkProtocolPacket_3140.o.abs.fiz.hd > 0 ? "mp-yellow" : "・") + "\">" + (networkProtocolPacket_3140.o.abs.fiz.hd > 0 ? formatNumber(networkProtocolPacket_3140.o.abs.fiz.hd) : "・") + "</span> | <span class=\"" + (networkProtocolPacket_3140.o.abs.mag.hd > 0 ? "mp-yellow" : "・") + "\">" + (networkProtocolPacket_3140.o.abs.mag.hd > 0 ? formatNumber(networkProtocolPacket_3140.o.abs.mag.hd) : "・") + "</span></td>").appendTo(networkProtocolPacket_3126);
+            const networkProtocolPacket_3153 = $("<td class=\"mp-bs-label\">" + (networkProtocolPacket_3140.o.ch.u > 0 ? "<span class=\"mp-yellow\">" + networkProtocolPacket_3140.o.ch.u + "</span>" : "・") + "</td>").appendTo(networkProtocolPacket_3127);
             if (networkProtocolPacket_3140.d.p.a > 0) {
                 let networkProtocolPacket_3154 = "Łącznie: " + parsedNumber(networkProtocolPacket_3140.d.p.a) + "<br>";
                 if (networkProtocolPacket_3140.d.p.fiz > 0) {
@@ -13705,7 +13705,7 @@ const {
                     networkProtocolPacket_3155 += "Ogień: " + parsedNumber(networkProtocolPacket_3140.d.d.f) + " (" + obliczProcent(networkProtocolPacket_3140.d.d.f, networkProtocolPacket_3140.d.d.a) + "%)<br>";
                 }
                 if (networkProtocolPacket_3140.d.d.l > 0) {
-                    networkProtocolPacket_3155 += "BÅ‚ysk: " + parsedNumber(networkProtocolPacket_3140.d.d.l) + " (" + obliczProcent(networkProtocolPacket_3140.d.d.l, networkProtocolPacket_3140.d.d.a) + "%)<br>";
+                    networkProtocolPacket_3155 += "Błysk: " + parsedNumber(networkProtocolPacket_3140.d.d.l) + " (" + obliczProcent(networkProtocolPacket_3140.d.d.l, networkProtocolPacket_3140.d.d.a) + "%)<br>";
                 }
                 if (networkProtocolPacket_3140.d.d.c > 0) {
                     networkProtocolPacket_3155 += "Zimno: " + parsedNumber(networkProtocolPacket_3140.d.d.c) + " (" + obliczProcent(networkProtocolPacket_3140.d.d.c, networkProtocolPacket_3140.d.d.a) + "%)<br>";
@@ -13724,10 +13724,10 @@ const {
             let networkProtocolPacket_3156 = networkProtocolPacket_3140.d.r.fiz > 0 ? "Fizyczne: " + parsedNumber(networkProtocolPacket_3140.d.r.fiz) + " (" + obliczProcent(networkProtocolPacket_3140.d.r.fiz, networkProtocolPacket_3140.d.r.a) + "%)<br>" : "";
             let networkProtocolPacket_3157 = "Łącznie: " + parsedNumber(networkProtocolPacket_3140.d.r.a) + "<br>" + networkProtocolPacket_3156;
             if (networkProtocolPacket_3140.d.r.gr > 0) {
-                networkProtocolPacket_3157 += "GÅ‚Ä™boka rana: " + parsedNumber(networkProtocolPacket_3140.d.r.gr) + " (" + obliczProcent(networkProtocolPacket_3140.d.r.gr, networkProtocolPacket_3140.d.r.a) + "%)<br>";
+                networkProtocolPacket_3157 += "Głęboka rana: " + parsedNumber(networkProtocolPacket_3140.d.r.gr) + " (" + obliczProcent(networkProtocolPacket_3140.d.r.gr, networkProtocolPacket_3140.d.r.a) + "%)<br>";
             }
             if (networkProtocolPacket_3140.d.r.f.t + networkProtocolPacket_3140.d.r.f.w > 0) {
-                let networkProtocolPacket_3158 = networkProtocolPacket_3140.d.r.f.t > 0 ? "OgieÅ„ DoT: " + parsedNumber(networkProtocolPacket_3140.d.r.f.t) + " (" + obliczProcent(networkProtocolPacket_3140.d.r.f.t, networkProtocolPacket_3140.d.r.a) + "%)<br>" : "";
+                let networkProtocolPacket_3158 = networkProtocolPacket_3140.d.r.f.t > 0 ? "Ogień DoT: " + parsedNumber(networkProtocolPacket_3140.d.r.f.t) + " (" + obliczProcent(networkProtocolPacket_3140.d.r.f.t, networkProtocolPacket_3140.d.r.a) + "%)<br>" : "";
                 networkProtocolPacket_3157 += "Ogień: " + parsedNumber(networkProtocolPacket_3140.d.r.f.w) + " (" + obliczProcent(networkProtocolPacket_3140.d.r.f.w, networkProtocolPacket_3140.d.r.a) + "%)<br>" + networkProtocolPacket_3158;
             }
             if (networkProtocolPacket_3140.d.r.l.t + networkProtocolPacket_3140.d.r.l.w > 0) {
@@ -13792,7 +13792,7 @@ const {
                         }
                     }
                 }
-                networkProtocolPacket_3164 += "Siła obrażeń: " + parsedNumber(networkProtocolPacket_3140.legbon.cbk.p) + "<br>Zadane obraÅ¼enia: " + parsedNumber(networkProtocolPacket_3140.legbon.cbk.o);
+                networkProtocolPacket_3164 += "Siła obrażeń: " + parsedNumber(networkProtocolPacket_3140.legbon.cbk.p) + "<br>Zadane obrażenia: " + parsedNumber(networkProtocolPacket_3140.legbon.cbk.o);
                 networkProtocolPacket_3147.tip(networkProtocolPacket_3164);
             }
             if (networkProtocolPacket_3140.o.ch.u > 0) {
@@ -13804,7 +13804,7 @@ const {
             }
             let networkProtocolPacket_3168 = "Podsumowanie:<br>Utracił: " + parsedNumber(networkProtocolPacket_3140.o.ac.d);
             if (networkProtocolPacket_3140.o.ac.do > 0) {
-                networkProtocolPacket_3168 += "<br>ZniszczyÅ‚: " + networkProtocolPacket_3140.o.ac.do;
+                networkProtocolPacket_3168 += "<br>Zniszczył: " + networkProtocolPacket_3140.o.ac.do;
             }
             networkProtocolPacket_3151.tip(networkProtocolPacket_3168);
             if (networkProtocolPacket_3140.o.ac.dall && networkProtocolPacket_3140.o.ac.dt > 0) {
@@ -14019,9 +14019,9 @@ const {
             };
             const networkProtocolPacket_3222 = [networkProtocolPacket_3171, networkProtocolPacket_3172, networkProtocolPacket_3173, networkProtocolPacket_3174, networkProtocolPacket_3175, networkProtocolPacket_3176, networkProtocolPacket_3177, networkProtocolPacket_3178, networkProtocolPacket_3179, networkProtocolPacket_3180, networkProtocolPacket_3181, networkProtocolPacket_3182, networkProtocolPacket_3183, networkProtocolPacket_3184, networkProtocolPacket_3185, networkProtocolPacket_3186, networkProtocolPacket_3187, networkProtocolPacket_3188, networkProtocolPacket_3189, networkProtocolPacket_3190, networkProtocolPacket_3191, networkProtocolPacket_3192, networkProtocolPacket_3193, networkProtocolPacket_3194, networkProtocolPacket_3195, networkProtocolPacket_3196, networkProtocolPacket_3197, networkProtocolPacket_3198, networkProtocolPacket_3199, networkProtocolPacket_3200, networkProtocolPacket_3201, networkProtocolPacket_3202, networkProtocolPacket_3203, networkProtocolPacket_3204, networkProtocolPacket_3205, networkProtocolPacket_3206, networkProtocolPacket_3207, networkProtocolPacket_3208, networkProtocolPacket_3209, networkProtocolPacket_3210, networkProtocolPacket_3211, networkProtocolPacket_3212, networkProtocolPacket_3213, networkProtocolPacket_3214, networkProtocolPacket_3215, networkProtocolPacket_3216, networkProtocolPacket_3217, networkProtocolPacket_3218, networkProtocolPacket_3219, networkProtocolPacket_3220, networkProtocolPacket_3221];
             for (const {
-                    from: networkProtocolPacket_3223,
-                    to: networkProtocolPacket_3224
-                }
+                from: networkProtocolPacket_3223,
+                to: networkProtocolPacket_3224
+            }
                 of networkProtocolPacket_3222) {
                 const networkProtocolPacket_3225 = networkProtocolPacket_3223();
                 if (networkProtocolPacket_3225 > networkProtocolPacket_3074[networkProtocolPacket_3224]) {
@@ -14264,7 +14264,7 @@ const {
             if (networkProtocolPacket_3250.rarity === "legendary") {
                 networkProtocolPacket_3247.legendary = true;
             }
-            if (networkProtocolPacket_3250?.opis?.includes("Jeden ze skÅ‚adnikÃ³w legendarnej zbroi wykuwanej przez krasnoludy.")) {
+            if (networkProtocolPacket_3250?.opis?.includes("Jeden ze składników legendarnej zbroi wykuwanej przez krasnoludy.")) {
                 networkProtocolPacket_3247.stone = true;
             }
         }
@@ -14296,7 +14296,7 @@ const {
         }
         const networkProtocolPacket_3257 = (...networkProtocolPacket_3258) => networkProtocolPacket_3258.some(networkProtocolPacket_3259 => networkProtocolPacket_3259.length);
         if (networkProtocolPacket_3257(networkProtocolPacket_3246.want, networkProtocolPacket_3246.must, networkProtocolPacket_3246.not)) {
-            _g("loot&want=" + networkProtocolPacket_3246.want.toString() + "&not=" + networkProtocolPacket_3246.not.toString() + "&must=" + networkProtocolPacket_3246.must.toString() + "&final=0", async function(networkProtocolPacket_3260) {
+            _g("loot&want=" + networkProtocolPacket_3246.want.toString() + "&not=" + networkProtocolPacket_3246.not.toString() + "&must=" + networkProtocolPacket_3246.must.toString() + "&final=0", async function (networkProtocolPacket_3260) {
                 if (networkProtocolPacket_3260 && !networkProtocolPacket_3247.legendary && !networkProtocolPacket_3247.stone && networkProtocolPacket_3245) {
                     if (networkProtocolPacket_3232.closeLoot.solo && !networkProtocolPacket_3234 || networkProtocolPacket_3232.closeLoot.party && networkProtocolPacket_3234) {
                         Engine?.loots?.acceptLoot();
@@ -14333,7 +14333,7 @@ const {
         if (networkProtocolPacket_3268 == "legendary") {
             networkProtocolPacket_3273 = networkProtocolPacket_3264.rarity.legendary;
         }
-        const networkProtocolPacket_3274 = ["Serce pajÄ™czego ołtarza", "Kolec pajęczej matki", "Pazur młodego smoka", "Rytualne ostrze orków", "Kolec matki ośmionogÃ³w", "Serce Ołtarza Bogini"];
+        const networkProtocolPacket_3274 = ["Serce pajęczego ołtarza", "Kolec pajęczej matki", "Pazur młodego smoka", "Rytualne ostrze orków", "Kolec matki ośmionogów", "Serce Ołtarza Bogini"];
         if (networkProtocolPacket_3274.includes(networkProtocolPacket_3266)) {
             networkProtocolPacket_3273 ??= networkProtocolPacket_3264.other.claw;
         }
@@ -14444,9 +14444,9 @@ const {
                     g: networkProtocolPacket_3299,
                     r: networkProtocolPacket_3300
                 } = networkProtocolPacket_3291[networkProtocolPacket_3292][networkProtocolPacket_3296];
-                const networkProtocolPacket_3301 = $("<div class=\"mp-avatar-char do-action-cursor\" style=\"background-color: " + (networkProtocolPacket_3300 ? "#28a74561" : "#dc354561") + "\"></div>").appendTo(networkProtocolPacket_3295).tip(networkProtocolPacket_3300 ? "Kalendarz odebrany" : "Zaloguj się, aby odebraÄ‡");
+                const networkProtocolPacket_3301 = $("<div class=\"mp-avatar-char do-action-cursor\" style=\"background-color: " + (networkProtocolPacket_3300 ? "#28a74561" : "#dc354561") + "\"></div>").appendTo(networkProtocolPacket_3295).tip(networkProtocolPacket_3300 ? "Kalendarz odebrany" : "Zaloguj się, aby odebrać");
                 $("<div class=\"mp-avatar-char-icon\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/postacie/" + networkProtocolPacket_3299 + "');" + (networkProtocolPacket_3300 ? "" : " filter: grayscale(1);") + "\"></div>").appendTo(networkProtocolPacket_3301);
-                networkProtocolPacket_3301.click(function() {
+                networkProtocolPacket_3301.click(function () {
                     executeLoginChar(networkProtocolPacket_3297, networkProtocolPacket_3292);
                 });
             }
@@ -14455,13 +14455,13 @@ const {
         const networkProtocolPacket_3302 = $("<div class=\"mp-flex-center\"></div>").appendTo(networkProtocolPacket_3289);
         const networkProtocolPacket_3303 = createButton("Otwórz okno", "green");
         networkProtocolPacket_3303.appendTo(networkProtocolPacket_3302).tip("Odbiera aktualne okno w kalendarzu");
-        networkProtocolPacket_3303.click(function() {
+        networkProtocolPacket_3303.click(function () {
             networkProtocolPacket_3304();
         });
         const networkProtocolPacket_3305 = createButton("Reset", "red");
         networkProtocolPacket_3305.appendTo(networkProtocolPacket_3302).tip("Resetuje zapisany postęp otwartych okien - Automatyczny reset o 5:25");
-        networkProtocolPacket_3305.click(async function() {
-            const networkProtocolPacket_3306 = await askWindow("Czy na pewno chcesz zresetować postÄ™p otwartych okienek? Zresetuje to wszystkie zapisane okna.");
+        networkProtocolPacket_3305.click(async function () {
+            const networkProtocolPacket_3306 = await askWindow("Czy na pewno chcesz zresetować postęp otwartych okienek? Zresetuje to wszystkie zapisane okna.");
             if (networkProtocolPacket_3306) {
                 networkProtocolPacket_3276();
             }
@@ -14501,13 +14501,13 @@ const {
             return;
         }
         if (Engine.hero.d.lvl < 25) {
-            return message("Kalendarz jest dostÄ™pny od 25 poziomu doświadczenia!");
+            return message("Kalendarz jest dostępny od 25 poziomu doświadczenia!");
         }
         if (uiLayoutComponent_317());
         if (!uiLayoutComponent_318()) {
             return message("Brak miejsca, by odebrać nagrodę.");
         }
-        _g("rewards_calendar&action=show", function() {
+        _g("rewards_calendar&action=show", function () {
             $(Engine.rewardsCalendar.wnd.$).hide();
         });
     }
@@ -14575,11 +14575,11 @@ const {
             "hydrokora chimeryczna": "1204146382127243305",
             vashkar: "1204146446815858739",
             lulukav: "1204350945647923230",
-            "arachin podstÄ™pny": "1204146485063716905",
+            "arachin podstępny": "1204146485063716905",
             reuzen: "1204146543620395098",
             "wernoradzki drakolisz": "1204146563195207721",
             "dziewicza orlica": "1204147210208419910",
-            "zabójczy krÃ³lik": "1204147248586424411",
+            "zabójczy królik": "1204147248586424411",
             "renegat baulus": "1204147273362047016",
             "piekielny arcymag": "1204147392836800614",
             "versus zoons": "1204147422272552960",
@@ -14590,27 +14590,27 @@ const {
             "barbatos smoczy strażnik": "1204147544536387686",
             tanroth: "1204147563431727195",
             "domina ecclesiae": "1290169486959185953",
-            "mietek Å¼ul": "1290169594144755793",
+            "mietek żul": "1290169594144755793",
             "mroczny patryk": "1290169648981213254",
             "karmazynowy mściciel": "1290169685341638666",
             złodziej: "1290169737665445939",
             "zły przewodnik": "1290169759303729272",
-            "opÄ™tany paladyn": "1290169784721477632",
-            "piekielny koÅ›ciej": "1290169809085923349",
-            "koziec mÄ…ciciel ścieżek": "1290169837565247510",
+            "opętany paladyn": "1290169784721477632",
+            "piekielny kościej": "1290169809085923349",
+            "koziec mąciciel ścieżek": "1290169837565247510",
             "kochanka nocy": "1290169882201030749",
             "książe kasim": "1290169903801827348",
             "książę kasim": "1290169903801827348",
             "baca bez łowiec": "1290169942850666496",
             "lichwiarz grauhaz": "1290169963591630869",
             "obłąkany łowca orków": "1290169985544753182",
-            "czarujÄ…ca atalia": "1290170010572034111",
-            "Å›wiÄ™ty braciszek": "1290170031258341396",
+            "czarująca atalia": "1290170010572034111",
+            "święty braciszek": "1290170031258341396",
             "viviana nandin": "1290170050959114341",
             "mulher ma": "1290170072895062046",
             "demonis pan nicości": "1290170093023526932",
             "vapor veneno": "1290170113332346973",
-            "dÄ™boroÅ¼ec": "1290170133645623409",
+            "dęborożec": "1290170133645623409",
             tepeyollotl: "1290170815236542506",
             "negthotep czarny kapłan": "1290170752238358570",
             "młody smok": "1290170790880219136",
@@ -14659,7 +14659,7 @@ const {
         }
         if (networkProtocolPacket_3325) {
             networkProtocolPacket_3327 = networkProtocolPacket_3326[networkProtocolPacket_3328] ? "<@&" + networkProtocolPacket_3326[networkProtocolPacket_3328] + ">" : "<@&1184159355357106216>";
-            networkProtocolPacket_3333 = "CzeÅ›Ä‡! " + networkProtocolPacket_3327 + " - " + networkProtocolPacket_3322.nick;
+            networkProtocolPacket_3333 = "Cześć! " + networkProtocolPacket_3327 + " - " + networkProtocolPacket_3322.nick;
         }
         const networkProtocolPacket_3339 = {
             name: "Tomasz",
@@ -14672,7 +14672,7 @@ const {
         }
         let networkProtocolPacket_3341 = getKillSecondsText(networkProtocolPacket_3322.id);
         let networkProtocolPacket_3342 = Object.entries(Engine.others.check()).length + 1;
-        let networkProtocolPacket_3343 = "DruÅ¼yna: " + networkProtocolPacket_3340 + "\nOsób na mapie: " + networkProtocolPacket_3342;
+        let networkProtocolPacket_3343 = "Drużyna: " + networkProtocolPacket_3340 + "\nOsób na mapie: " + networkProtocolPacket_3342;
         let networkProtocolPacket_3344 = "https://micc.garmory-cdn.cloud/obrazki/npc/";
         const networkProtocolPacket_3345 = await fetch(networkProtocolPacket_3344 + networkProtocolPacket_3322.icon);
         const networkProtocolPacket_3346 = new File([await networkProtocolPacket_3345.blob()], "npc.gif");
@@ -14776,11 +14776,11 @@ const {
         const networkProtocolPacket_3372 = $("<div class=\"mp-npc-detector-button do-action-cursor mp-button-green\">Zajmij<time></time></div>").tip("Zajmij herosa na czacie lokalnym");
         const networkProtocolPacket_3373 = $("<div class=\"mp-npc-detector-button do-action-cursor mp-button-orange\">Klan<time></time></div>").tip("Wyślij wiadomość na czat klanowy");
         const networkProtocolPacket_3374 = $("<div class=\"mp-npc-detector-button do-action-cursor mp-button-gray\">Global<time></time></div>").tip("Wyślij wiadomość na czat globalny");
-        const networkProtocolPacket_3375 = $("<div class=\"mp-npc-detector-button do-action-cursor mp-button-blue\">Discord<time></time></div>").tip("Wyślij wiadomoÅ›Ä‡ na discord");
+        const networkProtocolPacket_3375 = $("<div class=\"mp-npc-detector-button do-action-cursor mp-button-blue\">Discord<time></time></div>").tip("Wyślij wiadomość na discord");
         const networkProtocolPacket_3376 = $("<div class=\"mp-npc-detector-button do-action-cursor mp-button-yellow\">Podejdź</div>").tip("Podejdź na koordynaty npc");
         const networkProtocolPacket_3377 = $("<div class=\"mp-npc-detector-button do-action-cursor mp-button-red\">Zamknij</div>").tip("Zamknij okno");
         if (networkProtocolPacket_3352.npc == "heroes" && networkProtocolPacket_3370.claim) {
-            networkProtocolPacket_3372.click(function() {
+            networkProtocolPacket_3372.click(function () {
                 const networkProtocolPacket_3378 = {
                     c: "Zajmuję herosa " + networkProtocolPacket_3352.nick
                 };
@@ -14788,7 +14788,7 @@ const {
             }).appendTo(networkProtocolPacket_3369);
         }
         if (networkProtocolPacket_3371 > 0 && networkProtocolPacket_3370.clan) {
-            networkProtocolPacket_3373.off("click").on("click", function() {
+            networkProtocolPacket_3373.off("click").on("click", function () {
                 let networkProtocolPacket_3379 = "";
                 if (networkProtocolPacket_3364) {
                     const networkProtocolPacket_3380 = networkProtocolPacket_3364 - ts();
@@ -14800,7 +14800,7 @@ const {
             }).appendTo(networkProtocolPacket_3369);
         }
         if (networkProtocolPacket_3370.global) {
-            networkProtocolPacket_3374.click(function() {
+            networkProtocolPacket_3374.click(function () {
                 let networkProtocolPacket_3381 = "";
                 if (networkProtocolPacket_3364) {
                     const networkProtocolPacket_3382 = networkProtocolPacket_3364 - ts();
@@ -14812,7 +14812,7 @@ const {
             }).appendTo(networkProtocolPacket_3369);
         }
         if (networkProtocolPacket_3370.discord) {
-            networkProtocolPacket_3375.click(function() {
+            networkProtocolPacket_3375.click(function () {
                 if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[17].id][uiLayoutComponent_164][uiLayoutComponent_221].discord.url.length < 0) {
                     return message("Nie ustawiłeś linku webhooka discord");
                 }
@@ -14827,7 +14827,7 @@ const {
             }).appendTo(networkProtocolPacket_3369);
         }
         if (networkProtocolPacket_3370.chase) {
-            networkProtocolPacket_3376.click(function() {
+            networkProtocolPacket_3376.click(function () {
                 const networkProtocolPacket_3383 = {
                     x: networkProtocolPacket_3352.map.x,
                     y: networkProtocolPacket_3352.map.y
@@ -14836,7 +14836,7 @@ const {
             }).appendTo(networkProtocolPacket_3369);
         }
         if (networkProtocolPacket_3370.close) {
-            networkProtocolPacket_3377.click(function() {
+            networkProtocolPacket_3377.click(function () {
                 networkProtocolPacket_3357.remove();
                 Engine.targets.deleteArrow("Npc-" + networkProtocolPacket_3352.id);
             }).appendTo(networkProtocolPacket_3369);
@@ -14865,7 +14865,7 @@ const {
         }).tip("Zamknij");
         const networkProtocolPacket_3384 = $("<div class=\"" + (ADDON_STORAGE_REFERENCE.window[networkProtocolPacket_3353].s ? "mp-window-pin-button " : "mp-window-unpin-button ") + "do-action-cursor\"></div>").appendTo(networkProtocolPacket_3367);
         networkProtocolPacket_3384.tip(ADDON_STORAGE_REFERENCE.window[networkProtocolPacket_3353].s ? "Odblokuj okno" : "Zablokuj okno");
-        networkProtocolPacket_3384.click(async function() {
+        networkProtocolPacket_3384.click(async function () {
             const networkProtocolPacket_3385 = ADDON_STORAGE_REFERENCE.window[networkProtocolPacket_3353].s;
             ADDON_STORAGE_REFERENCE.window[networkProtocolPacket_3353].s = !networkProtocolPacket_3385;
             networkProtocolPacket_3357.draggable(networkProtocolPacket_3385 ? "enable" : "disable");
@@ -14874,7 +14874,7 @@ const {
         });
         const networkProtocolPacket_3386 = createSettingsButton("Ustawienia");
         networkProtocolPacket_3386.appendTo(networkProtocolPacket_3367);
-        networkProtocolPacket_3386.click(async function() {
+        networkProtocolPacket_3386.click(async function () {
             const networkProtocolPacket_3387 = ADDON_STORAGE_REFERENCE.window[MODULE_ADDON_REGISTRY[17].id].o = !ADDON_STORAGE_REFERENCE.window[MODULE_ADDON_REGISTRY[17].id].o;
             $("#w-" + MODULE_ADDON_REGISTRY[17].id)[networkProtocolPacket_3387 ? "show" : "hide"]();
             $("div[mp-widget-ui=\"" + MODULE_ADDON_REGISTRY[17].id + "\"] div").toggleClass("mp-icon-active", networkProtocolPacket_3387);
@@ -14911,7 +14911,7 @@ const {
         networkProtocolPacket_3400.style.height = networkProtocolPacket_3405 + "px";
         networkProtocolPacket_3400.style.backgroundImage = "url(https://micc.garmory-cdn.cloud/obrazki/miasta/" + networkProtocolPacket_3395 + ")";
         networkProtocolPacket_3400.dataset.kratka = networkProtocolPacket_3403;
-        networkProtocolPacket_3400.rysujKropke = function(networkProtocolPacket_3406, networkProtocolPacket_3407, networkProtocolPacket_3408 = "red") {
+        networkProtocolPacket_3400.rysujKropke = function (networkProtocolPacket_3406, networkProtocolPacket_3407, networkProtocolPacket_3408 = "red") {
             const networkProtocolPacket_3409 = document.createElement("div");
             networkProtocolPacket_3409.className = "mp-tip-map-position";
             networkProtocolPacket_3409.style.background = networkProtocolPacket_3408;
@@ -15007,8 +15007,8 @@ const {
         const networkProtocolPacket_3434 = networkProtocolPacket_3417.find(".mp-window-header-left");
         const networkProtocolPacket_3435 = networkProtocolPacket_3417.find(".mp-window-header-right");
         const networkProtocolPacket_3436 = networkProtocolPacket_3428.find(".mp-npc-detector-buttons");
-        const networkProtocolPacket_3437 = $("<div class=\"mp-npc-detector-button do-action-cursor\">Powiadom, że idziesz<time></time></div>").tip("Napisz do <name style=\"font-weight: bold;\">" + networkProtocolPacket_3426.trim() + "</name>, Å¼e idziesz");
-        networkProtocolPacket_3437.click(function() {
+        const networkProtocolPacket_3437 = $("<div class=\"mp-npc-detector-button do-action-cursor\">Powiadom, że idziesz<time></time></div>").tip("Napisz do <name style=\"font-weight: bold;\">" + networkProtocolPacket_3426.trim() + "</name>, że idziesz");
+        networkProtocolPacket_3437.click(function () {
             if (uiLayoutComponent_221 == networkProtocolPacket_3410.world) {
                 let networkProtocolPacket_3438 = networkProtocolPacket_3426.split(" ").join("_");
                 const networkProtocolPacket_3439 = {
@@ -15024,7 +15024,7 @@ const {
         }).tip("Zamknij");
         const networkProtocolPacket_3440 = $("<div class=\"" + (ADDON_STORAGE_REFERENCE.window[networkProtocolPacket_3413].s ? "mp-window-pin-button " : "mp-window-unpin-button ") + "do-action-cursor\"></div>").appendTo(networkProtocolPacket_3434);
         networkProtocolPacket_3440.tip(ADDON_STORAGE_REFERENCE.window[networkProtocolPacket_3413].s ? "Odblokuj okno" : "Zablokuj okno");
-        networkProtocolPacket_3440.click(async function() {
+        networkProtocolPacket_3440.click(async function () {
             const networkProtocolPacket_3441 = ADDON_STORAGE_REFERENCE.window[networkProtocolPacket_3413].s;
             ADDON_STORAGE_REFERENCE.window[networkProtocolPacket_3413].s = !networkProtocolPacket_3441;
             networkProtocolPacket_3417.draggable(networkProtocolPacket_3441 ? "enable" : "disable");
@@ -15114,7 +15114,7 @@ const {
 
     function addonStorageDescriptor_1499(networkProtocolPacket_3464) {
         if (!networkProtocolPacket_3458(networkProtocolPacket_3464)) {
-            throw new Error("Błąd podczas ładowania ustawieÅ„!");
+            throw new Error("Błąd podczas ładowania ustawień!");
         }
         let networkProtocolPacket_3465 = networkProtocolPacket_3454(networkProtocolPacket_3464);
         if (networkProtocolPacket_3465.item && networkProtocolPacket_3465.shadow && networkProtocolPacket_3465.audio && networkProtocolPacket_3465.clan && networkProtocolPacket_3465.alert && networkProtocolPacket_3465.rainItems && networkProtocolPacket_3465.settings) {
@@ -15157,7 +15157,7 @@ const {
         let networkProtocolPacket_3481 = Engine.items.fetchLocationItems("g").find(networkProtocolPacket_3482 => networkProtocolPacket_3482.st === 20).hid;
         const networkProtocolPacket_3483 = networkProtocolPacket_3470();
         let networkProtocolPacket_3484 = readStats(networkProtocolPacket_3483.stat);
-        if (networkProtocolPacket_3483.name == "Torba podrÃ³Å¼na") {
+        if (networkProtocolPacket_3483.name == "Torba podróżna") {
             networkProtocolPacket_3484.rarity = "legendary";
             networkProtocolPacket_3484.opis = "Margonem Plus 2025r.";
         }
@@ -15616,7 +15616,7 @@ const {
     }
     let combatCalculationMetric_3618;
     const combatCalculationMetric_3619 = Engine.items.newItem;
-    Engine.items.newItem = function(combatCalculationMetric_3620, combatCalculationMetric_3621) {
+    Engine.items.newItem = function (combatCalculationMetric_3620, combatCalculationMetric_3621) {
         if (["l", "k"].includes(combatCalculationMetric_3621.loc) && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[18].id]) {
             const combatCalculationMetric_3622 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[18].id];
             const combatCalculationMetric_3623 = readStats(combatCalculationMetric_3621.stat);
@@ -15718,10 +15718,10 @@ const {
                         }
                     }
                 } else {
-                    message("Tylko dowódca grupy może usuwaÄ‡ czÅ‚onkÃ³w!");
+                    message("Tylko dowódca grupy może usuwać członków!");
                 }
             } else {
-                message("Nie jesteÅ› w grupie!");
+                message("Nie jesteś w grupie!");
             }
         },
         async systemCreate() {
@@ -15822,7 +15822,7 @@ const {
     let combatCalculationMetric_3681 = {
         m: {
             count: 0,
-            msg: "Magowie w druÅ¼ynie: ",
+            msg: "Magowie w drużynie: ",
             list: []
         },
         p: {
@@ -15832,12 +15832,12 @@ const {
         },
         t: {
             count: 0,
-            msg: "Tropiciele w druÅ¼ynie: ",
+            msg: "Tropiciele w drużynie: ",
             list: []
         },
         b: {
             count: 0,
-            msg: "Tancerze ostrzy w druÅ¼ynie: ",
+            msg: "Tancerze ostrzy w drużynie: ",
             list: []
         },
         w: {
@@ -15847,7 +15847,7 @@ const {
         },
         h: {
             count: 0,
-            msg: "Åowcy w drużynie: ",
+            msg: "Łowcy w drużynie: ",
             list: []
         },
         none: {
@@ -15897,7 +15897,7 @@ const {
         const combatCalculationMetric_3688 = calcDrop(combatCalculationMetric_3687.max.oplvl);
         let combatCalculationMetric_3689 = "brak zaniżania lootu.";
         if (combatCalculationMetric_3687.min.oplvl < combatCalculationMetric_3688) {
-            combatCalculationMetric_3689 = "zaniÅ¼anie lootu.";
+            combatCalculationMetric_3689 = "zaniżanie lootu.";
         }
         const combatCalculationMetric_3690 = {
             c: "Najmniejszy poziom " + combatCalculationMetric_3687.min.lvl + " - " + combatCalculationMetric_3687.min.nick + " (" + combatCalculationMetric_3687.min.lvl + combatCalculationMetric_3687.min.prof + "), największy poziom " + combatCalculationMetric_3687.max.lvl + " - " + combatCalculationMetric_3687.max.nick + " (" + combatCalculationMetric_3687.max.lvl + combatCalculationMetric_3687.max.prof + ") - " + combatCalculationMetric_3689
@@ -15921,7 +15921,7 @@ const {
             combatCalculationMetric_3681 = {
                 m: {
                     count: 0,
-                    msg: "Magowie w druÅ¼ynie: ",
+                    msg: "Magowie w drużynie: ",
                     list: []
                 },
                 p: {
@@ -15946,7 +15946,7 @@ const {
                 },
                 h: {
                     count: 0,
-                    msg: "Åowcy w drużynie: ",
+                    msg: "Łowcy w drużynie: ",
                     list: []
                 },
                 none: {
@@ -16012,10 +16012,10 @@ const {
                         color: "#dc3545",
                         fontWeight: "bold",
                         fontSize: "10px"
-                    }).tip("ZaniÅ¼anie lootu w drużynie.").html("Zaniżanie lootu");
+                    }).tip("Zaniżanie lootu w drużynie.").html("Zaniżanie lootu");
                     if (combatCalculationMetric_3692 && (!Engine.map.d.name.includes("- przedsionek") || Engine.map.mode !== 5)) {
                         message("-----======[ WARNING ]======-----");
-                        message("Zaniżanie lootu w druÅ¼ynie");
+                        message("Zaniżanie lootu w drużynie");
                         message("-----======[ WARNING ]======-----");
                         combatCalculationMetric_3691.play();
                         combatCalculationMetric_3692 = false;
@@ -16027,10 +16027,10 @@ const {
                 }
                 combatCalculationMetric_3706 = "zaniżanie lootu w drużynie.";
             }
-            $("div#mp-party-stats-box").click(function() {
+            $("div#mp-party-stats-box").click(function () {
                 combatCalculationMetric_3683();
             });
-            $("div#mp-party-stats-levels-box").click(function() {
+            $("div#mp-party-stats-levels-box").click(function () {
                 combatCalculationMetric_3686();
             });
             if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[19].id].stats.showProf && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[19].id]) {
@@ -16078,19 +16078,19 @@ const {
         let combatCalculationMetric_3718 = combatCalculationMetric_3716.list;
         for (const combatCalculationMetric_3719 in combatCalculationMetric_3718) {
             const combatCalculationMetric_3720 = combatCalculationMetric_3718[combatCalculationMetric_3719];
-            $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor" + (combatCalculationMetric_3715 == "tags" ? " mp-small-text" : "") + "\">" + (combatCalculationMetric_3715 == "images" ? "<img src=\"" + combatCalculationMetric_3720 + "\"></img>" : combatCalculationMetric_3718[combatCalculationMetric_3719]) + "</div>").appendTo(combatCalculationMetric_3717).tip("<b>Przedmiot: " + combatCalculationMetric_3719 + "</b><br><br>Prawy przycisk myszy - otwiera menu.").on("contextmenu", function(combatCalculationMetric_3721) {
+            $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor" + (combatCalculationMetric_3715 == "tags" ? " mp-small-text" : "") + "\">" + (combatCalculationMetric_3715 == "images" ? "<img src=\"" + combatCalculationMetric_3720 + "\"></img>" : combatCalculationMetric_3718[combatCalculationMetric_3719]) + "</div>").appendTo(combatCalculationMetric_3717).tip("<b>Przedmiot: " + combatCalculationMetric_3719 + "</b><br><br>Prawy przycisk myszy - otwiera menu.").on("contextmenu", function (combatCalculationMetric_3721) {
                 combatCalculationMetric_3721.preventDefault();
                 let combatCalculationMetric_3722 = [
-                    ["UsuÅ„", async () => {
+                    ["Usuń", async () => {
                         delete combatCalculationMetric_3718[combatCalculationMetric_3719];
                         saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                         networkProtocolPacket_2824(combatCalculationMetric_3715);
                         networkProtocolPacket_2825();
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]
                 ];
                 Engine.interface.showPopupMenu(combatCalculationMetric_3722, combatCalculationMetric_3721);
             });
@@ -16288,7 +16288,7 @@ const {
     }
 
     function combatCalculationMetric_3782() {
-        $("div.mp-image-change").each(function() {
+        $("div.mp-image-change").each(function () {
             $(this).removeClass("mp-image-change");
             $(this).find("canvas").css("display", "block");
             $(this).find("img").remove();
@@ -16398,7 +16398,7 @@ const {
         }
     }
     const combatCalculationMetric_3809 = Engine.showEqManager.newWindow;
-    Engine.showEqManager.newWindow = async function(combatCalculationMetric_3810, combatCalculationMetric_3811) {
+    Engine.showEqManager.newWindow = async function (combatCalculationMetric_3810, combatCalculationMetric_3811) {
         const {
             id: combatCalculationMetric_3812
         } = combatCalculationMetric_3810;
@@ -16510,7 +16510,7 @@ const {
                 }
             }
         } catch {
-            message("BÅ‚Ä™dny regex");
+            message("Błędny regex");
             $(".mp-item-search-target").removeClass("mp-item-search-target");
         }
     }
@@ -16534,12 +16534,12 @@ const {
             ...Engine.clan
         } : Engine.clan;
         const combatCalculationMetric_3841 = {
-            updateMembers: function() {}
+            updateMembers: function () { }
         };
         if (!combatCalculationMetric_3840) {
             Engine.clan = combatCalculationMetric_3841;
         }
-        _g("clan&a=members", function({
+        _g("clan&a=members", function ({
             members: combatCalculationMetric_3842
         }) {
             Engine.clan = combatCalculationMetric_3840;
@@ -16607,16 +16607,16 @@ const {
                 c: 0,
                 u: [],
                 np: [],
-                t: "Łowczyni WspomnieÅ„",
+                t: "Łowczyni Wspomnień",
                 p: []
             },
             "7": {
                 n: "Przyzy",
-                m: "Komnata Krwawych ObrzÄ™dÃ³w",
+                m: "Komnata Krwawych Obrzędów",
                 c: 0,
                 u: [],
                 np: [],
-                t: "Przyzywacz DemonÃ³w",
+                t: "Przyzywacz Demonów",
                 p: []
             },
             "8": {
@@ -16657,7 +16657,7 @@ const {
             },
             "13": {
                 n: "Katy",
-                m: ["Pustynne Katakumby", "Pustynne Katakumby - sala 1", "Pustynne Katakumby - sala 2", "Komnaty Bezdusznych - sala 1", "Komnaty Bezdusznych - sala 2", "Katakumby Odnalezionych Skrytobójców", "Katakumby Opętanych Dusz", "Katakumby Krwawych Wypraw", "Katakumby PolegÅ‚ych Legionistów", "Korytarz Porzuconych Nadziei", "Korytarz Porzuconych Marzeń", "Wschodni Tunel JaÅºni", "Zachodni Tunel Jaźni"],
+                m: ["Pustynne Katakumby", "Pustynne Katakumby - sala 1", "Pustynne Katakumby - sala 2", "Komnaty Bezdusznych - sala 1", "Komnaty Bezdusznych - sala 2", "Katakumby Odnalezionych Skrytobójców", "Katakumby Opętanych Dusz", "Katakumby Krwawych Wypraw", "Katakumby Poległych Legionistów", "Korytarz Porzuconych Nadziei", "Korytarz Porzuconych Marzeń", "Wschodni Tunel Jaźni", "Zachodni Tunel Jaźni"],
                 c: 0,
                 u: [],
                 np: [],
@@ -16675,7 +16675,7 @@ const {
             },
             "15": {
                 n: "Pustynia",
-                m: ["Pustynia Shaiharrud - zachód", "Namiot Piechoty Piłowej", "Namiot Naznaczonych", "Jurta Czcicieli", "Namiot Gwardii SmokoszczÄ™kich", "Sępiarnia", "Jurta Chaegda", "Jurta Nomadzka", "Namiot Pustynnych Smoków", "Namiot Błogosławionych", "Pustynia Shaiharrud - wschÃ³d", "Smocze Skalisko", "Skały UmarÅ‚ych", "Jaskinia Sępa s.2", "Jaskinia Sępa s.1", "Jaskinia Piaskowej Burzy s.2", "Jaskinia Szczęk", "Jaskinia Smoczej Paszczy p.1", "Jaskinia Odwagi", "Jaskinia Próby", "Grota PoÅ›więcenia", "Świątynia Hebrehotha - przedsionek"],
+                m: ["Pustynia Shaiharrud - zachód", "Namiot Piechoty Piłowej", "Namiot Naznaczonych", "Jurta Czcicieli", "Namiot Gwardii Smokoszczękich", "Sępiarnia", "Jurta Chaegda", "Jurta Nomadzka", "Namiot Pustynnych Smoków", "Namiot Błogosławionych", "Pustynia Shaiharrud - wschód", "Smocze Skalisko", "Skały Umarłych", "Jaskinia Sępa s.2", "Jaskinia Sępa s.1", "Jaskinia Piaskowej Burzy s.2", "Jaskinia Szczęk", "Jaskinia Smoczej Paszczy p.1", "Jaskinia Odwagi", "Jaskinia Próby", "Grota Poświęcenia", "Świątynia Hebrehotha - przedsionek"],
                 c: 0,
                 u: [],
                 np: [],
@@ -16684,7 +16684,7 @@ const {
             },
             "16": {
                 n: "Wiedźmy",
-                m: ["Potępione Zamczysko", "Potępione Zamczysko - korytarz wejściowy", "Potępione Zamczysko - lochy zachodnie p.1", "Potępione Zamczysko - lochy wschodnie p.1", "Potępione Zamczysko - sala ofiarna", "Potępione Zamczysko - korytarz zachodni", "Potępione Zamczysko - korytarz wschodni", "Potępione Zamczysko - zachodnia komnata", "Potępione Zamczysko - wschodnia komnata", "Wieża Szlochów p.1", "WieÅ¼a SzlochÃ³w p.2", "Wieża Szlochów p.3", "Potępione Zamczysko - Å‚Ä…cznik zachodni", "Potępione Zamczysko - łącznik wschodni", "Potępione Zamczysko - północna komnata", "Potępione Zamczysko - lochy zachodnie p.2", "Potępione Zamczysko - lochy wschodnie p.2", "Potępione Zamczysko - głębokie lochy"],
+                m: ["Potępione Zamczysko", "Potępione Zamczysko - korytarz wejściowy", "Potępione Zamczysko - lochy zachodnie p.1", "Potępione Zamczysko - lochy wschodnie p.1", "Potępione Zamczysko - sala ofiarna", "Potępione Zamczysko - korytarz zachodni", "Potępione Zamczysko - korytarz wschodni", "Potępione Zamczysko - zachodnia komnata", "Potępione Zamczysko - wschodnia komnata", "Wieża Szlochów p.1", "Wieża Szlochów p.2", "Wieża Szlochów p.3", "Potępione Zamczysko - łącznik zachodni", "Potępione Zamczysko - łącznik wschodni", "Potępione Zamczysko - północna komnata", "Potępione Zamczysko - lochy zachodnie p.2", "Potępione Zamczysko - lochy wschodnie p.2", "Potępione Zamczysko - głębokie lochy"],
                 c: 0,
                 u: [],
                 np: [],
@@ -16693,7 +16693,7 @@ const {
             },
             "17": {
                 n: "Driady",
-                m: ["Rozlewisko Kai", "Gvar Hamryd", "Matecznik Szelestu", "Jaskinia Suchych PÄ™dów s.1", "Jaskinia Suchych PędÃ³w s.2", "Jaskinia Suchych Pędów s.3", "Jaskinia Suchych Pędów s.4", "Drzewo Å»ycia p.1", "Drzewo Życia p.2"],
+                m: ["Rozlewisko Kai", "Gvar Hamryd", "Matecznik Szelestu", "Jaskinia Suchych Pędów s.1", "Jaskinia Suchych Pędów s.2", "Jaskinia Suchych Pędów s.3", "Jaskinia Suchych Pędów s.4", "Drzewo Życia p.1", "Drzewo Życia p.2"],
                 c: 0,
                 u: [],
                 np: [],
@@ -16746,7 +16746,7 @@ const {
             combatCalculationMetric_3852(combatCalculationMetric_3874.map, combatCalculationMetric_3875, combatCalculationMetric_3874.nick, combatCalculationMetric_3874.id);
             const combatCalculationMetric_3876 = $("<div class=\"mp-list-list-row\" id=\"mp-clan-row\" char-id=\"" + combatCalculationMetric_3874.id + "\">\n            <div class=\"mp-list-party-add do-action-cursor\">\n                +\n            </div>\n            <div class=\"mp-list-info-case\">\n                <div class=\"mp-list-nick do-action-cursor\" data-npc=\"" + combatCalculationMetric_3875 + "\" data-clan-id=\"" + combatCalculationMetric_3874.id + "\" id=\"mp-member\">\n                    " + combatCalculationMetric_3874.nick + "\n                </div>\n                <div class=\"mp-list-map\">\n                    " + combatCalculationMetric_3874.map + "\n                </div>\n            </div>\n            <div class=\"mp-list-player-data\"> \n                <div class=\"mp-list-level\">\n                    " + combatCalculationMetric_3874.lvl + combatCalculationMetric_3874.prof + "\n                </div>\n                <div class=\"mp-list-coords\">\n                    (" + combatCalculationMetric_3874.x + ", " + combatCalculationMetric_3874.y + ")\n                </div>\n            </div>\n        </div>").appendTo(combatCalculationMetric_3858);
             const combatCalculationMetric_3877 = combatCalculationMetric_3876.find(".mp-list-party-add");
-            combatCalculationMetric_3877.click(function() {
+            combatCalculationMetric_3877.click(function () {
                 window._g("party&a=inv&id=" + combatCalculationMetric_3874.id);
             }).tip("Zaproś do drużyny");
             if (combatCalculationMetric_3874.id === Engine.hero.d.id) {
@@ -16754,10 +16754,10 @@ const {
             }
             const combatCalculationMetric_3878 = combatCalculationMetric_3876.find(".mp-list-map");
             combatCalculationMetric_3878.tip(combatCalculationMetric_3874.map);
-            combatCalculationMetric_3876.contextmenu(async function(combatCalculationMetric_3879) {
+            combatCalculationMetric_3876.contextmenu(async function (combatCalculationMetric_3879) {
                 const combatCalculationMetric_3880 = await findDataByC(combatCalculationMetric_3874.id, Engine.worldConfig.getWorldName());
                 let combatCalculationMetric_3881 = [
-                    ["ZaproÅ› do drużyny", () => {
+                    ["Zaproś do drużyny", () => {
                         window._g("party&a=inv&id=" + combatCalculationMetric_3874.id);
                     }],
                     ["Napisz wiadomość", () => {
@@ -16781,7 +16781,7 @@ const {
                     }]);
                 }
                 Engine.interface.showPopupMenu(combatCalculationMetric_3881, combatCalculationMetric_3879);
-            }).click(function() {
+            }).click(function () {
                 getEngine().chatController.getChatInputWrapper().setPrivateMessageProcedure(combatCalculationMetric_3874.nick);
             });
             const combatCalculationMetric_3882 = createUserTip(combatCalculationMetric_3874, "", ADMIN_IDENTIFIERS_MAP, CUSTOM_FLAIR_TOOLTIPS);
@@ -16793,7 +16793,7 @@ const {
         for (const combatCalculationMetric_3884 in combatCalculationMetric_3846) {
             if (combatCalculationMetric_3846[combatCalculationMetric_3884].c > 0) {
                 const combatCalculationMetric_3885 = $("<div class=\"mp-member-spot do-action-cursor\">" + combatCalculationMetric_3846[combatCalculationMetric_3884].n + ": " + combatCalculationMetric_3846[combatCalculationMetric_3884].c + "</div>").appendTo(combatCalculationMetric_3883).tip("<b>" + combatCalculationMetric_3846[combatCalculationMetric_3884].t + "</b><br>" + combatCalculationMetric_3846[combatCalculationMetric_3884].np.toString().split(",").join("<br>"));
-                combatCalculationMetric_3885.on("mouseover", function() {
+                combatCalculationMetric_3885.on("mouseover", function () {
                     const combatCalculationMetric_3886 = combatCalculationMetric_3846[combatCalculationMetric_3884].u || [];
                     const combatCalculationMetric_3887 = $("#w-" + MODULE_ADDON_REGISTRY[22].id + " div#mp-clan-row");
                     const combatCalculationMetric_3888 = [];
@@ -16803,23 +16803,23 @@ const {
                     const combatCalculationMetric_3890 = combatCalculationMetric_3888.join(",");
                     combatCalculationMetric_3887.removeClass("mp-clanlight");
                     if (combatCalculationMetric_3890.length) {
-                        combatCalculationMetric_3887.filter(function() {
+                        combatCalculationMetric_3887.filter(function () {
                             const combatCalculationMetric_3891 = $(this);
                             return combatCalculationMetric_3891.is(combatCalculationMetric_3890) || combatCalculationMetric_3891.find(combatCalculationMetric_3890).length > 0;
                         }).addClass("mp-clanlight");
                     }
                 });
-                combatCalculationMetric_3885.on("mouseleave", function() {
+                combatCalculationMetric_3885.on("mouseleave", function () {
                     $(".mp-clanlight").removeClass("mp-clanlight");
                 });
-                combatCalculationMetric_3885.click(function() {
+                combatCalculationMetric_3885.click(function () {
                     let combatCalculationMetric_3892 = combatCalculationMetric_3846[combatCalculationMetric_3884].t + ": " + combatCalculationMetric_3846[combatCalculationMetric_3884].c + " (" + combatCalculationMetric_3846[combatCalculationMetric_3884].np.toString().split(",").join(", ") + ")";
                     const combatCalculationMetric_3893 = {
                         c: combatCalculationMetric_3892
                     };
                     window._g("chat&channel=clan", false, combatCalculationMetric_3893);
                 });
-                combatCalculationMetric_3885.contextmenu(function() {
+                combatCalculationMetric_3885.contextmenu(function () {
                     const combatCalculationMetric_3894 = combatCalculationMetric_3846[combatCalculationMetric_3884].p;
                     for (const combatCalculationMetric_3895 in combatCalculationMetric_3894) {
                         window._g("party&a=inv&id=" + combatCalculationMetric_3894[combatCalculationMetric_3895]);
@@ -16828,7 +16828,7 @@ const {
             }
         }
         $("#w-" + MODULE_ADDON_REGISTRY[22].id + " clan").html("(" + combatCalculationMetric_3847.length + ")");
-        $("#w-" + MODULE_ADDON_REGISTRY[22].id + " clan").off("click").on("click", function() {
+        $("#w-" + MODULE_ADDON_REGISTRY[22].id + " clan").off("click").on("click", function () {
             const combatCalculationMetric_3896 = Engine?.hero?.d?.clan?.id;
             if (combatCalculationMetric_3896 > 0) {
                 const combatCalculationMetric_3897 = {
@@ -16863,33 +16863,33 @@ const {
             ...Engine.society
         } : Engine.society;
         const combatCalculationMetric_3901 = {
-            bottomPanelVisible: function() {},
-            close: function() {},
-            createColumn: function() {},
-            createSortButton: function() {},
-            createsWantedButton: function() {},
-            getAllName: function() {},
-            getPersonById: function() {},
-            getWantedPersons: function() {},
-            howSortButton: function() {},
-            init: function() {},
-            initPersons: function() {},
-            initWindow: function() {},
-            onClear: function() {},
-            onResize: function() {},
-            removeAddPerson: function() {},
-            scrollUpdate: function() {},
-            setAmount: function() {},
-            setHowRecordsOnPerson: function() {},
-            setSortVisible: function() {},
-            setTitle: function() {},
-            setVisible: function() {},
-            updateData: function() {}
+            bottomPanelVisible: function () { },
+            close: function () { },
+            createColumn: function () { },
+            createSortButton: function () { },
+            createsWantedButton: function () { },
+            getAllName: function () { },
+            getPersonById: function () { },
+            getWantedPersons: function () { },
+            howSortButton: function () { },
+            init: function () { },
+            initPersons: function () { },
+            initWindow: function () { },
+            onClear: function () { },
+            onResize: function () { },
+            removeAddPerson: function () { },
+            scrollUpdate: function () { },
+            setAmount: function () { },
+            setHowRecordsOnPerson: function () { },
+            setSortVisible: function () { },
+            setTitle: function () { },
+            setVisible: function () { },
+            updateData: function () { }
         };
         if (!combatCalculationMetric_3900) {
             Engine.society = combatCalculationMetric_3901;
         }
-        _g("friends&a=show", function({
+        _g("friends&a=show", function ({
             friends: combatCalculationMetric_3902
         }) {
             try {
@@ -16941,7 +16941,7 @@ const {
             },
             "4": {
                 n: "Arcy",
-                m: "Wulkan Politraki - Piekielne CzeluÅ›cie",
+                m: "Wulkan Politraki - Piekielne Czeluście",
                 c: 0,
                 u: [],
                 np: [],
@@ -16950,7 +16950,7 @@ const {
             },
             "5": {
                 n: "Zoons",
-                m: "Lokum Złych GoblinÃ³w - pracownia",
+                m: "Lokum Złych Goblinów - pracownia",
                 c: 0,
                 u: [],
                 np: [],
@@ -16959,7 +16959,7 @@ const {
             },
             "6": {
                 n: "Łowka",
-                m: "Å¹rÃ³dÅ‚o Wspomnień",
+                m: "Źródło Wspomnień",
                 c: 0,
                 u: [],
                 np: [],
@@ -17013,7 +17013,7 @@ const {
             },
             "13": {
                 n: "Katy",
-                m: ["Pustynne Katakumby", "Pustynne Katakumby - sala 1", "Pustynne Katakumby - sala 2", "Komnaty Bezdusznych - sala 1", "Komnaty Bezdusznych - sala 2", "Katakumby Odnalezionych Skrytobójców", "Katakumby Opętanych Dusz", "Katakumby Krwawych Wypraw", "Katakumby PolegÅ‚ych Legionistów", "Korytarz Porzuconych Nadziei", "Korytarz Porzuconych Marzeń", "Wschodni Tunel JaÅºni", "Zachodni Tunel Jaźni"],
+                m: ["Pustynne Katakumby", "Pustynne Katakumby - sala 1", "Pustynne Katakumby - sala 2", "Komnaty Bezdusznych - sala 1", "Komnaty Bezdusznych - sala 2", "Katakumby Odnalezionych Skrytobójców", "Katakumby Opętanych Dusz", "Katakumby Krwawych Wypraw", "Katakumby Poległych Legionistów", "Korytarz Porzuconych Nadziei", "Korytarz Porzuconych Marzeń", "Wschodni Tunel Jaźni", "Zachodni Tunel Jaźni"],
                 c: 0,
                 u: [],
                 np: [],
@@ -17031,7 +17031,7 @@ const {
             },
             "15": {
                 n: "Pustynia",
-                m: ["Pustynia Shaiharrud - zachód", "Namiot Piechoty Piłowej", "Namiot Naznaczonych", "Jurta Czcicieli", "Namiot Gwardii SmokoszczÄ™kich", "Sępiarnia", "Jurta Chaegda", "Jurta Nomadzka", "Namiot Pustynnych Smoków", "Namiot Błogosławionych", "Pustynia Shaiharrud - wschÃ³d", "Smocze Skalisko", "Skały UmarÅ‚ych", "Jaskinia Sępa s.2", "Jaskinia Sępa s.1", "Jaskinia Piaskowej Burzy s.2", "Jaskinia Szczęk", "Jaskinia Smoczej Paszczy p.1", "Jaskinia Odwagi", "Jaskinia Próby", "Grota PoÅ›więcenia", "Świątynia Hebrehotha - przedsionek"],
+                m: ["Pustynia Shaiharrud - zachód", "Namiot Piechoty Piłowej", "Namiot Naznaczonych", "Jurta Czcicieli", "Namiot Gwardii Smokoszczękich", "Sępiarnia", "Jurta Chaegda", "Jurta Nomadzka", "Namiot Pustynnych Smoków", "Namiot Błogosławionych", "Pustynia Shaiharrud - wschód", "Smocze Skalisko", "Skały Umarłych", "Jaskinia Sępa s.2", "Jaskinia Sępa s.1", "Jaskinia Piaskowej Burzy s.2", "Jaskinia Szczęk", "Jaskinia Smoczej Paszczy p.1", "Jaskinia Odwagi", "Jaskinia Próby", "Grota Poświęcenia", "Świątynia Hebrehotha - przedsionek"],
                 c: 0,
                 u: [],
                 np: [],
@@ -17040,7 +17040,7 @@ const {
             },
             "16": {
                 n: "Wiedźmy",
-                m: ["Potępione Zamczysko", "Potępione Zamczysko - korytarz wejściowy", "Potępione Zamczysko - lochy zachodnie p.1", "Potępione Zamczysko - lochy wschodnie p.1", "Potępione Zamczysko - sala ofiarna", "Potępione Zamczysko - korytarz zachodni", "Potępione Zamczysko - korytarz wschodni", "Potępione Zamczysko - zachodnia komnata", "Potępione Zamczysko - wschodnia komnata", "Wieża Szlochów p.1", "WieÅ¼a SzlochÃ³w p.2", "Wieża Szlochów p.3", "Potępione Zamczysko - łącznik zachodni", "Potępione Zamczysko - Å‚Ä…cznik wschodni", "Potępione Zamczysko - północna komnata", "Potępione Zamczysko - lochy zachodnie p.2", "Potępione Zamczysko - lochy wschodnie p.2", "Potępione Zamczysko - głębokie lochy"],
+                m: ["Potępione Zamczysko", "Potępione Zamczysko - korytarz wejściowy", "Potępione Zamczysko - lochy zachodnie p.1", "Potępione Zamczysko - lochy wschodnie p.1", "Potępione Zamczysko - sala ofiarna", "Potępione Zamczysko - korytarz zachodni", "Potępione Zamczysko - korytarz wschodni", "Potępione Zamczysko - zachodnia komnata", "Potępione Zamczysko - wschodnia komnata", "Wieża Szlochów p.1", "Wieża Szlochów p.2", "Wieża Szlochów p.3", "Potępione Zamczysko - łącznik zachodni", "Potępione Zamczysko - łącznik wschodni", "Potępione Zamczysko - północna komnata", "Potępione Zamczysko - lochy zachodnie p.2", "Potępione Zamczysko - lochy wschodnie p.2", "Potępione Zamczysko - głębokie lochy"],
                 c: 0,
                 u: [],
                 np: [],
@@ -17049,7 +17049,7 @@ const {
             },
             "17": {
                 n: "Driady",
-                m: ["Rozlewisko Kai", "Gvar Hamryd", "Matecznik Szelestu", "Jaskinia Suchych PÄ™dów s.1", "Jaskinia Suchych PędÃ³w s.2", "Jaskinia Suchych Pędów s.3", "Jaskinia Suchych Pędów s.4", "Drzewo Å»ycia p.1", "Drzewo Życia p.2"],
+                m: ["Rozlewisko Kai", "Gvar Hamryd", "Matecznik Szelestu", "Jaskinia Suchych Pędów s.1", "Jaskinia Suchych Pędów s.2", "Jaskinia Suchych Pędów s.3", "Jaskinia Suchych Pędów s.4", "Drzewo Życia p.1", "Drzewo Życia p.2"],
                 c: 0,
                 u: [],
                 np: [],
@@ -17103,18 +17103,18 @@ const {
             combatCalculationMetric_3912(combatCalculationMetric_3934.map, combatCalculationMetric_3935, combatCalculationMetric_3934.nick, combatCalculationMetric_3934.id);
             const combatCalculationMetric_3936 = $("<div class=\"mp-list-list-row\" id=\"mp-friends-row\" char-id=\"" + combatCalculationMetric_3934.id + "\">\n            <div class=\"mp-list-party-add do-action-cursor\">\n                +\n            </div>\n            <div class=\"mp-list-info-case\">\n                <div class=\"mp-list-nick do-action-cursor\" data-npc=\"" + combatCalculationMetric_3935 + "\" data-friends-id=\"" + combatCalculationMetric_3934.id + "\" id=\"mp-member\">\n                    " + combatCalculationMetric_3934.nick + "\n                </div>\n                <div class=\"mp-list-map\">\n                    " + combatCalculationMetric_3934.map + "\n                </div>\n            </div>\n            <div class=\"mp-list-player-data\"> \n                <div class=\"mp-list-level\">\n                    " + combatCalculationMetric_3934.lvl + combatCalculationMetric_3934.prof + "\n                </div>\n                <div class=\"mp-list-coords\">\n                    (" + combatCalculationMetric_3934.x + ", " + combatCalculationMetric_3934.y + ")\n                </div>\n            </div>\n        </div>").appendTo(combatCalculationMetric_3918);
             const combatCalculationMetric_3937 = combatCalculationMetric_3936.find(".mp-list-party-add");
-            combatCalculationMetric_3937.click(function() {
+            combatCalculationMetric_3937.click(function () {
                 window._g("party&a=inv&id=" + combatCalculationMetric_3934.id);
-            }).tip("ZaproÅ› do drużyny");
+            }).tip("Zaproś do drużyny");
             if (combatCalculationMetric_3934.id === Engine.hero.d.id) {
                 combatCalculationMetric_3937.addClass("mp-disable");
             }
             const combatCalculationMetric_3938 = combatCalculationMetric_3936.find(".mp-list-map");
             combatCalculationMetric_3938.tip(combatCalculationMetric_3934.map);
-            combatCalculationMetric_3936.contextmenu(async function(combatCalculationMetric_3939) {
+            combatCalculationMetric_3936.contextmenu(async function (combatCalculationMetric_3939) {
                 const combatCalculationMetric_3940 = await findDataByC(combatCalculationMetric_3934.id, Engine.worldConfig.getWorldName());
                 let combatCalculationMetric_3941 = [
-                    ["ZaproÅ› do drużyny", () => {
+                    ["Zaproś do drużyny", () => {
                         window._g("party&a=inv&id=" + combatCalculationMetric_3934.id);
                     }],
                     ["Napisz wiadomość", () => {
@@ -17138,7 +17138,7 @@ const {
                     }]);
                 }
                 Engine.interface.showPopupMenu(combatCalculationMetric_3941, combatCalculationMetric_3939);
-            }).click(function() {
+            }).click(function () {
                 getEngine().chatController.getChatInputWrapper().setPrivateMessageProcedure(combatCalculationMetric_3934.nick);
             });
             const combatCalculationMetric_3942 = createUserTip(combatCalculationMetric_3934, "", ADMIN_IDENTIFIERS_MAP, CUSTOM_FLAIR_TOOLTIPS);
@@ -17150,7 +17150,7 @@ const {
         for (const combatCalculationMetric_3944 in combatCalculationMetric_3906) {
             if (combatCalculationMetric_3906[combatCalculationMetric_3944].c > 0) {
                 const combatCalculationMetric_3945 = $("<div class=\"mp-member-spot do-action-cursor\">" + combatCalculationMetric_3906[combatCalculationMetric_3944].n + ": " + combatCalculationMetric_3906[combatCalculationMetric_3944].c + "</div>").appendTo(combatCalculationMetric_3943).tip("<b>" + combatCalculationMetric_3906[combatCalculationMetric_3944].t + "</b><br>" + combatCalculationMetric_3906[combatCalculationMetric_3944].np.toString().split(",").join("<br>"));
-                combatCalculationMetric_3945.on("mouseover", function() {
+                combatCalculationMetric_3945.on("mouseover", function () {
                     const combatCalculationMetric_3946 = combatCalculationMetric_3906[combatCalculationMetric_3944].u || [];
                     const combatCalculationMetric_3947 = $("#w-" + MODULE_ADDON_REGISTRY[23].id + " div#mp-friends-row");
                     const combatCalculationMetric_3948 = [];
@@ -17159,20 +17159,20 @@ const {
                     }
                     const combatCalculationMetric_3950 = combatCalculationMetric_3948.join(",");
                     if (combatCalculationMetric_3950.length) {
-                        combatCalculationMetric_3947.filter(function() {
+                        combatCalculationMetric_3947.filter(function () {
                             const combatCalculationMetric_3951 = $(this);
                             return combatCalculationMetric_3951.is(combatCalculationMetric_3950) || combatCalculationMetric_3951.find(combatCalculationMetric_3950).length > 0;
                         });
                     }
                 });
-                combatCalculationMetric_3945.click(function() {
+                combatCalculationMetric_3945.click(function () {
                     let combatCalculationMetric_3952 = combatCalculationMetric_3906[combatCalculationMetric_3944].t + ": " + combatCalculationMetric_3906[combatCalculationMetric_3944].c + " (" + combatCalculationMetric_3906[combatCalculationMetric_3944].np.toString().split(",").join(", ") + ")";
                     const combatCalculationMetric_3953 = {
                         c: combatCalculationMetric_3952
                     };
                     window._g("chat&channel=clan", false, combatCalculationMetric_3953);
                 });
-                combatCalculationMetric_3945.contextmenu(function() {
+                combatCalculationMetric_3945.contextmenu(function () {
                     const combatCalculationMetric_3954 = combatCalculationMetric_3906[combatCalculationMetric_3944].p;
                     for (const combatCalculationMetric_3955 in combatCalculationMetric_3954) {
                         window._g("party&a=inv&id=" + combatCalculationMetric_3954[combatCalculationMetric_3955]);
@@ -17193,26 +17193,26 @@ const {
         }
     }, 20000);
     const combatCalculationMetric_3956 = window._g;
-    window._g = function(combatCalculationMetric_3957, combatCalculationMetric_3958, combatCalculationMetric_3959) {
+    window._g = function (combatCalculationMetric_3957, combatCalculationMetric_3958, combatCalculationMetric_3959) {
         if (!combatCalculationMetric_3957.match("_") && combatCalculationMetric_3957.match("chat") && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[24].id]) {
             let combatCalculationMetric_3960 = combatCalculationMetric_3959 && combatCalculationMetric_3959.c ? combatCalculationMetric_3959.c.toString().toLowerCase() : "";
-            if (combatCalculationMetric_3957.match("chat&channel=local") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.local && !combatCalculationMetric_3960.match(/zajmuje|zajmujÄ™/)) {
+            if (combatCalculationMetric_3957.match("chat&channel=local") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.local && !combatCalculationMetric_3960.match(/zajmuje|zajmuję/)) {
                 return message("Wysyłanie wiadomości na chat LOKALNY zablokowane. Wyjątek, gdy zawiera: zajmuje");
             }
             if (combatCalculationMetric_3957.match("chat&channel=global") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.global) {
-                return message("WysyÅ‚anie wiadomości na chat GLOBALNY zablokowane.");
+                return message("Wysyłanie wiadomości na chat GLOBALNY zablokowane.");
             }
-            if (combatCalculationMetric_3957.match("chat&channel=clan") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.clan && !combatCalculationMetric_3960.match(/ide|idÄ™|po/)) {
-                return message("WysyÅ‚anie wiadomoÅ›ci na chat KLANOWY zablokowane. Wyjątek, gdy zawiera: ide, po");
+            if (combatCalculationMetric_3957.match("chat&channel=clan") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.clan && !combatCalculationMetric_3960.match(/ide|idę|po/)) {
+                return message("Wysyłanie wiadomości na chat KLANOWY zablokowane. Wyjątek, gdy zawiera: ide, po");
             }
             if (combatCalculationMetric_3957.match("chat&channel=party") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.party && !combatCalculationMetric_3960.match(/klepie|zajmuje/)) {
                 return message("Wysyłanie wiadomości na chat GRUPOWY zablokowane. Wyjątek, gdy zawiera: klepie, zajmuje");
             }
-            if (combatCalculationMetric_3957.match("chat&channel=trade") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.trade && !combatCalculationMetric_3960.match(/sprzedam|kupie|kupiÄ™|sell|buy|wymienie|zamienie/)) {
-                return message("Wysyłanie wiadomoÅ›ci na chat HANDLOWY zablokowane. WyjÄ…tek, gdy zawiera: sprzedam, kupie, sell, buy, wymienie, zamienie");
+            if (combatCalculationMetric_3957.match("chat&channel=trade") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.trade && !combatCalculationMetric_3960.match(/sprzedam|kupie|kupię|sell|buy|wymienie|zamienie/)) {
+                return message("Wysyłanie wiadomości na chat HANDLOWY zablokowane. Wyjątek, gdy zawiera: sprzedam, kupie, sell, buy, wymienie, zamienie");
             }
-            if (combatCalculationMetric_3957.match("chat&channel=personal") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.personal && !combatCalculationMetric_3960.match(/ide|idÄ™/)) {
-                return message("Wysyłanie wiadomoÅ›ci na chat PRYWATNY zablokowane. Wyjątek, gdy zawiera: ide");
+            if (combatCalculationMetric_3957.match("chat&channel=personal") && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[24].id].block.personal && !combatCalculationMetric_3960.match(/ide|idę/)) {
+                return message("Wysyłanie wiadomości na chat PRYWATNY zablokowane. Wyjątek, gdy zawiera: ide");
             }
         }
         if (!combatCalculationMetric_3957.match("_") && combatCalculationMetric_3957.match("loot") && combatCalculationMetric_3957.match("final=1") && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[19].id]) {
@@ -17284,8 +17284,8 @@ const {
         if (combatCalculationMetric_3981.cost >= 500 && combatCalculationMetric_3981.cost <= 100000000000 && combatCalculationMetric_3981.time >= 2 && combatCalculationMetric_3981.time <= 168) {
             const combatCalculationMetric_3982 = combatCalculationMetric_3963();
             if (combatCalculationMetric_3982.length > 0) {
-                combatCalculationMetric_3982.forEach(combatCalculationMetric_3983 => combatCalculationMetric_3962() && _g("ah&action=sell&item=" + combatCalculationMetric_3983 + "&buy_out=" + combatCalculationMetric_3981.cost + "&time=" + combatCalculationMetric_3981.time + "&is_featured=0", function(combatCalculationMetric_3984) {
-                    if (combatCalculationMetric_3984 && combatCalculationMetric_3984.alert && combatCalculationMetric_3984.alert.toString().includes("Posiadasz zbyt maÅ‚o środków")) {
+                combatCalculationMetric_3982.forEach(combatCalculationMetric_3983 => combatCalculationMetric_3962() && _g("ah&action=sell&item=" + combatCalculationMetric_3983 + "&buy_out=" + combatCalculationMetric_3981.cost + "&time=" + combatCalculationMetric_3981.time + "&is_featured=0", function (combatCalculationMetric_3984) {
+                    if (combatCalculationMetric_3984 && combatCalculationMetric_3984.alert && combatCalculationMetric_3984.alert.toString().includes("Posiadasz zbyt mało środków")) {
                         Engine.communication.taskQueue = [];
                     }
                     if (combatCalculationMetric_3984 && combatCalculationMetric_3984.message && combatCalculationMetric_3984.message[0] && combatCalculationMetric_3984.message[0].id == 1801016) {
@@ -17330,9 +17330,9 @@ const {
         document.querySelector("#mp-agr-34-false-checkbox").checked = combatCalculationMetric_3987;
         combatCalculationMetric_3988.removeClass("mp-berserk-false mp-berserk-true");
         if (combatCalculationMetric_3987) {
-            combatCalculationMetric_3988.tip("WyÅ‚Ä…cz agresywność potworÃ³w");
+            combatCalculationMetric_3988.tip("Wyłącz agresywność potworów");
         } else {
-            combatCalculationMetric_3988.tip("Włącz agresywność potworÃ³w");
+            combatCalculationMetric_3988.tip("Włącz agresywność potworów");
         }
         combatCalculationMetric_3988.addClass("mp-berserk-" + combatCalculationMetric_3987);
     }
@@ -17367,7 +17367,7 @@ const {
             console.error("Błąd podczas wykonywania handleDialogueClick:", combatCalculationMetric_3995);
         }
     }
-    setInterval(function() {
+    setInterval(function () {
         combatCalculationMetric_3989();
         if (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[29].id] && ACTIVE_PLAYER_IDENTITY?.id > 0 && Object.keys(isHerosOnMapTable).length < 1) {
             combatCalculationMetric_3996(ACTIVE_PLAYER_IDENTITY.id);
@@ -17426,7 +17426,7 @@ const {
         if (Object.keys(isHerosOnMapTable).length > 0) {
             return;
         }
-        _g("fight&a=attack&id=" + combatCalculationMetric_4006, async function(combatCalculationMetric_4013) {
+        _g("fight&a=attack&id=" + combatCalculationMetric_4006, async function (combatCalculationMetric_4013) {
             if (combatCalculationMetric_4013?.lag && combatCalculationMetric_4013?.ev && combatCalculationMetric_4013?.e == "ok" && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[29].id][uiLayoutComponent_270].autof && !combatCalculationMetric_4013?.alert && !combatCalculationMetric_4013?.message) {
                 await waitForSeconds(2);
                 _g("fight&a=f&enabled=1");
@@ -17482,7 +17482,7 @@ const {
             const combatCalculationMetric_4037 = combatCalculationMetric_4033[combatCalculationMetric_4036];
             const combatCalculationMetric_4038 = combatCalculationMetric_4037._cachedStats;
             const combatCalculationMetric_4039 = combatCalculationMetric_4038?.opis?.toLowerCase() || "";
-            const combatCalculationMetric_4040 = ["skÅ‚adnikÃ³w legendarnego stroju", "kopalnia", "#year#", "licytacja", "event", "rozbicia", "ulepszania"];
+            const combatCalculationMetric_4040 = ["składników legendarnego stroju", "kopalnia", "#year#", "licytacja", "event", "rozbicia", "ulepszania"];
             const combatCalculationMetric_4041 = !combatCalculationMetric_4040.some(combatCalculationMetric_4042 => combatCalculationMetric_4039.includes(combatCalculationMetric_4042));
             const combatCalculationMetric_4043 = getClGroup(combatCalculationMetric_4037.cl);
             const combatCalculationMetric_4044 = !!combatCalculationMetric_4038?.personal;
@@ -17504,7 +17504,7 @@ const {
         if (Engine.shop && combatCalculationMetric_4052.length > 0) {
             combatCalculationMetric_4030 = true;
             let combatCalculationMetric_4053 = combatCalculationMetric_4052.slice(0, 20).toString();
-            _g("shop&buy=&sell=" + combatCalculationMetric_4053, function(combatCalculationMetric_4054) {
+            _g("shop&buy=&sell=" + combatCalculationMetric_4053, function (combatCalculationMetric_4054) {
                 if (combatCalculationMetric_4054?.message) {
                     combatCalculationMetric_4030 = false;
                     combatCalculationMetric_4031 = 0;
@@ -17539,13 +17539,13 @@ const {
     }
 
     function combatCalculationMetric_4068(combatCalculationMetric_4069) {
-        return function() {
+        return function () {
             copyText(combatCalculationMetric_4069);
         };
     }
 
     function combatCalculationMetric_4070(combatCalculationMetric_4071) {
-        return function() {
+        return function () {
             const combatCalculationMetric_4072 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[31].id].loots[uiLayoutComponent_221];
             combatCalculationMetric_4072.common = combatCalculationMetric_4064(combatCalculationMetric_4072.common, combatCalculationMetric_4071);
             combatCalculationMetric_4072.unique = combatCalculationMetric_4064(combatCalculationMetric_4072.unique, combatCalculationMetric_4071);
@@ -17603,14 +17603,14 @@ const {
         for (const combatCalculationMetric_4088 in combatCalculationMetric_4087) {
             const combatCalculationMetric_4089 = combatCalculationMetric_4087[combatCalculationMetric_4088];
             const combatCalculationMetric_4090 = universalCreateItem(combatCalculationMetric_4089, "mp", ADDON_STORAGE_REFERENCE);
-            combatCalculationMetric_4090.contextmenu(function(combatCalculationMetric_4091) {
+            combatCalculationMetric_4090.contextmenu(function (combatCalculationMetric_4091) {
                 let combatCalculationMetric_4092 = [
                     ["Kopiuj ID przedmiotu", combatCalculationMetric_4068("ITEM#" + combatCalculationMetric_4089.hid + "." + uiLayoutComponent_221), {
                         button: {
                             cls: "mp-popup-menu-item"
                         }
                     }],
-                    ["UsuÅ„", combatCalculationMetric_4070(combatCalculationMetric_4089.id), {
+                    ["Usuń", combatCalculationMetric_4070(combatCalculationMetric_4089.id), {
                         button: {
                             cls: "mp-popup-menu-item"
                         }
@@ -17759,7 +17759,7 @@ const {
         addStyle("mp-addon-32", combatCalculationMetric_4093);
     }
     const combatCalculationMetric_4096 = window.TIPS.parseTip;
-    window.TIPS.parseTip = function(combatCalculationMetric_4097) {
+    window.TIPS.parseTip = function (combatCalculationMetric_4097) {
         if (combatCalculationMetric_4097 && typeof combatCalculationMetric_4097 === "string" && combatCalculationMetric_4097.includes("item-head") && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[32].id]) {
             const combatCalculationMetric_4098 = window?.TIPS?.target?.[0];
             const combatCalculationMetric_4099 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[32].id].add;
@@ -17781,7 +17781,7 @@ const {
                         if (combatCalculationMetric_4103.unbindCost && combatCalculationMetric_4099.unbind) {
                             const combatCalculationMetric_4107 = combatCalculationMetric_4104.querySelector(".item-tip-section.s-9");
                             if (combatCalculationMetric_4107) {
-                                combatCalculationMetric_4107.insertAdjacentHTML("beforeend", "<div class=\"tip-item-stat-unbind\">Koszt odwiÄ…zania: " + combatCalculationMetric_4103.unbindCost + " SÅ</div>");
+                                combatCalculationMetric_4107.insertAdjacentHTML("beforeend", "<div class=\"tip-item-stat-unbind\">Koszt odwiązania: " + combatCalculationMetric_4103.unbindCost + " SŁ</div>");
                             }
                         }
                         if (combatCalculationMetric_4103.salvageItems && combatCalculationMetric_4099.essence) {
@@ -17835,7 +17835,7 @@ const {
             $(Engine.mails.getMailsWindow().wnd.$).remove();
             try {
                 Engine.mails.close();
-            } catch (combatCalculationMetric_4118) {}
+            } catch (combatCalculationMetric_4118) { }
         }
     }
 
@@ -17859,7 +17859,7 @@ const {
     }
 
     function combatCalculationMetric_4112() {
-        return function() {
+        return function () {
             clearInterval(combatCalculationMetric_4116);
             combatCalculationMetric_4116 = setInterval(() => {
                 const combatCalculationMetric_4123 = document.querySelector(".mails-window");
@@ -17924,7 +17924,7 @@ const {
         const combatCalculationMetric_4146 = ADDON_STORAGE_REFERENCE.limit[uiLayoutComponent_164][uiLayoutComponent_221].k[combatCalculationMetric_4135].ore;
         $(".mp-mine-active").removeClass("mp-mine-active");
         $("div[data-mine=\"" + combatCalculationMetric_4135 + "\"]").addClass("mp-mine-active");
-        $("\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-mine-name\">" + combatCalculationMetric_4139 + "</div>\n                    <div class=\"mp-mine-info\">" + combatCalculationMetric_4140 + ", " + parsedAddonConfig.prof[combatCalculationMetric_4141] + "</div>\n                    <div class=\"mp-mine-icon\">\n                        <img class=\"mp-mine-icon-src\" src=\"" + combatCalculationMetric_4142 + "\"></img>\n                    </div>\n                    <div class=\"mp-mine-drop\">\n                        <div>UbiÄ‡:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.elite.kill + " " + (combatCalculationMetric_4145.kill > 0 ? "(+" + combatCalculationMetric_4145.kill + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-unique\">\n                        <div>Unikatowe:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.elite.drop.unique + " " + (combatCalculationMetric_4145.drop.unique > 0 ? "(+" + combatCalculationMetric_4145.drop.unique + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-heroic\">\n                        <div>Heroiczne:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.elite.drop.heroic + " " + (combatCalculationMetric_4145.drop.heroic > 0 ? "(+" + combatCalculationMetric_4145.drop.heroic + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-legendary\">\n                        <div>Legendarne:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.elite.drop.legendary + " " + (combatCalculationMetric_4145.drop.legendary > 0 ? "(+" + combatCalculationMetric_4145.drop.legendary + ")" : "") + "</div>\n                    </div>\n                </div>\n            ").appendTo(combatCalculationMetric_4137);
+        $("\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-mine-name\">" + combatCalculationMetric_4139 + "</div>\n                    <div class=\"mp-mine-info\">" + combatCalculationMetric_4140 + ", " + parsedAddonConfig.prof[combatCalculationMetric_4141] + "</div>\n                    <div class=\"mp-mine-icon\">\n                        <img class=\"mp-mine-icon-src\" src=\"" + combatCalculationMetric_4142 + "\"></img>\n                    </div>\n                    <div class=\"mp-mine-drop\">\n                        <div>Ubić:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.elite.kill + " " + (combatCalculationMetric_4145.kill > 0 ? "(+" + combatCalculationMetric_4145.kill + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-unique\">\n                        <div>Unikatowe:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.elite.drop.unique + " " + (combatCalculationMetric_4145.drop.unique > 0 ? "(+" + combatCalculationMetric_4145.drop.unique + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-heroic\">\n                        <div>Heroiczne:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.elite.drop.heroic + " " + (combatCalculationMetric_4145.drop.heroic > 0 ? "(+" + combatCalculationMetric_4145.drop.heroic + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-legendary\">\n                        <div>Legendarne:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.elite.drop.legendary + " " + (combatCalculationMetric_4145.drop.legendary > 0 ? "(+" + combatCalculationMetric_4145.drop.legendary + ")" : "") + "</div>\n                    </div>\n                </div>\n            ").appendTo(combatCalculationMetric_4137);
         $("\n                <div class=\"mp-background-section\">\n                    <div class=\"mp-mine-name\">" + combatCalculationMetric_4143 + "</div>\n                    <div class=\"mp-mine-ore\">\n                        <img class=\"mp-mine-icon-ore\" src=\"" + combatCalculationMetric_4144 + "\"></img>\n                    </div>\n                    <div class=\"mp-mine-drop\">\n                        <div>Rozkuć:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.ore.open + " " + (combatCalculationMetric_4146.open > 0 ? "(+" + combatCalculationMetric_4146.open + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop\">\n                        <div>Puste:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.ore.drop.empty + " " + (combatCalculationMetric_4146.drop.empty > 0 ? "(+" + combatCalculationMetric_4146.drop.empty + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-common\">\n                        <div>Zwykłe:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.ore.drop.common + " " + (combatCalculationMetric_4146.drop.common > 0 ? "(+" + combatCalculationMetric_4146.drop.common + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-unique\">\n                        <div>Unikatowe:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.ore.drop.unique + " " + (combatCalculationMetric_4146.drop.unique > 0 ? "(+" + combatCalculationMetric_4146.drop.unique + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-heroic\">\n                        <div>Heroiczne:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.ore.drop.heroic + " " + (combatCalculationMetric_4146.drop.heroic > 0 ? "(+" + combatCalculationMetric_4146.drop.heroic + ")" : "") + "</div>\n                    </div>\n                    <div class=\"mp-mine-drop mp-color-legendary\">\n                        <div>Legendarne:</div><div class=\"mp-mine-value\">" + combatCalculationMetric_4136.ore.drop.legendary + " " + (combatCalculationMetric_4146.drop.legendary > 0 ? "(+" + combatCalculationMetric_4146.drop.legendary + ")" : "") + "</div>\n                    </div>\n                </div>\n            ").appendTo(combatCalculationMetric_4137);
         $(".mp-mine-value").tip("Wartość podana w nawiasie jest dziennym licznikiem");
     }
@@ -17974,8 +17974,8 @@ const {
     }
 
     function combatCalculationMetric_4157() {
-        (function(combatCalculationMetric_4158) {
-            Engine.npcs.getDrawableList = function() {
+        (function (combatCalculationMetric_4158) {
+            Engine.npcs.getDrawableList = function () {
                 const combatCalculationMetric_4159 = combatCalculationMetric_4158.apply(Engine.npcs);
                 const combatCalculationMetric_4160 = [];
                 Object.values(combatCalculationMetric_4159).forEach((combatCalculationMetric_4161, combatCalculationMetric_4162) => {
@@ -17991,7 +17991,7 @@ const {
     combatCalculationMetric_4157();
 
     function uiLayoutComponent_454(combatCalculationMetric_4163) {
-        let combatCalculationMetric_4164 = ["Kopalnia Krwawej Zemsty", "Kopalnia Krwawej Pychy", "Kopalnia Krwawego Szaleństwa", "Kopalnia Krwawej Arogancji", "Kopalnia Krwawego OpÄ™tania", "Bazar Szperaczy"];
+        let combatCalculationMetric_4164 = ["Kopalnia Krwawej Zemsty", "Kopalnia Krwawej Pychy", "Kopalnia Krwawego Szaleństwa", "Kopalnia Krwawej Arogancji", "Kopalnia Krwawego Opętania", "Bazar Szperaczy"];
         const combatCalculationMetric_4165 = {
             Tunel: "orange",
             "Krab olbrzymi": "orange"
@@ -18004,11 +18004,11 @@ const {
             Pisanki: "red",
             "Wielkanocne pisanki": "purple",
             "Zamrożony czarodziej": "purple",
-            "Naładowany krysztaÅ‚": "purple",
+            "Naładowany kryształ": "purple",
             "Pokaźne Złoże": "purple",
             "Niewydobyty minerał": "purple",
-            "BÅ‚Ä™kitne złoże": "purple",
-            "Sterta koÅ›ci": "purple"
+            "Błękitne złoże": "purple",
+            "Sterta kości": "purple"
         };
         const combatCalculationMetric_4168 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[35].id].show;
         if (combatCalculationMetric_4164.includes(Engine.map.d.name)) {
@@ -18024,7 +18024,7 @@ const {
         }
         if (combatCalculationMetric_4163.glow) {
             const combatCalculationMetric_4169 = combatCalculationMetric_4163.update;
-            combatCalculationMetric_4163.update = function() {
+            combatCalculationMetric_4163.update = function () {
                 combatCalculationMetric_4163.glow.update();
                 return combatCalculationMetric_4169.apply(this, arguments);
             };
@@ -18032,7 +18032,7 @@ const {
     }
     async function networkProtocolPacket_2696() {
         await waitForSeconds(1);
-        _g("match&a=accept_opp&ans=1", function() {
+        _g("match&a=accept_opp&ans=1", function () {
             closeAlert();
             message("Akceptuje walkę");
         });
@@ -18044,7 +18044,7 @@ const {
         let combatCalculationMetric_4171 = combatCalculationMetric_4170?.matchmaking_preparation.opponent_prof;
         let combatCalculationMetric_4172 = Number(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[36].id].builds[uiLayoutComponent_270][combatCalculationMetric_4171]);
         if (combatCalculationMetric_4172 > 0) {
-            _g("builds&action=updateCurrent&id=" + combatCalculationMetric_4172, function() {
+            _g("builds&action=updateCurrent&id=" + combatCalculationMetric_4172, function () {
                 let combatCalculationMetric_4173 = Engine.buildsManager.getBuildsCommons().getBuildsName()[combatCalculationMetric_4172].name;
                 if (combatCalculationMetric_4173 == "[SET." + combatCalculationMetric_4172 + "]") {
                     combatCalculationMetric_4173 = "Zestaw nr " + combatCalculationMetric_4172;
@@ -18059,13 +18059,13 @@ const {
             return;
         }
         await waitForSeconds(2);
-        _g("match&a=prepared", function() {
+        _g("match&a=prepared", function () {
             message("Akceptuje przygotowanie");
         });
     }
     async function networkProtocolPacket_2698() {
         await waitForSeconds(1);
-        _g("fight&a=f&enabled=1", function() {
+        _g("fight&a=f&enabled=1", function () {
             message("Daje szybką walkę");
         });
     }
@@ -18075,7 +18075,7 @@ const {
         }
         $(Engine.matchmaking.summary.wnd.$[0]).hide();
         await waitForSeconds(1);
-        _g("fight&a=nextmatch", function() {
+        _g("fight&a=nextmatch", function () {
             $(Engine.matchmaking.summary.wnd.$[0]).hide();
         });
     }
@@ -18085,7 +18085,7 @@ const {
         }
         $(Engine.matchmaking.summary.wnd.$[0]).hide();
         await waitForSeconds(1);
-        _g("match&a=collect", function() {
+        _g("match&a=collect", function () {
             $(Engine.matchmaking.summary.wnd.$[0]).hide();
             message("Odbieram nagrodę");
         });
@@ -18121,7 +18121,7 @@ const {
         let combatCalculationMetric_4187 = combatCalculationMetric_4186.list.slice(0, combatCalculationMetric_4184);
         for (const combatCalculationMetric_4188 in combatCalculationMetric_4187) {
             const combatCalculationMetric_4189 = combatCalculationMetric_4187[combatCalculationMetric_4188];
-            $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor\"><i class=\"fa-solid fa-font\"></i></div>").appendTo(combatCalculationMetric_4185).tip("<b>" + combatCalculationMetric_4187[combatCalculationMetric_4188] + "</b><br>Prawy przycisk myszy - otwiera menu.").on("contextmenu", function(combatCalculationMetric_4190) {
+            $("<div class=\"mp-leg-settings-item mp-leg-center-item do-action-cursor\"><i class=\"fa-solid fa-font\"></i></div>").appendTo(combatCalculationMetric_4185).tip("<b>" + combatCalculationMetric_4187[combatCalculationMetric_4188] + "</b><br>Prawy przycisk myszy - otwiera menu.").on("contextmenu", function (combatCalculationMetric_4190) {
                 combatCalculationMetric_4190.preventDefault();
                 let combatCalculationMetric_4191 = [
                     ["Edytuj chatter", async () => {
@@ -18136,25 +18136,25 @@ const {
                             }
                         }
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }],
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }],
                     ["Usuń chatter", async () => {
                         combatCalculationMetric_4186.list.splice(combatCalculationMetric_4188, 1);
                         saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                         addonStorageDescriptor_1944();
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]
                 ];
                 Engine.interface.showPopupMenu(combatCalculationMetric_4191, combatCalculationMetric_4190);
             });
         }
         if (combatCalculationMetric_4187.length < combatCalculationMetric_4184) {
-            $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(combatCalculationMetric_4185).click(async function() {
+            $("<div class=\"mp-leg-settings-item-add do-action-cursor\">+</div>").appendTo(combatCalculationMetric_4185).click(async function () {
                 const combatCalculationMetric_4193 = await addChatterText();
                 if (combatCalculationMetric_4193) {
                     if (combatCalculationMetric_4193.length > 0) {
@@ -18162,10 +18162,10 @@ const {
                         saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                         addonStorageDescriptor_1944();
                     } else {
-                        message("BÅ‚Ä…d podczas dodawania: zbyt krótki chatter");
+                        message("Błąd podczas dodawania: zbyt krótki chatter");
                     }
                 } else {
-                    message("Błąd podczas dodawania: zbyt krÃ³tki chatter");
+                    message("Błąd podczas dodawania: zbyt krótki chatter");
                 }
             });
         }
@@ -18179,7 +18179,7 @@ const {
         if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[37].id].chatter.list.length > 0 && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[37].id] && ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[37].id].chatter.e) {
             let combatCalculationMetric_4195 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[37].id].chatter.list;
             for (const combatCalculationMetric_4196 in combatCalculationMetric_4195) {
-                const combatCalculationMetric_4197 = $("<div class=\"mp-chat-button-one-send do-action-cursor\">" + combatCalculationMetric_4195[combatCalculationMetric_4196] + "</div>").tip("Kliknij LPM, aby wysłać na chat klanowy.<br>Kliknij PPM, aby wysłać na chat grupowy.<br><br>Pełna wiadomość: " + combatCalculationMetric_4195[combatCalculationMetric_4196]).click(function() {
+                const combatCalculationMetric_4197 = $("<div class=\"mp-chat-button-one-send do-action-cursor\">" + combatCalculationMetric_4195[combatCalculationMetric_4196] + "</div>").tip("Kliknij LPM, aby wysłać na chat klanowy.<br>Kliknij PPM, aby wysłać na chat grupowy.<br><br>Pełna wiadomość: " + combatCalculationMetric_4195[combatCalculationMetric_4196]).click(function () {
                     if (getClan().id > 0) {
                         const combatCalculationMetric_4198 = {
                             c: combatCalculationMetric_4195[combatCalculationMetric_4196]
@@ -18188,7 +18188,7 @@ const {
                     } else {
                         message("Nie posiadasz klanu.");
                     }
-                }).contextmenu(function(combatCalculationMetric_4199) {
+                }).contextmenu(function (combatCalculationMetric_4199) {
                     if (getParty().has) {
                         const combatCalculationMetric_4200 = {
                             c: combatCalculationMetric_4195[combatCalculationMetric_4196]
@@ -18292,7 +18292,7 @@ const {
             });
             combatCalculationMetric_4204 = false;
         }
-        if (combatCalculationMetric_4205.f && combatCalculationMetric_4205.f.m && (combatCalculationMetric_4205.f.m.toString().includes("poddał walkÄ™") || combatCalculationMetric_4205.f.m.toString().includes("poddaÅ‚a walkę")) && combatCalculationMetric_4204) {
+        if (combatCalculationMetric_4205.f && combatCalculationMetric_4205.f.m && (combatCalculationMetric_4205.f.m.toString().includes("poddał walkę") || combatCalculationMetric_4205.f.m.toString().includes("poddała walkę")) && combatCalculationMetric_4204) {
             let combatCalculationMetric_4225 = combatCalculationMetric_4205.f.m.toString();
             const combatCalculationMetric_4226 = /txt=([\p{L}\d _-]+?) podda\w*/u;
             const combatCalculationMetric_4227 = combatCalculationMetric_4225.match(combatCalculationMetric_4226);
@@ -18369,7 +18369,7 @@ const {
             "1": {
                 "1": {
                     color: "var(--mp-color-orange)",
-                    type: "PvP za zgodÄ…"
+                    type: "PvP za zgodą"
                 },
                 "2": {
                     color: "var(--mp-color-red)",
@@ -18379,7 +18379,7 @@ const {
             "2": {
                 "1": {
                     color: "var(--mp-color-orange)",
-                    type: "PvP za zgodÄ…"
+                    type: "PvP za zgodą"
                 },
                 "2": {
                     color: "var(--mp-color-red)",
@@ -18467,13 +18467,13 @@ const {
             if (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].builds.onButton.firstLetter) {
                 combatCalculationMetric_4265 = combatCalculationMetric_4264;
             }
-            const combatCalculationMetric_4266 = $("<div class=\"do-action-cursor mp-si-border\"><div class=\"mp-si-border-inset\">" + combatCalculationMetric_4265 + "</div></div>").appendTo(combatCalculationMetric_4259).tip(combatCalculationMetric_4263 + "<br><br>" + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].builds.build[combatCalculationMetric_4262] + "<br><br>Kliknij PPM, aby edytować skrót").click(function() {
-                _g("builds&action=updateCurrent&id=" + combatCalculationMetric_4262, function() {
+            const combatCalculationMetric_4266 = $("<div class=\"do-action-cursor mp-si-border\"><div class=\"mp-si-border-inset\">" + combatCalculationMetric_4265 + "</div></div>").appendTo(combatCalculationMetric_4259).tip(combatCalculationMetric_4263 + "<br><br>" + ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].builds.build[combatCalculationMetric_4262] + "<br><br>Kliknij PPM, aby edytować skrót").click(function () {
+                _g("builds&action=updateCurrent&id=" + combatCalculationMetric_4262, function () {
                     if (Engine.skills) {
                         _g("skillshop");
                     }
                 });
-            }).contextmenu(async function() {
+            }).contextmenu(async function () {
                 const combatCalculationMetric_4267 = await showKeyCaptureWindow(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].builds.build[combatCalculationMetric_4262]);
                 if (combatCalculationMetric_4267) {
                     ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].builds.build[combatCalculationMetric_4262] = combatCalculationMetric_4267;
@@ -18525,7 +18525,7 @@ const {
         if (combatCalculationMetric_4269.showReachPercent) {
             $("<span id=\"mp-hp-value\" class=\"mp-percent-value\">" + (combatCalculationMetric_4270 ? combatCalculationMetric_4275 : Math.floor(combatCalculationMetric_4275)) + "%</span>").appendTo(combatCalculationMetric_4271);
         }
-        $(combatCalculationMetric_4271).tip("Å»ycie: " + parsedGold(Engine.hero.d.warrior_stats.hp) + " / " + parsedGold(Engine.hero.d.warrior_stats.maxhp));
+        $(combatCalculationMetric_4271).tip("Życie: " + parsedGold(Engine.hero.d.warrior_stats.hp) + " / " + parsedGold(Engine.hero.d.warrior_stats.maxhp));
     }
 
     function combatCalculationMetric_4279() {
@@ -18578,17 +18578,17 @@ const {
         if (combatCalculationMetric_4282.showReach) {
             $("<span id=\"mp-exp-value\" class=\"mp-percent-value\">" + parsedGold(combatCalculationMetric_4295) + "</span>").appendTo(combatCalculationMetric_4284);
         }
-        $(combatCalculationMetric_4284).tip("Doświadczenie:<br>" + parsedGold(Engine.hero.d.exp) + " / " + parsedGold(combatCalculationMetric_4286) + "<br><br>Do nastÄ™pnego poziomu brakuje: " + parsedGold(combatCalculationMetric_4295) + "<br><br>Wyczerpanie: " + combatCalculationMetric_4279());
+        $(combatCalculationMetric_4284).tip("Doświadczenie:<br>" + parsedGold(Engine.hero.d.exp) + " / " + parsedGold(combatCalculationMetric_4286) + "<br><br>Do następnego poziomu brakuje: " + parsedGold(combatCalculationMetric_4295) + "<br><br>Wyczerpanie: " + combatCalculationMetric_4279());
     }
     async function uiLayoutComponent_367() {
         $(".mp-si-gold").html(parsedGold(Engine.hero.d.gold)).tip("" + ShowNumber(Engine.hero.d.gold));
-        $(".mp-si-credits").html(parsedGold(Engine.hero.d.credits)).tip("Smocze Å‚uski");
+        $(".mp-si-credits").html(parsedGold(Engine.hero.d.credits)).tip("Smocze łuski");
         $(".mp-si-runes").html(parsedGold(Engine.hero.d.runes)).tip("Smocze runy");
     }
     async function uiLayoutComponent_370() {
         const combatCalculationMetric_4296 = $(".mp-si-stats-list");
         combatCalculationMetric_4296.empty();
-        combatCalculationMetric_4296.off("click").on("click", function() {
+        combatCalculationMetric_4296.off("click").on("click", function () {
             $(".stats-wrapper .stats-button .stats-expand").click();
         }).tip("Kliknij, aby rozwinąć szczegółowe statystyki");
         const combatCalculationMetric_4297 = Engine.hero.d.warrior_stats;
@@ -18706,7 +18706,7 @@ const {
             let combatCalculationMetric_4330 = parseInt($("span.skills_total").text());
             let combatCalculationMetric_4331 = combatCalculationMetric_4330 - combatCalculationMetric_4329;
             let combatCalculationMetric_4332 = combatCalculationMetric_4328.childNodes ? combatCalculationMetric_4328.childNodes : [];
-            $(combatCalculationMetric_4332).each(function() {
+            $(combatCalculationMetric_4332).each(function () {
                 let combatCalculationMetric_4333 = $(this)[0];
                 let combatCalculationMetric_4334 = combatCalculationMetric_4333.classList.toString();
                 let combatCalculationMetric_4335 = parseInt(combatCalculationMetric_4333.id.split("skill_").join(""));
@@ -18716,24 +18716,24 @@ const {
                     if (combatCalculationMetric_4336 < 10) {
                         const combatCalculationMetric_4337 = $("<div mp-skills=\"remove\" class=\"mp-add-um-case\"></div>").appendTo(combatCalculationMetric_4333);
                         if (combatCalculationMetric_4336 <= 9 && combatCalculationMetric_4331 >= 1) {
-                            $("<div class=\"mp-add-um mp-add-um-1\">1</div>").appendTo(combatCalculationMetric_4337).click(function() {
+                            $("<div class=\"mp-add-um mp-add-um-1\">1</div>").appendTo(combatCalculationMetric_4337).click(function () {
                                 let combatCalculationMetric_4338 = combatCalculationMetric_4336 + 1;
-                                _g("skills&learn=" + combatCalculationMetric_4335 + "&lvl=" + combatCalculationMetric_4338, function() {
+                                _g("skills&learn=" + combatCalculationMetric_4335 + "&lvl=" + combatCalculationMetric_4338, function () {
                                     uiLayoutComponent_373();
                                 });
                             });
                         }
                         if (combatCalculationMetric_4336 <= 5 && combatCalculationMetric_4331 >= 5) {
-                            $("<div class=\"mp-add-um mp-add-um-5\">5</div>").appendTo(combatCalculationMetric_4337).click(function() {
+                            $("<div class=\"mp-add-um mp-add-um-5\">5</div>").appendTo(combatCalculationMetric_4337).click(function () {
                                 let combatCalculationMetric_4339 = combatCalculationMetric_4336 + 5;
-                                _g("skills&learn=" + combatCalculationMetric_4335 + "&lvl=" + combatCalculationMetric_4339, function() {
+                                _g("skills&learn=" + combatCalculationMetric_4335 + "&lvl=" + combatCalculationMetric_4339, function () {
                                     uiLayoutComponent_373();
                                 });
                             });
                         }
                         if (combatCalculationMetric_4336 == 0 && combatCalculationMetric_4331 >= 10) {
-                            $("<div class=\"mp-add-um mp-add-um-10\">10</div>").appendTo(combatCalculationMetric_4337).click(function() {
-                                _g("skills&learn=" + combatCalculationMetric_4335 + "&lvl=10", function() {
+                            $("<div class=\"mp-add-um mp-add-um-10\">10</div>").appendTo(combatCalculationMetric_4337).click(function () {
+                                _g("skills&learn=" + combatCalculationMetric_4335 + "&lvl=10", function () {
                                     uiLayoutComponent_373();
                                 });
                             });
@@ -18748,7 +18748,7 @@ const {
         let combatCalculationMetric_4340 = $(Engine.skills.wnd.$[0]).find(".skills-window")[0];
         if (combatCalculationMetric_4340) {
             $("#gargonem-skills-learn-code").remove();
-            $("<div id=\"gargonem-skills-learn-code\" class=\"mp-button dialogue-cursor mp-um-gargonem\">KOD UM</div>").appendTo(combatCalculationMetric_4340).click(function() {
+            $("<div id=\"gargonem-skills-learn-code\" class=\"mp-button dialogue-cursor mp-um-gargonem\">KOD UM</div>").appendTo(combatCalculationMetric_4340).click(function () {
                 combatCalculationMetric_4341();
             });
         }
@@ -18783,10 +18783,10 @@ const {
                 }
                 const combatCalculationMetric_4355 = combatCalculationMetric_4352[combatCalculationMetric_4353];
                 const combatCalculationMetric_4356 = combatCalculationMetric_4351[combatCalculationMetric_4355];
-                _g("skills&learn=" + combatCalculationMetric_4355 + "&lvl=" + combatCalculationMetric_4356, function(combatCalculationMetric_4357) {
+                _g("skills&learn=" + combatCalculationMetric_4355 + "&lvl=" + combatCalculationMetric_4356, function (combatCalculationMetric_4357) {
                     if (combatCalculationMetric_4357 && combatCalculationMetric_4357.msg) {
                         const combatCalculationMetric_4358 = combatCalculationMetric_4357.msg.toString();
-                        if (combatCalculationMetric_4358.includes("Posiadasz zbyt mało zÅ‚ota") || combatCalculationMetric_4358.includes("Musisz wydać conajmniej") || combatCalculationMetric_4358.includes("Nie masz doÅ›Ä‡")) {
+                        if (combatCalculationMetric_4358.includes("Posiadasz zbyt mało złota") || combatCalculationMetric_4358.includes("Musisz wydać conajmniej") || combatCalculationMetric_4358.includes("Nie masz dość")) {
                             return;
                         }
                     }
@@ -18803,7 +18803,7 @@ const {
                 const combatCalculationMetric_4360 = combatCalculationMetric_4347.repeat ? 1 : 0;
                 _g("skills&battleaction=set&battleskills=" + combatCalculationMetric_4359 + "&rpt=" + combatCalculationMetric_4360);
             } else {
-                message("Błędny kod umiejÄ™tności!");
+                message("Błędny kod umiejętności!");
             }
         }
         combatCalculationMetric_4349();
@@ -18821,18 +18821,18 @@ const {
                             return;
                         }
                         if (combatCalculationMetric_4362.prof !== Engine.hero.d.prof) {
-                            message("Kod umiejÄ™tności nie jest na twoją profesje!");
+                            message("Kod umiejętności nie jest na twoją profesje!");
                             return;
                         }
                         if (combatCalculationMetric_4362.skills && combatCalculationMetric_4362.mastery) {
                             combatCalculationMetric_4345(combatCalculationMetric_4362.skills, combatCalculationMetric_4362.mastery);
                         } else {
-                            message("BÅ‚Ä™dny kod umiejÄ™tności!");
+                            message("Błędny kod umiejętności!");
                             return;
                         }
                         return;
                     } else {
-                        message("BÅ‚Ä™dny kod umiejÄ™tności!");
+                        message("Błędny kod umiejętności!");
                         return;
                     }
                 } else {
@@ -18974,7 +18974,7 @@ const {
         }
     }
     const combatCalculationMetric_4402 = window._g;
-    window._g = function(...combatCalculationMetric_4403) {
+    window._g = function (...combatCalculationMetric_4403) {
         let combatCalculationMetric_4404 = combatCalculationMetric_4403[0];
         if (typeof combatCalculationMetric_4404 !== "string") {
             return combatCalculationMetric_4402.apply(this, combatCalculationMetric_4403);
@@ -19072,85 +19072,85 @@ const {
                 checkPlayer: false,
                 extraCondition: combatCalculationMetric_4428 => combatCalculationMetric_4428.split(";")[1] != 0
             }, {
-                keyword: "curse",
-                condition: combatCalculationMetric_4419.curse.e,
-                message: combatCalculationMetric_4419.curse.m,
-                color: combatCalculationMetric_4419.curse.c,
-                checkPlayer: false
-            }, {
-                keyword: "lastheal",
-                condition: combatCalculationMetric_4419.lastheal.e,
-                message: combatCalculationMetric_4419.lastheal.m,
-                color: combatCalculationMetric_4419.lastheal.c,
-                checkPlayer: false
-            }, {
-                keyword: "-legbon_glare",
-                condition: combatCalculationMetric_4419.glare.e,
-                message: combatCalculationMetric_4419.glare.m,
-                color: combatCalculationMetric_4419.glare.c,
-                checkPlayer: false
-            }, {
-                keyword: "cleanse",
-                condition: combatCalculationMetric_4419.cleanse.e,
-                message: combatCalculationMetric_4419.cleanse.m,
-                color: combatCalculationMetric_4419.cleanse.c,
-                checkPlayer: true
-            }, {
-                keyword: "distract",
-                condition: combatCalculationMetric_4420.distract.e,
-                message: combatCalculationMetric_4420.distract.m,
-                color: combatCalculationMetric_4420.distract.c,
-                checkPlayer: false
-            }, {
-                keyword: "parry",
-                condition: combatCalculationMetric_4420.parry.e,
-                message: combatCalculationMetric_4420.parry.m,
-                color: combatCalculationMetric_4420.parry.c,
-                checkPlayer: true
-            }, {
-                keyword: "arrowblock",
-                condition: combatCalculationMetric_4420.arrowblock.e,
-                message: combatCalculationMetric_4420.arrowblock.m,
-                color: combatCalculationMetric_4420.arrowblock.c,
-                checkPlayer: true
-            }, {
-                keyword: "evade",
-                condition: combatCalculationMetric_4420.evade.e,
-                message: combatCalculationMetric_4420.evade.m,
-                color: combatCalculationMetric_4420.evade.c,
-                checkPlayer: true
-            }, {
-                keyword: "blok",
-                condition: combatCalculationMetric_4420.blok.e,
-                message: combatCalculationMetric_4420.blok.m,
-                color: combatCalculationMetric_4420.blok.c,
-                checkPlayer: true
-            }, {
-                keyword: "crit",
-                condition: combatCalculationMetric_4420.crit.e,
-                message: combatCalculationMetric_4420.crit.m,
-                color: combatCalculationMetric_4420.crit.c,
-                checkPlayer: false,
-                extraCondition: combatCalculationMetric_4429 => !combatCalculationMetric_4429.includes("verycrit")
-            }, {
-                keyword: "acdmg_destroyed",
-                condition: combatCalculationMetric_4420.acdmg_destroyed.e,
-                message: combatCalculationMetric_4420.acdmg_destroyed.m,
-                color: combatCalculationMetric_4420.acdmg_destroyed.c,
-                checkPlayer: true
-            }, {
-                keyword: "freeze",
-                condition: combatCalculationMetric_4420.freeze.e,
-                message: combatCalculationMetric_4420.freeze.m,
-                color: combatCalculationMetric_4420.freeze.c,
-                checkPlayer: false
-            }, {
-                keyword: "stun",
-                condition: combatCalculationMetric_4420.stun.e,
-                message: combatCalculationMetric_4420.stun.m,
-                color: combatCalculationMetric_4420.stun.c,
-                checkPlayer: false
-            }];
+                    keyword: "curse",
+                    condition: combatCalculationMetric_4419.curse.e,
+                    message: combatCalculationMetric_4419.curse.m,
+                    color: combatCalculationMetric_4419.curse.c,
+                    checkPlayer: false
+                }, {
+                    keyword: "lastheal",
+                    condition: combatCalculationMetric_4419.lastheal.e,
+                    message: combatCalculationMetric_4419.lastheal.m,
+                    color: combatCalculationMetric_4419.lastheal.c,
+                    checkPlayer: false
+                }, {
+                    keyword: "-legbon_glare",
+                    condition: combatCalculationMetric_4419.glare.e,
+                    message: combatCalculationMetric_4419.glare.m,
+                    color: combatCalculationMetric_4419.glare.c,
+                    checkPlayer: false
+                }, {
+                    keyword: "cleanse",
+                    condition: combatCalculationMetric_4419.cleanse.e,
+                    message: combatCalculationMetric_4419.cleanse.m,
+                    color: combatCalculationMetric_4419.cleanse.c,
+                    checkPlayer: true
+                }, {
+                    keyword: "distract",
+                    condition: combatCalculationMetric_4420.distract.e,
+                    message: combatCalculationMetric_4420.distract.m,
+                    color: combatCalculationMetric_4420.distract.c,
+                    checkPlayer: false
+                }, {
+                    keyword: "parry",
+                    condition: combatCalculationMetric_4420.parry.e,
+                    message: combatCalculationMetric_4420.parry.m,
+                    color: combatCalculationMetric_4420.parry.c,
+                    checkPlayer: true
+                }, {
+                    keyword: "arrowblock",
+                    condition: combatCalculationMetric_4420.arrowblock.e,
+                    message: combatCalculationMetric_4420.arrowblock.m,
+                    color: combatCalculationMetric_4420.arrowblock.c,
+                    checkPlayer: true
+                }, {
+                    keyword: "evade",
+                    condition: combatCalculationMetric_4420.evade.e,
+                    message: combatCalculationMetric_4420.evade.m,
+                    color: combatCalculationMetric_4420.evade.c,
+                    checkPlayer: true
+                }, {
+                    keyword: "blok",
+                    condition: combatCalculationMetric_4420.blok.e,
+                    message: combatCalculationMetric_4420.blok.m,
+                    color: combatCalculationMetric_4420.blok.c,
+                    checkPlayer: true
+                }, {
+                    keyword: "crit",
+                    condition: combatCalculationMetric_4420.crit.e,
+                    message: combatCalculationMetric_4420.crit.m,
+                    color: combatCalculationMetric_4420.crit.c,
+                    checkPlayer: false,
+                    extraCondition: combatCalculationMetric_4429 => !combatCalculationMetric_4429.includes("verycrit")
+                }, {
+                    keyword: "acdmg_destroyed",
+                    condition: combatCalculationMetric_4420.acdmg_destroyed.e,
+                    message: combatCalculationMetric_4420.acdmg_destroyed.m,
+                    color: combatCalculationMetric_4420.acdmg_destroyed.c,
+                    checkPlayer: true
+                }, {
+                    keyword: "freeze",
+                    condition: combatCalculationMetric_4420.freeze.e,
+                    message: combatCalculationMetric_4420.freeze.m,
+                    color: combatCalculationMetric_4420.freeze.c,
+                    checkPlayer: false
+                }, {
+                    keyword: "stun",
+                    condition: combatCalculationMetric_4420.stun.e,
+                    message: combatCalculationMetric_4420.stun.m,
+                    color: combatCalculationMetric_4420.stun.c,
+                    checkPlayer: false
+                }];
             combatCalculationMetric_4427.forEach(combatCalculationMetric_4430 => {
                 if (combatCalculationMetric_4417.includes(combatCalculationMetric_4430.keyword) && combatCalculationMetric_4430.condition) {
                     if (combatCalculationMetric_4430.extraCondition && !combatCalculationMetric_4430.extraCondition(combatCalculationMetric_4417)) {
@@ -19216,7 +19216,7 @@ const {
         }).tip("Zamknij");
         const combatCalculationMetric_4448 = $("<div class=\"" + (ADDON_STORAGE_REFERENCE.window[combatCalculationMetric_4438].s ? "mp-window-pin-button " : "mp-window-unpin-button ") + "do-action-cursor\"></div>").appendTo(combatCalculationMetric_4446);
         combatCalculationMetric_4448.tip(ADDON_STORAGE_REFERENCE.window[combatCalculationMetric_4438].s ? "Odblokuj okno" : "Zablokuj okno");
-        combatCalculationMetric_4448.click(async function() {
+        combatCalculationMetric_4448.click(async function () {
             const combatCalculationMetric_4449 = ADDON_STORAGE_REFERENCE.window[combatCalculationMetric_4438].s;
             ADDON_STORAGE_REFERENCE.window[combatCalculationMetric_4438].s = !combatCalculationMetric_4449;
             combatCalculationMetric_4442.draggable(combatCalculationMetric_4449 ? "enable" : "disable");
@@ -19371,7 +19371,7 @@ const {
         }, {
             id: 2,
             type: "unique",
-            name: "Ekstrakt unikalnoÅ›ci",
+            name: "Ekstrakt unikalności",
             icon: "ese_unikat"
         }, {
             id: 3,
@@ -19458,7 +19458,7 @@ const {
             }
             if (chatMuteDurationConfig.essence.has >= chatMuteDurationConfig.essence.needToSpin) {
                 let navigationMatrixCoordinate_4510 = chatMuteDurationConfig.essence.has.toString();
-                await _g("bonus_reselect&action=select&item=" + chatMuteDurationConfig.item + "&bonusIdx=" + navigationMatrixCoordinate_4507, async function() {
+                await _g("bonus_reselect&action=select&item=" + chatMuteDurationConfig.item + "&bonusIdx=" + navigationMatrixCoordinate_4507, async function () {
                     message("Posiadasz " + navigationMatrixCoordinate_4510 + " esencji do rollowania tego przedmiotu!");
                     navigationMatrixCoordinate_4504();
                     if (navigationMatrixCoordinate_4508) {
@@ -19480,7 +19480,7 @@ const {
                 });
             } else {
                 message("Potrzebujesz " + chatMuteDurationConfig.essence.needToSpin + " esencji!");
-                await _g("bonus_reselect&action=select&item=" + chatMuteDurationConfig.item + "&bonusIdx=" + navigationMatrixCoordinate_4507, async function() {
+                await _g("bonus_reselect&action=select&item=" + chatMuteDurationConfig.item + "&bonusIdx=" + navigationMatrixCoordinate_4507, async function () {
                     navigationMatrixCoordinate_4504();
                 });
                 networkProtocolPacket_2832();
@@ -19488,7 +19488,7 @@ const {
                 removeStyle("mp-addon-46");
             }
         } else {
-            await _g("moveitem&st=2&id=" + chatMuteDurationConfig.item + "&bonusIdx=" + navigationMatrixCoordinate_4507, async function() {
+            await _g("moveitem&st=2&id=" + chatMuteDurationConfig.item + "&bonusIdx=" + navigationMatrixCoordinate_4507, async function () {
                 if (!navigationMatrixCoordinate_4508) {
                     networkProtocolPacket_2832();
                     play_success();
@@ -19573,7 +19573,7 @@ const {
         if (ADDON_STORAGE_REFERENCE.window[navigationMatrixCoordinate_4521].s) {
             navigationMatrixCoordinate_4525.draggable("disable");
         }
-        $("\n                <div class=\"mp-window-header\">\n                    <div class=\"mp-window-header-left\"></div>\n                    <div class=\"mp-window-header-title do-action-cursor\">" + MODULE_ADDON_REGISTRY[46].name + "</div>\n                    <div class=\"mp-window-header-right\"></div>\n                </div>\n                <div class=\"content default-cursor\">\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-title\">Przedmiot</div>\n                        <div class=\"mp-item-spinner\"></div>\n                        " + (navigationMatrixCoordinate_4520.essence.needToSpin > 0 ? "<div class=\"text-center mp-spinner-info\">Wymaga <b>" + navigationMatrixCoordinate_4520.essence.needToSpin + "</b> esencji, której posiadasz <b>" + navigationMatrixCoordinate_4520.essence.has + "</b>.</div>" : "") + "\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-title\">Wyszukiwany bonus</div>\n                        <div class=\"mp-bonus-select-content\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-title\">Informacje</div>\n                        <div class=\"text-center mp-spinner-info\">Po wybraniu bonusu automatycznie rozpocznie siÄ™ wyszukiwanie</div>\n                        <div class=\"text-center\"><span class=\"mp-badge\">ESC</span> - anuluje wyszukiwanie</div>\n                    </div>\n                    \n                </div>\n            ").appendTo(navigationMatrixCoordinate_4525);
+        $("\n                <div class=\"mp-window-header\">\n                    <div class=\"mp-window-header-left\"></div>\n                    <div class=\"mp-window-header-title do-action-cursor\">" + MODULE_ADDON_REGISTRY[46].name + "</div>\n                    <div class=\"mp-window-header-right\"></div>\n                </div>\n                <div class=\"content default-cursor\">\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-title\">Przedmiot</div>\n                        <div class=\"mp-item-spinner\"></div>\n                        " + (navigationMatrixCoordinate_4520.essence.needToSpin > 0 ? "<div class=\"text-center mp-spinner-info\">Wymaga <b>" + navigationMatrixCoordinate_4520.essence.needToSpin + "</b> esencji, której posiadasz <b>" + navigationMatrixCoordinate_4520.essence.has + "</b>.</div>" : "") + "\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-title\">Wyszukiwany bonus</div>\n                        <div class=\"mp-bonus-select-content\"></div>\n                    </div>\n                    <div class=\"mp-background-section\">\n                        <div class=\"mp-title\">Informacje</div>\n                        <div class=\"text-center mp-spinner-info\">Po wybraniu bonusu automatycznie rozpocznie się wyszukiwanie</div>\n                        <div class=\"text-center\"><span class=\"mp-badge\">ESC</span> - anuluje wyszukiwanie</div>\n                    </div>\n                    \n                </div>\n            ").appendTo(navigationMatrixCoordinate_4525);
         const navigationMatrixCoordinate_4529 = navigationMatrixCoordinate_4525.find(".mp-bonus-select-content");
         const navigationMatrixCoordinate_4530 = {
             weapons: {
@@ -19582,7 +19582,7 @@ const {
                     tier: 1
                 },
                 ds: {
-                    name: "SiÅ‚a",
+                    name: "Siła",
                     tier: 1
                 },
                 di: {
@@ -19628,7 +19628,7 @@ const {
                     tier: 1
                 },
                 ds: {
-                    name: "SiÅ‚a",
+                    name: "Siła",
                     tier: 1
                 },
                 di: {
@@ -19648,11 +19648,11 @@ const {
                     tier: 2
                 },
                 reslight: {
-                    name: "Odporność na bÅ‚yskawice",
+                    name: "Odporność na błyskawice",
                     tier: 2
                 },
                 act: {
-                    name: "Odporność na truciznÄ™",
+                    name: "Odporność na truciznę",
                     tier: 2
                 },
                 ac: {
@@ -19682,11 +19682,11 @@ const {
             },
             jewelry: {
                 dz: {
-                    name: "ZrÄ™cznoÅ›Ä‡",
+                    name: "Zręczność",
                     tier: 1
                 },
                 ds: {
-                    name: "SiÅ‚a",
+                    name: "Siła",
                     tier: 1
                 },
                 di: {
@@ -19750,7 +19750,7 @@ const {
         const navigationMatrixCoordinate_4540 = $("<div class=\"mp-select-options do-action-cursor\"></div>").appendTo(navigationMatrixCoordinate_4538);
         navigationMatrixCoordinate_4534.forEach(navigationMatrixCoordinate_4541 => {
             const navigationMatrixCoordinate_4542 = $("<div class=\"mp-option do-action-cursor mp-option-tier-" + navigationMatrixCoordinate_4541.tier + "\" data-value=\"" + navigationMatrixCoordinate_4541.value + "\">" + navigationMatrixCoordinate_4541.label + "</div>");
-            navigationMatrixCoordinate_4542.on("click", function() {
+            navigationMatrixCoordinate_4542.on("click", function () {
                 addStyle("mp-addon-46", navigationMatrixCoordinate_4503);
                 const navigationMatrixCoordinate_4543 = $(this).data("value");
                 navigationMatrixCoordinate_4539.text(navigationMatrixCoordinate_4541.label);
@@ -19765,7 +19765,7 @@ const {
             });
             navigationMatrixCoordinate_4540.append(navigationMatrixCoordinate_4542);
         });
-        navigationMatrixCoordinate_4539.on("click", function(navigationMatrixCoordinate_4544) {
+        navigationMatrixCoordinate_4539.on("click", function (navigationMatrixCoordinate_4544) {
             navigationMatrixCoordinate_4544.stopPropagation();
             $(".mp-select-options").not(navigationMatrixCoordinate_4540).hide();
             navigationMatrixCoordinate_4540.toggle();
@@ -19780,7 +19780,7 @@ const {
         }).tip("Zamknij");
         const navigationMatrixCoordinate_4547 = $("<div class=\"" + (ADDON_STORAGE_REFERENCE.window[navigationMatrixCoordinate_4521].s ? "mp-window-pin-button " : "mp-window-unpin-button ") + "do-action-cursor\"></div>").appendTo(navigationMatrixCoordinate_4545);
         navigationMatrixCoordinate_4547.tip(ADDON_STORAGE_REFERENCE.window[navigationMatrixCoordinate_4521].s ? "Odblokuj okno" : "Zablokuj okno");
-        navigationMatrixCoordinate_4547.click(async function() {
+        navigationMatrixCoordinate_4547.click(async function () {
             const navigationMatrixCoordinate_4548 = ADDON_STORAGE_REFERENCE.window[navigationMatrixCoordinate_4521].s;
             ADDON_STORAGE_REFERENCE.window[navigationMatrixCoordinate_4521].s = !navigationMatrixCoordinate_4548;
             navigationMatrixCoordinate_4525.draggable(navigationMatrixCoordinate_4548 ? "enable" : "disable");
@@ -20101,7 +20101,7 @@ const {
     const navigationMatrixCoordinate_4654 = () => Engine.hero.d.gold;
     let navigationMatrixCoordinate_4655 = null;
     const navigationMatrixCoordinate_4656 = window.Engine.communication.parseJSON;
-    window.Engine.communication.parseJSON = function(navigationMatrixCoordinate_4657) {
+    window.Engine.communication.parseJSON = function (navigationMatrixCoordinate_4657) {
         const navigationMatrixCoordinate_4658 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[50].id];
         const navigationMatrixCoordinate_4659 = navigationMatrixCoordinate_4656.apply(this, arguments);
         if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[50].id]) {
@@ -20135,13 +20135,13 @@ const {
         const navigationMatrixCoordinate_4663 = navigationMatrixCoordinate_4654();
         const navigationMatrixCoordinate_4664 = navigationMatrixCoordinate_4658.cost;
         for (const {
-                id: navigationMatrixCoordinate_4665,
-                bid_g: navigationMatrixCoordinate_4666,
-                bo_c: navigationMatrixCoordinate_4667,
-                bidder = 0,
-                is_observed: navigationMatrixCoordinate_4668,
-                own_auction = false
-            }
+            id: navigationMatrixCoordinate_4665,
+            bid_g: navigationMatrixCoordinate_4666,
+            bo_c: navigationMatrixCoordinate_4667,
+            bidder = 0,
+            is_observed: navigationMatrixCoordinate_4668,
+            own_auction = false
+        }
             of navigationMatrixCoordinate_4661) {
             if (!navigationMatrixCoordinate_4665 || !navigationMatrixCoordinate_4666 || bidder >= 2 || !navigationMatrixCoordinate_4668 || own_auction || navigationMatrixCoordinate_4667 || navigationMatrixCoordinate_4666 > navigationMatrixCoordinate_4663 || navigationMatrixCoordinate_4666 > navigationMatrixCoordinate_4664) {
                 continue;
@@ -20188,10 +20188,10 @@ const {
         };
         navigationMatrixCoordinate_4682[Engine.hero.d.prof] = 1;
         for (const {
-                d: {
-                    prof: navigationMatrixCoordinate_4683
-                }
+            d: {
+                prof: navigationMatrixCoordinate_4683
             }
+        }
             of navigationMatrixCoordinate_4681) {
             if (navigationMatrixCoordinate_4682[navigationMatrixCoordinate_4683] !== undefined) {
                 navigationMatrixCoordinate_4682[navigationMatrixCoordinate_4683]++;
@@ -20443,7 +20443,7 @@ const {
             navigationMatrixCoordinate_4735 = [];
             const navigationMatrixCoordinate_4746 = navigationMatrixCoordinate_4741[0].getBoundingClientRect();
             navigationMatrixCoordinate_4743().forEach(navigationMatrixCoordinate_4747 => {
-                $(navigationMatrixCoordinate_4747).find(".item").each(function() {
+                $(navigationMatrixCoordinate_4747).find(".item").each(function () {
                     const navigationMatrixCoordinate_4748 = this.getBoundingClientRect();
                     const navigationMatrixCoordinate_4749 = navigationMatrixCoordinate_4746.left < navigationMatrixCoordinate_4748.right && navigationMatrixCoordinate_4746.right > navigationMatrixCoordinate_4748.left && navigationMatrixCoordinate_4746.top < navigationMatrixCoordinate_4748.bottom && navigationMatrixCoordinate_4746.bottom > navigationMatrixCoordinate_4748.top;
                     $(this).toggleClass("mp-selected", navigationMatrixCoordinate_4749);
@@ -20557,13 +20557,13 @@ const {
                 await startGetEnhacement(navigationMatrixCoordinate_4767);
             }
             if (navigationMatrixCoordinate_4769.length && Engine.crafting?.salvage) {
-                $(".salvage__reagents").find(".item").each(function() {
+                $(".salvage__reagents").find(".item").each(function () {
                     $(this).remove();
                 });
-                $(".salvage__receives").find(".item").each(function() {
+                $(".salvage__receives").find(".item").each(function () {
                     $(this).remove();
                 });
-                $(".inventory-grid .inner-grid .scroll-pane").find(".moved").each(function() {
+                $(".inventory-grid .inner-grid .scroll-pane").find(".moved").each(function () {
                     const navigationMatrixCoordinate_4774 = $(this);
                     if (!navigationMatrixCoordinate_4774.hasClass("SALVAGE-disable") && navigationMatrixCoordinate_4774.hasClass("moved")) {
                         navigationMatrixCoordinate_4774.removeClass("moved");
@@ -20575,7 +20575,7 @@ const {
                 Engine.crafting.salvage.selectedInventoryItems = [];
             } else if (navigationMatrixCoordinate_4768.length && Engine.crafting?.salvage) {
                 const navigationMatrixCoordinate_4775 = Engine.crafting.salvage.selectedInventoryItems.concat(navigationMatrixCoordinate_4768);
-                _g("salvager&action=preview&selectedItems=" + navigationMatrixCoordinate_4775.slice(0, 25).toString(), function(navigationMatrixCoordinate_4776) {
+                _g("salvager&action=preview&selectedItems=" + navigationMatrixCoordinate_4775.slice(0, 25).toString(), function (navigationMatrixCoordinate_4776) {
                     if (navigationMatrixCoordinate_4776?.salvager_preview?.item) {
                         $(".mp-selected").removeClass("mp-selected");
                         Engine.crafting.salvage.selectedInventoryItems = navigationMatrixCoordinate_4775.slice(0, 25);
@@ -20614,7 +20614,7 @@ const {
                 passive: false
             });
         }
-        window.scrollCounterHandler = function(navigationMatrixCoordinate_4779) {
+        window.scrollCounterHandler = function (navigationMatrixCoordinate_4779) {
             if (Engine?.depo && ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[53].id]) {
                 navigationMatrixCoordinate_4779.preventDefault();
                 let navigationMatrixCoordinate_4780 = Engine.depo.getVisible();
@@ -20899,7 +20899,7 @@ const {
         };
         const navigationMatrixCoordinate_4858 = navigationMatrixCoordinate_4854();
         if (!navigationMatrixCoordinate_4858) {
-            message("Brak wolnego miejsca – nie da się sortowaÄ‡");
+            message("Brak wolnego miejsca – nie da się sortować");
             navigationMatrixCoordinate_4736();
             navigationMatrixCoordinate_4783 = false;
             return;
@@ -20956,10 +20956,10 @@ const {
 
         function navigationMatrixCoordinate_4878() {
             const navigationMatrixCoordinate_4879 = $("\n        <div class=\"mp-deposit-helper\">\n            <div class=\"mp-deposit-button-types mp-separator\">\n                <div id=\"mp-deposit-common\" class=\"mp-button-deposit do-action-cursor mp-deposit-common\">Zwykłe</div>\n                <div id=\"mp-deposit-unique\" class=\"mp-button-deposit do-action-cursor mp-deposit-unique\">Unikatowe</div>\n                <div id=\"mp-deposit-heroic\" class=\"mp-button-deposit do-action-cursor mp-deposit-heroic\">Heroiczne</div>\n                <div id=\"mp-deposit-upgraded\" class=\"mp-button-deposit do-action-cursor mp-deposit-upgraded\">Ulepszone</div>\n                <div id=\"mp-deposit-legendary\" class=\"mp-button-deposit do-action-cursor mp-deposit-legendary\">Legendarne</div>\n                <div id=\"mp-deposit-settings\" class=\"mp-button-deposit-box do-action-cursor mp-deposit-settings\"></div>\n                <div id=\"mp-deposit-bind\" class=\"mp-button-deposit-box2 do-action-cursor mp-deposit-bind " + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.bind ? "bg-green" : "bg-red") + "\"></div>\n                <div id=\"mp-deposit-target\" class=\"mp-button-deposit-box do-action-cursor mp-deposit-tab\">" + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.tab ? "TAB" : "ALL") + "</div>\n            </div>\n            <div class=\"mp-deposit-button-types\">\n                <div id=\"mp-deposit-nugget\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/zlo/samorodek02.gif');\"></div>\n                <div id=\"mp-deposit-bless\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/ble/placeholder.gif');\"></div>\n                <div id=\"mp-deposit-expires\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/eve/west-cebula.gif');\"></div>\n                <div id=\"mp-deposit-dust\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/que/paczka01.gif');\"></div>\n                <div id=\"mp-deposit-upgrade\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/upg/wielkanoc_upg_09.gif');\"></div>\n                <div id=\"mp-deposit-exp\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/kon/wielkanoc_elita_08.gif');\"></div>\n                <div id=\"mp-deposit-coupon\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/eve/kuf_kupony.gif');\"></div>\n                <div id=\"mp-deposit-skins\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/eve/maska_zuego.gif');\"></div>\n                <div id=\"mp-deposit-chest\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/neu/64_kopalnia_04.gif');\"></div>\n                <div id=\"mp-deposit-components\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/bag/kuf_compontent_06.gif.gif');\"></div>\n                <div id=\"mp-deposit-weapons\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/mie/placeholder.gif');\"></div>\n                <div id=\"mp-deposit-armors\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/zbr/placeholder.gif');\"></div>\n                <div id=\"mp-deposit-jewelry\" class=\"mp-button-deposit-box do-action-cursor\" style=\"background: url('https://micc.garmory-cdn.cloud/obrazki/itemy/pie/placeholder.gif');\"></div>\n                <div id=\"mp-deposit-sort\" class=\"mp-button-deposit-box do-action-cursor mp-deposit-sort\"></div>\n            </div>\n        </div>\n    ").appendTo(".depo .filter-section");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-sort").click(function() {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-sort").click(function () {
                 navigationMatrixCoordinate_4784();
-            }).tip("Sortowanie przedmiotÃ³w w zakÅ‚adce");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-settings").click(function() {
+            }).tip("Sortowanie przedmiotów w zakładce");
+            navigationMatrixCoordinate_4879.find("#mp-deposit-settings").click(function () {
                 const navigationMatrixCoordinate_4880 = "" + MODULE_ADDON_REGISTRY[53].id;
                 const navigationMatrixCoordinate_4881 = "#w-" + navigationMatrixCoordinate_4880;
                 const navigationMatrixCoordinate_4882 = ADDON_STORAGE_REFERENCE.window[navigationMatrixCoordinate_4880].o;
@@ -20967,28 +20967,28 @@ const {
                 $(navigationMatrixCoordinate_4881).toggle(!navigationMatrixCoordinate_4882);
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
             }).tip("Ustawienia");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-target").click(function() {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-target").click(function () {
                 const navigationMatrixCoordinate_4883 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.tab;
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.tab = !navigationMatrixCoordinate_4883;
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 $(this).html(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.tab ? "TAB" : "ALL");
-                $(this).tip("Kliknij, aby zmienić<br><br>Wyjmowanie przedmiotów " + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.tab ? "z aktualnej zakładki" : "ze wszystkich zakÅ‚adek"));
+                $(this).tip("Kliknij, aby zmienić<br><br>Wyjmowanie przedmiotów " + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.tab ? "z aktualnej zakładki" : "ze wszystkich zakładek"));
             }).tip("Kliknij, aby zmienić<br><br>Wyjmowanie przedmiotów " + (ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.tab ? "z aktualnej zakładki" : "ze wszystkich zakładek"));
-            navigationMatrixCoordinate_4879.find("#mp-deposit-bind").click(function() {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-bind").click(function () {
                 const navigationMatrixCoordinate_4884 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.bind;
                 ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.bind = !navigationMatrixCoordinate_4884;
                 saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
                 $(this).removeClass("bg-green bg-red");
                 $(this).addClass(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.bind ? "bg-green" : "bg-red");
-                $(this).tip(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.bind ? "Wyjmowanie związanych przedmiotów <bold>wÅ‚Ä…czone</bold>" : "Wyjmowanie zwiÄ…zanych przedmiotów <bold>wyłączone</bold>");
-            }).tip(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.bind ? "Wyjmowanie zwiÄ…zanych przedmiotów <bold>wÅ‚Ä…czone</bold>" : "Wyjmowanie zwiÄ…zanych przedmiotów <bold>wyłączone</bold>");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-common").click(function(navigationMatrixCoordinate_4885) {
+                $(this).tip(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.bind ? "Wyjmowanie związanych przedmiotów <bold>włączone</bold>" : "Wyjmowanie związanych przedmiotów <bold>wyłączone</bold>");
+            }).tip(ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit.bind ? "Wyjmowanie związanych przedmiotów <bold>włączone</bold>" : "Wyjmowanie związanych przedmiotów <bold>wyłączone</bold>");
+            navigationMatrixCoordinate_4879.find("#mp-deposit-common").click(function (navigationMatrixCoordinate_4885) {
                 const navigationMatrixCoordinate_4886 = getItemArrayFromLocWithValid("g", "common", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 const navigationMatrixCoordinate_4887 = getItemArrayFromLocWithValid("d", "common", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 let navigationMatrixCoordinate_4888 = [];
                 if (navigationMatrixCoordinate_4886.length) {
-                    navigationMatrixCoordinate_4888.push(["WÅ‚Ã³Å¼ do depozytu (" + navigationMatrixCoordinate_4886.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4886.length + " przedmiotÃ³w");
+                    navigationMatrixCoordinate_4888.push(["Włóż do depozytu (" + navigationMatrixCoordinate_4886.length + ")", () => {
+                        message("Wkładam " + navigationMatrixCoordinate_4886.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4886);
                     }, {
                         button: {
@@ -20998,7 +20998,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4887.length) {
                     navigationMatrixCoordinate_4888.push(["Wyjmij z depozytu (" + navigationMatrixCoordinate_4887.length + ")", () => {
-                        message("Wyjmuję " + navigationMatrixCoordinate_4887.length + " przedmiotÃ³w");
+                        message("Wyjmuję " + navigationMatrixCoordinate_4887.length + " przedmiotów");
                         startGetSelect(navigationMatrixCoordinate_4887);
                     }, {
                         button: {
@@ -21012,13 +21012,13 @@ const {
                     message("Brak przedmiotów spełniających kryteria");
                 }
             }).tip("Przedmioty zwykłe");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-unique").click(function(navigationMatrixCoordinate_4889) {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-unique").click(function (navigationMatrixCoordinate_4889) {
                 const navigationMatrixCoordinate_4890 = getItemArrayFromLocWithValid("g", "unique", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 const navigationMatrixCoordinate_4891 = getItemArrayFromLocWithValid("d", "unique", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 let navigationMatrixCoordinate_4892 = [];
                 if (navigationMatrixCoordinate_4890.length) {
                     navigationMatrixCoordinate_4892.push(["Włóż do depozytu (" + navigationMatrixCoordinate_4890.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4890.length + " przedmiotÃ³w");
+                        message("Wkładam " + navigationMatrixCoordinate_4890.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4890);
                     }, {
                         button: {
@@ -21028,7 +21028,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4891.length) {
                     navigationMatrixCoordinate_4892.push(["Wyjmij z depozytu (" + navigationMatrixCoordinate_4891.length + ")", () => {
-                        message("WyjmujÄ™ " + navigationMatrixCoordinate_4891.length + " przedmiotÃ³w");
+                        message("Wyjmuję " + navigationMatrixCoordinate_4891.length + " przedmiotów");
                         startGetSelect(navigationMatrixCoordinate_4891);
                     }, {
                         button: {
@@ -21039,16 +21039,16 @@ const {
                 if (navigationMatrixCoordinate_4892.length) {
                     Engine.interface.showPopupMenu(navigationMatrixCoordinate_4892, navigationMatrixCoordinate_4889);
                 } else {
-                    message("Brak przedmiotów speÅ‚niajÄ…cych kryteria");
+                    message("Brak przedmiotów spełniających kryteria");
                 }
             }).tip("Przedmioty unikatowe");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-heroic").click(function(navigationMatrixCoordinate_4893) {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-heroic").click(function (navigationMatrixCoordinate_4893) {
                 const navigationMatrixCoordinate_4894 = getItemArrayFromLocWithValid("g", "heroic", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 const navigationMatrixCoordinate_4895 = getItemArrayFromLocWithValid("d", "heroic", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 let navigationMatrixCoordinate_4896 = [];
                 if (navigationMatrixCoordinate_4894.length) {
                     navigationMatrixCoordinate_4896.push(["Włóż do depozytu (" + navigationMatrixCoordinate_4894.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4894.length + " przedmiotÃ³w");
+                        message("Wkładam " + navigationMatrixCoordinate_4894.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4894);
                     }, {
                         button: {
@@ -21058,7 +21058,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4895.length) {
                     navigationMatrixCoordinate_4896.push(["Wyjmij z depozytu (" + navigationMatrixCoordinate_4895.length + ")", () => {
-                        message("Wyjmuję " + navigationMatrixCoordinate_4895.length + " przedmiotÃ³w");
+                        message("Wyjmuję " + navigationMatrixCoordinate_4895.length + " przedmiotów");
                         startGetSelect(navigationMatrixCoordinate_4895);
                     }, {
                         button: {
@@ -21069,16 +21069,16 @@ const {
                 if (navigationMatrixCoordinate_4896.length) {
                     Engine.interface.showPopupMenu(navigationMatrixCoordinate_4896, navigationMatrixCoordinate_4893);
                 } else {
-                    message("Brak przedmiotÃ³w speÅ‚niajÄ…cych kryteria");
+                    message("Brak przedmiotów spełniających kryteria");
                 }
             }).tip("Przedmioty heroiczne");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-upgraded").click(function(navigationMatrixCoordinate_4897) {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-upgraded").click(function (navigationMatrixCoordinate_4897) {
                 const navigationMatrixCoordinate_4898 = getItemArrayFromLocWithValid("g", "upgraded", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 const navigationMatrixCoordinate_4899 = getItemArrayFromLocWithValid("d", "upgraded", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 let navigationMatrixCoordinate_4900 = [];
                 if (navigationMatrixCoordinate_4898.length) {
-                    navigationMatrixCoordinate_4900.push(["WÅ‚Ã³Å¼ do depozytu (" + navigationMatrixCoordinate_4898.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4898.length + " przedmiotÃ³w");
+                    navigationMatrixCoordinate_4900.push(["Włóż do depozytu (" + navigationMatrixCoordinate_4898.length + ")", () => {
+                        message("Wkładam " + navigationMatrixCoordinate_4898.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4898);
                     }, {
                         button: {
@@ -21088,7 +21088,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4899.length) {
                     navigationMatrixCoordinate_4900.push(["Wyjmij z depozytu (" + navigationMatrixCoordinate_4899.length + ")", () => {
-                        message("WyjmujÄ™ " + navigationMatrixCoordinate_4899.length + " przedmiotÃ³w");
+                        message("Wyjmuję " + navigationMatrixCoordinate_4899.length + " przedmiotów");
                         startGetSelect(navigationMatrixCoordinate_4899);
                     }, {
                         button: {
@@ -21102,13 +21102,13 @@ const {
                     message("Brak przedmiotów spełniających kryteria");
                 }
             }).tip("Przedmioty ulepszone");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-legendary").click(function(navigationMatrixCoordinate_4901) {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-legendary").click(function (navigationMatrixCoordinate_4901) {
                 const navigationMatrixCoordinate_4902 = getItemArrayFromLocWithValid("g", "legendary", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 const navigationMatrixCoordinate_4903 = getItemArrayFromLocWithValid("d", "legendary", ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit);
                 let navigationMatrixCoordinate_4904 = [];
                 if (navigationMatrixCoordinate_4902.length) {
-                    navigationMatrixCoordinate_4904.push(["WÅ‚Ã³Å¼ do depozytu (" + navigationMatrixCoordinate_4902.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4902.length + " przedmiotÃ³w");
+                    navigationMatrixCoordinate_4904.push(["Włóż do depozytu (" + navigationMatrixCoordinate_4902.length + ")", () => {
+                        message("Wkładam " + navigationMatrixCoordinate_4902.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4902);
                     }, {
                         button: {
@@ -21118,7 +21118,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4903.length) {
                     navigationMatrixCoordinate_4904.push(["Wyjmij z depozytu (" + navigationMatrixCoordinate_4903.length + ")", () => {
-                        message("Wyjmuję " + navigationMatrixCoordinate_4903.length + " przedmiotÃ³w");
+                        message("Wyjmuję " + navigationMatrixCoordinate_4903.length + " przedmiotów");
                         startGetSelect(navigationMatrixCoordinate_4903);
                     }, {
                         button: {
@@ -21132,7 +21132,7 @@ const {
                     message("Brak przedmiotów spełniających kryteria");
                 }
             }).tip("Przedmioty legendarne");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-components").click(function(navigationMatrixCoordinate_4905) {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-components").click(function (navigationMatrixCoordinate_4905) {
                 let navigationMatrixCoordinate_4906 = [];
                 const navigationMatrixCoordinate_4907 = getItemsFromEqByComponentsTier1().map(navigationMatrixCoordinate_4908 => navigationMatrixCoordinate_4908.id);
                 const navigationMatrixCoordinate_4909 = getItemsFromDepoAllByComponentsTier1().map(navigationMatrixCoordinate_4910 => navigationMatrixCoordinate_4910.id);
@@ -21149,7 +21149,7 @@ const {
                         if (navigationMatrixCoordinate_4911.length) {
                             navigationMatrixCoordinate_4925.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4911.length + ")", () => {
                                 if (navigationMatrixCoordinate_4911.length) {
-                                    message("WyjmujÄ™ " + navigationMatrixCoordinate_4911.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4911.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4911);
                                 }
                             }, {
@@ -21161,7 +21161,7 @@ const {
                         if (navigationMatrixCoordinate_4909.length && navigationMatrixCoordinate_4909.length > navigationMatrixCoordinate_4911.length) {
                             navigationMatrixCoordinate_4925.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4909.length + ")", () => {
                                 if (navigationMatrixCoordinate_4909.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_4909.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4909.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4909);
                                 }
                             }, {
@@ -21171,8 +21171,8 @@ const {
                             }]);
                         }
                         if (navigationMatrixCoordinate_4907.length) {
-                            navigationMatrixCoordinate_4925.push(["WÅ‚Ã³Å¼ wszystkie (" + navigationMatrixCoordinate_4907.length + ")", () => {
-                                message("WkÅ‚adam " + navigationMatrixCoordinate_4907.length + " przedmiotÃ³w");
+                            navigationMatrixCoordinate_4925.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4907.length + ")", () => {
+                                message("Wkładam " + navigationMatrixCoordinate_4907.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_4907);
                             }, {
                                 button: {
@@ -21182,18 +21182,18 @@ const {
                         }
                         Engine.interface.showPopupMenu(navigationMatrixCoordinate_4925, navigationMatrixCoordinate_4905);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item-t1"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item-t1"
+                            }
+                        }]);
                 }
                 if (navigationMatrixCoordinate_4915.length + navigationMatrixCoordinate_4913.length) {
                     navigationMatrixCoordinate_4906.push(["Tier 2 (101-200)", () => {
                         let navigationMatrixCoordinate_4926 = [];
                         if (navigationMatrixCoordinate_4917.length) {
-                            navigationMatrixCoordinate_4926.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_4917.length + ")", () => {
+                            navigationMatrixCoordinate_4926.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4917.length + ")", () => {
                                 if (navigationMatrixCoordinate_4917.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_4917.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4917.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4917);
                                 }
                             }, {
@@ -21205,7 +21205,7 @@ const {
                         if (navigationMatrixCoordinate_4915.length && navigationMatrixCoordinate_4915.length > navigationMatrixCoordinate_4917.length) {
                             navigationMatrixCoordinate_4926.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4915.length + ")", () => {
                                 if (navigationMatrixCoordinate_4915.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_4915.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4915.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4915);
                                 }
                             }, {
@@ -21216,7 +21216,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_4913.length) {
                             navigationMatrixCoordinate_4926.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4913.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_4913.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_4913.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_4913);
                             }, {
                                 button: {
@@ -21226,10 +21226,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(navigationMatrixCoordinate_4926, navigationMatrixCoordinate_4905);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item-t2"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item-t2"
+                            }
+                        }]);
                 }
                 if (navigationMatrixCoordinate_4921.length + navigationMatrixCoordinate_4919.length) {
                     navigationMatrixCoordinate_4906.push(["Tier 3 (201-300)", () => {
@@ -21237,7 +21237,7 @@ const {
                         if (navigationMatrixCoordinate_4923.length) {
                             navigationMatrixCoordinate_4927.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4923.length + ")", () => {
                                 if (navigationMatrixCoordinate_4923.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_4923.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4923.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4923);
                                 }
                             }, {
@@ -21249,7 +21249,7 @@ const {
                         if (navigationMatrixCoordinate_4921.length && navigationMatrixCoordinate_4921.length > navigationMatrixCoordinate_4923.length) {
                             navigationMatrixCoordinate_4927.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4921.length + ")", () => {
                                 if (navigationMatrixCoordinate_4921.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_4921.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4921.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4921);
                                 }
                             }, {
@@ -21260,7 +21260,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_4919.length) {
                             navigationMatrixCoordinate_4927.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4919.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_4919.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_4919.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_4919);
                             }, {
                                 button: {
@@ -21270,10 +21270,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(navigationMatrixCoordinate_4927, navigationMatrixCoordinate_4905);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item-t3"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item-t3"
+                            }
+                        }]);
                 }
                 if (navigationMatrixCoordinate_4906.length) {
                     Engine.interface.showPopupMenu(navigationMatrixCoordinate_4906, navigationMatrixCoordinate_4905);
@@ -21281,7 +21281,7 @@ const {
                     message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Wszystko co związane z komponentami i symbolami - skrytki, skrzybki, componenty i symbole");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-expires").click(function() {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-expires").click(function () {
                 const navigationMatrixCoordinate_4928 = getItemsFromDepoTabByExpiries().map(navigationMatrixCoordinate_4929 => navigationMatrixCoordinate_4929.id);
                 const navigationMatrixCoordinate_4930 = getItemsFromDepoAllByExpiries().map(navigationMatrixCoordinate_4931 => navigationMatrixCoordinate_4931.id);
                 const navigationMatrixCoordinate_4932 = getItemsFromEqByExpiries().map(navigationMatrixCoordinate_4933 => navigationMatrixCoordinate_4933.id);
@@ -21289,7 +21289,7 @@ const {
                 if (navigationMatrixCoordinate_4928.length) {
                     navigationMatrixCoordinate_4934.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4928.length + ")", () => {
                         if (navigationMatrixCoordinate_4928.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4928.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4928.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4928);
                         }
                     }, {
@@ -21301,7 +21301,7 @@ const {
                 if (navigationMatrixCoordinate_4930.length && navigationMatrixCoordinate_4930.length > navigationMatrixCoordinate_4928.length) {
                     navigationMatrixCoordinate_4934.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4930.length + ")", () => {
                         if (navigationMatrixCoordinate_4930.length) {
-                            message("WyjmujÄ™ " + navigationMatrixCoordinate_4930.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4930.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4930);
                         }
                     }, {
@@ -21311,8 +21311,8 @@ const {
                     }]);
                 }
                 if (navigationMatrixCoordinate_4932.length) {
-                    navigationMatrixCoordinate_4934.push(["WÅ‚Ã³Å¼ wszystkie (" + navigationMatrixCoordinate_4932.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4932.length + " przedmiotÃ³w");
+                    navigationMatrixCoordinate_4934.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4932.length + ")", () => {
+                        message("Wkładam " + navigationMatrixCoordinate_4932.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4932);
                     }, {
                         button: {
@@ -21323,10 +21323,10 @@ const {
                 if (navigationMatrixCoordinate_4934.length) {
                     Engine.interface.showPopupMenu(navigationMatrixCoordinate_4934, event);
                 } else {
-                    message("Nie posiadasz tego typu przedmiotÃ³w");
+                    message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Przedmioty, które straciły ważność");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-dust").click(function() {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-dust").click(function () {
                 const navigationMatrixCoordinate_4935 = getItemsFromDepoTabByDust().map(navigationMatrixCoordinate_4936 => navigationMatrixCoordinate_4936.id);
                 const navigationMatrixCoordinate_4937 = getItemsFromDepoAllByDust().map(navigationMatrixCoordinate_4938 => navigationMatrixCoordinate_4938.id);
                 const navigationMatrixCoordinate_4939 = getItemsFromEqByDust().map(navigationMatrixCoordinate_4940 => navigationMatrixCoordinate_4940.id);
@@ -21334,7 +21334,7 @@ const {
                 if (navigationMatrixCoordinate_4935.length) {
                     navigationMatrixCoordinate_4941.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4935.length + ")", () => {
                         if (navigationMatrixCoordinate_4935.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4935.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4935.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4935);
                         }
                     }, {
@@ -21346,7 +21346,7 @@ const {
                 if (navigationMatrixCoordinate_4937.length && navigationMatrixCoordinate_4937.length > navigationMatrixCoordinate_4935.length) {
                     navigationMatrixCoordinate_4941.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4937.length + ")", () => {
                         if (navigationMatrixCoordinate_4937.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4937.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4937.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4937);
                         }
                     }, {
@@ -21356,8 +21356,8 @@ const {
                     }]);
                 }
                 if (navigationMatrixCoordinate_4939.length) {
-                    navigationMatrixCoordinate_4941.push(["WÅ‚Ã³Å¼ wszystkie (" + navigationMatrixCoordinate_4939.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4939.length + " przedmiotÃ³w");
+                    navigationMatrixCoordinate_4941.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4939.length + ")", () => {
+                        message("Wkładam " + navigationMatrixCoordinate_4939.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4939);
                     }, {
                         button: {
@@ -21371,15 +21371,15 @@ const {
                     message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Wszystkie pyły astralne i paczki z pyłem");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-upgrade").click(function() {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-upgrade").click(function () {
                 const navigationMatrixCoordinate_4942 = getItemsFromDepoTabByPkt().map(navigationMatrixCoordinate_4943 => navigationMatrixCoordinate_4943.id);
                 const navigationMatrixCoordinate_4944 = getItemsFromDepoAllByPkt().map(navigationMatrixCoordinate_4945 => navigationMatrixCoordinate_4945.id);
                 const navigationMatrixCoordinate_4946 = getItemsFromEqByPkt().map(navigationMatrixCoordinate_4947 => navigationMatrixCoordinate_4947.id);
                 let navigationMatrixCoordinate_4948 = [];
                 if (navigationMatrixCoordinate_4942.length) {
-                    navigationMatrixCoordinate_4948.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_4942.length + ")", () => {
+                    navigationMatrixCoordinate_4948.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4942.length + ")", () => {
                         if (navigationMatrixCoordinate_4942.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4942.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4942.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4942);
                         }
                     }, {
@@ -21391,7 +21391,7 @@ const {
                 if (navigationMatrixCoordinate_4944.length && navigationMatrixCoordinate_4944.length > navigationMatrixCoordinate_4942.length) {
                     navigationMatrixCoordinate_4948.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4944.length + ")", () => {
                         if (navigationMatrixCoordinate_4944.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4944.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4944.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4944);
                         }
                     }, {
@@ -21402,7 +21402,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4946.length) {
                     navigationMatrixCoordinate_4948.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4946.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4946.length + " przedmiotÃ³w");
+                        message("Wkładam " + navigationMatrixCoordinate_4946.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4946);
                     }, {
                         button: {
@@ -21416,15 +21416,15 @@ const {
                     message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Punkty ulepszenia przedmiotu");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-exp").click(function() {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-exp").click(function () {
                 const navigationMatrixCoordinate_4949 = getItemsFromDepoTabByExp().map(navigationMatrixCoordinate_4950 => navigationMatrixCoordinate_4950.id);
                 const navigationMatrixCoordinate_4951 = getItemsFromDepoAllByExp().map(navigationMatrixCoordinate_4952 => navigationMatrixCoordinate_4952.id);
                 const navigationMatrixCoordinate_4953 = getItemsFromEqByExp().map(navigationMatrixCoordinate_4954 => navigationMatrixCoordinate_4954.id);
                 let navigationMatrixCoordinate_4955 = [];
                 if (navigationMatrixCoordinate_4949.length) {
-                    navigationMatrixCoordinate_4955.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_4949.length + ")", () => {
+                    navigationMatrixCoordinate_4955.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4949.length + ")", () => {
                         if (navigationMatrixCoordinate_4949.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4949.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4949.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4949);
                         }
                     }, {
@@ -21436,7 +21436,7 @@ const {
                 if (navigationMatrixCoordinate_4951.length && navigationMatrixCoordinate_4951.length > navigationMatrixCoordinate_4949.length) {
                     navigationMatrixCoordinate_4955.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4951.length + ")", () => {
                         if (navigationMatrixCoordinate_4951.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4951.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4951.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4951);
                         }
                     }, {
@@ -21447,7 +21447,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4953.length) {
                     navigationMatrixCoordinate_4955.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4953.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4953.length + " przedmiotÃ³w");
+                        message("Wkładam " + navigationMatrixCoordinate_4953.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4953);
                     }, {
                         button: {
@@ -21461,7 +21461,7 @@ const {
                     message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Butelki dodające doświadczenie");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-coupon").click(function() {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-coupon").click(function () {
                 const navigationMatrixCoordinate_4956 = getItemsFromDepoTabByCoupon().map(navigationMatrixCoordinate_4957 => navigationMatrixCoordinate_4957.id);
                 const navigationMatrixCoordinate_4958 = getItemsFromDepoAllByCoupon().map(navigationMatrixCoordinate_4959 => navigationMatrixCoordinate_4959.id);
                 const navigationMatrixCoordinate_4960 = getItemsFromEqByCoupon().map(navigationMatrixCoordinate_4961 => navigationMatrixCoordinate_4961.id);
@@ -21469,7 +21469,7 @@ const {
                 if (navigationMatrixCoordinate_4956.length) {
                     navigationMatrixCoordinate_4962.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4956.length + ")", () => {
                         if (navigationMatrixCoordinate_4956.length) {
-                            message("WyjmujÄ™ " + navigationMatrixCoordinate_4956.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4956.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4956);
                         }
                     }, {
@@ -21481,7 +21481,7 @@ const {
                 if (navigationMatrixCoordinate_4958.length && navigationMatrixCoordinate_4958.length > navigationMatrixCoordinate_4956.length) {
                     navigationMatrixCoordinate_4962.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4958.length + ")", () => {
                         if (navigationMatrixCoordinate_4958.length) {
-                            message("WyjmujÄ™ " + navigationMatrixCoordinate_4958.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4958.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4958);
                         }
                     }, {
@@ -21492,7 +21492,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4960.length) {
                     navigationMatrixCoordinate_4962.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4960.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4960.length + " przedmiotÃ³w");
+                        message("Wkładam " + navigationMatrixCoordinate_4960.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4960);
                     }, {
                         button: {
@@ -21503,10 +21503,10 @@ const {
                 if (navigationMatrixCoordinate_4962.length) {
                     Engine.interface.showPopupMenu(navigationMatrixCoordinate_4962, event);
                 } else {
-                    message("Nie posiadasz tego typu przedmiotÃ³w");
+                    message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Kupony na teleport, torby, przywołania i strój");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-skins").click(function() {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-skins").click(function () {
                 const navigationMatrixCoordinate_4963 = getItemsFromDepoTabBySkinItems().map(navigationMatrixCoordinate_4964 => navigationMatrixCoordinate_4964.id);
                 const navigationMatrixCoordinate_4965 = getItemsFromDepoAllBySkinItems().map(navigationMatrixCoordinate_4966 => navigationMatrixCoordinate_4966.id);
                 const navigationMatrixCoordinate_4967 = getItemsFromEqBySkinItems().map(navigationMatrixCoordinate_4968 => navigationMatrixCoordinate_4968.id);
@@ -21514,7 +21514,7 @@ const {
                 if (navigationMatrixCoordinate_4963.length) {
                     navigationMatrixCoordinate_4969.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4963.length + ")", () => {
                         if (navigationMatrixCoordinate_4963.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4963.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4963.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4963);
                         }
                     }, {
@@ -21526,7 +21526,7 @@ const {
                 if (navigationMatrixCoordinate_4965.length && navigationMatrixCoordinate_4965.length > navigationMatrixCoordinate_4963.length) {
                     navigationMatrixCoordinate_4969.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4965.length + ")", () => {
                         if (navigationMatrixCoordinate_4965.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4965.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4965.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4965);
                         }
                     }, {
@@ -21537,7 +21537,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4967.length) {
                     navigationMatrixCoordinate_4969.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4967.length + ")", () => {
-                        message("Wkładam " + navigationMatrixCoordinate_4967.length + " przedmiotÃ³w");
+                        message("Wkładam " + navigationMatrixCoordinate_4967.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4967);
                     }, {
                         button: {
@@ -21548,18 +21548,18 @@ const {
                 if (navigationMatrixCoordinate_4969.length) {
                     Engine.interface.showPopupMenu(navigationMatrixCoordinate_4969, event);
                 } else {
-                    message("Nie posiadasz tego typu przedmiotÃ³w");
+                    message("Nie posiadasz tego typu przedmiotów");
                 }
-            }).tip("Wszystkie elementy stroju z herosÃ³w");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-chest").click(function() {
+            }).tip("Wszystkie elementy stroju z herosów");
+            navigationMatrixCoordinate_4879.find("#mp-deposit-chest").click(function () {
                 const navigationMatrixCoordinate_4970 = getItemsFromDepoTabByChest().map(navigationMatrixCoordinate_4971 => navigationMatrixCoordinate_4971.id);
                 const navigationMatrixCoordinate_4972 = getItemsFromDepoAllByChest().map(navigationMatrixCoordinate_4973 => navigationMatrixCoordinate_4973.id);
                 const navigationMatrixCoordinate_4974 = getItemsFromEqByChest().map(navigationMatrixCoordinate_4975 => navigationMatrixCoordinate_4975.id);
                 let navigationMatrixCoordinate_4976 = [];
                 if (navigationMatrixCoordinate_4970.length) {
-                    navigationMatrixCoordinate_4976.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_4970.length + ")", () => {
+                    navigationMatrixCoordinate_4976.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4970.length + ")", () => {
                         if (navigationMatrixCoordinate_4970.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4970.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4970.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4970);
                         }
                     }, {
@@ -21571,7 +21571,7 @@ const {
                 if (navigationMatrixCoordinate_4972.length && navigationMatrixCoordinate_4972.length > navigationMatrixCoordinate_4970.length) {
                     navigationMatrixCoordinate_4976.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4972.length + ")", () => {
                         if (navigationMatrixCoordinate_4972.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4972.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4972.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4972);
                         }
                     }, {
@@ -21582,7 +21582,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4974.length) {
                     navigationMatrixCoordinate_4976.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4974.length + ")", () => {
-                        message("WkÅ‚adam " + navigationMatrixCoordinate_4974.length + " przedmiotÃ³w");
+                        message("Wkładam " + navigationMatrixCoordinate_4974.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4974);
                     }, {
                         button: {
@@ -21596,15 +21596,15 @@ const {
                     message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Wszystkie skrzynki z elementami stroju z herosów");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-nugget").click(function(navigationMatrixCoordinate_4977) {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-nugget").click(function (navigationMatrixCoordinate_4977) {
                 const navigationMatrixCoordinate_4978 = getItemsFromEqByNugget().map(navigationMatrixCoordinate_4979 => navigationMatrixCoordinate_4979.id);
                 const navigationMatrixCoordinate_4980 = getItemsFromDepoAllByNugget().map(navigationMatrixCoordinate_4981 => navigationMatrixCoordinate_4981.id);
                 const navigationMatrixCoordinate_4982 = getItemsFromDepoTabByNugget().map(navigationMatrixCoordinate_4983 => navigationMatrixCoordinate_4983.id);
                 let navigationMatrixCoordinate_4984 = [];
                 if (navigationMatrixCoordinate_4982.length) {
-                    navigationMatrixCoordinate_4984.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_4982.length + ")", () => {
+                    navigationMatrixCoordinate_4984.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4982.length + ")", () => {
                         if (navigationMatrixCoordinate_4982.length) {
-                            message("Wyjmuję " + navigationMatrixCoordinate_4982.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4982.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4982);
                         }
                     }, {
@@ -21616,7 +21616,7 @@ const {
                 if (navigationMatrixCoordinate_4980.length && navigationMatrixCoordinate_4980.length > navigationMatrixCoordinate_4982.length) {
                     navigationMatrixCoordinate_4984.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4980.length + ")", () => {
                         if (navigationMatrixCoordinate_4980.length) {
-                            message("WyjmujÄ™ " + navigationMatrixCoordinate_4980.length + " przedmiotÃ³w");
+                            message("Wyjmuję " + navigationMatrixCoordinate_4980.length + " przedmiotów");
                             startGetSelect(navigationMatrixCoordinate_4980);
                         }
                     }, {
@@ -21627,7 +21627,7 @@ const {
                 }
                 if (navigationMatrixCoordinate_4978.length) {
                     navigationMatrixCoordinate_4984.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4978.length + ")", () => {
-                        message("WkÅ‚adam " + navigationMatrixCoordinate_4978.length + " przedmiotÃ³w");
+                        message("Wkładam " + navigationMatrixCoordinate_4978.length + " przedmiotów");
                         startPutSelect(navigationMatrixCoordinate_4978);
                     }, {
                         button: {
@@ -21641,7 +21641,7 @@ const {
                     message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Potencjalne przedmioty, które można dać na samorodki - ignoruje zwoje odwiązania i ekstrakcje");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-bless").click(function(navigationMatrixCoordinate_4985) {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-bless").click(function (navigationMatrixCoordinate_4985) {
                 const navigationMatrixCoordinate_4986 = getItemsFromDepoAllByBlessBonus("cleanse").map(navigationMatrixCoordinate_4987 => navigationMatrixCoordinate_4987.id);
                 const navigationMatrixCoordinate_4988 = getItemsFromDepoTabByBlessBonus("cleanse").map(navigationMatrixCoordinate_4989 => navigationMatrixCoordinate_4989.id);
                 const navigationMatrixCoordinate_4990 = getItemsFromEqByBlessBonus("cleanse").map(navigationMatrixCoordinate_4991 => navigationMatrixCoordinate_4991.id);
@@ -21697,7 +21697,7 @@ const {
                         if (navigationMatrixCoordinate_4988.length) {
                             navigationMatrixCoordinate_5083.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4988.length + ")", () => {
                                 if (navigationMatrixCoordinate_4988.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_4988.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4988.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4988);
                                 }
                             }, {
@@ -21709,7 +21709,7 @@ const {
                         if (navigationMatrixCoordinate_4986.length && navigationMatrixCoordinate_4986.length > navigationMatrixCoordinate_4988.length) {
                             navigationMatrixCoordinate_5083.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4986.length + ")", () => {
                                 if (navigationMatrixCoordinate_4986.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_4986.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4986.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4986);
                                 }
                             }, {
@@ -21720,7 +21720,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_4990.length) {
                             navigationMatrixCoordinate_5083.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4990.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_4990.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_4990.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_4990);
                             }, {
                                 button: {
@@ -21741,7 +21741,7 @@ const {
                         if (navigationMatrixCoordinate_4994.length) {
                             navigationMatrixCoordinate_5084.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_4994.length + ")", () => {
                                 if (navigationMatrixCoordinate_4994.length) {
-                                    message("WyjmujÄ™ " + navigationMatrixCoordinate_4994.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4994.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4994);
                                 }
                             }, {
@@ -21753,7 +21753,7 @@ const {
                         if (navigationMatrixCoordinate_4992.length && navigationMatrixCoordinate_4992.length > navigationMatrixCoordinate_4994.length) {
                             navigationMatrixCoordinate_5084.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4992.length + ")", () => {
                                 if (navigationMatrixCoordinate_4992.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_4992.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4992.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4992);
                                 }
                             }, {
@@ -21764,7 +21764,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_4996.length) {
                             navigationMatrixCoordinate_5084.push(["Włóż wszystkie (" + navigationMatrixCoordinate_4996.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_4996.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_4996.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_4996);
                             }, {
                                 button: {
@@ -21785,7 +21785,7 @@ const {
                         if (navigationMatrixCoordinate_5000.length) {
                             navigationMatrixCoordinate_5085.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5000.length + ")", () => {
                                 if (navigationMatrixCoordinate_5000.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5000.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5000.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5000);
                                 }
                             }, {
@@ -21797,7 +21797,7 @@ const {
                         if (navigationMatrixCoordinate_4998.length && navigationMatrixCoordinate_4998.length > navigationMatrixCoordinate_5000.length) {
                             navigationMatrixCoordinate_5085.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_4998.length + ")", () => {
                                 if (navigationMatrixCoordinate_4998.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_4998.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_4998.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_4998);
                                 }
                             }, {
@@ -21808,7 +21808,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5002.length) {
                             navigationMatrixCoordinate_5085.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5002.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5002.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5002.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5002);
                             }, {
                                 button: {
@@ -21829,7 +21829,7 @@ const {
                         if (navigationMatrixCoordinate_5006.length) {
                             navigationMatrixCoordinate_5086.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5006.length + ")", () => {
                                 if (navigationMatrixCoordinate_5006.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5006.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5006.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5006);
                                 }
                             }, {
@@ -21841,7 +21841,7 @@ const {
                         if (navigationMatrixCoordinate_5004.length && navigationMatrixCoordinate_5004.length > navigationMatrixCoordinate_5006.length) {
                             navigationMatrixCoordinate_5086.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5004.length + ")", () => {
                                 if (navigationMatrixCoordinate_5004.length) {
-                                    message("WyjmujÄ™ " + navigationMatrixCoordinate_5004.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5004.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5004);
                                 }
                             }, {
@@ -21852,7 +21852,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5008.length) {
                             navigationMatrixCoordinate_5086.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5008.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5008.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5008.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5008);
                             }, {
                                 button: {
@@ -21871,9 +21871,9 @@ const {
                     navigationMatrixCoordinate_5082.push([parsedAddonConfig.legbon.frenzy, () => {
                         let navigationMatrixCoordinate_5087 = [];
                         if (navigationMatrixCoordinate_5012.length) {
-                            navigationMatrixCoordinate_5087.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_5012.length + ")", () => {
+                            navigationMatrixCoordinate_5087.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5012.length + ")", () => {
                                 if (navigationMatrixCoordinate_5012.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5012.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5012.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5012);
                                 }
                             }, {
@@ -21885,7 +21885,7 @@ const {
                         if (navigationMatrixCoordinate_5010.length && navigationMatrixCoordinate_5010.length > navigationMatrixCoordinate_5012.length) {
                             navigationMatrixCoordinate_5087.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5010.length + ")", () => {
                                 if (navigationMatrixCoordinate_5010.length) {
-                                    message("WyjmujÄ™ " + navigationMatrixCoordinate_5010.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5010.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5010);
                                 }
                             }, {
@@ -21896,7 +21896,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5014.length) {
                             navigationMatrixCoordinate_5087.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5014.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5014.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5014.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5014);
                             }, {
                                 button: {
@@ -21917,7 +21917,7 @@ const {
                         if (navigationMatrixCoordinate_5018.length) {
                             navigationMatrixCoordinate_5088.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5018.length + ")", () => {
                                 if (navigationMatrixCoordinate_5018.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5018.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5018.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5018);
                                 }
                             }, {
@@ -21929,7 +21929,7 @@ const {
                         if (navigationMatrixCoordinate_5016.length && navigationMatrixCoordinate_5016.length > navigationMatrixCoordinate_5018.length) {
                             navigationMatrixCoordinate_5088.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5016.length + ")", () => {
                                 if (navigationMatrixCoordinate_5016.length) {
-                                    message("WyjmujÄ™ " + navigationMatrixCoordinate_5016.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5016.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5016);
                                 }
                             }, {
@@ -21940,7 +21940,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5020.length) {
                             navigationMatrixCoordinate_5088.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5020.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5020.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5020.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5020);
                             }, {
                                 button: {
@@ -21961,7 +21961,7 @@ const {
                         if (navigationMatrixCoordinate_5024.length) {
                             navigationMatrixCoordinate_5089.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5024.length + ")", () => {
                                 if (navigationMatrixCoordinate_5024.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5024.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5024.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5024);
                                 }
                             }, {
@@ -21973,7 +21973,7 @@ const {
                         if (navigationMatrixCoordinate_5022.length && navigationMatrixCoordinate_5022.length > navigationMatrixCoordinate_5024.length) {
                             navigationMatrixCoordinate_5089.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5022.length + ")", () => {
                                 if (navigationMatrixCoordinate_5022.length) {
-                                    message("WyjmujÄ™ " + navigationMatrixCoordinate_5022.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5022.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5022);
                                 }
                             }, {
@@ -21984,7 +21984,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5026.length) {
                             navigationMatrixCoordinate_5089.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5026.length + ")", () => {
-                                message("WkÅ‚adam " + navigationMatrixCoordinate_5026.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5026.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5026);
                             }, {
                                 button: {
@@ -22005,7 +22005,7 @@ const {
                         if (navigationMatrixCoordinate_5030.length) {
                             navigationMatrixCoordinate_5090.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5030.length + ")", () => {
                                 if (navigationMatrixCoordinate_5030.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5030.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5030.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5030);
                                 }
                             }, {
@@ -22017,7 +22017,7 @@ const {
                         if (navigationMatrixCoordinate_5028.length && navigationMatrixCoordinate_5028.length > navigationMatrixCoordinate_5030.length) {
                             navigationMatrixCoordinate_5090.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5028.length + ")", () => {
                                 if (navigationMatrixCoordinate_5028.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5028.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5028.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5028);
                                 }
                             }, {
@@ -22028,7 +22028,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5032.length) {
                             navigationMatrixCoordinate_5090.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5032.length + ")", () => {
-                                message("WkÅ‚adam " + navigationMatrixCoordinate_5032.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5032.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5032);
                             }, {
                                 button: {
@@ -22049,7 +22049,7 @@ const {
                         if (navigationMatrixCoordinate_5036.length) {
                             navigationMatrixCoordinate_5091.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5036.length + ")", () => {
                                 if (navigationMatrixCoordinate_5036.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5036.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5036.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5036);
                                 }
                             }, {
@@ -22061,7 +22061,7 @@ const {
                         if (navigationMatrixCoordinate_5034.length && navigationMatrixCoordinate_5034.length > navigationMatrixCoordinate_5036.length) {
                             navigationMatrixCoordinate_5091.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5034.length + ")", () => {
                                 if (navigationMatrixCoordinate_5034.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5034.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5034.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5034);
                                 }
                             }, {
@@ -22071,8 +22071,8 @@ const {
                             }]);
                         }
                         if (navigationMatrixCoordinate_5038.length) {
-                            navigationMatrixCoordinate_5091.push(["WÅ‚Ã³Å¼ wszystkie (" + navigationMatrixCoordinate_5038.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5038.length + " przedmiotÃ³w");
+                            navigationMatrixCoordinate_5091.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5038.length + ")", () => {
+                                message("Wkładam " + navigationMatrixCoordinate_5038.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5038);
                             }, {
                                 button: {
@@ -22091,9 +22091,9 @@ const {
                     navigationMatrixCoordinate_5082.push([parsedAddonConfig.legbon.holytouch, () => {
                         let navigationMatrixCoordinate_5092 = [];
                         if (navigationMatrixCoordinate_5042.length) {
-                            navigationMatrixCoordinate_5092.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_5042.length + ")", () => {
+                            navigationMatrixCoordinate_5092.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5042.length + ")", () => {
                                 if (navigationMatrixCoordinate_5042.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5042.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5042.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5042);
                                 }
                             }, {
@@ -22105,7 +22105,7 @@ const {
                         if (navigationMatrixCoordinate_5040.length && navigationMatrixCoordinate_5040.length > navigationMatrixCoordinate_5042.length) {
                             navigationMatrixCoordinate_5092.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5040.length + ")", () => {
                                 if (navigationMatrixCoordinate_5040.length) {
-                                    message("WyjmujÄ™ " + navigationMatrixCoordinate_5040.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5040.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5040);
                                 }
                             }, {
@@ -22116,7 +22116,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5044.length) {
                             navigationMatrixCoordinate_5092.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5044.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5044.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5044.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5044);
                             }, {
                                 button: {
@@ -22137,7 +22137,7 @@ const {
                         if (navigationMatrixCoordinate_5048.length) {
                             navigationMatrixCoordinate_5093.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5048.length + ")", () => {
                                 if (navigationMatrixCoordinate_5048.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5048.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5048.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5048);
                                 }
                             }, {
@@ -22149,7 +22149,7 @@ const {
                         if (navigationMatrixCoordinate_5046.length && navigationMatrixCoordinate_5046.length > navigationMatrixCoordinate_5048.length) {
                             navigationMatrixCoordinate_5093.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5046.length + ")", () => {
                                 if (navigationMatrixCoordinate_5046.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5046.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5046.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5046);
                                 }
                             }, {
@@ -22160,7 +22160,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5050.length) {
                             navigationMatrixCoordinate_5093.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5050.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5050.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5050.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5050);
                             }, {
                                 button: {
@@ -22179,9 +22179,9 @@ const {
                     navigationMatrixCoordinate_5082.push([parsedAddonConfig.legbon.lastheal, () => {
                         let navigationMatrixCoordinate_5094 = [];
                         if (navigationMatrixCoordinate_5054.length) {
-                            navigationMatrixCoordinate_5094.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_5054.length + ")", () => {
+                            navigationMatrixCoordinate_5094.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5054.length + ")", () => {
                                 if (navigationMatrixCoordinate_5054.length) {
-                                    message("WyjmujÄ™ " + navigationMatrixCoordinate_5054.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5054.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5054);
                                 }
                             }, {
@@ -22193,7 +22193,7 @@ const {
                         if (navigationMatrixCoordinate_5052.length && navigationMatrixCoordinate_5052.length > navigationMatrixCoordinate_5054.length) {
                             navigationMatrixCoordinate_5094.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5052.length + ")", () => {
                                 if (navigationMatrixCoordinate_5052.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5052.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5052.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5052);
                                 }
                             }, {
@@ -22204,7 +22204,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5056.length) {
                             navigationMatrixCoordinate_5094.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5056.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5056.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5056.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5056);
                             }, {
                                 button: {
@@ -22225,7 +22225,7 @@ const {
                         if (navigationMatrixCoordinate_5060.length) {
                             navigationMatrixCoordinate_5095.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5060.length + ")", () => {
                                 if (navigationMatrixCoordinate_5060.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5060.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5060.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5060);
                                 }
                             }, {
@@ -22237,7 +22237,7 @@ const {
                         if (navigationMatrixCoordinate_5058.length && navigationMatrixCoordinate_5058.length > navigationMatrixCoordinate_5060.length) {
                             navigationMatrixCoordinate_5095.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5058.length + ")", () => {
                                 if (navigationMatrixCoordinate_5058.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5058.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5058.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5058);
                                 }
                             }, {
@@ -22248,7 +22248,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5062.length) {
                             navigationMatrixCoordinate_5095.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5062.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5062.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5062.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5062);
                             }, {
                                 button: {
@@ -22267,9 +22267,9 @@ const {
                     navigationMatrixCoordinate_5082.push([parsedAddonConfig.legbon.quest_expbon, () => {
                         let navigationMatrixCoordinate_5096 = [];
                         if (navigationMatrixCoordinate_5066.length) {
-                            navigationMatrixCoordinate_5096.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_5066.length + ")", () => {
+                            navigationMatrixCoordinate_5096.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5066.length + ")", () => {
                                 if (navigationMatrixCoordinate_5066.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5066.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5066.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5066);
                                 }
                             }, {
@@ -22281,7 +22281,7 @@ const {
                         if (navigationMatrixCoordinate_5064.length && navigationMatrixCoordinate_5064.length > navigationMatrixCoordinate_5066.length) {
                             navigationMatrixCoordinate_5096.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5064.length + ")", () => {
                                 if (navigationMatrixCoordinate_5064.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5064.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5064.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5064);
                                 }
                             }, {
@@ -22291,8 +22291,8 @@ const {
                             }]);
                         }
                         if (navigationMatrixCoordinate_5068.length) {
-                            navigationMatrixCoordinate_5096.push(["WÅ‚Ã³Å¼ wszystkie (" + navigationMatrixCoordinate_5068.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5068.length + " przedmiotÃ³w");
+                            navigationMatrixCoordinate_5096.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5068.length + ")", () => {
+                                message("Wkładam " + navigationMatrixCoordinate_5068.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5068);
                             }, {
                                 button: {
@@ -22311,9 +22311,9 @@ const {
                     navigationMatrixCoordinate_5082.push([parsedAddonConfig.legbon.npc_expbon, () => {
                         let navigationMatrixCoordinate_5097 = [];
                         if (navigationMatrixCoordinate_5072.length) {
-                            navigationMatrixCoordinate_5097.push(["Wyjmij z zakÅ‚adki (" + navigationMatrixCoordinate_5072.length + ")", () => {
+                            navigationMatrixCoordinate_5097.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5072.length + ")", () => {
                                 if (navigationMatrixCoordinate_5072.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5072.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5072.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5072);
                                 }
                             }, {
@@ -22325,7 +22325,7 @@ const {
                         if (navigationMatrixCoordinate_5070.length && navigationMatrixCoordinate_5070.length > navigationMatrixCoordinate_5072.length) {
                             navigationMatrixCoordinate_5097.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5070.length + ")", () => {
                                 if (navigationMatrixCoordinate_5070.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5070.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5070.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5070);
                                 }
                             }, {
@@ -22335,8 +22335,8 @@ const {
                             }]);
                         }
                         if (navigationMatrixCoordinate_5074.length) {
-                            navigationMatrixCoordinate_5097.push(["WÅ‚Ã³Å¼ wszystkie (" + navigationMatrixCoordinate_5074.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5074.length + " przedmiotÃ³w");
+                            navigationMatrixCoordinate_5097.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5074.length + ")", () => {
+                                message("Wkładam " + navigationMatrixCoordinate_5074.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5074);
                             }, {
                                 button: {
@@ -22357,7 +22357,7 @@ const {
                         if (navigationMatrixCoordinate_5078.length) {
                             navigationMatrixCoordinate_5098.push(["Wyjmij z zakładki (" + navigationMatrixCoordinate_5078.length + ")", () => {
                                 if (navigationMatrixCoordinate_5078.length) {
-                                    message("Wyjmuję " + navigationMatrixCoordinate_5078.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5078.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5078);
                                 }
                             }, {
@@ -22369,7 +22369,7 @@ const {
                         if (navigationMatrixCoordinate_5076.length && navigationMatrixCoordinate_5076.length > navigationMatrixCoordinate_5078.length) {
                             navigationMatrixCoordinate_5098.push(["Wyjmij wszystkie (" + navigationMatrixCoordinate_5076.length + ")", () => {
                                 if (navigationMatrixCoordinate_5076.length) {
-                                    message("WyjmujÄ™ " + navigationMatrixCoordinate_5076.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + navigationMatrixCoordinate_5076.length + " przedmiotów");
                                     startGetSelect(navigationMatrixCoordinate_5076);
                                 }
                             }, {
@@ -22380,7 +22380,7 @@ const {
                         }
                         if (navigationMatrixCoordinate_5080.length) {
                             navigationMatrixCoordinate_5098.push(["Włóż wszystkie (" + navigationMatrixCoordinate_5080.length + ")", () => {
-                                message("Wkładam " + navigationMatrixCoordinate_5080.length + " przedmiotÃ³w");
+                                message("Wkładam " + navigationMatrixCoordinate_5080.length + " przedmiotów");
                                 startPutSelect(navigationMatrixCoordinate_5080);
                             }, {
                                 button: {
@@ -22400,8 +22400,8 @@ const {
                 } else {
                     message("Nie posiadasz tego typu przedmiotów");
                 }
-            }).tip("Błogosławieństwa zawierajÄ…ce bonus");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-weapons").click(function(navigationMatrixCoordinate_5099) {
+            }).tip("Błogosławieństwa zawierające bonus");
+            navigationMatrixCoordinate_4879.find("#mp-deposit-weapons").click(function (navigationMatrixCoordinate_5099) {
                 const navigationMatrixCoordinate_5100 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit;
                 let inventoryAutomationState_5101 = [];
                 const inventoryAutomationState_5102 = getItemsFromDepoAllByType("weapons", "common", navigationMatrixCoordinate_5100).map(inventoryAutomationState_5103 => inventoryAutomationState_5103.id);
@@ -22419,7 +22419,7 @@ const {
                         if (inventoryAutomationState_5104.length) {
                             inventoryAutomationState_5120.push(["Wyjmij z zakładki (" + inventoryAutomationState_5104.length + ")", () => {
                                 if (inventoryAutomationState_5104.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5104.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5104.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5104);
                                 }
                             }, {
@@ -22431,7 +22431,7 @@ const {
                         if (inventoryAutomationState_5102.length && inventoryAutomationState_5102.length > inventoryAutomationState_5104.length) {
                             inventoryAutomationState_5120.push(["Wyjmij wszystkie (" + inventoryAutomationState_5102.length + ")", () => {
                                 if (inventoryAutomationState_5102.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5102.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5102.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5102);
                                 }
                             }, {
@@ -22442,7 +22442,7 @@ const {
                         }
                         if (inventoryAutomationState_5106.length) {
                             inventoryAutomationState_5120.push(["Włóż wszystkie (" + inventoryAutomationState_5106.length + ")", () => {
-                                message("Wkładam " + inventoryAutomationState_5106.length + " przedmiotÃ³w");
+                                message("Wkładam " + inventoryAutomationState_5106.length + " przedmiotów");
                                 startPutSelect(inventoryAutomationState_5106);
                             }, {
                                 button: {
@@ -22452,10 +22452,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(inventoryAutomationState_5120, navigationMatrixCoordinate_5099);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]);
                 }
                 if (inventoryAutomationState_5108.length + inventoryAutomationState_5112.length) {
                     inventoryAutomationState_5101.push(["Unikatowe", () => {
@@ -22463,7 +22463,7 @@ const {
                         if (inventoryAutomationState_5110.length) {
                             inventoryAutomationState_5121.push(["Wyjmij z zakładki (" + inventoryAutomationState_5110.length + ")", () => {
                                 if (inventoryAutomationState_5110.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5110.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5110.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5110);
                                 }
                             }, {
@@ -22475,7 +22475,7 @@ const {
                         if (inventoryAutomationState_5108.length && inventoryAutomationState_5108.length > inventoryAutomationState_5110.length) {
                             inventoryAutomationState_5121.push(["Wyjmij wszystkie (" + inventoryAutomationState_5108.length + ")", () => {
                                 if (inventoryAutomationState_5108.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5108.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5108.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5108);
                                 }
                             }, {
@@ -22486,7 +22486,7 @@ const {
                         }
                         if (inventoryAutomationState_5112.length) {
                             inventoryAutomationState_5121.push(["Włóż wszystkie (" + inventoryAutomationState_5112.length + ")", () => {
-                                message("WkÅ‚adam " + inventoryAutomationState_5112.length + " przedmiotÃ³w");
+                                message("Wkładam " + inventoryAutomationState_5112.length + " przedmiotów");
                                 startPutSelect(inventoryAutomationState_5112);
                             }, {
                                 button: {
@@ -22496,10 +22496,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(inventoryAutomationState_5121, navigationMatrixCoordinate_5099);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]);
                 }
                 if (inventoryAutomationState_5114.length + inventoryAutomationState_5118.length) {
                     inventoryAutomationState_5101.push(["Heroiczne", () => {
@@ -22507,7 +22507,7 @@ const {
                         if (inventoryAutomationState_5116.length) {
                             inventoryAutomationState_5122.push(["Wyjmij z zakładki (" + inventoryAutomationState_5116.length + ")", () => {
                                 if (inventoryAutomationState_5116.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5116.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5116.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5116);
                                 }
                             }, {
@@ -22519,7 +22519,7 @@ const {
                         if (inventoryAutomationState_5114.length && inventoryAutomationState_5114.length > inventoryAutomationState_5116.length) {
                             inventoryAutomationState_5122.push(["Wyjmij wszystkie (" + inventoryAutomationState_5114.length + ")", () => {
                                 if (inventoryAutomationState_5114.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5114.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5114.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5114);
                                 }
                             }, {
@@ -22530,7 +22530,7 @@ const {
                         }
                         if (inventoryAutomationState_5118.length) {
                             inventoryAutomationState_5122.push(["Włóż wszystkie (" + inventoryAutomationState_5118.length + ")", () => {
-                                message("Wkładam " + inventoryAutomationState_5118.length + " przedmiotÃ³w");
+                                message("Wkładam " + inventoryAutomationState_5118.length + " przedmiotów");
                                 startPutSelect(inventoryAutomationState_5118);
                             }, {
                                 button: {
@@ -22540,10 +22540,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(inventoryAutomationState_5122, navigationMatrixCoordinate_5099);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]);
                 }
                 if (inventoryAutomationState_5101.length) {
                     Engine.interface.showPopupMenu(inventoryAutomationState_5101, navigationMatrixCoordinate_5099);
@@ -22551,7 +22551,7 @@ const {
                     message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Bronie");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-armors").click(function(inventoryAutomationState_5123) {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-armors").click(function (inventoryAutomationState_5123) {
                 const inventoryAutomationState_5124 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit;
                 let inventoryAutomationState_5125 = [];
                 const inventoryAutomationState_5126 = getItemsFromDepoAllByType("armors", "common", inventoryAutomationState_5124).map(inventoryAutomationState_5127 => inventoryAutomationState_5127.id);
@@ -22567,9 +22567,9 @@ const {
                     inventoryAutomationState_5125.push(["Zwykłe", () => {
                         let inventoryAutomationState_5144 = [];
                         if (inventoryAutomationState_5128.length) {
-                            inventoryAutomationState_5144.push(["Wyjmij z zakÅ‚adki (" + inventoryAutomationState_5128.length + ")", () => {
+                            inventoryAutomationState_5144.push(["Wyjmij z zakładki (" + inventoryAutomationState_5128.length + ")", () => {
                                 if (inventoryAutomationState_5128.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5128.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5128.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5128);
                                 }
                             }, {
@@ -22581,7 +22581,7 @@ const {
                         if (inventoryAutomationState_5126.length && inventoryAutomationState_5126.length > inventoryAutomationState_5128.length) {
                             inventoryAutomationState_5144.push(["Wyjmij wszystkie (" + inventoryAutomationState_5126.length + ")", () => {
                                 if (inventoryAutomationState_5126.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5126.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5126.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5126);
                                 }
                             }, {
@@ -22592,7 +22592,7 @@ const {
                         }
                         if (inventoryAutomationState_5130.length) {
                             inventoryAutomationState_5144.push(["Włóż wszystkie (" + inventoryAutomationState_5130.length + ")", () => {
-                                message("Wkładam " + inventoryAutomationState_5130.length + " przedmiotÃ³w");
+                                message("Wkładam " + inventoryAutomationState_5130.length + " przedmiotów");
                                 startPutSelect(inventoryAutomationState_5130);
                             }, {
                                 button: {
@@ -22602,10 +22602,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(inventoryAutomationState_5144, inventoryAutomationState_5123);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]);
                 }
                 if (inventoryAutomationState_5132.length + inventoryAutomationState_5136.length) {
                     inventoryAutomationState_5125.push(["Unikatowe", () => {
@@ -22613,7 +22613,7 @@ const {
                         if (inventoryAutomationState_5134.length) {
                             inventoryAutomationState_5145.push(["Wyjmij z zakładki (" + inventoryAutomationState_5134.length + ")", () => {
                                 if (inventoryAutomationState_5134.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5134.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5134.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5134);
                                 }
                             }, {
@@ -22625,7 +22625,7 @@ const {
                         if (inventoryAutomationState_5132.length && inventoryAutomationState_5132.length > inventoryAutomationState_5134.length) {
                             inventoryAutomationState_5145.push(["Wyjmij wszystkie (" + inventoryAutomationState_5132.length + ")", () => {
                                 if (inventoryAutomationState_5132.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5132.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5132.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5132);
                                 }
                             }, {
@@ -22635,8 +22635,8 @@ const {
                             }]);
                         }
                         if (inventoryAutomationState_5136.length) {
-                            inventoryAutomationState_5145.push(["WÅ‚Ã³Å¼ wszystkie (" + inventoryAutomationState_5136.length + ")", () => {
-                                message("WkÅ‚adam " + inventoryAutomationState_5136.length + " przedmiotÃ³w");
+                            inventoryAutomationState_5145.push(["Włóż wszystkie (" + inventoryAutomationState_5136.length + ")", () => {
+                                message("Wkładam " + inventoryAutomationState_5136.length + " przedmiotów");
                                 startPutSelect(inventoryAutomationState_5136);
                             }, {
                                 button: {
@@ -22646,10 +22646,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(inventoryAutomationState_5145, inventoryAutomationState_5123);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]);
                 }
                 if (inventoryAutomationState_5138.length + inventoryAutomationState_5142.length) {
                     inventoryAutomationState_5125.push(["Heroiczne", () => {
@@ -22657,7 +22657,7 @@ const {
                         if (inventoryAutomationState_5140.length) {
                             inventoryAutomationState_5146.push(["Wyjmij z zakładki (" + inventoryAutomationState_5140.length + ")", () => {
                                 if (inventoryAutomationState_5140.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5140.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5140.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5140);
                                 }
                             }, {
@@ -22669,7 +22669,7 @@ const {
                         if (inventoryAutomationState_5138.length && inventoryAutomationState_5138.length > inventoryAutomationState_5140.length) {
                             inventoryAutomationState_5146.push(["Wyjmij wszystkie (" + inventoryAutomationState_5138.length + ")", () => {
                                 if (inventoryAutomationState_5138.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5138.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5138.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5138);
                                 }
                             }, {
@@ -22680,7 +22680,7 @@ const {
                         }
                         if (inventoryAutomationState_5142.length) {
                             inventoryAutomationState_5146.push(["Włóż wszystkie (" + inventoryAutomationState_5142.length + ")", () => {
-                                message("WkÅ‚adam " + inventoryAutomationState_5142.length + " przedmiotÃ³w");
+                                message("Wkładam " + inventoryAutomationState_5142.length + " przedmiotów");
                                 startPutSelect(inventoryAutomationState_5142);
                             }, {
                                 button: {
@@ -22690,10 +22690,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(inventoryAutomationState_5146, inventoryAutomationState_5123);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]);
                 }
                 if (inventoryAutomationState_5125.length) {
                     Engine.interface.showPopupMenu(inventoryAutomationState_5125, inventoryAutomationState_5123);
@@ -22701,7 +22701,7 @@ const {
                     message("Nie posiadasz tego typu przedmiotów");
                 }
             }).tip("Pancerze");
-            navigationMatrixCoordinate_4879.find("#mp-deposit-jewelry").click(function(inventoryAutomationState_5147) {
+            navigationMatrixCoordinate_4879.find("#mp-deposit-jewelry").click(function (inventoryAutomationState_5147) {
                 const inventoryAutomationState_5148 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[53].id].deposit;
                 let inventoryAutomationState_5149 = [];
                 const inventoryAutomationState_5150 = getItemsFromDepoAllByType("jewelry", "common", inventoryAutomationState_5148).map(inventoryAutomationState_5151 => inventoryAutomationState_5151.id);
@@ -22717,9 +22717,9 @@ const {
                     inventoryAutomationState_5149.push(["Zwykłe", () => {
                         let inventoryAutomationState_5168 = [];
                         if (inventoryAutomationState_5152.length) {
-                            inventoryAutomationState_5168.push(["Wyjmij z zakÅ‚adki (" + inventoryAutomationState_5152.length + ")", () => {
+                            inventoryAutomationState_5168.push(["Wyjmij z zakładki (" + inventoryAutomationState_5152.length + ")", () => {
                                 if (inventoryAutomationState_5152.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5152.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5152.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5152);
                                 }
                             }, {
@@ -22731,7 +22731,7 @@ const {
                         if (inventoryAutomationState_5150.length && inventoryAutomationState_5150.length > inventoryAutomationState_5152.length) {
                             inventoryAutomationState_5168.push(["Wyjmij wszystkie (" + inventoryAutomationState_5150.length + ")", () => {
                                 if (inventoryAutomationState_5150.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5150.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5150.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5150);
                                 }
                             }, {
@@ -22741,8 +22741,8 @@ const {
                             }]);
                         }
                         if (inventoryAutomationState_5154.length) {
-                            inventoryAutomationState_5168.push(["WÅ‚Ã³Å¼ wszystkie (" + inventoryAutomationState_5154.length + ")", () => {
-                                message("WkÅ‚adam " + inventoryAutomationState_5154.length + " przedmiotÃ³w");
+                            inventoryAutomationState_5168.push(["Włóż wszystkie (" + inventoryAutomationState_5154.length + ")", () => {
+                                message("Wkładam " + inventoryAutomationState_5154.length + " przedmiotów");
                                 startPutSelect(inventoryAutomationState_5154);
                             }, {
                                 button: {
@@ -22752,10 +22752,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(inventoryAutomationState_5168, inventoryAutomationState_5147);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]);
                 }
                 if (inventoryAutomationState_5156.length + inventoryAutomationState_5160.length) {
                     inventoryAutomationState_5149.push(["Unikatowe", () => {
@@ -22763,7 +22763,7 @@ const {
                         if (inventoryAutomationState_5158.length) {
                             inventoryAutomationState_5169.push(["Wyjmij z zakładki (" + inventoryAutomationState_5158.length + ")", () => {
                                 if (inventoryAutomationState_5158.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5158.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5158.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5158);
                                 }
                             }, {
@@ -22775,7 +22775,7 @@ const {
                         if (inventoryAutomationState_5156.length && inventoryAutomationState_5156.length > inventoryAutomationState_5158.length) {
                             inventoryAutomationState_5169.push(["Wyjmij wszystkie (" + inventoryAutomationState_5156.length + ")", () => {
                                 if (inventoryAutomationState_5156.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5156.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5156.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5156);
                                 }
                             }, {
@@ -22786,7 +22786,7 @@ const {
                         }
                         if (inventoryAutomationState_5160.length) {
                             inventoryAutomationState_5169.push(["Włóż wszystkie (" + inventoryAutomationState_5160.length + ")", () => {
-                                message("WkÅ‚adam " + inventoryAutomationState_5160.length + " przedmiotÃ³w");
+                                message("Wkładam " + inventoryAutomationState_5160.length + " przedmiotów");
                                 startPutSelect(inventoryAutomationState_5160);
                             }, {
                                 button: {
@@ -22796,10 +22796,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(inventoryAutomationState_5169, inventoryAutomationState_5147);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]);
                 }
                 if (inventoryAutomationState_5162.length + inventoryAutomationState_5166.length) {
                     inventoryAutomationState_5149.push(["Heroiczne", () => {
@@ -22807,7 +22807,7 @@ const {
                         if (inventoryAutomationState_5164.length) {
                             inventoryAutomationState_5170.push(["Wyjmij z zakładki (" + inventoryAutomationState_5164.length + ")", () => {
                                 if (inventoryAutomationState_5164.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5164.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5164.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5164);
                                 }
                             }, {
@@ -22819,7 +22819,7 @@ const {
                         if (inventoryAutomationState_5162.length && inventoryAutomationState_5162.length > inventoryAutomationState_5164.length) {
                             inventoryAutomationState_5170.push(["Wyjmij wszystkie (" + inventoryAutomationState_5162.length + ")", () => {
                                 if (inventoryAutomationState_5162.length) {
-                                    message("Wyjmuję " + inventoryAutomationState_5162.length + " przedmiotÃ³w");
+                                    message("Wyjmuję " + inventoryAutomationState_5162.length + " przedmiotów");
                                     startGetSelect(inventoryAutomationState_5162);
                                 }
                             }, {
@@ -22830,7 +22830,7 @@ const {
                         }
                         if (inventoryAutomationState_5166.length) {
                             inventoryAutomationState_5170.push(["Włóż wszystkie (" + inventoryAutomationState_5166.length + ")", () => {
-                                message("Wkładam " + inventoryAutomationState_5166.length + " przedmiotÃ³w");
+                                message("Wkładam " + inventoryAutomationState_5166.length + " przedmiotów");
                                 startPutSelect(inventoryAutomationState_5166);
                             }, {
                                 button: {
@@ -22840,10 +22840,10 @@ const {
                         }
                         Engine.interface.showPopupMenu(inventoryAutomationState_5170, inventoryAutomationState_5147);
                     }, {
-                        button: {
-                            cls: "mp-popup-menu-item"
-                        }
-                    }]);
+                            button: {
+                                cls: "mp-popup-menu-item"
+                            }
+                        }]);
                 }
                 if (inventoryAutomationState_5149.length) {
                     Engine.interface.showPopupMenu(inventoryAutomationState_5149, inventoryAutomationState_5147);
@@ -22854,7 +22854,7 @@ const {
             navigationMatrixCoordinate_4732 = true;
             navigationMatrixCoordinate_4733 = false;
             const inventoryAutomationState_5171 = Engine.depo.close;
-            Engine.depo.close = function() {
+            Engine.depo.close = function () {
                 navigationMatrixCoordinate_4732 = false;
                 navigationMatrixCoordinate_4733 = false;
                 inventoryAutomationState_5171.apply(this, arguments);
@@ -23078,8 +23078,8 @@ const {
                 });
                 const inventoryAutomationState_5211 = {};
                 for (const {
-                        id: inventoryAutomationState_5212
-                    }
+                    id: inventoryAutomationState_5212
+                }
                     of inventoryAutomationState_5201) {
                     const inventoryAutomationState_5213 = Engine.items.getItemById(inventoryAutomationState_5212);
                     if (inventoryAutomationState_5213) {
@@ -23163,15 +23163,15 @@ const {
                     }
                 };
                 for (const {
-                        id: inventoryAutomationState_5238
-                    }
+                    id: inventoryAutomationState_5238
+                }
                     of inventoryAutomationState_5201) {
                     await manageStashLayoutState(inventoryAutomationState_5238);
                 }
                 navigationMatrixCoordinate_4736();
                 message("Przenoszenie zakończone");
             };
-            $(".grid").on("drag", ".item.mp-selected", function(inventoryAutomationState_5239, inventoryAutomationState_5240) {
+            $(".grid").on("drag", ".item.mp-selected", function (inventoryAutomationState_5239, inventoryAutomationState_5240) {
                 if (!navigationMatrixCoordinate_4735?.length) {
                     return console;
                 }
@@ -23183,7 +23183,7 @@ const {
                 let inventoryAutomationState_5246 = Math.floor((inventoryAutomationState_5240.offset.top - inventoryAutomationState_5241.top + inventoryAutomationState_5242 * inventoryAutomationState_5243 / 2) / (inventoryAutomationState_5242 * inventoryAutomationState_5243));
                 inventoryAutomationState_5186(navigationMatrixCoordinate_4735, inventoryAutomationState_5245, inventoryAutomationState_5246);
             });
-            $(".grid-wrapper").on("drop", async function(inventoryAutomationState_5247, inventoryAutomationState_5248) {
+            $(".grid-wrapper").on("drop", async function (inventoryAutomationState_5247, inventoryAutomationState_5248) {
                 const inventoryAutomationState_5249 = parseInt(/item-id-(\d+)/.exec(inventoryAutomationState_5247?.originalEvent?.target?.classList[1].toString())?.[1])?.toString();
                 if (!navigationMatrixCoordinate_4735?.length) {
                     return;
@@ -23224,9 +23224,9 @@ const {
             navigationMatrixCoordinate_4875();
         }
     });
-    (function() {
+    (function () {
         var inventoryAutomationState_5261 = Engine.interface.showPopupMenu;
-        Engine.interface.showPopupMenu = function(inventoryAutomationState_5262, inventoryAutomationState_5263, inventoryAutomationState_5264, inventoryAutomationState_5265 = {}) {
+        Engine.interface.showPopupMenu = function (inventoryAutomationState_5262, inventoryAutomationState_5263, inventoryAutomationState_5264, inventoryAutomationState_5265 = {}) {
             if (inventoryAutomationState_5263?.target?.classList?.contains("item") && navigationMatrixCoordinate_4732 && Engine.depo) {
                 const inventoryAutomationState_5266 = parseInt(/item-id-(\d+)/.exec(inventoryAutomationState_5263.target.classList[1].toString())?.[1]);
                 const inventoryAutomationState_5267 = Engine.items.getItemById(inventoryAutomationState_5266);
@@ -23305,13 +23305,13 @@ const {
     var inventoryAutomationState_5280 = false;
     let inventoryAutomationState_5281 = document.querySelector(".new-chat-window");
     let inventoryAutomationState_5282 = document.querySelector(".chat-config-wrapper");
-    inventoryAutomationState_5282.onmousedown = function(inventoryAutomationState_5283) {
+    inventoryAutomationState_5282.onmousedown = function (inventoryAutomationState_5283) {
         if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[56].id]) {
             return;
         }
         inventoryAutomationState_5280 = true;
     };
-    document.onmousemove = function(inventoryAutomationState_5284) {
+    document.onmousemove = function (inventoryAutomationState_5284) {
         if (!inventoryAutomationState_5280 || !ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[56].id]) {
             return;
         }
@@ -23321,7 +23321,7 @@ const {
         saveStorage(ADDON_AUTH_KEY_STRING, ADDON_STORAGE_REFERENCE);
         uiLayoutComponent_150();
     };
-    document.onmouseup = function(inventoryAutomationState_5285) {
+    document.onmouseup = function (inventoryAutomationState_5285) {
         if (!ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[56].id]) {
             return;
         }
@@ -23358,7 +23358,7 @@ const {
             inventoryAutomationState_5292 = true;
         }
         if (!inventoryAutomationState_5292) {
-            inventoryAutomationState_5291.append("<div style=\"width:100%;text-align:center;\">Brak przedmiotÃ³w</div>");
+            inventoryAutomationState_5291.append("<div style=\"width:100%;text-align:center;\">Brak przedmiotów</div>");
         }
         networkProtocolPacket_2825();
     }
@@ -23462,7 +23462,7 @@ const {
         const inventoryAutomationState_5330 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[62].id].stats;
         const inventoryAutomationState_5331 = $("#add62 .mp-egg-card .mp-egg-stats");
         inventoryAutomationState_5331.empty();
-        const inventoryAutomationState_5332 = $("\n                <div class=\"mp-egg-value\">\n                    <div>Åącznie:</div>\n                    <div>" + inventoryAutomationState_5330.a + "</div>\n                </div>\n                <div class=\"mp-egg-value mp-color-common\">\n                    <div>Rozbite:</div>\n                    <div>" + inventoryAutomationState_5330.f + "</div>\n                </div>\n                <div class=\"mp-egg-value mp-color-legendary\">\n                    <div>Podniesione:</div>\n                    <div>" + inventoryAutomationState_5330.s + "</div>\n                </div>");
+        const inventoryAutomationState_5332 = $("\n                <div class=\"mp-egg-value\">\n                    <div>Łącznie:</div>\n                    <div>" + inventoryAutomationState_5330.a + "</div>\n                </div>\n                <div class=\"mp-egg-value mp-color-common\">\n                    <div>Rozbite:</div>\n                    <div>" + inventoryAutomationState_5330.f + "</div>\n                </div>\n                <div class=\"mp-egg-value mp-color-legendary\">\n                    <div>Podniesione:</div>\n                    <div>" + inventoryAutomationState_5330.s + "</div>\n                </div>");
         inventoryAutomationState_5332.appendTo(inventoryAutomationState_5331);
     }
 
@@ -23538,7 +23538,7 @@ const {
                 const inventoryAutomationState_5352 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[27].id]?.key?.toLowerCase();
                 if (inventoryAutomationState_5352 && inventoryAutomationState_5339 === inventoryAutomationState_5352) {
                     const inventoryAutomationState_5353 = Engine.settingsStorage.getValue(34) ? 0 : 1;
-                    _g("settings&action=update&id=34&v=" + inventoryAutomationState_5353, function(inventoryAutomationState_5354) {
+                    _g("settings&action=update&id=34&v=" + inventoryAutomationState_5353, function (inventoryAutomationState_5354) {
                         if (inventoryAutomationState_5354.settings) {
                             const inventoryAutomationState_5355 = Engine.settingsStorage.getValue(34);
                             uiLayoutComponent_330(inventoryAutomationState_5355);
@@ -23562,7 +23562,7 @@ const {
                 const inventoryAutomationState_5358 = ADDON_STORAGE_REFERENCE.settings[MODULE_ADDON_REGISTRY[38].id].builds.build;
                 Object.entries(inventoryAutomationState_5358).forEach(([inventoryAutomationState_5359, inventoryAutomationState_5360]) => {
                     if (inventoryAutomationState_5339 === inventoryAutomationState_5360?.toLowerCase()) {
-                        _g("builds&action=updateCurrent&id=" + inventoryAutomationState_5359, function() {
+                        _g("builds&action=updateCurrent&id=" + inventoryAutomationState_5359, function () {
                             if (Engine.skills) {
                                 _g("skillshop");
                             }
@@ -23585,7 +23585,7 @@ const {
                 const inventoryAutomationState_5362 = Engine.buildsManager.getBuildsCommons().getAll$builds().length;
                 Object.entries(inventoryAutomationState_5361).forEach(([inventoryAutomationState_5363, inventoryAutomationState_5364]) => {
                     if (inventoryAutomationState_5363 <= inventoryAutomationState_5362 && inventoryAutomationState_5339 === inventoryAutomationState_5364?.toLowerCase()) {
-                        _g("builds&action=updateCurrent&id=" + inventoryAutomationState_5363, function() {
+                        _g("builds&action=updateCurrent&id=" + inventoryAutomationState_5363, function () {
                             if (Engine.skills) {
                                 _g("skillshop");
                             }
@@ -23605,8 +23605,8 @@ const {
                     const inventoryAutomationState_5367 = Engine.targets.getDrawableList();
                     const inventoryAutomationState_5368 = inventoryAutomationState_5367.find(inventoryAutomationState_5369 => inventoryAutomationState_5369.enabled && typeof inventoryAutomationState_5369.onclick === "function");
                     const inventoryAutomationState_5370 = {
-                        stopPropagation: () => {},
-                        preventDefault: () => {}
+                        stopPropagation: () => { },
+                        preventDefault: () => { }
                     };
                     inventoryAutomationState_5368?.onclick(inventoryAutomationState_5370);
                 }
@@ -23650,7 +23650,7 @@ const {
     }
     const inventoryAutomationState_5381 = Engine.map.drawImage;
     let inventoryAutomationState_5382 = null;
-    Engine.map.drawImage = function(inventoryAutomationState_5383) {
+    Engine.map.drawImage = function (inventoryAutomationState_5383) {
         inventoryAutomationState_5381.call(Engine.map, ...arguments);
         const inventoryAutomationState_5384 = Engine.map.d.id;
         if (!ADDON_STORAGE_REFERENCE.otherSettings.changeMaps || !inventoryAutomationState_5373.has(inventoryAutomationState_5384)) {
@@ -23674,7 +23674,7 @@ const {
     };
     const inventoryAutomationState_5387 = new Audio("https://margoplus.pl/audio/message.mp3");
     const inventoryAutomationState_5388 = window.message;
-    window.message = function(inventoryAutomationState_5389) {
+    window.message = function (inventoryAutomationState_5389) {
         if (inventoryAutomationState_5389?.length > 0 && ADDON_STORAGE_REFERENCE.alertmanager.e) {
             AlertManager.addAlert(parseBasicBB(inventoryAutomationState_5389), ADDON_STORAGE_REFERENCE.alertmanager.t, Number(ADDON_STORAGE_REFERENCE.alertmanager.s) * 1000);
             if (ADDON_STORAGE_REFERENCE.alertmanager.d) {
@@ -23686,7 +23686,7 @@ const {
         }
         inventoryAutomationState_5388.apply(this, arguments);
     };
-    $(".stats-expand").contextmenu(async function() {
+    $(".stats-expand").contextmenu(async function () {
         if (!ADMIN_IDENTIFIERS_MAP[uiLayoutComponent_164]) {
             return;
         }
@@ -23704,7 +23704,7 @@ const {
             globalThis.wss.publish(inventoryAutomationState_5392);
         }
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         async function inventoryAutomationState_5393() {
             await waitForSeconds(1);
             if (!chatIgnoredPlayersSet.c.includes(getClan().id)) {
@@ -23712,29 +23712,29 @@ const {
             }
             const inventoryAutomationState_5394 = Engine.settingsStorage.getValue(14);
             if (inventoryAutomationState_5394) {
-                _g("settings&action=update&id=14&v=0", function(inventoryAutomationState_5395) {
+                _g("settings&action=update&id=14&v=0", function (inventoryAutomationState_5395) {
                     if (inventoryAutomationState_5395.settings) {
-                        message("Wymuszono blokowanie zaproszeÅ„ spoza klanu.");
+                        message("Wymuszono blokowanie zaproszeń spoza klanu.");
                     }
                 });
             }
         }
         inventoryAutomationState_5393();
         navigationMatrixCoordinate_4737();
-        $(document).on("click", "div[detector=\"npc\"] *", function(inventoryAutomationState_5396) {
+        $(document).on("click", "div[detector=\"npc\"] *", function (inventoryAutomationState_5396) {
             inventoryAutomationState_5396.stopPropagation();
             const inventoryAutomationState_5397 = $(this).closest("div[detector=\"npc\"]");
             $("div[detector=\"npc\"]").removeClass("show-on-up");
             inventoryAutomationState_5397.addClass("show-on-up");
         });
-        $(document).on("click", function() {
+        $(document).on("click", function () {
             $(".mp-select-options").hide();
         });
-        $(document).on("click", "div.mp-attack-row[mp-attack-id]", function(inventoryAutomationState_5398) {
+        $(document).on("click", "div.mp-attack-row[mp-attack-id]", function (inventoryAutomationState_5398) {
             inventoryAutomationState_5398.stopPropagation();
             if (ADDON_STORAGE_REFERENCE.addons[MODULE_ADDON_REGISTRY[29].id]) {
                 if (!isPvPMap()) {
-                    return message("Brak moÅ¼liwości potyczki wariacie");
+                    return message("Brak możliwości potyczki wariacie");
                 }
                 const inventoryAutomationState_5399 = $(this).attr("mp-attack-id");
                 const inventoryAutomationState_5400 = $(this).attr("mp-attack-nick");
@@ -23759,7 +23759,7 @@ const {
                 }
             }
         });
-        $(document).on("click", ".inventory-grid", async function(systemSequencerToken_5404) {
+        $(document).on("click", ".inventory-grid", async function (systemSequencerToken_5404) {
             if (!systemSequencerToken_5404.shiftKey) {
                 return;
             }
@@ -23786,7 +23786,7 @@ const {
                 systemSequencerToken_5410(systemSequencerToken_5408, systemSequencerToken_5409);
             }
         });
-        $(document).on("click", ".inventory-grid", function(systemSequencerToken_5411) {
+        $(document).on("click", ".inventory-grid", function (systemSequencerToken_5411) {
             if (!systemSequencerToken_5411.ctrlKey) {
                 return;
             }
@@ -23846,7 +23846,7 @@ const {
         });
         let systemSequencerToken_5433 = false;
         let systemSequencerToken_5434 = [];
-        $(document).on("click", ".inventory-grid", function(systemSequencerToken_5435) {
+        $(document).on("click", ".inventory-grid", function (systemSequencerToken_5435) {
             if (systemSequencerToken_5433) {
                 return;
             }
@@ -23896,13 +23896,13 @@ const {
                 systemSequencerToken_5434.splice(systemSequencerToken_5440, 1);
             }
         });
-        $(document).on("keyup", function(systemSequencerToken_5441) {
+        $(document).on("keyup", function (systemSequencerToken_5441) {
             if (systemSequencerToken_5441?.key?.toLowerCase() === "alt" && systemSequencerToken_5434?.length > 0 && !systemSequencerToken_5433) {
                 systemSequencerToken_5433 = true;
                 systemSequencerToken_5442();
             }
         });
-        $(document).on("click", "div[mp-widget-ui]", function(systemSequencerToken_5443) {
+        $(document).on("click", "div[mp-widget-ui]", function (systemSequencerToken_5443) {
             if (!systemSequencerToken_5443.ctrlKey) {
                 return;
             }
@@ -23982,7 +23982,7 @@ const {
                     await systemSequencerToken_5455(systemSequencerToken_5458);
                     await new Promise(systemSequencerToken_5459 => setTimeout(systemSequencerToken_5459, 2000));
                 } catch (systemSequencerToken_5460) {
-                    console.error("Nie udaÅ‚o się usunąć elementu " + systemSequencerToken_5458 + ":", systemSequencerToken_5460);
+                    console.error("Nie udało się usunąć elementu " + systemSequencerToken_5458 + ":", systemSequencerToken_5460);
                 }
             }
             systemSequencerToken_5433 = false;
